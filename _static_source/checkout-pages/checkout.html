@@ -1,0 +1,1070 @@
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Wed Dec 17 2025 05:12:14 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="6930ff5f64737ab32d2979e6" data-wf-site="68b99847f96fcca15429faec" data-wf-intellimize-customer-id="117794055">
+<head>
+  <meta charset="utf-8">
+  <title>Checkout</title>
+  <meta content="Checkout" property="og:title">
+  <meta content="Checkout" property="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="../css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="../css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="../css/lionels-stunning-site-07720d.webflow.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Manrope:regular,500,600,700,800"]  }});</script>
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="../images/webclip.png" rel="apple-touch-icon">
+  <style>.anti-flicker, .anti-flicker * {visibility: hidden !important; opacity: 0 !important;}</style>
+  <style>[data-wf-hidden-variation], [data-wf-hidden-variation] * {
+        display: none !important;
+      }</style>
+  <script type="text/javascript">localStorage.removeItem('intellimize_opt_out_117794055'); if (localStorage.getItem('intellimize_data_tracking_type') !== 'always') { localStorage.setItem('intellimize_data_tracking_type', 'always'); }</script>
+  <script type="text/javascript">(function(e){var s={r:[]};e.wf={r:s.r,ready:t=>{s.r.push(t)}}})(window)</script>
+  <script type="text/javascript">(function(e,t,p){var n=document.documentElement,s={p:[],r:[]},u={p:s.p,r:s.r,push:function(e){s.p.push(e)},ready:function(e){s.r.push(e)}};e.intellimize=u,n.className+=" "+p,setTimeout(function(){n.className=n.className.replace(RegExp(" ?"+p),"")},t)})(window, 4000, 'anti-flicker')</script>
+  <link href="https://cdn.intellimize.co/snippet/117794055.js" rel="preload" as="script">
+  <script type="text/javascript">var wfClientScript=document.createElement("script");wfClientScript.src="https://cdn.intellimize.co/snippet/117794055.js",wfClientScript.async=!0,wfClientScript.onerror=function(){document.documentElement.className=document.documentElement.className.replace(RegExp(" ?anti-flicker"),"")},document.head.appendChild(wfClientScript);</script>
+  <link href="https://api.intellimize.co" rel="preconnect" crossorigin="true">
+  <link href="https://log.intellimize.co" rel="preconnect" crossorigin="true">
+  <link href="https://117794055.intellimizeio.com" rel="preconnect">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css">
+</head>
+<body>
+  <div class="w-embed w-script">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>DreamPlay One - Find Your Perfect Piano</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="bg-[#0a0a0f] text-white antialiased">
+      <header id="sticky-nav" class="fixed left-0 right-0 top-0 z-50 transition-all duration-500 bg-transparent py-6">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6">
+          <img src="https://cdn.prod.website-files.com/6723a7dd85bce00279c0bc64/6723b099310ac8f8c3ed97cd_dreamplay-logo.svg" alt="DreamPlay" class="h-7 brightness-0 invert">
+          <nav class="hidden items-center gap-1 md:flex" id="nav-steps">
+          </nav>
+          <div class="flex items-center gap-4">
+            <div id="nav-preview" class="hidden items-center gap-2 text-sm text-white/60 sm:flex">
+            </div>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section id="section-hero" class="journey-section relative flex h-screen items-center justify-center overflow-hidden bg-[#0a0a0f]">
+          <div class="pointer-events-none absolute inset-0 opacity-30" id="hero-gradient"></div>
+          <div class="pointer-events-none absolute right-0 top-1/2 w-[800px] -translate-y-1/2 opacity-20" id="hero-parallax">
+            <img src="https://cdn.prod.website-files.com/6723a7dd85bce00279c0bc64/672a8e88dad4c3bb42a68cce_dreamplay-one-keyboard-front.webp" alt="DreamPlay Keyboard" class="w-full">
+          </div>
+          <div class="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs text-white/60 backdrop-blur-sm md:mb-4 md:px-4 md:py-2 md:text-sm">
+              <span class="h-2 w-2 animate-pulse rounded-full bg-[#4a9eff]"></span>
+              Limited Pre-Order Available
+            </div>
+            <h1 class="mb-3 text-balance text-3xl font-bold tracking-tight text-white md:mb-4 md:text-6xl lg:text-7xl">
+              Find Your Perfect
+              <span class="mt-1 block bg-gradient-to-r from-[#4a9eff] to-[#60b8ff] bg-clip-text text-transparent md:mt-2">
+                DreamPlay One
+              </span>
+            </h1>
+            <p class="mx-auto mb-6 max-w-2xl text-sm leading-relaxed text-white/60 md:mb-8 md:text-lg">
+              In just 4 simple steps, we'll help you discover the ideal keyboard size and finish for your musical journey.
+            </p>
+            <button onclick="scrollToSection(1)" class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[#4a9eff] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#4a9eff]/30 md:gap-3 md:px-8 md:py-4 md:text-lg">
+              <span class="relative z-10">Start Your Journey</span>
+              <svg class="relative z-10 h-4 w-4 animate-bounce md:h-5 md:w-5" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+          </div>
+        </section>
+        <section id="section-measure" class="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-b from-[#0a0a0f] to-[#0f1419] py-20">
+          <div class="mx-auto w-full max-w-5xl px-4 md:px-6">
+            <div class="mb-4 text-center md:mb-6 animate-on-scroll">
+              <div class="mb-2 inline-flex items-center gap-2 rounded-full bg-[#4a9eff]/10 px-3 py-1.5 text-xs font-medium text-[#4a9eff] md:mb-3 md:px-4 md:py-2 md:text-sm">
+                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-[#4a9eff] text-[10px] text-white md:h-6 md:w-6 md:text-xs">1</span>
+                Step One
+              </div>
+              <h2 class="mb-2 text-balance text-2xl font-bold text-white md:mb-3 md:text-4xl lg:text-5xl">Select Your Hand Size</h2>
+              <p class="mx-auto max-w-xl text-sm text-white/60 md:text-base">Choose the option that best describes your hand size.</p>
+            </div>
+            <div id="hand-size-grid" class="grid gap-3 md:gap-6 lg:grid-cols-3 animate-on-scroll delay-100">
+            </div>
+            <p id="measure-recommendation" class="mt-4 py-4 text-center text-sm text-white/50 md:mt-5 animate-on-scroll delay-200">
+              Select your hand size to see your recommended piano keyboard.
+            </p>
+            <div class="mt-4 animate-on-scroll delay-300">
+              <button onclick="toggleModal(true)" class="mx-auto flex w-full max-w-md items-center justify-between rounded-xl border border-white/10 bg-white/5 p-4 transition-all hover:border-[#4a9eff]/50 hover:bg-white/10">
+                <span class="text-sm text-white/60 md:text-base">Unsure? Use Our Sizing Tool</span>
+                <span class="text-sm font-semibold text-[#4a9eff] md:text-base">→</span>
+              </button>
+            </div>
+          </div>
+        </section>
+        <section id="section-size" class="journey-section relative flex min-h-screen flex-col justify-center bg-[#0f1419] py-20">
+          <div class="mx-auto w-full max-w-6xl px-4 md:px-6">
+            <button onclick="scrollToSection(1)" class="mb-4 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white">
+              <span>←</span> Previous Step
+            </button>
+            <div class="mb-4 text-center md:mb-6 animate-on-scroll">
+              <div class="mb-2 inline-flex items-center gap-2 rounded-full bg-[#4a9eff]/10 px-3 py-1.5 text-xs font-medium text-[#4a9eff] md:mb-3 md:px-4 md:py-2 md:text-sm">
+                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-[#4a9eff] text-[10px] text-white md:h-6 md:w-6 md:text-xs">2</span>
+                Step Two
+              </div>
+              <h2 class="mb-2 text-balance text-2xl font-bold text-white md:mb-3 md:text-4xl lg:text-5xl">Your Recommended Size</h2>
+              <p class="mx-auto max-w-xl text-sm text-white/60 md:text-base">
+                Based on your hand span, we recommend the <span id="text-recommended-model" class="font-semibold text-[#4a9eff]">DS6.0</span>.
+              </p>
+            </div>
+            <div id="size-card-grid" class="grid gap-3 md:gap-4 lg:grid-cols-3 animate-on-scroll delay-100">
+            </div>
+          </div>
+        </section>
+        <section id="section-color" class="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-b from-[#0f1419] to-[#0a0a0f] py-20">
+          <div class="mx-auto w-full max-w-5xl px-4 md:px-6">
+            <button onclick="scrollToSection(2)" class="mb-4 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white">
+              <span>←</span> Previous Step
+            </button>
+            <div class="mb-4 text-center md:mb-6 animate-on-scroll">
+              <div class="mb-2 inline-flex items-center gap-2 rounded-full bg-[#4a9eff]/10 px-3 py-1.5 text-xs font-medium text-[#4a9eff] md:mb-3 md:px-4 md:py-2 md:text-sm">
+                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-[#4a9eff] text-[10px] text-white md:h-6 md:w-6 md:text-xs">3</span>
+                Step Three
+              </div>
+              <h2 class="mb-2 text-balance text-2xl font-bold text-white md:mb-3 md:text-4xl lg:text-5xl">Choose Your Finish</h2>
+              <p class="mx-auto max-w-xl text-sm text-white/60 md:text-base">Both finishes feature the same premium build quality.</p>
+            </div>
+            <div id="color-grid" class="grid gap-3 md:gap-6 lg:grid-cols-2 animate-on-scroll delay-100">
+            </div>
+          </div>
+        </section>
+        <section id="section-checkout" class="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-br from-[#4a9eff] to-[#2d7ad6] py-20">
+          <div class="mx-auto w-full max-w-4xl px-4 md:px-6">
+            <button onclick="scrollToSection(3)" class="mb-4 flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white">
+              <span>←</span> Previous Step
+            </button>
+            <div class="mb-8 text-center md:mb-12 animate-on-scroll">
+              <h2 class="mb-3 text-balance text-3xl font-bold text-white md:mb-4 md:text-5xl lg:text-6xl">
+                Be the First to<br>Experience DreamPlay.
+              </h2>
+              <p class="mx-auto mb-6 max-w-lg text-sm text-white/80 md:mb-8 md:text-base lg:text-lg">
+                We've finished the design. Now, we need your help to begin production.
+              </p>
+              <div id="countdown-container" class="mb-6 flex items-center justify-center gap-4 md:mb-8 md:gap-8">
+              </div>
+              <p class="text-sm text-white/70 md:text-base">
+                Join <span id="customer-count" class="font-semibold text-white">~1,247</span> customers just like you
+              </p>
+            </div>
+            <div id="pricing-grid" class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 animate-on-scroll delay-100">
+            </div>
+          </div>
+        </section>
+        <section id="section-contact" class="journey-section relative flex min-h-screen flex-col justify-center bg-[#0a0a0f] py-20">
+          <div class="mx-auto w-full max-w-5xl px-4 md:px-6">
+            <button onclick="scrollToSection(4)" class="mb-4 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white">
+              <span>←</span> Previous Step
+            </button>
+            <div class="mb-6 text-center md:mb-10 animate-on-scroll">
+              <div class="mb-2 inline-flex items-center gap-2 rounded-full bg-[#4a9eff]/10 px-3 py-1.5 text-xs font-medium text-[#4a9eff] md:mb-3 md:px-4 md:py-2 md:text-sm">
+                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-[#4a9eff] text-[10px] text-white md:h-6 md:w-6 md:text-xs">5</span>
+                Complete Your Order
+              </div>
+              <h2 class="mb-2 text-2xl font-bold text-white md:text-3xl lg:text-4xl">Almost There!</h2>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2 md:gap-8 animate-on-scroll delay-100">
+              <form id="order-form" class="flex flex-col">
+                <div class="flex-1 rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
+                  <h3 class="mb-5 text-lg font-semibold text-white md:text-xl">Contact Information</h3>
+                  <div class="space-y-4">
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-white/60">Full Name</label>
+                      <input type="text" id="input-name" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[#4a9eff]" required="">
+                    </div>
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-white/60">Email Address</label>
+                      <input type="email" id="input-email" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[#4a9eff]" required="">
+                    </div>
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-white/60">Address</label>
+                      <input type="text" id="input-address" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[#4a9eff]" required="">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                      <input type="text" id="input-city" placeholder="City" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[#4a9eff]" required="">
+                      <input type="text" id="input-zip" placeholder="Zip" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[#4a9eff]" required="">
+                    </div>
+                  </div>
+                  <button type="submit" id="btn-submit" class="mt-6 w-full rounded-xl bg-gradient-to-r from-[#4a9eff] to-[#60b8ff] py-3.5 text-base font-semibold text-white transition-all hover:opacity-90">
+                    Pay & Complete
+                  </button>
+                  <p id="bundle-info" class="mt-2 text-center text-sm text-white/60"></p>
+                </div>
+              </form>
+              <div id="order-summary" class="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div id="sizing-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-opacity">
+        <div class="relative max-h-[90vh] w-full max-w-6xl overflow-auto rounded-3xl" onclick="event.stopPropagation()">
+          <button onclick="toggleModal(false)" class="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20">
+            <svg class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+          <div class="dp-solution-container">
+            <div class="dp-solution-header">
+              <h2 class="dp-solution-title">A Keyboard That Fits You.</h2>
+              <p class="dp-solution-subtitle">DreamPlay's DS Standardized Keyboards come in different sizes to match your biology.</p>
+            </div>
+            <div class="dp-solution-grid">
+              <div class="dp-card">
+                <div class="dp-card-header">
+                  <div class="dp-icon-circle"><span>📏</span></div>
+                  <div class="dp-card-title">Find Your Zone</div>
+                </div>
+                <div class="dp-slider-wrapper">
+                  <div class="dp-field-label-row">
+                    <div class="dp-field-label">Your hand span</div>
+                    <div id="dp-handspan-value" class="dp-handspan-value">8.0 in <span>/ 20.3 cm</span></div>
+                  </div>
+                  <div id="dp-glow-layer" class="dp-glow-layer"></div>
+                  <input id="dp-handspan-slider" class="dp-slider" type="range" min="0" max="100" step="0.5" value="50">
+                  <div class="dp-slider-label-row">
+                    <span>Small (6 in)</span>
+                    <span>Average (8 in)</span>
+                    <span>Large (10 in)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="dp-card">
+                <div class="dp-result-tag">Your match</div>
+                <div id="dp-result-zone" class="dp-result-zone">Zone B</div>
+                <div id="dp-result-range" class="dp-result-range">Hand span range: 7.6 to 8.5 inches</div>
+                <div id="dp-result-model" class="dp-result-model">DS6.0</div>
+                <div class="dp-result-model-label">Recommended model</div>
+                <div id="dp-result-desc" class="dp-result-desc">The 'Goldilocks' size.</div>
+                <div class="dp-reach-box">
+                  <div class="dp-reach-icon">✓</div>
+                  <div>
+                    <div class="dp-reach-text-label">Reach capability</div>
+                    <div id="dp-result-reach" class="dp-reach-text-value">Play 10ths with ease</div>
+                  </div>
+                </div>
+                <button onclick="applySizingTool()" class="dp-select-button">Select and Return</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="toast-viewport" class="fixed bottom-0 right-0 z-[100] flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]">
+      </div>
+      <script src="script.js"></script>
+    </body>
+    </html>
+  </div>
+  <div class="w-embed">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+:root {
+  --dp-radius-card: 2rem;
+  --dp-radius-inner: 1.25rem;
+  --dp-radius-pill: 999px;
+  /* Zone Colors */
+  --zone-a: rgba(239, 68, 68, 1);
+  --zone-b: rgba(249, 115, 22, 1);
+  --zone-c: rgba(34, 211, 238, 1);
+}
+body {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 158, 255, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 158, 255, 0.6);
+}
+html {
+  scroll-behavior: smooth;
+}
+/* --- Sizing Tool Specific Styles --- */
+.dp-solution-container {
+  background: #0a0a0f;
+  color: #f9fafb;
+  width: 100%;
+  border-radius: 3rem;
+  padding: 3rem 1.5rem;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .dp-solution-container {
+    padding: 5rem 2rem;
+  }
+}
+.dp-solution-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.dp-solution-title {
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .dp-solution-title {
+    font-size: 2.4rem;
+  }
+}
+.dp-solution-subtitle {
+  font-size: 1rem;
+  color: #9ca3af;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.dp-solution-grid {
+  display: grid;
+  gap: 2rem;
+  align-items: stretch;
+}
+@media (min-width: 1024px) {
+  .dp-solution-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 3rem;
+  }
+}
+.dp-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--dp-radius-card);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .dp-card {
+    padding: 2.5rem;
+  }
+}
+.dp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.dp-icon-circle {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--dp-radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+}
+.dp-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.dp-slider-wrapper {
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.dp-field-label-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.dp-field-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.dp-handspan-value {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #60a5fa; /* Default */
+}
+.dp-handspan-value span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #9ca3af;
+  margin-left: 0.4rem;
+}
+.dp-glow-layer {
+  position: absolute;
+  top: 2.6rem;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  z-index: 0;
+  filter: blur(16px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+.dp-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  margin: 1rem 0 0.25rem;
+  height: 6px;
+  border-radius: var(--dp-radius-pill);
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.dp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: var(--dp-radius-pill);
+  background: #fff;
+  border: 4px solid var(--thumb-color, #60a5fa);
+  cursor: pointer;
+  margin-top: -7px; /* Align thumb with track */
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  transition: border-color 0.2s ease;
+}
+.dp-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  background: transparent;
+}
+.dp-slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+.dp-result-zone {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.dp-result-range {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+}
+.dp-result-model {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.dp-result-model-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #60a5fa;
+  margin-bottom: 1.5rem;
+}
+.dp-result-desc {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.dp-reach-box {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--dp-radius-inner);
+  padding: 0.9rem 1rem;
+}
+.dp-reach-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.6rem;
+  background: rgba(74, 158, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a9eff;
+  font-weight: bold;
+}
+.dp-select-button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  background: #4a9eff;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--dp-radius-inner);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(74, 158, 255, 0.3);
+}
+.dp-select-button:hover {
+  background: #3a8eef;
+  transform: translateY(-1px);
+}
+/* Animations for scroll reveal */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: all 0.7s ease-out;
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* --- TOAST SYSTEM STYLES (New) --- */
+.toast {
+    pointer-events: auto;
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #0f1419; /* Dark theme bg */
+    padding: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slideIn .3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-variant-destructive {
+    border-color: rgba(239, 68, 68, 0.5);
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+.toast-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+.toast-description {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    color: rgba(255,255,255,0.7);
+}
+.toast-close {
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+.toast-close:hover {
+    opacity: 1;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.toast-exit {
+    opacity: 0;
+    transform: translateX(100%);
+}
+</style>
+  </div>
+  <div class="w-embed w-script">
+    <script>
+// --- Global State ---
+const state = {
+    handSpan: null, // 'small', 'medium', 'large'
+    size: 'DS6.0', 
+    color: null,    
+    tier: 'full',   
+    // Logic from use-mobile.ts
+    isMobile: false, 
+    // Sizing tool internal state
+    currentZone: 'B' 
+};
+// --- Logic from use-mobile.ts ---
+const MOBILE_BREAKPOINT = 768;
+function initMobileDetection() {
+    const checkMobile = () => {
+        state.isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+        // Optional: Add logic here if you want to change layout dynamically via JS
+        // based on mobile state (though CSS media queries are usually better).
+    };
+    // Initial check
+    checkMobile();
+    // Listener
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    mql.addEventListener('change', checkMobile);
+}
+// --- Logic from use-toast.ts (Vanilla Implementation) ---
+const ToastSystem = {
+    limit: 1, // Matches TOAST_LIMIT in use-toast.ts
+    toasts: [],
+    show({ title, description, variant = 'default' }) {
+        const viewport = document.getElementById('toast-viewport');
+        // Respect limit: remove oldest if at limit
+        if (this.toasts.length >= this.limit) {
+            this.dismiss(this.toasts[0].id);
+        }
+        const id = 'toast-' + Math.random().toString(36).substr(2, 9);
+        // Create DOM Element
+        const el = document.createElement('div');
+        el.id = id;
+        el.className = `toast ${variant === 'destructive' ? 'toast-variant-destructive' : 'toast-variant-default'}`;
+        // Inner HTML
+        el.innerHTML = `
+            <div class="grid gap-1">
+                ${title ? `<div class="toast-title text-white">${title}</div>` : ''}
+                ${description ? `<div class="toast-description">${description}</div>` : ''}
+            </div>
+            <button class="toast-close text-white" onclick="ToastSystem.dismiss('${id}')">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.1929 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.1929 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+        `;
+        viewport.appendChild(el);
+        this.toasts.push({ id, el });
+        // Auto dismiss logic (matches TOAST_REMOVE_DELAY, usually 5-10s)
+        setTimeout(() => this.dismiss(id), 5000);
+    },
+    dismiss(id) {
+        const index = this.toasts.findIndex(t => t.id === id);
+        if (index === -1) return;
+        const { el } = this.toasts[index];
+        // Animation out
+        el.classList.add('toast-exit');
+        // Remove from DOM after animation
+        setTimeout(() => {
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+        }, 300); // match CSS transition time
+        this.toasts.splice(index, 1);
+    }
+};
+// --- Data Constants ---
+const HAND_SIZES = [
+    { id: 'small', label: 'Smaller Hands', range: '< 7.6 inches', zone: 'Zone A', pianoSize: 'DS5.5', desc: 'Ideal for women and children', emoji: '🤚' },
+    { id: 'medium', label: 'Average Hands', range: '7.6–8.5 inches', zone: 'Zone B', pianoSize: 'DS6.0', desc: 'Perfect for most men and women', emoji: '✋' },
+    { id: 'large', label: 'Larger Hands', range: '8.5+ inches', zone: 'Zone C', pianoSize: 'DS6.5', desc: 'For the small percentage with larger hands', emoji: '🖐️' }
+];
+const KEYBOARDS = {
+    'DS5.5': { name: 'DreamPlay One DS5.5', tagline: 'Perfect for smaller hands', desc: 'Ideal for women and children', zone: 'Zone A', keys: 'Narrowest' },
+    'DS6.0': { name: 'DreamPlay One DS6.0', tagline: 'Perfect for average hands', desc: 'Ideal for most men and women', zone: 'Zone B', keys: 'Narrow' },
+    'DS6.5': { name: 'DreamPlay One DS6.5', tagline: 'Standard keys for large hands', desc: 'For larger hands', zone: 'Zone C', keys: 'Standard' }
+};
+const PRICING_TIERS = [
+    { id: 'full', name: 'Pay in Full', price: '$599', subtitle: 'Best Value', desc: 'Get the complete bundle with extras', recommended: true },
+    { id: 'deposit', name: 'Reserve Your Spot', price: '$299', subtitle: '50% Now', desc: 'Be first in line, pay 50% later', recommended: false },
+    { id: 'waitlist', name: 'Join Waitlist', price: 'Free', subtitle: 'No Payment', desc: 'Just your email, no commitment', recommended: false }
+];
+// --- Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileDetection(); // Start mobile detection
+    initScrollSpy();
+    initStickyNav();
+    initCountdown();
+    renderHandSizes();
+    renderSizeCards();
+    renderColorCards();
+    renderPricingTiers();
+    updateOrderSummary();
+    initSizingTool();
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+});
+// --- Navigation & Scroll Logic ---
+function scrollToSection(index) {
+    const ids = ['section-hero', 'section-measure', 'section-size', 'section-color', 'section-checkout', 'section-contact'];
+    const el = document.getElementById(ids[index]);
+    if(el) el.scrollIntoView({ behavior: 'smooth' });
+}
+function initScrollSpy() {
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('.journey-section');
+        const scrollPos = window.scrollY + window.innerHeight / 2;
+        let activeIndex = 0;
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const top = rect.top + window.scrollY;
+            const bottom = top + rect.height;
+            if (scrollPos >= top && scrollPos < bottom) {
+                activeIndex = index;
+            }
+        });
+        renderNavSteps(activeIndex);
+    });
+}
+function initStickyNav() {
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('sticky-nav');
+        if (window.scrollY > 100) {
+            nav.classList.replace('bg-transparent', 'bg-[#0a0a0f]/95');
+            nav.classList.add('shadow-lg', 'backdrop-blur-md');
+            nav.classList.replace('py-6', 'py-3');
+        } else {
+            nav.classList.replace('bg-[#0a0a0f]/95', 'bg-transparent');
+            nav.classList.remove('shadow-lg', 'backdrop-blur-md');
+            nav.classList.replace('py-3', 'py-6');
+        }
+    });
+    renderNavSteps(0);
+}
+function renderNavSteps(activeIdx) {
+    const steps = ['Start', 'Measure', 'Size', 'Color', 'Reserve'];
+    const container = document.getElementById('nav-steps');
+    container.innerHTML = steps.map((label, index) => {
+        const isActive = activeIdx === index;
+        const isCompleted = activeIdx > index;
+        const isClickable = index <= activeIdx || isCompleted;
+        let btnClass = `group relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 `;
+        if (isActive) btnClass += "bg-[#4a9eff] text-white shadow-lg shadow-[#4a9eff]/30";
+        else if (isCompleted) btnClass += "text-[#4a9eff] hover:bg-[#4a9eff]/10 cursor-pointer";
+        else btnClass += "text-white/40 cursor-not-allowed";
+        let indicator = '';
+        if (index > 0) {
+            let badgeClass = isActive ? "bg-white/20 text-white" : (isCompleted ? "bg-[#4a9eff]/20 text-[#4a9eff]" : "bg-white/10 text-white/40");
+            indicator = `<span class="flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold ${badgeClass}">${isCompleted ? '✓' : index}</span>`;
+        }
+        return `<button onclick="${isClickable ? `scrollToSection(${index})` : ''}" class="${btnClass}">
+             ${indicator} <span class="hidden lg:inline">${label}</span>
+        </button>`;
+    }).join('');
+    // Update Header Preview
+    const preview = document.getElementById('nav-preview');
+    if(state.size || state.color) {
+        preview.classList.remove('hidden');
+        preview.classList.add('flex');
+        let html = '';
+        if(state.size) html += `<span class="text-[#4a9eff]">${state.size}</span>`;
+        if(state.size && state.color) html += `<span>•</span>`;
+        if(state.color) html += `<span class="text-[#4a9eff]">${state.color}</span>`;
+        preview.innerHTML = html;
+    } else {
+        preview.classList.add('hidden');
+    }
+}
+// --- Renderers & Logic ---
+// 1. Hand Size
+function renderHandSizes() {
+    const grid = document.getElementById('hand-size-grid');
+    grid.innerHTML = HAND_SIZES.map(s => {
+        const isSelected = state.handSpan === s.id;
+        const borderClass = isSelected ? "border-[#4a9eff] bg-[#4a9eff]/10 ring-2 ring-[#4a9eff]/50" : "border-white/10 bg-white/5 hover:border-[#4a9eff]/50 hover:bg-[#4a9eff]/5";
+        return `
+        <button onclick="handleHandSelect('${s.id}')" class="group relative flex flex-col overflow-hidden rounded-xl border p-5 text-left transition-all duration-300 md:rounded-2xl md:p-6 ${borderClass}">
+            ${isSelected ? `<div class="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-[#4a9eff] text-white">✓</div>` : ''}
+            <div class="flex flex-1 flex-col items-center">
+                <span class="text-4xl mb-3 grayscale group-hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100">${s.emoji}</span>
+                <h3 class="text-xl font-bold text-white mb-1">${s.label}</h3>
+                <p class="text-center text-sm text-[#4a9eff]/80 mb-4 h-12">${s.desc}</p>
+                <div class="text-sm font-light text-white/50 mb-4">${s.range}</div>
+            </div>
+            <div class="mt-auto w-full rounded-lg bg-white/5 p-3">
+                 <div class="flex justify-between items-center mb-1">
+                    <span class="text-white/70 font-semibold">${s.pianoSize}</span>
+                    <span class="text-xs bg-white/10 px-2 rounded text-white/50">${s.zone}</span>
+                 </div>
+                 <p class="text-xs text-white/50">${s.keys} Keys</p>
+            </div>
+        </button>`;
+    }).join('');
+}
+function handleHandSelect(id) {
+    state.handSpan = id;
+    const map = { small: 'DS5.5', medium: 'DS6.0', large: 'DS6.5' };
+    state.size = map[id];
+    document.getElementById('measure-recommendation').innerText = `We recommend the ${state.size} for your hand size.`;
+    renderHandSizes();
+    renderSizeCards();
+    setTimeout(() => scrollToSection(2), 300);
+}
+// 2. Size Selection
+function renderSizeCards() {
+    const grid = document.getElementById('size-card-grid');
+    document.getElementById('text-recommended-model').innerText = state.size || 'DS6.0';
+    grid.innerHTML = Object.entries(KEYBOARDS).map(([key, data]) => {
+        const isSelected = state.size === key;
+        const borderClass = isSelected ? "border-[#4a9eff] shadow-2xl shadow-[#4a9eff]/20" : "border-white/10 hover:border-white/20";
+        return `
+        <button onclick="handleSizeSelect('${key}')" class="group relative overflow-hidden rounded-xl border text-left transition-all duration-300 ${borderClass}">
+            ${isSelected ? `<div class="absolute right-2 top-2 z-10 rounded-full bg-gradient-to-r from-[#4a9eff] to-[#7dd3fc] px-2 py-0.5 text-[10px] font-bold uppercase text-white shadow-lg">Recommended</div>` : ''}
+            <div class="absolute left-2 top-2 z-10 text-[10px] text-white/50 bg-white/10 px-2 rounded">${data.zone}</div>
+            <div class="relative overflow-hidden bg-white/5 p-6 flex justify-center">
+                 <img src="https://cdn.prod.website-files.com/6723a7dd85bce00279c0bc64/672a8e88dad4c3bb42a68cce_dreamplay-one-keyboard-front.webp" class="h-24 object-contain group-hover:scale-105 transition-transform" />
+            </div>
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-white">${data.name}</h3>
+                <p class="text-xs text-white/60 mb-2">${data.tagline}</p>
+                <div class="grid grid-cols-2 gap-2 mt-3">
+                    <div class="bg-white/5 p-2 rounded">
+                        <div class="text-[#4a9eff] font-bold">88</div>
+                        <div class="text-[10px] text-white/50">Keys</div>
+                    </div>
+                     <div class="bg-white/5 p-2 rounded">
+                        <div class="text-white font-bold text-xs">${data.keys}</div>
+                        <div class="text-[10px] text-white/50">Width</div>
+                    </div>
+                </div>
+                <div class="mt-3 text-center py-2 rounded text-sm font-semibold ${isSelected ? 'bg-[#4a9eff] text-white' : 'bg-white/10 text-white/60'}">
+                    ${isSelected ? 'Selected' : 'Select'}
+                </div>
+            </div>
+        </button>`;
+    }).join('');
+}
+function handleSizeSelect(sizeKey) {
+    state.size = sizeKey;
+    renderSizeCards();
+    updateOrderSummary();
+    setTimeout(() => scrollToSection(3), 300);
+}
+// 3. Color Selection
+function renderColorCards() {
+    const colors = [
+        { id: 'Black', name: 'Midnight Black', hex: '#1a1a1a', grad: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)' },
+        { id: 'White', name: 'Pearl White', hex: '#f5f5f5', grad: 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)' }
+    ];
+    const grid = document.getElementById('color-grid');
+    grid.innerHTML = colors.map(c => {
+        const isSelected = state.color === c.id;
+        const borderClass = isSelected ? "border-[#4a9eff] shadow-2xl shadow-[#4a9eff]/20" : "border-white/10 hover:border-white/20";
+        return `
+        <button onclick="handleColorSelect('${c.id}')" class="group relative overflow-hidden rounded-xl border text-left transition-all duration-300 ${borderClass}">
+            <div class="h-40 relative" style="background: ${c.grad}">
+                <img src="https://cdn.prod.website-files.com/6723a7dd85bce00279c0bc64/672a8e88dad4c3bb42a68cce_dreamplay-one-keyboard-front.webp" 
+                     class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] max-w-none group-hover:scale-110 transition-transform ${c.id === 'Black' ? 'brightness-50' : ''}" />
+                ${isSelected ? `<div class="absolute right-3 top-3 bg-[#4a9eff] rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">✓</div>` : ''}
+            </div>
+            <div class="p-5">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-5 h-5 rounded-full border border-white/20" style="background:${c.hex}"></div>
+                    <h3 class="text-xl font-bold text-white">${c.name}</h3>
+                </div>
+                <div class="mt-3 text-center py-2 rounded text-sm font-semibold ${isSelected ? 'bg-[#4a9eff] text-white' : 'bg-white/10 text-white/60'}">
+                    ${isSelected ? 'Selected' : 'Choose Finish'}
+                </div>
+            </div>
+        </button>`;
+    }).join('');
+}
+function handleColorSelect(colorId) {
+    state.color = colorId;
+    renderColorCards();
+    updateOrderSummary();
+    setTimeout(() => scrollToSection(4), 300);
+}
+// 4. Pricing / Checkout
+function renderPricingTiers() {
+    const grid = document.getElementById('pricing-grid');
+    grid.innerHTML = PRICING_TIERS.map(t => {
+        const isSelected = state.tier === t.id;
+        const bgClass = isSelected ? "border-white bg-white/20 backdrop-blur-sm" : "border-white/20 bg-white/10 backdrop-blur-sm hover:border-white/40";
+        return `
+        <button onclick="handleTierSelect('${t.id}')" class="relative flex flex-col items-center rounded-2xl border p-6 text-center transition-all duration-300 ${bgClass}">
+            ${t.recommended ? `<div class="absolute right-2 top-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#4a9eff]">Best Value</div>` : ''}
+            <div class="text-4xl font-bold text-white mt-4">${t.price}</div>
+            <div class="text-lg font-medium text-white/90 mt-1">${t.name}</div>
+            <div class="text-sm text-white/60 mt-2">${t.desc}</div>
+            ${isSelected ? `<div class="mt-4 rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-[#4a9eff]">Selected</div>` : ''}
+        </button>`;
+    }).join('');
+}
+function handleTierSelect(tierId) {
+    state.tier = tierId;
+    renderPricingTiers();
+    updateSubmitButton();
+    updateOrderSummary();
+    setTimeout(() => scrollToSection(5), 300);
+}
+// 5. Contact & Summary
+function updateSubmitButton() {
+    const btn = document.getElementById('btn-submit');
+    const note = document.getElementById('bundle-info');
+    const tier = PRICING_TIERS.find(t => t.id === state.tier);
+    btn.innerText = tier.id === 'waitlist' ? 'Join Waitlist' : `Pay ${tier.price} & Complete`;
+    if(tier.id === 'full') note.innerText = "+ stand, bench and pedal included";
+    else if(tier.id === 'deposit') note.innerText = "+ stand and pedal included";
+    else note.innerText = "";
+}
+function updateOrderSummary() {
+    const container = document.getElementById('order-summary');
+    const tier = PRICING_TIERS.find(t => t.id === state.tier);
+    const shipDate = state.size === 'DS6.5' ? 'April 2026' : 'July 2026';
+    container.innerHTML = `
+        <h3 class="mb-5 text-xl font-semibold text-white">Your Selection</h3>
+        <div class="mb-5 bg-white/5 rounded-xl p-4 flex justify-center">
+             <img src="https://cdn.prod.website-files.com/6723a7dd85bce00279c0bc64/672a8e88dad4c3bb42a68cce_dreamplay-one-keyboard-front.webp" class="h-20 object-contain" />
+        </div>
+        <div class="space-y-3 border-b border-white/10 pb-5 text-sm">
+            <div class="flex justify-between"><span class="text-white/60">Model</span> <span class="text-white">DreamPlay One ${state.size || '-'}</span></div>
+            <div class="flex justify-between"><span class="text-white/60">Finish</span> <span class="text-white">${state.color || '-'}</span></div>
+            <div class="flex justify-between"><span class="text-white/60">Option</span> <span class="text-[#4a9eff]">${tier.name}</span></div>
+            <div class="flex justify-between"><span class="text-white/60">Est. Shipping</span> <span class="text-white">${state.size ? shipDate : '-'}</span></div>
+        </div>
+        <div class="mt-5 flex justify-between items-center">
+            <span class="text-white/60">Due Today</span>
+            <span class="text-3xl font-bold text-[#4a9eff]">${tier.price}</span>
+        </div>
+    `;
+}
+// --- Form Submission with Toast ---
+document.getElementById('order-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-submit');
+    const originalText = btn.innerText;
+    btn.innerHTML = `<svg class="animate-spin h-5 w-5 mr-2 inline" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
+    setTimeout(() => {
+        // Success Toast
+        ToastSystem.show({
+            title: "Reservation Received!",
+            description: "We have sent a confirmation to your email address.",
+            variant: "default"
+        });
+        btn.innerText = "Completed";
+        // Example: If it failed, you would use:
+        /*
+        ToastSystem.show({
+            title: "Error",
+            description: "Something went wrong. Please try again.",
+            variant: "destructive"
+        });
+        */
+        // Reset button after a moment
+        setTimeout(() => {
+            updateSubmitButton();
+        }, 3000);
+    }, 2000);
+});
+// --- Extras: Countdown & Sizing Tool ---
+function initCountdown() {
+    let d = 0, h = 11, m = 4, s = 42;
+    setInterval(() => {
+        s--;
+        if(s<0) { s=59; m--; }
+        if(m<0) { m=59; h--; }
+        const pad = (n) => n.toString().padStart(2,'0');
+        const html = [
+            {v:pad(d), l:'DAYS'}, {v:pad(h), l:'HOURS'}, {v:pad(m), l:'MIN'}, {v:pad(s), l:'SEC'}
+        ].map(i => `
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white md:text-5xl">${i.v}</div>
+                <div class="text-[10px] text-white/60">${i.l}</div>
+            </div>
+        `).join('<span class="text-2xl text-white/40">:</span>');
+        document.getElementById('countdown-container').innerHTML = html;
+    }, 1000);
+}
+// Sizing Tool Modal Logic
+function toggleModal(show) {
+    const modal = document.getElementById('sizing-modal');
+    if(show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+function initSizingTool() {
+    const slider = document.getElementById('dp-handspan-slider');
+    const glow = document.getElementById('dp-glow-layer');
+    const valDisplay = document.getElementById('dp-handspan-value');
+    // Gradients for logic
+    const cA = 'rgba(239, 68, 68, 1)'; // Red
+    const cB = 'rgba(249, 115, 22, 1)'; // Orange
+    const cC = 'rgba(34, 211, 238, 1)'; // Teal
+    // Visual break points on slider (0-100 scale)
+    const endA = 33.33; 
+    const endB = 66.66;
+    // Helper to map 0-100 slider to real inches
+    const getRealValue = (p) => {
+        if (p <= endA) return 6.0 + (p / endA) * (7.6 - 6.0);
+        if (p <= endB) {
+            const rel = (p - endA) / (endB - endA);
+            return 7.6 + rel * (8.5 - 7.6);
+        }
+        const rel = (p - endB) / (100 - endB);
+        return 8.5 + rel * (10.0 - 8.5);
+    };
+    const updateUI = () => {
+        const p = parseFloat(slider.value);
+        const real = getRealValue(p);
+        // Color logic
+        let color = cA;
+        let zone = 'A';
+        let rangeTxt = 'Hand span range: under 7.6 inches';
+        let model = 'DS5.5';
+        if(real >= 7.6) { color = cB; zone = 'B'; rangeTxt = '7.6 to 8.5 inches'; model = 'DS6.0'; }
+        if(real > 8.5) { color = cC; zone = 'C'; rangeTxt = 'above 8.5 inches'; model = 'DS6.5'; }
+        // Update CSS Var for thumb color
+        slider.style.setProperty('--thumb-color', color);
+        // Dynamic gradient on slider track
+        const gradient = `linear-gradient(to right, ${color} 0%, ${color} ${p}%, rgba(255,255,255,0.1) ${p}%, rgba(255,255,255,0.1) 100%)`;
+        slider.style.background = gradient;
+        // Glow
+        if(glow) glow.style.background = `linear-gradient(90deg, ${color}, transparent)`;
+        // Text Updates
+        valDisplay.innerHTML = `${real.toFixed(1)} in <span>/ ${(real * 2.54).toFixed(1)} cm</span>`;
+        valDisplay.style.color = color;
+        document.getElementById('dp-result-zone').innerText = `Zone ${zone}`;
+        document.getElementById('dp-result-zone').style.color = color;
+        document.getElementById('dp-result-range').innerText = rangeTxt;
+        document.getElementById('dp-result-model').innerText = model;
+        state.currentZone = zone;
+    };
+    slider.addEventListener('input', updateUI);
+    updateUI(); // Init
+}
+function applySizingTool() {
+    const zoneToSize = { 'A': 'small', 'B': 'medium', 'C': 'large' };
+    const sizeId = zoneToSize[state.currentZone];
+    handleHandSelect(sizeId);
+    toggleModal(false);
+}
+</script>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=68b99847f96fcca15429faec" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="../js/webflow.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script>
+// Initialize Lenis
+const lenis = new Lenis({
+	lerp: 0.1,
+});
+// Listen for the scroll event and log the event data
+lenis.on('scroll', (e) => {
+  console.log(e);
+});
+// Use requestAnimationFrame to continuously update the scroll
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+</script>
+</body>
+</html>
