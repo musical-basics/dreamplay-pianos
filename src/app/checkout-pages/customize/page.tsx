@@ -241,14 +241,14 @@ export default function CustomizePage() {
                                     onClick={() => isClickable && scrollToSection(index)}
                                     disabled={!isClickable}
                                     className={`group relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${isActive ? 'bg-[#4a9eff] text-white shadow-lg shadow-[#4a9eff]/30' :
-                                            isCompleted ? 'text-[#4a9eff] hover:bg-[#4a9eff]/10' :
-                                                'text-white/40'
+                                        isCompleted ? 'text-[#4a9eff] hover:bg-[#4a9eff]/10' :
+                                            'text-white/40'
                                         } ${isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                                 >
                                     {index > 0 && (
                                         <span className={`flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold ${isActive ? 'bg-white/20 text-white' :
-                                                isCompleted ? 'bg-[#4a9eff]/20 text-[#4a9eff]' :
-                                                    'bg-white/10 text-white/40'
+                                            isCompleted ? 'bg-[#4a9eff]/20 text-[#4a9eff]' :
+                                                'bg-white/10 text-white/40'
                                             }`}>
                                             {isCompleted ? '✓' : index}
                                         </span>
@@ -273,7 +273,7 @@ export default function CustomizePage() {
             {/* --- SECTIONS --- */}
 
             {/* SECTION 0: HERO */}
-            <section ref={el => sectionRefs.current[0] = el} id="section-0" className="journey-section relative flex h-screen items-center justify-center overflow-hidden bg-[#0a0a0f]">
+            <section ref={el => { if (sectionRefs.current) sectionRefs.current[0] = el }} id="section-0" className="journey-section relative flex h-screen items-center justify-center overflow-hidden bg-[#0a0a0f]">
                 <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_center,_#4a9eff_0%,_transparent_50%)]"></div>
                 <div className="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6">
                     <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs text-white/60 backdrop-blur-sm md:mb-4 md:px-4 md:py-2 md:text-sm">
@@ -304,7 +304,7 @@ export default function CustomizePage() {
             </section>
 
             {/* SECTION 1: HAND SIZE */}
-            <section ref={el => sectionRefs.current[1] = el} id="section-1" className="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-b from-[#0a0a0f] to-[#0f1419] py-20">
+            <section ref={el => { if (sectionRefs.current) sectionRefs.current[1] = el }} id="section-1" className="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-b from-[#0a0a0f] to-[#0f1419] py-20">
                 <div className="absolute left-6 top-24 hidden flex-col items-center gap-2 xl:flex 2xl:left-12">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#4a9eff] text-xl font-bold text-white shadow-[0_0_20px_rgba(74,158,255,0.3)]">1</div>
                     <div className="h-32 w-0.5 bg-gradient-to-b from-[#4a9eff] to-transparent"></div>
@@ -385,7 +385,7 @@ export default function CustomizePage() {
             </section>
 
             {/* SECTION 2: RECOMMENDATION */}
-            <section ref={el => sectionRefs.current[2] = el} id="section-2" className="journey-section relative flex min-h-screen flex-col justify-center bg-[#0f1419] py-20">
+            <section ref={el => { if (sectionRefs.current) sectionRefs.current[2] = el }} id="section-2" className="journey-section relative flex min-h-screen flex-col justify-center bg-[#0f1419] py-20">
                 <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
                     <button onClick={() => scrollToSection(1)} className="mb-4 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white">
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -443,7 +443,7 @@ export default function CustomizePage() {
             </section>
 
             {/* SECTION 3: FINISH */}
-            <section ref={el => sectionRefs.current[3] = el} id="section-3" className="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-b from-[#0f1419] to-[#0a0a0f] py-20">
+            <section ref={el => { if (sectionRefs.current) sectionRefs.current[3] = el }} id="section-3" className="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-b from-[#0f1419] to-[#0a0a0f] py-20">
                 <div className="mx-auto w-full max-w-5xl px-4 md:px-6">
                     <button onClick={() => scrollToSection(2)} className="mb-4 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white">
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -487,7 +487,7 @@ export default function CustomizePage() {
             </section>
 
             {/* SECTION 4: PRICING */}
-            <section ref={el => sectionRefs.current[4] = el} id="section-4" className="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-br from-[#4a9eff] to-[#2d7ad6] py-20">
+            <section ref={el => { if (sectionRefs.current) sectionRefs.current[4] = el }} id="section-4" className="journey-section relative flex min-h-screen flex-col justify-center bg-gradient-to-br from-[#4a9eff] to-[#2d7ad6] py-20">
                 <div className="mx-auto w-full max-w-4xl px-4 md:px-6">
                     <button onClick={() => scrollToSection(3)} className="mb-4 flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white">
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -535,7 +535,7 @@ export default function CustomizePage() {
             </section>
 
             {/* SECTION 5: FINAL FORM (Waitlist Only logic basically, since Shopify redirects happened) */}
-            <section ref={el => sectionRefs.current[5] = el} id="section-5" className="journey-section relative flex min-h-screen flex-col justify-center bg-[#0a0a0f] py-20">
+            <section ref={el => { if (sectionRefs.current) sectionRefs.current[5] = el }} id="section-5" className="journey-section relative flex min-h-screen flex-col justify-center bg-[#0a0a0f] py-20">
                 <div className="mx-auto w-full max-w-5xl px-4 md:px-6">
                     <button onClick={() => scrollToSection(4)} className="mb-4 flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white">
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
