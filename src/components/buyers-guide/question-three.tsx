@@ -43,7 +43,7 @@ export function QuestionThree({ selected, demographic, onSelect }: QuestionThree
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground mb-4">
-                    What&apos;s the hand size?
+                    What&apos;s your hand size?
                 </h2>
                 <p className="text-muted-foreground text-lg mb-6">
                     {demographic === "child"

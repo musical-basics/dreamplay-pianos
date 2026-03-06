@@ -29,7 +29,7 @@ export function QuestionFour({ selected, onSelect }: QuestionFourProps) {
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground mb-4">
-                    What&apos;s the main goal?
+                    What&apos;s your main goal?
                 </h2>
                 <p className="text-muted-foreground text-lg mb-10">
                     Understanding your musical goals helps us fine-tune our recommendation.
