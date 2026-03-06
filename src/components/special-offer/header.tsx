@@ -138,7 +138,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 label="Manufacturing & Shipping"
                                 useDarkText={useDarkText}
                                 items={[
-                                    { label: "Manufacturing", href: "/production-timeline" },
+                                    { label: "Production Timeline", href: "/production-timeline" },
                                     { label: "Shipping", href: "/information-and-policies/shipping" },
                                 ]}
                             />
@@ -215,7 +215,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
 
                                 <div className="border-t border-gray-200 my-2" />
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Manufacturing & Shipping</div>
-                                <Link href="/production-timeline" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Manufacturing</Link>
+                                <Link href="/production-timeline" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Production Timeline</Link>
                                 <Link href="/information-and-policies/shipping" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Shipping</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
