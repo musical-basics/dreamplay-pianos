@@ -8,6 +8,7 @@ import { HiddenBarrierSection } from "@/components/how-it-works/hidden-barrier-s
 import { ScienceSection } from "@/components/how-it-works/science-section"
 import { ResearchSection } from "@/components/how-it-works/research-section"
 import { CtaSection } from "@/components/how-it-works/cta-section"
+import { getHiddenProducts } from "@/actions/admin-actions"
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -18,7 +19,8 @@ const inter = Inter({
     variable: "--font-inter",
 })
 
-export default function HowItWorksPage() {
+export default async function HowItWorksPage() {
+    const hiddenProducts = await getHiddenProducts()
     return (
         <div className={`${playfair.variable} ${inter.variable} font-sans antialiased min-h-screen selection:bg-white/20 bg-black`}>
             <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
@@ -43,7 +45,7 @@ export default function HowItWorksPage() {
                 <ResearchSection />
 
                 {/* CTA */}
-                <CtaSection />
+                <CtaSection hiddenProducts={hiddenProducts} />
             </main>
 
             <Footer />

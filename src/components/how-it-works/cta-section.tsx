@@ -1,11 +1,11 @@
 import { ArrowRight } from "lucide-react"
 import { PricingSection } from "@/components/premium-offer/pricing-section"
 
-export function CtaSection() {
+export function CtaSection({ hiddenProducts = [] }: { hiddenProducts?: string[] }) {
     return (
         <>
             {/* Reserve your DreamPlay One — reuses the pricing cards */}
-            <PricingSection hiddenProducts={['reservation']} />
+            <PricingSection hiddenProducts={hiddenProducts} />
 
             {/* Build your DreamPlay One — dark hero CTA */}
             <section className="relative w-full bg-black text-white overflow-hidden">
