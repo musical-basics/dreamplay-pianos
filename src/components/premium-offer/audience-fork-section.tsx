@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Check, ArrowDown } from "lucide-react"
 import { QuestionOne } from "@/components/buyers-guide/question-one"
@@ -29,6 +29,19 @@ export function InlineBuyersGuide() {
         handSize: null,
         goal: null,
     })
+    const [sectionInView, setSectionInView] = useState(false)
+    const sectionRef = useRef<HTMLElement>(null)
+
+    useEffect(() => {
+        const el = sectionRef.current
+        if (!el) return
+        const observer = new IntersectionObserver(
+            ([entry]) => setSectionInView(entry.isIntersecting),
+            { threshold: 0.05 }
+        )
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [])
 
     const updateProfile = (key: keyof UserProfile, value: string) => {
         setProfile((prev) => ({ ...prev, [key]: value }))
@@ -71,7 +84,7 @@ export function InlineBuyersGuide() {
     const completedStep = getCompletedStep()
 
     return (
-        <section className="relative" style={{
+        <section ref={sectionRef} className="relative" style={{
             '--background': '0 0% 100%',
             '--foreground': '0 0% 9%',
             '--card': '0 0% 100%',
@@ -85,7 +98,7 @@ export function InlineBuyersGuide() {
             '--primary-foreground': '0 0% 98%',
         } as React.CSSProperties}>
             {/* Fixed Journey Timeline - far right (desktop only) */}
-            {currentStep >= 1 && (
+            {currentStep >= 1 && sectionInView && (
                 <aside className="hidden xl:block fixed right-8 top-1/2 -translate-y-1/2 z-40 w-48">
                     <div className="bg-white/95 backdrop-blur-sm rounded-2xl border border-neutral-200 shadow-lg p-5">
                         <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 mb-4">
