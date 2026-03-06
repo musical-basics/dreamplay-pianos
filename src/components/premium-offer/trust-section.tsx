@@ -12,10 +12,10 @@ export function TrustSection() {
     <section id="trust" className="relative">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28 lg:py-32">
         <div className="mb-16 max-w-2xl">
-          <p className="font-sans text-sm uppercase tracking-[0.3em] text-muted-foreground">
+          <p className="font-sans text-sm uppercase tracking-[0.3em] text-white/50">
             Built to Last
           </p>
-          <h2 className="mt-4 font-sans text-3xl leading-tight text-foreground md:text-4xl lg:text-5xl text-balance">
+          <h2 className="mt-4 font-sans text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl text-balance">
             Trusted manufacturing. Transparent process.
           </h2>
         </div>
@@ -37,11 +37,11 @@ export function TrustSection() {
           {/* Content */}
           <div className="flex flex-col justify-center lg:w-3/5">
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="manufacturer" className="border-border/60">
-                <AccordionTrigger className="font-sans text-lg text-foreground hover:no-underline md:text-xl">
+              <AccordionItem value="manufacturer" className="border-white/15">
+                <AccordionTrigger className="font-sans text-lg text-white hover:no-underline md:text-xl">
                   About Our Manufacturer
                 </AccordionTrigger>
-                <AccordionContent className="font-sans text-sm leading-relaxed text-muted-foreground md:text-base">
+                <AccordionContent className="font-sans text-sm leading-relaxed text-white/60 md:text-base">
                   <p>
                     Our Supplier, Ebulent Technologies Corporation, has been a cornerstone of precision
                     manufacturing in Shenzhen for over two decades. We chose them
@@ -49,7 +49,7 @@ export function TrustSection() {
                     expertise in building next-generation musical instruments.
                   </p>
                   <p className="mt-4">
-                    <strong className="text-foreground">
+                    <strong className="text-white">
                       The Aeroband Connection:
                     </strong>{" "}
                     Ebulent is the manufacturing force behind the viral Aeroband
@@ -57,7 +57,7 @@ export function TrustSection() {
                     feel as responsive and soulful as an acoustic one.
                   </p>
                   <p className="mt-4">
-                    <strong className="text-foreground">
+                    <strong className="text-white">
                       Total Quality Control:
                     </strong>{" "}
                     Unlike factories that just assemble bought parts, Ebulent
@@ -66,7 +66,7 @@ export function TrustSection() {
                     critical components in-house.
                   </p>
                   <p className="mt-4">
-                    <strong className="text-foreground">
+                    <strong className="text-white">
                       Decades of Experience:
                     </strong>{" "}
                     Established in the early 2000s, Ebulent has evolved from
@@ -77,16 +77,16 @@ export function TrustSection() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="timeline" className="border-border/60">
-                <AccordionTrigger className="font-sans text-lg text-foreground hover:no-underline md:text-xl">
+              <AccordionItem value="timeline" className="border-white/15">
+                <AccordionTrigger className="font-sans text-lg text-white hover:no-underline md:text-xl">
                   Production Timeline
                 </AccordionTrigger>
-                <AccordionContent className="font-sans text-sm leading-relaxed text-muted-foreground md:text-base">
+                <AccordionContent className="font-sans text-sm leading-relaxed text-white/60 md:text-base">
                   <div className="flex flex-col gap-4">
                     <div className="flex items-start gap-4">
-                      <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-foreground" />
+                      <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-white" />
                       <p>
-                        <strong className="text-foreground">
+                        <strong className="text-white">
                           Tooling (90 Days):
                         </strong>{" "}
                         The most complex part is creating the steel molds for our
@@ -95,9 +95,9 @@ export function TrustSection() {
                       </p>
                     </div>
                     <div className="flex items-start gap-4">
-                      <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-foreground" />
+                      <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-white" />
                       <p>
-                        <strong className="text-foreground">
+                        <strong className="text-white">
                           Delivery Target (August 2026):
                         </strong>{" "}
                         We have built a 2-month buffer into our timeline to
@@ -114,11 +114,11 @@ export function TrustSection() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="risks" className="border-border/60">
-                <AccordionTrigger className="font-sans text-lg text-foreground hover:no-underline md:text-xl">
+              <AccordionItem value="risks" className="border-white/15">
+                <AccordionTrigger className="font-sans text-lg text-white hover:no-underline md:text-xl">
                   Risks & Challenges
                 </AccordionTrigger>
-                <AccordionContent className="font-sans text-sm leading-relaxed text-muted-foreground md:text-base">
+                <AccordionContent className="font-sans text-sm leading-relaxed text-white/60 md:text-base">
                   <p className="mb-4">
                     Every crowdfunding campaign involves some risk, but we have
                     mitigated the biggest ones already:
@@ -130,7 +130,7 @@ export function TrustSection() {
                       "Experienced Team: We know music and logistics.",
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-foreground" />
+                        <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-white" />
                         <p>{item}</p>
                       </div>
                     ))}
@@ -138,20 +138,20 @@ export function TrustSection() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="shipping" className="border-border/60">
-                <AccordionTrigger className="font-sans text-lg text-foreground hover:no-underline md:text-xl">
+              <AccordionItem value="shipping" className="border-white/15">
+                <AccordionTrigger className="font-sans text-lg text-white hover:no-underline md:text-xl">
                   Shipping & Delivery
                 </AccordionTrigger>
-                <AccordionContent className="font-sans text-sm leading-relaxed text-muted-foreground md:text-base">
+                <AccordionContent className="font-sans text-sm leading-relaxed text-white/60 md:text-base">
                   <p>
                     We ship worldwide! Shipping costs will be calculated after
                     the campaign ends to ensure you get the best current rates.
                   </p>
-                  <div className="mt-4 border border-border/40 bg-background p-4">
-                    <p className="text-xs font-medium uppercase tracking-wider text-foreground">
+                  <div className="mt-4 border border-white/15 bg-white/5 p-4">
+                    <p className="text-xs font-medium uppercase tracking-wider text-white">
                       Important for All Backers (US/EU/UK/Asia/Australia)
                     </p>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="mt-2 text-sm text-white/60">
                       Shipping estimates do not include local VAT (e.g., 19%
                       MwSt), Tariffs, Import Duties, or Customs fees. When your keyboard
                       is ready to ship, we will advise you of the final duties amount
