@@ -36,23 +36,42 @@ export function InfoSectionThree({ handSize, demographic }: InfoSectionThreeProp
                                 <div className="flex justify-between items-center mb-2">
                                     <span className="text-sm text-muted-foreground">Conventional (DS6.5)</span>
                                     <span className="text-sm font-medium text-foreground">
-                                        {handSize === "large" ? "10" : handSize === "average" ? "9" : "8"} Notes
+                                        {demographic === "child"
+                                            ? (handSize === "large" ? "8" : handSize === "average" ? "7" : "6")
+                                            : (handSize === "large" ? "10" : handSize === "average" ? "9" : "8")
+                                        } Notes
                                     </span>
                                 </div>
                                 <div className="h-3 bg-muted rounded-full overflow-hidden">
                                     <div
                                         className="h-full bg-muted-foreground rounded-full"
-                                        style={{ width: handSize === "large" ? "100%" : handSize === "average" ? "90%" : "80%" }}
+                                        style={{
+                                            width: demographic === "child"
+                                                ? (handSize === "large" ? "80%" : handSize === "average" ? "70%" : "60%")
+                                                : (handSize === "large" ? "100%" : handSize === "average" ? "90%" : "80%")
+                                        }}
                                     />
                                 </div>
                             </div>
                             <div>
                                 <div className="flex justify-between items-center mb-2">
                                     <span className="text-sm text-muted-foreground">{model} Model</span>
-                                    <span className="text-sm font-medium text-foreground">10 Notes</span>
+                                    <span className="text-sm font-medium text-foreground">
+                                        {demographic === "child"
+                                            ? (handSize === "large" ? "10" : handSize === "average" ? "9" : "8")
+                                            : "10"
+                                        } Notes
+                                    </span>
                                 </div>
                                 <div className="h-3 bg-muted rounded-full overflow-hidden">
-                                    <div className="h-full bg-accent rounded-full w-full" />
+                                    <div
+                                        className="h-full bg-accent rounded-full"
+                                        style={{
+                                            width: demographic === "child"
+                                                ? (handSize === "large" ? "100%" : handSize === "average" ? "90%" : "80%")
+                                                : "100%"
+                                        }}
+                                    />
                                 </div>
                             </div>
                         </div>

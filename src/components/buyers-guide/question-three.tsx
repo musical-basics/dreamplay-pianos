@@ -16,9 +16,9 @@ export function QuestionThree({ selected, demographic, onSelect }: QuestionThree
     const getHandSizeRanges = () => {
         if (demographic === "child") {
             return {
-                small: { label: "Small", range: "Under 5.5 inches", icon: "🤚" },
-                average: { label: "Average", range: "5.5 - 7 inches", icon: "✋" },
-                large: { label: "Larger", range: "Over 7 inches", icon: "🖐️" },
+                small: { label: "Small Children's Hand", range: "Under 5.5 inches", icon: "🤚" },
+                average: { label: "Average Children's Hand", range: "5.5 - 7 inches", icon: "✋" },
+                large: { label: "Larger Children's Hand", range: "Over 7 inches", icon: "🖐️" },
             }
         }
         return {
