@@ -44,9 +44,13 @@ next-env.d.ts
 *.backup.tsx
 *.standalone.tsx
 _old/
+_backup_logic/
+_backup_repos/
+_backup_files/
 
 # repomix
 *repomix*
+!repomix.config.json
 
 # Large factory media files
 public/images/factory-pictures/other pictures (no need to use)/
