@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/accordion"
 import { LazyVideo } from "@/components/premium-offer/LazyVideo"
 
-const BG_VIDEO = "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/DreamPlay%20Hero%201080p%20Video%20Hero%202%20Loop%20(Child%2BMom%2BLearningApp).mp4"
+const BG_VIDEO = "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/DreamPlay%20Hero%20720p%20Video%20Hero%202%20Loop%20(Child%2BMom%2BLearningApp).mp4"
 
 export function ChildHeroSection() {
     return (
