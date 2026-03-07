@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 import { CheckCircle2, ChevronRight, Loader2, Mail } from "lucide-react";
 
 export default function RegisterPage() {
+    const searchParams = useSearchParams();
+    const isCrowdfunding = searchParams.get("offer") === "crowdfunding";
+
     const [step, setStep] = useState(1);
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -66,10 +70,15 @@ export default function RegisterPage() {
                 throw new Error(signUpError.message);
             }
 
+            const baseTags = ["VIP Account", `Reason: ${reason}`].filter(Boolean);
+            const offerTags = isCrowdfunding
+                ? ["$300 Off Lead", ...baseTags]
+                : ["Free Shipping Lead", ...baseTags];
+
             const res = await subscribeToNewsletter({
                 email,
                 first_name: name.split(" ")[0],
-                tags: ["VIP Account", "Free Shipping Lead", `Reason: ${reason}`].filter(Boolean)
+                tags: offerTags
             });
 
             localStorage.setItem("dp_user_email", email);
@@ -118,8 +127,14 @@ export default function RegisterPage() {
                 {step === 1 && (
                     <div className="space-y-4">
                         <div className="text-center mb-6">
-                            <h1 className="text-2xl font-serif text-white tracking-tight mb-2">Activate Free Shipping</h1>
-                            <p className="text-white/60 text-sm font-sans">Create a VIP account to unlock free global shipping on your order.</p>
+                            <h1 className="text-2xl font-serif text-white tracking-tight mb-2">
+                                {isCrowdfunding ? "Register to Unlock Your $300 Discount" : "Activate Free Shipping"}
+                            </h1>
+                            <p className="text-white/60 text-sm font-sans">
+                                {isCrowdfunding
+                                    ? "Create an account and we\u2019ll send your exclusive $300 off coupon code."
+                                    : "Create a VIP account to unlock free global shipping on your order."}
+                            </p>
                         </div>
                         <form onSubmit={handleNext}>
                             <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">Email Address</label>
@@ -196,10 +211,15 @@ export default function RegisterPage() {
                         <h3 className="font-serif text-3xl mb-4 text-white">Check your email</h3>
                         <p className="text-white/60 text-sm mb-6 leading-relaxed">
                             We&apos;ve sent a verification link to <span className="text-white/80">{email}</span>. Click the link to activate your account.
+                            {isCrowdfunding && (
+                                <span className="block mt-2 text-amber-400/80">
+                                    Your $300 discount code will be emailed to you shortly after verification.
+                                </span>
+                            )}
                         </p>
                         <p className="text-white/40 font-sans text-xs leading-relaxed">
                             Didn&apos;t receive the email? Check your spam folder or{" "}
-                            <a href="/register" className="text-white/60 hover:text-white underline underline-offset-4 transition-colors">
+                            <a href={`/register${isCrowdfunding ? '?offer=crowdfunding' : ''}`} className="text-white/60 hover:text-white underline underline-offset-4 transition-colors">
                                 try again
                             </a>.
                         </p>
