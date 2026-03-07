@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { subscribeToNewsletter } from "@/actions/email-actions";
@@ -8,6 +8,14 @@ import { trackEmailConversion } from "@/components/EmailTracker";
 import { CheckCircle2, ChevronRight, Loader2, Mail } from "lucide-react";
 
 export default function RegisterPage() {
+    return (
+        <Suspense fallback={<div className="bg-[#050505] min-h-screen" />}>
+            <RegisterContent />
+        </Suspense>
+    );
+}
+
+function RegisterContent() {
     const searchParams = useSearchParams();
     const isCrowdfunding = searchParams.get("offer") === "crowdfunding";
 
