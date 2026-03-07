@@ -1,19 +1,13 @@
 "use client"
 
+import { LazyVideo } from "@/components/premium-offer/LazyVideo"
+
 const BG_VIDEO = "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/DreamPlay%20Hero%201080p%20Video%20Hero%203%20Loop%20(Hand%20Sizes).mp4"
 
 export function VideoHero3() {
     return (
         <section className="relative min-h-screen md:min-h-0 md:aspect-video overflow-hidden">
-            <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 h-full w-full object-cover"
-            >
-                <source src={BG_VIDEO} type="video/mp4" />
-            </video>
+            <LazyVideo src={BG_VIDEO} />
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/[0.02] to-transparent" />
             <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.15) 100%)' }} />
             <div className="absolute inset-0 bg-black/[0.15]" />

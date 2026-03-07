@@ -42,7 +42,7 @@ export function VideoSection() {
           className="h-full w-full object-cover block"
           controls={isPlaying}
           playsInline
-          preload="metadata"
+          preload="none"
           poster="/images/video-thumbnail-piano.png"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
