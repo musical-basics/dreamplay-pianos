@@ -40,7 +40,7 @@ export function CountdownBanner() {
                 className="group bg-[#050505] border-b border-white/10 py-2.5 text-center flex items-center justify-center gap-2 w-full z-50 text-[10px] sm:text-xs text-white/70 uppercase tracking-[0.15em] font-sans font-medium hover:text-white transition-colors cursor-pointer"
             >
                 <span className="text-amber-400 font-bold">🎉 Crowdfunding Special</span>
-                <span className="hidden sm:inline">— Register to unlock</span>
+                <span className="hidden sm:inline">| Register to unlock</span>
                 <span className="font-bold text-white/90">$300 OFF</span>
                 <span className="hidden md:inline text-white/50">your DreamPlay piano</span>
                 <ChevronRight size={14} className="text-white/40 group-hover:text-white/70 transition-colors" />
@@ -64,8 +64,8 @@ export function CountdownBanner() {
                     <span className="bg-amber-400/10 px-1.5 py-0.5 rounded">{pad(timeLeft.s)}s</span>
                 </span>
             )}
-            <span className="hidden md:inline text-white/50">— Reserve for $549 before $1,199 MSRP</span>
-            <span className="md:hidden text-white/50">— $549 → $1,199</span>
+            <span className="hidden md:inline text-white/50">| Reserve for $549 before $1,199 MSRP</span>
+            <span className="md:hidden text-white/50">| $549 → $1,199</span>
         </Link>
     )
 }

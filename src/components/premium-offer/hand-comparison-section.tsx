@@ -15,7 +15,7 @@ export function HandComparisonSection() {
                     </h2>
                     <p className="mt-4 font-sans text-sm font-medium leading-relaxed text-neutral-500 md:text-base">
                         87% of women and 24% of men have hands too small for a standard keyboard.
-                        The standard 6.5&quot; octave span was designed for one hand size — and it probably isn&apos;t yours.
+                        The standard 6.5&quot; octave span was designed for one hand size, and it probably isn&apos;t yours.
                     </p>
                 </div>
 

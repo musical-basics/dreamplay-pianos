@@ -33,7 +33,7 @@ export function SwitchingSection() {
                                     </p>
                                     <p className="mt-1 font-sans text-sm leading-relaxed text-neutral-500">
                                         Lionel seamlessly switches between standard and narrow sizes daily. Practicing on narrower keys
-                                        teaches your hands to relax — a skill that directly transfers and improves your technique on any keyboard.
+                                        teaches your hands to relax, a skill that directly transfers and improves your technique on any keyboard.
                                     </p>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@ export function SwitchingSection() {
                                     </p>
                                     <p className="mt-1 font-sans text-sm leading-relaxed text-neutral-500">
                                         Research from the University of Sydney confirms that pianists who practice on reduced-size keyboards
-                                        improve their relaxation and accuracy — benefits that carry over when returning to standard-size instruments.
+                                        improve their relaxation and accuracy, benefits that carry over when returning to standard-size instruments.
                                     </p>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ export function SwitchingSection() {
                             />
                         </div>
                         <p className="mt-3 font-sans text-xs text-neutral-400 text-center">
-                            Linda Gould &amp; David Steinbuhler — pioneers of the DS Standard
+                            Linda Gould &amp; David Steinbuhler, pioneers of the DS Standard
                         </p>
                     </div>
                 </div>

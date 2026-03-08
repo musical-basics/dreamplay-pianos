@@ -152,7 +152,7 @@ export function SizeFinderSection() {
                     DS5.5®
                   </strong>{" "}
                   model is your match. The active key width is 41.1{'"'} (1044
-                  mm) — approximately 7/8ths of a standard keyboard. With our
+                  mm), approximately 7/8ths of a standard keyboard. With our
                   DS5.5 keyboard, you will find that octaves, 9ths, and even
                   10ths become comfortable.
                 </>
@@ -164,7 +164,7 @@ export function SizeFinderSection() {
                     DS6.0®
                   </strong>{" "}
                   model is your match. The active key width is 44.53{'"'} (1131
-                  mm) — approximately 15/16ths of a standard keyboard. With our
+                  mm), approximately 15/16ths of a standard keyboard. With our
                   DS6.0 keyboard, you will find that octaves and 9ths are
                   effortless and 10ths become reachable.
                 </>

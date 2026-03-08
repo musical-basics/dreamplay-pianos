@@ -106,7 +106,7 @@ export function CrowdfundingSection() {
                 Perform on Any Stage.
               </h2>
               <p className="mt-5 max-w-md font-sans text-base font-medium leading-relaxed text-white/80 md:text-xl">
-                Embark on your professional journey the right way —
+                Embark on your professional journey the right way:
                 perform live without strain on any stage.
               </p>
             </div>
@@ -128,7 +128,7 @@ export function CrowdfundingSection() {
               </h2>
               <p className="mt-5 max-w-md font-sans text-base font-medium leading-relaxed text-white/80 md:text-xl">
                 Our interactive app guides you note-by-note with light-up keys,
-                real-time feedback, and a library of songs — from beginner to virtuoso.
+                real-time feedback, and a library of songs, from beginner to virtuoso.
               </p>
             </div>
           </div>

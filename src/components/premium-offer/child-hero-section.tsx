@@ -86,7 +86,7 @@ export function ChildUpgradePath() {
                         <h4 className="font-serif text-2xl text-neutral-900 md:text-3xl">DS6.0</h4>
                         <p className="mt-1 font-sans text-xs uppercase tracking-wider text-neutral-400">15/16ths Size</p>
                         <p className="mt-4 font-sans text-sm font-medium leading-relaxed text-neutral-600">
-                            As their hands grow past 7.6&quot;, they upgrade to the DS6.0 — the universal size
+                            As their hands grow past 7.6&quot;, they upgrade to the DS6.0, the universal size
                             used by top university programs. Same muscle memory, same relaxed technique, just more room.
                         </p>
                     </div>
@@ -103,18 +103,18 @@ export function ChildUpgradePath() {
                                     <p>
                                         <strong className="text-neutral-900">How the upgrade works:</strong> When your child outgrows
                                         the DS5.5, contact our team to arrange a keyboard swap. You&apos;ll only pay the difference in price
-                                        between the two models — we handle the rest.
+                                        between the two models. We handle the rest.
                                     </p>
                                     <p>
                                         <strong className="text-neutral-900">Why start on DS5.5?</strong> Standard 6.5&quot; octave
                                         keyboards force children to hyperextend their fingers, creating bad habits that are extremely hard
-                                        to unlearn later. Starting on a properly sized keyboard builds the correct foundation — relaxed
+                                        to unlearn later. Starting on a properly sized keyboard builds the correct foundation: relaxed
                                         wrists, curved fingers, natural hand position.
                                     </p>
                                     <p>
                                         <strong className="text-neutral-900">When to upgrade:</strong> Most children transition between
                                         ages 12-16, when their handspan grows past 7.6&quot;. Some prefer to stay on the DS5.5 well into
-                                        adulthood — many professional female pianists have handspans in the DS5.5 range.
+                                        adulthood. Many professional female pianists have handspans in the DS5.5 range.
                                     </p>
                                     <p>
                                         <strong className="text-neutral-900">No lost progress:</strong> The transition from DS5.5 to

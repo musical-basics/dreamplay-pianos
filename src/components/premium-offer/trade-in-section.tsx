@@ -15,7 +15,7 @@ export function TradeInSection() {
                         They grow. Their keyboard grows with them.
                     </h2>
                     <p className="mt-5 font-sans text-base font-medium leading-relaxed text-neutral-500 md:text-lg max-w-2xl">
-                        When your child&apos;s hands outgrow the DS5.5, trade it in for a DS6.0 — completely free.
+                        When your child&apos;s hands outgrow the DS5.5, trade it in for a DS6.0, completely free.
                         No hidden fees, no fine print. Just a bigger keyboard for bigger hands.
                     </p>
                 </div>
@@ -51,7 +51,7 @@ export function TradeInSection() {
                         </div>
                         <h3 className="font-serif text-xl text-neutral-900 mb-3">Play On, Pain-Free</h3>
                         <p className="font-sans text-sm leading-relaxed text-neutral-500">
-                            Your child continues playing on a properly-sized keyboard — no gap in practice, no added expense.
+                            Your child continues playing on a properly-sized keyboard: no gap in practice, no added expense.
                         </p>
                     </div>
                 </div>

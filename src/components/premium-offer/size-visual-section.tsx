@@ -58,7 +58,7 @@ export function SizeVisualSection() {
                         Find your perfect fit.
                     </h2>
                     <p className="mt-6 font-sans text-sm font-medium leading-relaxed text-black/60 md:text-base">
-                        Three DS Standard sizes — the same standard adopted by top
+                        Three DS Standard sizes, the same standard adopted by top
                         universities worldwide. A professional instrument for every hand.
                     </p>
                 </div>

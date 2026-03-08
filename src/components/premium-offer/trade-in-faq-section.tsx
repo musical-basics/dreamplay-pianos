@@ -21,7 +21,7 @@ const faqs = [
     {
         question: "What condition does the DS5.5 need to be in?",
         answer:
-            "Normal wear and tear is perfectly fine — it's a musical instrument, it should be played! As long as the keyboard is functional and not intentionally damaged, we'll accept it for trade-in.",
+            "Normal wear and tear is perfectly fine. It's a musical instrument, it should be played! As long as the keyboard is functional and not intentionally damaged, we'll accept it for trade-in.",
     },
     {
         question: "Do I need to pay for shipping?",
@@ -36,7 +36,7 @@ const faqs = [
     {
         question: "Can I trade a DS6.0 for a DS5.5 instead?",
         answer:
-            "No. The trade-in program is designed for growing children — it only goes from DS5.5 to DS6.0 as their hands get bigger. If you ordered the wrong size, we offer a 90-day exchange period where you can swap for the correct model. Buyer pays shipping for exchanges.",
+            "No. The trade-in program is designed for growing children. It only goes from DS5.5 to DS6.0 as their hands get bigger. If you ordered the wrong size, we offer a 90-day exchange period where you can swap for the correct model. Buyer pays shipping for exchanges.",
     },
 ]
 
