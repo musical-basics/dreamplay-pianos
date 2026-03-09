@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { SpecialOfferHeader } from "@/components/learn-page-components/special-offer/header";
+import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/learn-page-components/animated-section";
 import {

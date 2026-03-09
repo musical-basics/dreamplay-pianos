@@ -122,6 +122,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 items={[
                                     { label: "Product Info", href: "/product-information" },
                                     { label: "Buyer's Guide", href: "/buyers-guide" },
+                                    { label: "DreamPlay Learn", href: "/learn" },
                                 ]}
                             />
 
@@ -207,6 +208,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Features</div>
                                 <Link href="/product-information" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Product Info</Link>
                                 <Link href="/buyers-guide" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Buyer&apos;s Guide</Link>
+                                <Link href="/learn" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>DreamPlay Learn</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">About Us</div>
