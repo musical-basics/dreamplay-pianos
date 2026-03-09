@@ -29,10 +29,10 @@ export default function LearnPage() {
             />
             <main className="pt-[100px]">
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 1 — HERO
+                    SECTION 1 - HERO
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-[#050505] py-20 text-center">
-                    {/* Background video — dual-element crossfade for seamless loops */}
+                    {/* Background video: dual-element crossfade for seamless loops */}
                     <div className="absolute inset-0" ref={(container) => {
                         if (!container || container.dataset.initialized) return;
                         container.dataset.initialized = "true";
@@ -66,7 +66,7 @@ export default function LearnPage() {
                         function scheduleTransition(vidEl: HTMLVideoElement, clipIdx: number) {
                             const clip = sources[clipIdx];
                             if (clip.endBefore > 0) {
-                                // Cut clip short — trigger crossfade early
+                                // Cut clip short: trigger crossfade early
                                 vidEl.ontimeupdate = () => {
                                     if (vidEl.duration && vidEl.currentTime >= vidEl.duration - clip.endBefore - (clip.fadeMs / 1000)) {
                                         vidEl.ontimeupdate = null;
@@ -74,7 +74,7 @@ export default function LearnPage() {
                                     }
                                 };
                             } else {
-                                // Play full clip — crossfade on natural end
+                                // Play full clip: crossfade on natural end
                                 vidEl.onended = () => {
                                     vidEl.onended = null;
                                     triggerNext();
@@ -123,7 +123,7 @@ export default function LearnPage() {
                             </span>
                         </h1>
                         <p className="mx-auto max-w-2xl font-sans text-lg leading-relaxed text-white/70 md:text-xl">
-                            DreamPlay Learn guides you note by note—on screen and on your keyboard.
+                            DreamPlay Learn guides you note by note, on screen and on your keyboard.
                             With LED-lit keys, finger indicators, and intelligent error correction,
                             every practice session is a step forward.
                         </p>
@@ -146,7 +146,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 2 — DUAL MODE (Sheet Music + Falling Notes)
+                    SECTION 2 - DUAL MODE (Sheet Music + Falling Notes)
                 ═══════════════════════════════════════════════════════════ */}
                 <section id="features" className="bg-white py-24 text-black md:py-32">
                     <div className="container mx-auto max-w-6xl px-6">
@@ -158,7 +158,7 @@ export default function LearnPage() {
                                 Two Modes. One Goal.
                             </h2>
                             <p className="mx-auto max-w-2xl font-sans text-base leading-relaxed text-neutral-600">
-                                Whether you read sheet music or prefer visual falling notes, DreamPlay Learn adapts to your learning style. Toggle between modes—or use both at once.
+                                Whether you read sheet music or prefer visual falling notes, DreamPlay Learn adapts to your learning style. Toggle between modes, or use both at once.
                             </p>
                         </AnimatedSection>
 
@@ -180,7 +180,7 @@ export default function LearnPage() {
                                         Sheet Music Mode
                                     </h3>
                                     <p className="font-sans text-sm leading-relaxed text-neutral-600">
-                                        Traditional notation with a modern twist. Notes highlight as you play, finger numbers guide your hand positioning, and the score scrolls automatically—waiting until you hit the right key before moving forward.
+                                        Traditional notation with a modern twist. Notes highlight as you play, finger numbers guide your hand positioning, and the score scrolls automatically, waiting until you hit the right key before moving forward.
                                     </p>
                                 </div>
                             </AnimatedSection>
@@ -205,7 +205,7 @@ export default function LearnPage() {
                                         Falling Notes Mode
                                     </h3>
                                     <p className="font-sans text-sm leading-relaxed text-neutral-600">
-                                        Colorful note blocks cascade toward the keys in real time. See exactly which note to play, when to play it, and for how long—no music reading required. Perfect for beginners and visual learners.
+                                        Colorful note blocks cascade toward the keys in real time. See exactly which note to play, when to play it, and for how long. No music reading required. Perfect for beginners and visual learners.
                                     </p>
                                 </div>
                             </AnimatedSection>
@@ -220,7 +220,7 @@ export default function LearnPage() {
                                     </div>
                                     <p className="text-left font-sans text-sm leading-relaxed text-neutral-700">
                                         <strong className="text-black">Use both at once.</strong>{" "}
-                                        Enable dual view to see falling notes and sheet music simultaneously—the best of both worlds.
+                                        Enable dual view to see falling notes and sheet music simultaneously: the best of both worlds.
                                     </p>
                                 </div>
                                 <div className="relative aspect-video overflow-hidden bg-neutral-100">
@@ -245,7 +245,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 3 — SMART GUIDANCE & ERROR CORRECTION
+                    SECTION 3 - SMART GUIDANCE & ERROR CORRECTION
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="bg-[#050505] py-24 text-white md:py-32">
                     <div className="container mx-auto max-w-6xl px-6">
@@ -270,7 +270,7 @@ export default function LearnPage() {
                                     Finger Numbers
                                 </h3>
                                 <p className="font-sans text-sm leading-relaxed text-white/60">
-                                    Every note is annotated with the exact finger to use. Build proper technique from day one—no bad habits, no guesswork.
+                                    Every note is annotated with the exact finger to use. Build proper technique from day one. No bad habits, no guesswork.
                                 </p>
                             </AnimatedSection>
 
@@ -283,7 +283,7 @@ export default function LearnPage() {
                                     Wait-For-Correct
                                 </h3>
                                 <p className="font-sans text-sm leading-relaxed text-white/60">
-                                    The song won&apos;t move forward until you&apos;ve pressed the right key. No rushing, no falling behind—learn at exactly your pace.
+                                    The song won&apos;t move forward until you&apos;ve pressed the right key. No rushing, no falling behind. Learn at exactly your pace.
                                 </p>
                             </AnimatedSection>
 
@@ -296,7 +296,7 @@ export default function LearnPage() {
                                     Gentle Correction
                                 </h3>
                                 <p className="font-sans text-sm leading-relaxed text-white/60">
-                                    Hit a wrong note? The software gently reminds you of the correct one. No frustration—just clear, instant feedback that keeps you in flow.
+                                    Hit a wrong note? The software gently reminds you of the correct one. No frustration, just clear, instant feedback that keeps you in flow.
                                 </p>
                             </AnimatedSection>
                         </div>
@@ -304,7 +304,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 4 — LED INTEGRATION (The Big Differentiator)
+                    SECTION 4 - LED INTEGRATION (The Big Differentiator)
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="relative overflow-hidden bg-gradient-to-b from-[#050505] via-[#0a0f1a] to-[#050505] py-24 text-white md:py-32">
                     {/* Subtle glow effect */}
@@ -329,7 +329,7 @@ export default function LearnPage() {
                                         <span className="text-cyan-300"> lights up on your keyboard</span>.
                                     </p>
                                     <p>
-                                        Not just a virtual indicator on a screen—a <strong className="text-white">real, physical light</strong> that glows beneath the key you need to press. Your eyes stay on the keyboard. Your hands stay in position. Learning becomes instinctive.
+                                        Not just a virtual indicator on a screen, but a <strong className="text-white">real, physical light</strong> that glows beneath the key you need to press. Your eyes stay on the keyboard. Your hands stay in position. Learning becomes instinctive.
                                     </p>
                                 </div>
 
@@ -360,7 +360,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 5 — TEMPO & SMART DETECTION
+                    SECTION 5 - TEMPO & SMART DETECTION
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="bg-white py-24 text-black md:py-32">
                     <div className="container mx-auto max-w-6xl px-6">
@@ -407,7 +407,7 @@ export default function LearnPage() {
                                         <div>
                                             <h3 className="mb-1 font-sans text-sm font-bold text-black">Smart MIDI Detection</h3>
                                             <p className="font-sans text-sm leading-relaxed text-neutral-600">
-                                                Simply start playing and our app will detect exactly which part of the piece you&apos;re on—thanks to our high-quality MIDI connection. No need to scroll or search.
+                                                Simply start playing and our app will detect exactly which part of the piece you&apos;re on, thanks to our high-quality MIDI connection. No need to scroll or search.
                                             </p>
                                         </div>
                                     </div>
@@ -430,7 +430,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 5.5 — HARDWARE SHOWCASE
+                    SECTION 5.5 - HARDWARE SHOWCASE
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="border-t border-white/10 bg-[#050505] py-24 text-white md:py-32">
                     <div className="container mx-auto max-w-6xl px-6">
@@ -494,7 +494,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 6 — THE ONLY KEYBOARD (Differentiator)
+                    SECTION 6 - THE ONLY KEYBOARD (Differentiator)
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="border-t border-white/10 bg-[#0a0a0f] py-24 text-white md:py-32">
                     <div className="container mx-auto max-w-4xl px-6 text-center">
@@ -519,14 +519,14 @@ export default function LearnPage() {
                                     <div className="mb-4 font-serif text-4xl font-bold text-cyan-400">01</div>
                                     <h3 className="mb-2 font-sans text-sm font-bold uppercase tracking-wider text-white">App Teaches</h3>
                                     <p className="font-sans text-sm text-white/50">
-                                        Sheet music, falling notes, finger numbers—every piece broken down step by step.
+                                        Sheet music, falling notes, and finger numbers. Every piece broken down step by step.
                                     </p>
                                 </div>
                                 <div className="border border-white/10 bg-white/[0.03] p-8 text-left">
                                     <div className="mb-4 font-serif text-4xl font-bold text-blue-400">02</div>
                                     <h3 className="mb-2 font-sans text-sm font-bold uppercase tracking-wider text-white">Keys Light Up</h3>
                                     <p className="font-sans text-sm text-white/50">
-                                        Custom LEDs illuminate the exact key to press in real time—a physical guide built into your instrument.
+                                        Custom LEDs illuminate the exact key to press in real time: a physical guide built into your instrument.
                                     </p>
                                 </div>
                                 <div className="border border-white/10 bg-white/[0.03] p-8 text-left">
@@ -542,7 +542,7 @@ export default function LearnPage() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════════════
-                    SECTION 7 — CTA
+                    SECTION 7 - CTA
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="border-t border-white/10 bg-[#050505] py-24 text-center">
                     <div className="container mx-auto max-w-3xl px-6">
