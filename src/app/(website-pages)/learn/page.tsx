@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/learn-page-components/animated-section";
+import { LazyVideo } from "@/components/learn-page-components/lazy-video";
 import {
     ArrowRight,
     Music,
@@ -188,13 +189,9 @@ export default function LearnPage() {
                             {/* Falling Notes Mode */}
                             <AnimatedSection delay={200} className="group relative overflow-hidden border border-neutral-200 bg-neutral-50 shadow-sm transition-all hover:shadow-xl">
                                 <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
-                                    <video
+                                    <LazyVideo
                                         src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Falling%20Notes%20Mode.mp4"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        className="h-full w-full"
                                     />
                                 </div>
                                 <div className="p-8 md:p-10">
@@ -224,19 +221,10 @@ export default function LearnPage() {
                                     </p>
                                 </div>
                                 <div className="relative aspect-video overflow-hidden bg-neutral-100">
-                                    <video
-                                        ref={(el) => {
-                                            if (el && !el.dataset.initialized) {
-                                                el.dataset.initialized = "true";
-                                                el.currentTime = 2;
-                                            }
-                                        }}
+                                    <LazyVideo
                                         src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/UI%20Play%20through%202.mp4"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="h-full w-full object-cover"
+                                        className="h-full w-full"
+                                        startAt={2}
                                     />
                                 </div>
                             </div>
@@ -367,13 +355,9 @@ export default function LearnPage() {
                         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] lg:items-center">
                             <AnimatedSection>
                                 <div className="relative overflow-hidden border border-neutral-200 shadow-xl">
-                                    <video
+                                    <LazyVideo
                                         src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Clip-4-transcode.mp4"
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        className="h-full w-full object-cover"
+                                        className="h-full w-full"
                                     />
                                 </div>
                             </AnimatedSection>
@@ -450,13 +434,9 @@ export default function LearnPage() {
                         {/* Full-width keyboard shot */}
                         <AnimatedSection>
                             <div className="relative mb-16 overflow-hidden">
-                                <video
+                                <LazyVideo
                                     src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Clip-3.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className="w-full object-cover"
+                                    className="w-full"
                                 />
                             </div>
                         </AnimatedSection>
