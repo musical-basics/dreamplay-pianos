@@ -28,7 +28,7 @@ export function ResearchSection() {
                             title: "Benefits of ergonomically scaled keyboards",
                             source: "Survey of reduced size users",
                             desc: "Players report relief from pain, faster technical progress, and greater comfort when they move to keyboards that match their hand span.",
-                            href: "https://www.researchgate.net/publication/264457999",
+                            href: "https://www.researchgate.net/publication/287901848_PIANIST_HAND_SPANS_GENDER_AND_ETHNIC_DIFFERENCES_AND_IMPLICATIONS_FOR_PIANO_PLAYING",
                             cta: "Read full study",
                         },
                         {
