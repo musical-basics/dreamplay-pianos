@@ -38,9 +38,9 @@ export default function LearnPage() {
                         container.dataset.initialized = "true";
 
                         const sources = [
-                            { src: "/videos/DreamPlay Grid Hero.mp4", startAt: 0, endBefore: 0, fadeMs: 600 },
-                            { src: "/videos/Falling Notes Mode.mp4", startAt: 0, endBefore: 0, fadeMs: 600 },
-                            { src: "/videos/UI Play through 2.mp4", startAt: 2, endBefore: 1.5, fadeMs: 400 },
+                            { src: "https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4", startAt: 0, endBefore: 0, fadeMs: 600 },
+                            { src: "https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Falling%20Notes%20Mode.mp4", startAt: 0, endBefore: 0, fadeMs: 600 },
+                            { src: "https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/UI%20Play%20through%202.mp4", startAt: 2, endBefore: 1.5, fadeMs: 400 },
                         ];
                         let idx = 0;
 
@@ -189,7 +189,7 @@ export default function LearnPage() {
                             <AnimatedSection delay={200} className="group relative overflow-hidden border border-neutral-200 bg-neutral-50 shadow-sm transition-all hover:shadow-xl">
                                 <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
                                     <video
-                                        src="/videos/Falling Notes Mode.mp4"
+                                        src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Falling%20Notes%20Mode.mp4"
                                         autoPlay
                                         muted
                                         loop
@@ -231,7 +231,7 @@ export default function LearnPage() {
                                                 el.currentTime = 2;
                                             }
                                         }}
-                                        src="/videos/UI Play through 2.mp4"
+                                        src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/UI%20Play%20through%202.mp4"
                                         autoPlay
                                         muted
                                         loop
@@ -368,7 +368,7 @@ export default function LearnPage() {
                             <AnimatedSection>
                                 <div className="relative overflow-hidden border border-neutral-200 shadow-xl">
                                     <video
-                                        src="/videos/Clip-4-transcode.mp4"
+                                        src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Clip-4-transcode.mp4"
                                         autoPlay
                                         loop
                                         muted
@@ -451,7 +451,7 @@ export default function LearnPage() {
                         <AnimatedSection>
                             <div className="relative mb-16 overflow-hidden">
                                 <video
-                                    src="/videos/Clip-3.mp4"
+                                    src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Clip-3.mp4"
                                     autoPlay
                                     loop
                                     muted
