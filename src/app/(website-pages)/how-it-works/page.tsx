@@ -4,7 +4,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import TestimonialsSection from "@/components/checkout/TestimonialsSection";
+import OldTestimonialsSection from "@/components/checkout/OldTestimonialsSection";
 
 // --- HELPERS ---
 
@@ -238,7 +238,7 @@ export default function HowItWorksPage() {
             <main className="flex flex-col items-center">
 
                 {/* ═══ TESTIMONIALS — DARK ═══ */}
-                <TestimonialsSection />
+                <OldTestimonialsSection />
 
                 {/* ═══ SECTION 1: CALCULATOR — DARK ═══ */}
                 <section className="w-full bg-[#050505] text-white pt-24 py-12 md:py-24 px-4 flex justify-center">
