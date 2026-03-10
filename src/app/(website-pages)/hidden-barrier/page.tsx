@@ -19,7 +19,7 @@ const inter = Inter({
     variable: "--font-inter",
 })
 
-export default async function TheHiddenBarrierPage() {
+export default async function HiddenBarrierPage() {
     const hiddenProducts = await getHiddenProducts()
     return (
         <div className={`${playfair.variable} ${inter.variable} font-sans antialiased min-h-screen selection:bg-white/20 bg-black`}>
