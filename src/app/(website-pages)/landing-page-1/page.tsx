@@ -283,18 +283,6 @@ export default function LandingPage1() {
         return () => window.removeEventListener("scroll", onScroll)
     }, [])
 
-    /* Auto-rotate testimonials */
-    useEffect(() => {
-        const t = setInterval(
-            () =>
-                setActiveTestimonial(
-                    (p) => (p + 1) % EXPERT_TESTIMONIALS.length
-                ),
-            6000
-        )
-        return () => clearInterval(t)
-    }, [])
-
     const scrollToBuyBox = () => {
         buyBoxRef.current?.scrollIntoView({ behavior: "smooth" })
     }
