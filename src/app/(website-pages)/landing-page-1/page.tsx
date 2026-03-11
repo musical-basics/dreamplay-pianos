@@ -15,6 +15,11 @@ import {
     Brain,
     Music,
     ArrowRight,
+    MessageCircle,
+    HelpCircle,
+    Keyboard,
+    Crosshair,
+    RefreshCw,
 } from "lucide-react"
 
 const playfair = Playfair_Display({
@@ -170,6 +175,72 @@ const EXPERT_TESTIMONIALS = [
     },
 ]
 
+const FEATURES_DEEP = [
+    {
+        headline: "Sized for Your Hands",
+        copy: "DS5.5 and DS6.0 octaves let your hands play in a natural arch — no overstretching, no strain. It's the first piano sized for the pianist, not the other way around.",
+        img: "/images/DS5.5-White-p-1080.png",
+        icon: Keyboard,
+    },
+    {
+        headline: "Studio-Ready MIDI",
+        copy: "Connect to any DAW, play any virtual instrument, layer sounds. DreamPlay One is a production-grade controller with Bluetooth and USB-C MIDI.",
+        img: "/images/DS6.0-Black-1-p-1080.png",
+        icon: Crosshair,
+    },
+    {
+        headline: "Your Brain Adapts in Minutes",
+        copy: "Studies show pianists adapt to narrower keys in 10–15 minutes. Your muscle memory transfers seamlessly — only the pain disappears.",
+        img: "/images/DreamPlay Piano Hands.jpg",
+        icon: RefreshCw,
+    },
+]
+
+const USER_TESTIMONIALS = [
+    {
+        quote: "I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears.",
+        name: "Dr. Carol Leone",
+        role: "Chair of Piano Studies, SMU Meadows School of the Arts",
+    },
+    {
+        quote: "I can play for much longer and continue to play every day. I don't get frustrated from the pain and from being limited in my playing.",
+        name: "Jen McCabe",
+        role: "Pianist, teacher, music director",
+    },
+    {
+        quote: "My favorite story is from a piano performance major, who couldn't believe that playing the piano didn't have to hurt. The instrument restored her joy for piano repertoire.",
+        name: "Kathryn-Ananda Owens",
+        role: "Professor of Music – Piano, St Olaf College",
+    },
+]
+
+const FAQ_ITEMS = [
+    {
+        q: "Why narrower keys?",
+        a: "Standard pianos use a 6.5-inch octave, a size locked in since the 1880s for large male hands. The DS5.5® and DS6.0® sizes are scientifically designed so smaller and average-sized hands can play with a naturally relaxed arch — eliminating overstretching, pain, and injury.",
+    },
+    {
+        q: "What's in the box?",
+        a: "DreamPlay One keyboard (73 or 88 keys), adjustable stand, sustain pedal, USB-C MIDI cable, power adapter, and a quick-start guide. Choose between DS5.5 or DS6.0 sizing at checkout.",
+    },
+    {
+        q: "When will it ship?",
+        a: "Batch 1 ships August 2026. You'll receive monthly backstage photo and video updates showing your piano being built.",
+    },
+    {
+        q: "Can I try both sizes?",
+        a: "Absolutely. We offer free exchanges within 90 days if you'd like to try the other key size.",
+    },
+    {
+        q: "Is my deposit refundable?",
+        a: "Yes — your $99 deposit is 100% refundable at any time, no questions asked. Funds are held securely in escrow until your piano is ready to ship.",
+    },
+    {
+        q: "What about the 90-Day Home Trial?",
+        a: "Once your DreamPlay One arrives, you have a full 90 days to play it at home. If you're not completely satisfied, we arrange free return shipping and issue a full refund.",
+    },
+]
+
 const TIMELINE_STEPS = [
     {
         step: "1",
@@ -248,6 +319,16 @@ export default function LandingPage1() {
                     </button>
                 </div>
             </header>
+
+            {/* ═══════════════════════════════════════════════════
+                0. ANNOUNCEMENT BAR
+            ═══════════════════════════════════════════════════ */}
+            <div className="bg-stone-900 text-white text-center text-sm font-medium py-2.5 px-4">
+                <span className="inline-flex items-center gap-2 flex-wrap justify-center">
+                    <span className="animate-pulse text-amber-400">🔒</span>
+                    Founder&apos;s Batch — <strong>83% Claimed</strong> | Only <strong>42 Allocations</strong> Remaining
+                </span>
+            </div>
 
             <main>
                 {/* ═══════════════════════════════════════════════════
@@ -387,6 +468,15 @@ export default function LandingPage1() {
                             ))}
                         </div>
 
+                        {/* Inline Testimonial */}
+                        <div className="flex items-start gap-3 bg-stone-50/80 border border-stone-200/80 rounded-xl px-4 py-3 mt-1">
+                            <MessageCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                            <p className="text-sm text-stone-600 italic leading-relaxed">
+                                &ldquo;Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.&rdquo;
+                                <span className="block text-xs text-stone-400 mt-1 not-italic">— Claudia Wang, Master&apos;s Student, SMU</span>
+                            </p>
+                        </div>
+
                         {/* Accordions */}
                         <div className="divide-y divide-stone-200 border-t border-b border-stone-200 mt-4">
                             {ACCORDIONS.map((item, i) => (
@@ -458,6 +548,70 @@ export default function LandingPage1() {
                                     </p>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ═══════════════════════════════════════════════════
+                    2B. IMAGE-WITH-TEXT FEATURES
+                ═══════════════════════════════════════════════════ */}
+                <section className="py-20 px-4">
+                    <div className="max-w-5xl mx-auto">
+                        <h2
+                            className="text-2xl md:text-3xl font-bold text-center mb-4"
+                            style={{ fontFamily: "var(--font-playfair)" }}
+                        >
+                            What Makes DreamPlay Different
+                        </h2>
+                        <p className="text-center text-stone-500 text-sm mb-16 max-w-lg mx-auto">
+                            Three breakthroughs that change everything about how
+                            you experience the piano.
+                        </p>
+
+                        <div className="space-y-16 md:space-y-24">
+                            {FEATURES_DEEP.map((f, i) => {
+                                const Icon = f.icon
+                                return (
+                                    <div
+                                        key={i}
+                                        className={`flex flex-col md:flex-row items-center gap-8 md:gap-14 ${i % 2 === 1
+                                                ? "md:flex-row-reverse"
+                                                : ""
+                                            }`}
+                                    >
+                                        {/* Image */}
+                                        <div className="w-full md:w-1/2 rounded-2xl overflow-hidden bg-stone-100 aspect-[4/3]">
+                                            <img
+                                                src={f.img}
+                                                alt={f.headline}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+
+                                        {/* Text */}
+                                        <div className="w-full md:w-1/2 space-y-4">
+                                            <div className="inline-flex items-center gap-2 bg-stone-100 rounded-full px-3 py-1.5">
+                                                <Icon className="w-4 h-4 text-stone-600" />
+                                                <span className="text-xs font-semibold text-stone-600 uppercase tracking-wide">
+                                                    {f.headline}
+                                                </span>
+                                            </div>
+                                            <h3
+                                                className="text-xl md:text-2xl font-bold text-stone-900"
+                                                style={{
+                                                    fontFamily:
+                                                        "var(--font-playfair)",
+                                                }}
+                                            >
+                                                {f.headline}
+                                            </h3>
+                                            <p className="text-stone-500 leading-relaxed">
+                                                {f.copy}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </section>
@@ -629,6 +783,54 @@ export default function LandingPage1() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════
+                    5B. REVIEWS CAROUSEL — "What Pianists Are Saying"
+                ═══════════════════════════════════════════════════ */}
+                <section className="py-20 px-4">
+                    <div className="max-w-5xl mx-auto">
+                        <h2
+                            className="text-2xl md:text-3xl font-bold text-center mb-4"
+                            style={{ fontFamily: "var(--font-playfair)" }}
+                        >
+                            What Pianists Are Saying
+                        </h2>
+                        <p className="text-center text-stone-500 text-sm mb-12 max-w-lg mx-auto">
+                            Real stories from pianists who&apos;ve experienced
+                            ergonomically-sized keys.
+                        </p>
+
+                        <div className="grid md:grid-cols-3 gap-6">
+                            {USER_TESTIMONIALS.map((t, i) => (
+                                <div
+                                    key={i}
+                                    className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
+                                >
+                                    {/* Stars */}
+                                    <div className="flex gap-0.5 mb-4">
+                                        {[1, 2, 3, 4, 5].map((s) => (
+                                            <Star
+                                                key={s}
+                                                className="w-4 h-4 fill-amber-400 text-amber-400"
+                                            />
+                                        ))}
+                                    </div>
+                                    <p className="text-stone-700 text-sm leading-relaxed mb-4 italic">
+                                        &ldquo;{t.quote}&rdquo;
+                                    </p>
+                                    <div className="border-t border-stone-100 pt-3">
+                                        <p className="font-bold text-stone-900 text-sm">
+                                            {t.name}
+                                        </p>
+                                        <p className="text-stone-500 text-xs mt-0.5">
+                                            {t.role}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ═══════════════════════════════════════════════════
                     6. TRANSPARENCY / HOW IT WORKS TIMELINE
                 ═══════════════════════════════════════════════════ */}
                 <section className="py-20 px-4">
@@ -689,10 +891,69 @@ export default function LandingPage1() {
                         </div>
                     </div>
                 </section>
+                {/* ═══════════════════════════════════════════════════
+                    7. STANDALONE FAQ
+                ═══════════════════════════════════════════════════ */}
+                <section className="bg-stone-50 border-t border-stone-200 py-20 px-4">
+                    <div className="max-w-3xl mx-auto">
+                        <h2
+                            className="text-2xl md:text-3xl font-bold text-center mb-4"
+                            style={{ fontFamily: "var(--font-playfair)" }}
+                        >
+                            Questions? We&apos;ve Got You Covered
+                        </h2>
+                        <p className="text-center text-stone-500 text-sm mb-12">
+                            Everything you need to know before reserving.
+                        </p>
+
+                        <div className="divide-y divide-stone-200 border-t border-b border-stone-200">
+                            {FAQ_ITEMS.map((item, i) => (
+                                <details
+                                    key={i}
+                                    className="group"
+                                >
+                                    <summary className="flex items-center justify-between py-5 cursor-pointer list-none">
+                                        <span className="text-sm font-semibold text-stone-800 group-hover:text-stone-600 transition-colors flex items-center gap-2">
+                                            <HelpCircle className="w-4 h-4 text-stone-400" />
+                                            {item.q}
+                                        </span>
+                                        <ChevronDown className="w-4 h-4 text-stone-400 transition-transform duration-300 group-open:rotate-180" />
+                                    </summary>
+                                    <div className="pb-5 pr-4 pl-6">
+                                        <p className="text-sm text-stone-500 leading-relaxed">
+                                            {item.a}
+                                        </p>
+                                    </div>
+                                </details>
+                            ))}
+                        </div>
+                    </div>
+                </section>
             </main>
 
             {/* ═══════════════════════════════════════════════════
-                7. STICKY MOBILE CTA FOOTER
+                MINIMAL FOOTER
+            ═══════════════════════════════════════════════════ */}
+            <footer className="border-t border-stone-200 py-8 px-4 text-center">
+                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div
+                        className="text-lg font-bold tracking-tight text-stone-400"
+                        style={{ fontFamily: "var(--font-playfair)" }}
+                    >
+                        DreamPlay
+                    </div>
+                    <div className="flex items-center gap-4 text-xs text-stone-400">
+                        <a href="mailto:hello@dreamplaykeys.com" className="hover:text-stone-600 transition-colors">
+                            Contact
+                        </a>
+                        <span>•</span>
+                        <span>© {new Date().getFullYear()} DreamPlay Inc.</span>
+                    </div>
+                </div>
+            </footer>
+
+            {/* ═══════════════════════════════════════════════════
+                STICKY MOBILE CTA
             ═══════════════════════════════════════════════════ */}
             <div
                 className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-stone-200 shadow-[0_-4px_24px_rgba(0,0,0,.10)] transition-transform duration-300 ${showSticky ? "translate-y-0" : "translate-y-full"
