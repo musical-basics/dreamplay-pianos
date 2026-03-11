@@ -90,19 +90,19 @@ const ACCORDIONS = [
 const PAIN_POINTS = [
     {
         icon: Zap,
-        emoji: "💢",
+        emoji: "⚡",
         title: "Causes Active Pain",
         desc: "86% of university piano majors experience pain or injury from overstretching (ulnar deviation).",
     },
     {
         icon: Hand,
-        emoji: "✋",
+        emoji: "✋🏻",
         title: "Unfair Advantage",
         desc: "Standard 6.5\" octaves were built for massive male hands from the 1880s.",
     },
     {
         icon: Brain,
-        emoji: "🧠",
+        emoji: "🧩",
         title: "Cognitive Overload",
         desc: "You spend 90% of your time practicing \"the stretch\" instead of the music.",
     },
@@ -541,7 +541,11 @@ export default function LandingPage1() {
                                     className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
                                 >
                                     <div className="text-3xl mb-4">
-                                        {item.emoji}
+                                        {i < 3 ? (
+                                            <item.icon className="w-8 h-8 text-stone-800 stroke-[1.5]" />
+                                        ) : (
+                                            item.emoji
+                                        )}
                                     </div>
                                     <h3 className="font-bold text-stone-900 mb-2">
                                         {item.title}
