@@ -68,6 +68,10 @@ function AnalyticsTrackerContent() {
             // --- ATTACH TO METADATA ---
             const initialReferrer = sessionStorage.getItem('dp_initial_referrer');
             if (initialReferrer) metadata.referrer = initialReferrer;
+
+            // --- CHECKOUT A/B TEST BUCKET ---
+            const abCookieMatch = document.cookie.match(/(^| )dp_checkout_ab=([^;]+)/);
+            if (abCookieMatch) metadata.checkout_ab = abCookieMatch[2];
         }
 
         // 1. If navigating internally inside the App, fire the leave event for the OLD page

@@ -359,11 +359,11 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             if (exactVariantId && exactVariantId.trim() !== '') {
                 // SUCCESS: We have the exact variant ID! 
                 // We use a Shopify "Cart Permalink" format: /cart/{variant_id}:{quantity}
-                let permalink = `/cart/${exactVariantId}:1`;
+                let permalink = `/cart/${exactVariantId}:1?note=checkout_source:customize`;
 
                 // Append the VIP Discount Code if one was generated from the Emailer
                 if (discountCode) {
-                    permalink += `?discount=${discountCode}`;
+                    permalink += `&discount=${discountCode}`;
                 }
 
                 // THE CART CLEAR HACK: 
@@ -397,6 +397,8 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     const separator = baseUrl.includes('?') ? '&' : '?';
                     const finalParams = separator === '?' ? propertiesParams.substring(1) : propertiesParams;
                     checkoutUrl = baseUrl + (baseUrl.includes('?') ? propertiesParams : `?${finalParams}`);
+
+                    checkoutUrl += `&note=checkout_source:customize`;
 
                     if (discountCode) {
                         checkoutUrl += `&discount=${discountCode}`;

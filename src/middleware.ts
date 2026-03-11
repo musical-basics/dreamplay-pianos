@@ -88,18 +88,55 @@ export async function middleware(request: NextRequest) {
     }
 
     // ========================================================================
-    // PRIORITY #2: COOKIES (Returning Visitors)
+    // PRIORITY #2: HARDCODED CHECKOUT A/B TEST (Round-Robin)
     // ========================================================================
-    // WE SKIPPED BLIND COOKIE CHECKS HERE because we don't know which path 
-    // a cookie belongs to without checking the DB or hardcoding paths.
-    // Falling back to Priority #3 (Database) ensures we only rewrite 
-    // if the current path actually has an active test.
+    // Deterministic 1:1 alternation between /checkout (PDP) and /customize (wizard).
+    // No randomization — uses a global counter cookie for strict alternation.
+    if (pathname === "/customize") {
+        const existingBucket = request.cookies.get("dp_checkout_ab")?.value;
+
+        if (existingBucket === "checkout") {
+            // Returning visitor already assigned to PDP — rewrite
+            const rewriteUrl = request.nextUrl.clone();
+            rewriteUrl.pathname = "/checkout";
+            const response = NextResponse.rewrite(rewriteUrl);
+            // Refresh cookie expiry
+            response.cookies.set("dp_checkout_ab", "checkout", { path: "/", maxAge: 60 * 60 * 24 * 30 });
+            return response;
+        }
+
+        if (existingBucket === "customize") {
+            // Returning visitor already assigned to wizard — pass through
+            const response = NextResponse.next();
+            response.cookies.set("dp_checkout_ab", "customize", { path: "/", maxAge: 60 * 60 * 24 * 30 });
+            return response;
+        }
+
+        // New visitor — use counter for deterministic alternation
+        const counterStr = request.cookies.get("dp_checkout_ab_counter")?.value || "0";
+        const counter = parseInt(counterStr, 10) || 0;
+        const assignedBucket = counter % 2 === 0 ? "checkout" : "customize";
+        const nextCounter = counter + 1;
+
+        if (assignedBucket === "checkout") {
+            const rewriteUrl = request.nextUrl.clone();
+            rewriteUrl.pathname = "/checkout";
+            const response = NextResponse.rewrite(rewriteUrl);
+            response.cookies.set("dp_checkout_ab", "checkout", { path: "/", maxAge: 60 * 60 * 24 * 30 });
+            response.cookies.set("dp_checkout_ab_counter", nextCounter.toString(), { path: "/", maxAge: 60 * 60 * 24 * 365 });
+            return response;
+        } else {
+            const response = NextResponse.next();
+            response.cookies.set("dp_checkout_ab", "customize", { path: "/", maxAge: 60 * 60 * 24 * 30 });
+            response.cookies.set("dp_checkout_ab_counter", nextCounter.toString(), { path: "/", maxAge: 60 * 60 * 24 * 365 });
+            return response;
+        }
+    }
 
     // ========================================================================
-    // PRIORITY #3: DATABASE (Fallback for Organic Traffic)
+    // PRIORITY #3: DATABASE (Fallback for other A/B tests)
     // ========================================================================
-    // Only hit the database if neither URL params nor cookies provide the variant.
-    // This preserves existing behavior for visitors who aren't from email campaigns.
+    // Only hit the database for paths that aren't handled by hardcoded tests above.
 
     const { data: activeTest } = await supabase
         .from("ab_tests")

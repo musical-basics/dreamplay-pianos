@@ -72,8 +72,8 @@ function CheckoutContent() {
         const exactVariantId = VARIANT_MAP[tier]?.[size]?.[color];
 
         if (exactVariantId && exactVariantId.trim() !== '') {
-            let permalink = `/cart/${exactVariantId}:1`;
-            if (discountCode) permalink += `?discount=${discountCode}`;
+            let permalink = `/cart/${exactVariantId}:1?note=checkout_source:pdp`;
+            if (discountCode) permalink += `&discount=${discountCode}`;
 
             // Shopify clear cart hack ensures no duplicate checkouts
             const checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
@@ -81,7 +81,7 @@ function CheckoutContent() {
             window.location.href = checkoutUrl;
         } else {
             // Fallback
-            let fallbackUrl = `https://dreamplay-pianos.myshopify.com/cart/add?id=52209394549050&quantity=1&return_to=/checkout&properties[Size]=${size}&properties[Finish]=${color}`;
+            let fallbackUrl = `https://dreamplay-pianos.myshopify.com/cart/add?id=52209394549050&quantity=1&return_to=/checkout&properties[Size]=${size}&properties[Finish]=${color}&note=checkout_source:pdp`;
             if (discountCode) fallbackUrl += `&discount=${discountCode}`;
             window.location.href = fallbackUrl;
         }
