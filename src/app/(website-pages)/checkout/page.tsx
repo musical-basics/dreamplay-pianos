@@ -97,7 +97,7 @@ function CheckoutContent() {
                     {/* ================= LEFT: IMAGE GALLERY ================= */}
                     <div className="flex flex-col gap-4 lg:sticky lg:top-28 mb-10 lg:mb-0">
                         {/* Main Image Stage */}
-                        <div className="relative w-full aspect-[4/3] bg-[#f8f9fa] rounded-xl overflow-hidden flex items-center justify-center p-8 border border-neutral-100">
+                        <div className="relative w-full aspect-[4/3] bg-[#f8f9fa] overflow-hidden flex items-center justify-center p-8 border border-neutral-100">
                             <Image
                                 src={activeImages[activeImageIdx]}
                                 alt={`DreamPlay One in ${color}`}
@@ -113,7 +113,7 @@ function CheckoutContent() {
                                 <button
                                     key={idx}
                                     onClick={() => setActiveImageIdx(idx)}
-                                    className={`relative aspect-[4/3] rounded-lg overflow-hidden border-2 bg-[#f8f9fa] transition-all ${activeImageIdx === idx ? "border-neutral-900" : "border-transparent hover:border-neutral-300"
+                                    className={`relative aspect-[4/3] overflow-hidden border-2 bg-[#f8f9fa] transition-all ${activeImageIdx === idx ? "border-neutral-900" : "border-transparent hover:border-neutral-300"
                                         }`}
                                 >
                                     <Image src={src} alt={`Thumbnail ${idx + 1}`} fill className="object-cover p-1 mix-blend-multiply" />
@@ -126,7 +126,7 @@ function CheckoutContent() {
                     <div className="flex flex-col pt-2">
 
                         {/* Title & Reviews */}
-                        <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight mb-2">
+                        <h1 className="text-3xl sm:text-4xl font-serif font-semibold text-neutral-900 tracking-tight mb-2">
                             DreamPlay One
                         </h1>
 
@@ -180,7 +180,7 @@ function CheckoutContent() {
                                         <button
                                             key={s}
                                             onClick={() => setSize(s)}
-                                            className={`py-3 px-4 rounded-lg border-2 text-left transition-all ${size === s ? "border-neutral-900 bg-neutral-900 shadow-sm" : "border-neutral-300 bg-white hover:border-neutral-400"
+                                            className={`py-3 px-4 border-2 text-left transition-all ${size === s ? "border-neutral-900 bg-neutral-900 shadow-sm" : "border-neutral-300 bg-white hover:border-neutral-400"
                                                 }`}
                                         >
                                             <div className={`font-bold text-sm ${size === s ? 'text-white' : 'text-neutral-700'}`}>{s}</div>
@@ -198,7 +198,7 @@ function CheckoutContent() {
                                         <button
                                             key={c}
                                             onClick={() => setColor(c)}
-                                            className={`flex items-center gap-2 py-2.5 px-5 rounded-full border-2 transition-all ${color === c ? "border-neutral-900 bg-neutral-900 shadow-sm" : "border-neutral-300 bg-white hover:border-neutral-400"
+                                            className={`flex items-center gap-2 py-2.5 px-5 border-2 transition-all ${color === c ? "border-neutral-900 bg-neutral-900 shadow-sm" : "border-neutral-300 bg-white hover:border-neutral-400"
                                                 }`}
                                         >
                                             <span className={`w-4 h-4 rounded-full border shadow-inner ${c === "Black" ? "bg-[#111] border-neutral-800" : "bg-[#f4f4f5] border-neutral-300"}`}></span>
@@ -224,7 +224,7 @@ function CheckoutContent() {
                                         return (
                                             <label
                                                 key={option.id}
-                                                className={`relative flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all ${isSelected ? 'border-neutral-900 bg-neutral-50' : 'border-neutral-200 bg-white hover:border-neutral-300'}`}
+                                                className={`relative flex items-center justify-between p-4 border-2 cursor-pointer transition-all ${isSelected ? 'border-neutral-900 bg-neutral-50' : 'border-neutral-200 bg-white hover:border-neutral-300'}`}
                                             >
                                                 <input
                                                     type="radio"
@@ -253,7 +253,7 @@ function CheckoutContent() {
 
                                                 {/* NightSeal "Most Popular" Badge */}
                                                 {option.badge && (
-                                                    <div className="absolute -top-3 right-4 bg-neutral-900 text-white text-[10px] font-bold px-2.5 py-0.5 rounded shadow-md uppercase tracking-wider">
+                                                    <div className="absolute -top-3 right-4 bg-neutral-900 text-white text-[10px] font-bold px-2.5 py-0.5 shadow-md uppercase tracking-wider">
                                                         {option.badge}
                                                     </div>
                                                 )}
@@ -268,7 +268,7 @@ function CheckoutContent() {
                         <button
                             onClick={handleCheckout}
                             disabled={isCheckingOut}
-                            className="w-full bg-[#111111] text-white font-bold text-sm tracking-widest uppercase py-4 rounded-lg hover:bg-black transition-colors mt-2 mb-8 disabled:opacity-70 flex items-center justify-center gap-2"
+                            className="w-full bg-[#111111] text-white font-bold text-sm tracking-widest uppercase py-4 hover:bg-black transition-colors mt-2 mb-8 disabled:opacity-70 flex items-center justify-center gap-2"
                         >
                             {isCheckingOut ? <><Loader2 className="w-4 h-4 animate-spin" /> Processing...</> : "Add To Cart"}
                         </button>
