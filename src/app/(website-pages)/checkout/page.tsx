@@ -180,11 +180,11 @@ function CheckoutContent() {
                                         <button
                                             key={s}
                                             onClick={() => setSize(s)}
-                                            className={`py-3 px-4 rounded-lg border-2 text-left transition-all ${size === s ? "border-neutral-900 bg-neutral-50" : "border-neutral-200 bg-white hover:border-neutral-300"
+                                            className={`py-3 px-4 rounded-lg border-2 text-left transition-all ${size === s ? "border-neutral-900 bg-neutral-900 shadow-sm" : "border-neutral-300 bg-white hover:border-neutral-400"
                                                 }`}
                                         >
-                                            <div className={`font-bold text-sm ${size === s ? 'text-neutral-900' : 'text-neutral-700'}`}>{s}</div>
-                                            <div className="text-xs text-neutral-500 mt-0.5">{s === "DS6.0" ? "15/16ths Size" : "7/8ths Size"}</div>
+                                            <div className={`font-bold text-sm ${size === s ? 'text-white' : 'text-neutral-700'}`}>{s}</div>
+                                            <div className={`text-xs mt-0.5 ${size === s ? 'text-neutral-300' : 'text-neutral-500'}`}>{s === "DS6.0" ? "15/16ths Size" : "7/8ths Size"}</div>
                                         </button>
                                     ))}
                                 </div>
@@ -198,11 +198,11 @@ function CheckoutContent() {
                                         <button
                                             key={c}
                                             onClick={() => setColor(c)}
-                                            className={`flex items-center gap-2 py-2.5 px-5 rounded-full border-2 transition-all ${color === c ? "border-neutral-900 bg-neutral-50" : "border-neutral-200 bg-white hover:border-neutral-300"
+                                            className={`flex items-center gap-2 py-2.5 px-5 rounded-full border-2 transition-all ${color === c ? "border-neutral-900 bg-neutral-900 shadow-sm" : "border-neutral-300 bg-white hover:border-neutral-400"
                                                 }`}
                                         >
                                             <span className={`w-4 h-4 rounded-full border shadow-inner ${c === "Black" ? "bg-[#111] border-neutral-800" : "bg-[#f4f4f5] border-neutral-300"}`}></span>
-                                            <span className={`text-sm font-bold ${color === c ? 'text-neutral-900' : 'text-neutral-700'}`}>{c}</span>
+                                            <span className={`text-sm font-bold ${color === c ? 'text-white' : 'text-neutral-700'}`}>{c}</span>
                                         </button>
                                     ))}
                                 </div>
