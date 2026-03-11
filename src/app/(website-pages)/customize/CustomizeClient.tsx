@@ -8,7 +8,7 @@ import { getCountdownDate } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 import { useABAnalytics } from "@/hooks/use-ab-analytics";
-import { ArrowRight, ArrowLeft, Check, ShieldCheck, X, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, ShieldCheck, X, CheckCircle2, Undo2, Truck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { VARIANT_MAP } from "./variant-map";
 import { RegisterModal } from "@/components/RegisterModal";
@@ -986,6 +986,22 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                 </button>
                             )
                         })}
+                    </div>
+
+                    {/* Trust Badges */}
+                    <div className="grid grid-cols-3 gap-4 mt-10 max-w-xl mx-auto">
+                        <div className="flex flex-col items-center justify-center text-center gap-2">
+                            <ShieldCheck size={28} strokeWidth={1.5} className="text-white/70" />
+                            <span className="text-[11px] font-bold text-white/70">90-Day Trial</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center text-center gap-2">
+                            <Undo2 size={28} strokeWidth={1.5} className="text-white/70" />
+                            <span className="text-[11px] font-bold text-white/70">Easy Returns</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center text-center gap-2">
+                            <Truck size={28} strokeWidth={1.5} className="text-white/70" />
+                            <span className="text-[11px] font-bold text-white/70">Free Shipping</span>
+                        </div>
                     </div>
 
                     {/* Pricing footnote */}

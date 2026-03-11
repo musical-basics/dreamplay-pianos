@@ -292,10 +292,10 @@ function CheckoutContent() {
                         {/* Simple Nightseal-style Testimonial Snippet */}
                         <div>
                             <p className="text-sm font-medium italic text-neutral-600 mb-3 leading-relaxed">
-                                &ldquo;I love that it doesn&rsquo;t force my hands into a stretched, painful position like every standard piano I&rsquo;ve played before this one. It&rsquo;s a revelation.&rdquo;
+                                &ldquo;Everything is easier on the 6.0 for me&hellip; I feel very comfortable playing scales, fast passages, or big chords.&rdquo;
                             </p>
                             <div className="flex items-center gap-2">
-                                <span className="text-xs font-bold text-neutral-400">Dr. Carol L.</span>
+                                <span className="text-xs font-bold text-neutral-400">Claudia Wang, Master&apos;s Student at SMU</span>
                                 <div className="flex text-[#FFD700]">
                                     {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={12} fill="currentColor" strokeWidth={0} />)}
                                 </div>
