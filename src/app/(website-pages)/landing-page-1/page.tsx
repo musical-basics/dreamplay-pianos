@@ -169,14 +169,14 @@ const EXPERT_TESTIMONIALS = [
         quote: "I cannot begin to describe the career-changing, and even life-changing, benefits our students have reaped from having these instruments to practice on daily. Their first response though was, 'Why did it take so long? Why did we have to suffer so unnecessarily?'",
     },
     {
-        name: "Claudia Wang",
-        role: "Master's Student, Southern Methodist University (SMU)",
-        quote: "Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.",
+        name: "Dr. Carol Leone",
+        role: "Chair of Piano Studies, SMU Meadows School of the Arts",
+        quote: "I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears. A lifetime of struggling with a seemingly insurmountable problem vanishes in the moment they realize, 'It's not me that is the problem; it is the instrument!'",
     },
     {
-        name: "Hubert Ness",
-        role: "Professor of Jazz Piano, HMDK University of Stuttgart",
-        quote: "Another surprising effect for me was that playing this [DS6.0] also has a positive effect when you go back to the normal keyboard.",
+        name: "Kathryn-Ananda Owens",
+        role: "Professor of Music – Piano, St Olaf College, Minnesota",
+        quote: "My favorite story is from a piano performance major, who couldn't believe that playing the piano didn't have to hurt. The instrument restored her joy for piano repertoire. She had been preparing to change over to harpsichord due to keyboard size issues.",
     },
 ]
 
@@ -203,9 +203,9 @@ const FEATURES_DEEP = [
 
 const USER_TESTIMONIALS = [
     {
-        quote: "I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears.",
-        name: "Dr. Carol Leone",
-        role: "Chair of Piano Studies, SMU Meadows School of the Arts",
+        quote: "Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.",
+        name: "Claudia Wang",
+        role: "Master's Student, Southern Methodist University (SMU)",
     },
     {
         quote: "I can play for much longer and continue to play every day. I don't get frustrated from the pain and from being limited in my playing.",
@@ -213,9 +213,9 @@ const USER_TESTIMONIALS = [
         role: "Pianist, teacher, music director",
     },
     {
-        quote: "My favorite story is from a piano performance major, who couldn't believe that playing the piano didn't have to hurt. The instrument restored her joy for piano repertoire.",
-        name: "Kathryn-Ananda Owens",
-        role: "Professor of Music – Piano, St Olaf College",
+        quote: "I realize now, looking back, that most of the time I spent practicing was used trying to overcome difficulties because of my hand-size... If you spend 90% of the time trying to overcome limitations imposed by hand size, then you are truly disadvantaged.",
+        name: "Christopher Donison",
+        role: "Executive Artistic Director, Music by the Sea (Co-inventor of DS keyboards)",
     },
 ]
 
