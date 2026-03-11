@@ -178,6 +178,11 @@ const EXPERT_TESTIMONIALS = [
         role: "Professor of Music – Piano, St Olaf College, Minnesota",
         quote: "My favorite story is from a piano performance major, who couldn't believe that playing the piano didn't have to hurt. The instrument restored her joy for piano repertoire. She had been preparing to change over to harpsichord due to keyboard size issues.",
     },
+    {
+        name: "Hubert Ness",
+        role: "Professor of Jazz Piano, HMDK University of Stuttgart",
+        quote: "Another surprising effect for me was that playing this [DS6.0] also has a positive effect when you go back to the normal keyboard.",
+    },
 ]
 
 const FEATURES_DEEP = [
