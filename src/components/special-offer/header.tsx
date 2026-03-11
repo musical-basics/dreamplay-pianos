@@ -116,7 +116,6 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                         <nav className="hidden md:flex items-center gap-6 h-full">
                             <Link href="/how-it-works" className={linkClass(useDarkText)}>How It Works</Link>
                             <Link href="/better-practice" className={linkClass(useDarkText)}>The Benefits</Link>
-                            <Link href="/parents-guide" className={linkClass(useDarkText)}>For Parents</Link>
                             <NavDropdown
                                 label="Features"
                                 useDarkText={useDarkText}
@@ -124,6 +123,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                     { label: "Product Info", href: "/product-information" },
                                     { label: "Buyer's Guide", href: "/buyers-guide" },
                                     { label: "DreamPlay Learn", href: "/learn" },
+                                    { label: "For Parents", href: "/parents-guide" },
                                 ]}
                             />
 
@@ -205,12 +205,12 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                             <nav className="flex flex-col p-4">
                                 <Link href="/how-it-works" className="py-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>How It Works</Link>
                                 <Link href="/better-practice" className="py-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>The Benefits</Link>
-                                <Link href="/parents-guide" className="py-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>For Parents</Link>
                                 <div className="border-t border-gray-200 my-2" />
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Features</div>
                                 <Link href="/product-information" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Product Info</Link>
                                 <Link href="/buyers-guide" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Buyer&apos;s Guide</Link>
                                 <Link href="/learn" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>DreamPlay Learn</Link>
+                                <Link href="/parents-guide" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>For Parents</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">About Us</div>
