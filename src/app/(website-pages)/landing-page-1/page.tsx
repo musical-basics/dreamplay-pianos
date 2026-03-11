@@ -45,19 +45,19 @@ const inter = Inter({
 const GALLERY_IMAGES = [
     {
         src: "/images/DreamPlay Piano Hands.jpg",
-        alt: "DreamPlay One — Hands on Keys",
+        alt: "DreamPlay One, Hands on Keys",
     },
     {
         src: "/images/DS6.0-Black-1-p-1080.png",
-        alt: "DreamPlay One DS6.0 — Side Angle",
+        alt: "DreamPlay One DS6.0, Side Angle",
     },
     {
         src: "/images/DS5.5-White-p-1080.png",
-        alt: "DreamPlay One DS5.5 — White Model",
+        alt: "DreamPlay One DS5.5, White Model",
     },
     {
         src: "/images/DSDS6.0-Straightened-1-1024x788.jpg",
-        alt: "DreamPlay One DS6.0 — In Studio",
+        alt: "DreamPlay One DS6.0, In Studio",
     },
 ]
 
@@ -71,7 +71,7 @@ const ACCORDIONS = [
     {
         title: "Why Narrower Keys?",
         content:
-            "Standard pianos use a 6.5-inch octave, a size locked in since the 1880s for large male hands. The DS5.5® (5.5-inch octave) and DS6.0® (6.0-inch octave) standards are scientifically sized to let smaller and average-sized hands play with a naturally relaxed arch — eliminating overstretching, pain, and injury.",
+            "Standard pianos use a 6.5-inch octave, a size locked in since the 1880s for large male hands. The DS5.5® (5.5-inch octave) and DS6.0® (6.0-inch octave) standards are scientifically sized to let smaller and average-sized hands play with a naturally relaxed arch, eliminating overstretching, pain, and injury.",
     },
     {
         title: "What's in the Box?",
@@ -81,7 +81,7 @@ const ACCORDIONS = [
     {
         title: "The Pre-Order Promise",
         content:
-            "DreamPlay One is currently in the final design stage — what you see are production-intent renderings. Tooling begins shortly and you will receive monthly backstage photo and video updates showing your piano being built. Your deposit is 100% refundable at any time, no questions asked.",
+            "DreamPlay One is currently in the final design stage. What you see are production-intent renderings. Tooling begins shortly and you will receive monthly backstage photo and video updates showing your piano being built. Your deposit is 100% refundable at any time, no questions asked.",
     },
     {
         title: "90-Day Home Trial",
@@ -194,7 +194,7 @@ const EXPERT_TESTIMONIALS = [
 const FEATURES_DEEP = [
     {
         headline: "Sized for Your Hands",
-        copy: "DS5.5 and DS6.0 octaves let your hands play in a natural arch — no overstretching, no strain. It's the first piano sized for the pianist, not the other way around.",
+        copy: "DS5.5 and DS6.0 octaves let your hands play in a natural arch: no overstretching, no strain. It's the first piano sized for the pianist, not the other way around.",
         img: "/images/DS5.5-White-p-1080.png",
         icon: Keyboard,
     },
@@ -206,7 +206,7 @@ const FEATURES_DEEP = [
     },
     {
         headline: "Your Brain Adapts in Minutes",
-        copy: "Studies show pianists adapt to narrower keys in 10–15 minutes. Your muscle memory transfers seamlessly — only the pain disappears.",
+        copy: "Studies show pianists adapt to narrower keys in 10–15 minutes. Your muscle memory transfers seamlessly. Only the pain disappears.",
         img: "/images/DreamPlay Piano Hands.jpg",
         icon: RefreshCw,
     },
@@ -233,7 +233,7 @@ const USER_TESTIMONIALS = [
 const FAQ_ITEMS = [
     {
         q: "Why narrower keys?",
-        a: "Standard pianos use a 6.5-inch octave, a size locked in since the 1880s for large male hands. The DS5.5® and DS6.0® sizes are scientifically designed so smaller and average-sized hands can play with a naturally relaxed arch — eliminating overstretching, pain, and injury.",
+        a: "Standard pianos use a 6.5-inch octave, a size locked in since the 1880s for large male hands. The DS5.5® and DS6.0® sizes are scientifically designed so smaller and average-sized hands can play with a naturally relaxed arch, eliminating overstretching, pain, and injury.",
     },
     {
         q: "What's in the box?",
@@ -249,7 +249,7 @@ const FAQ_ITEMS = [
     },
     {
         q: "Is my deposit refundable?",
-        a: "Yes — your $99 deposit is 100% refundable at any time, no questions asked. Funds are held securely in escrow until your piano is ready to ship.",
+        a: "Yes. Your $99 deposit is 100% refundable at any time, no questions asked. Funds are held securely in escrow until your piano is ready to ship.",
     },
     {
         q: "What about the 90-Day Home Trial?",
@@ -273,7 +273,7 @@ const TIMELINE_STEPS = [
     {
         step: "3",
         title: "Ship",
-        desc: "Pay the remaining balance only when your piano is boxed and ready to ship — August 2026.",
+        desc: "Pay the remaining balance only when your piano is boxed and ready to ship (August 2026).",
         icon: Package,
     },
 ]
@@ -388,7 +388,7 @@ export default function LandingPage1() {
                             DreamPlay One
                         </h1>
                         <p className="text-stone-500 text-sm -mt-2">
-                            DS5.5® & DS6.0® — Scientifically Sized Keys
+                            DS5.5® & DS6.0® | Scientifically Sized Keys
                         </p>
 
                         {/* Pricing */}
@@ -454,7 +454,7 @@ export default function LandingPage1() {
                             <MessageCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
                             <p className="text-sm text-stone-600 italic leading-relaxed">
                                 &ldquo;Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.&rdquo;
-                                <span className="block text-xs text-stone-400 mt-1 not-italic">— Claudia Wang, Master&apos;s Student, SMU</span>
+                                <span className="block text-xs text-stone-400 mt-1 not-italic">Claudia Wang, Master&apos;s Student, SMU</span>
                             </p>
                         </div>
 
@@ -508,7 +508,7 @@ export default function LandingPage1() {
                             The Problem With &ldquo;Standard&rdquo; Pianos
                         </h2>
                         <p className="text-center text-stone-500 text-sm mb-12 max-w-xl mx-auto">
-                            For over a century, one key size has dominated —
+                            For over a century, one key size has dominated,
                             regardless of the pianist&apos;s hand.
                         </p>
 
@@ -977,7 +977,7 @@ export default function LandingPage1() {
                         </div>
                     </div>
                     <div className="sm:hidden text-sm font-bold text-stone-900">
-                        DreamPlay Deposit — $99
+                        DreamPlay Deposit: $99
                     </div>
                     <button
                         onClick={scrollToBuyBox}
