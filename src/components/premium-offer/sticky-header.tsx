@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react"
 import { ArrowRight } from "lucide-react"
+import { logEvent } from "@/lib/analytics"
 
 export function StickyHeader() {
   const [visible, setVisible] = useState(false)
@@ -26,8 +27,8 @@ export function StickyHeader() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${visible
-          ? "translate-y-0 opacity-100"
-          : "-translate-y-full opacity-0 pointer-events-none"
+        ? "translate-y-0 opacity-100"
+        : "-translate-y-full opacity-0 pointer-events-none"
         }`}
     >
       <div className="bg-neutral-900/80 backdrop-blur-md border-b border-white/5">
@@ -56,6 +57,7 @@ export function StickyHeader() {
           {/* CTA */}
           <a
             href="/customize"
+            onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
             className="group flex items-center gap-2 bg-white px-5 py-2 font-sans text-[10px] uppercase tracking-widest text-black transition-colors hover:bg-white/90 md:text-xs"
           >
             Pre-Order Now

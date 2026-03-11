@@ -1,5 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { logEvent } from "@/lib/analytics"
 
 const allTiers = [
   {
@@ -198,6 +201,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
               {/* CTA */}
               <a
                 href="/customize"
+                onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
                 className={`mt-8 group flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors ${tier.highlight
                   ? "border-background bg-background text-foreground hover:bg-background/90"
                   : "border-background/30 text-background hover:bg-background/10"

@@ -4,6 +4,8 @@ import Link from "next/link"
 import { ArrowRight, Menu, X, User, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { getHomepage, syncHomepageAB } from "@/lib/homepage-ab"
 import { useABAnalytics } from "@/hooks/use-ab-analytics"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
@@ -72,6 +74,13 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
         return () => subscription.unsubscribe()
     }, [])
 
+    // Sync homepage A/B cookie to localStorage
+    useEffect(() => {
+        syncHomepageAB()
+    }, [])
+
+    const router = useRouter()
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 100)
@@ -104,13 +113,20 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                 )}>
                     <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-2">
+                        <a
+                            href="/"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                router.push(getHomepage())
+                            }}
+                            className="flex items-center gap-2 cursor-pointer"
+                        >
                             <img
                                 src={useDarkText ? "/images/Logo.svg" : "/images/DreamPlay Logo White.png"}
                                 alt="DreamPlay Pianos"
                                 className={`h-8 transition-all ${useDarkText ? "brightness-0" : ""}`}
                             />
-                        </Link>
+                        </a>
 
                         {/* Main navigation */}
                         <nav className="hidden md:flex items-center gap-6 h-full">

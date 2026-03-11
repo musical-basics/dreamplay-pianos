@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { logEvent } from "@/lib/analytics"
 
 export function CrowdfundingSection() {
   return (
@@ -31,6 +34,7 @@ export function CrowdfundingSection() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
           <a
             href="/customize"
+            onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
             className="inline-block bg-white px-8 py-3 text-center text-xs font-sans uppercase tracking-widest text-black transition-colors hover:bg-white/90 md:text-sm"
           >
             Pre-Order Now

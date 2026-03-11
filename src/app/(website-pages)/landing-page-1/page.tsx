@@ -3,6 +3,8 @@
 import { Playfair_Display, Inter } from "next/font/google"
 import { useState, useEffect, useRef } from "react"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
+import { syncHomepageAB } from "@/lib/homepage-ab"
+import { logEvent } from "@/lib/analytics"
 import {
     Check,
     Star,
@@ -296,6 +298,18 @@ export default function LandingPage1() {
         return () => window.removeEventListener("scroll", onScroll)
     }, [])
 
+    /* Sync homepage A/B cookie to localStorage */
+    useEffect(() => {
+        syncHomepageAB()
+    }, [])
+
+    const trackCTA = (destination: string) => {
+        logEvent("homepage_ab_cta_click", {
+            path: "/landing-page-1",
+            metadata: { variant: "landing-page-1", destination }
+        })
+    }
+
     const scrollToBuyBox = () => {
         buyBoxRef.current?.scrollIntoView({ behavior: "smooth" })
     }
@@ -428,6 +442,7 @@ export default function LandingPage1() {
                         {/* CTA */}
                         <a
                             href="/checkout"
+                            onClick={() => trackCTA("/checkout")}
                             className="block w-full text-center bg-[#111111] text-white py-4 text-sm font-bold tracking-widest uppercase hover:bg-transparent hover:text-[#111111] transition-all duration-200"
                             style={{ border: "2px solid #111111" }}
                         >
@@ -883,7 +898,7 @@ export default function LandingPage1() {
                         {/* Final CTA */}
                         <div className="text-center mt-16">
                             <button
-                                onClick={scrollToBuyBox}
+                                onClick={() => { trackCTA("/checkout"); scrollToBuyBox() }}
                                 className="inline-flex items-center gap-2 bg-[#111111] text-white px-8 py-4 text-sm font-bold tracking-widest uppercase hover:bg-transparent hover:text-[#111111] transition-all duration-200 cursor-pointer"
                                 style={{ border: "2px solid #111111" }}
                             >
@@ -982,7 +997,7 @@ export default function LandingPage1() {
                         DreamPlay Deposit: $99
                     </div>
                     <button
-                        onClick={scrollToBuyBox}
+                        onClick={() => { trackCTA("/checkout"); scrollToBuyBox() }}
                         className="flex-shrink-0 bg-[#111111] text-white px-6 py-3 text-sm font-bold tracking-widest uppercase hover:bg-transparent hover:text-black transition-all duration-200 cursor-pointer"
                         style={{ border: "2px solid #111111" }}
                     >
