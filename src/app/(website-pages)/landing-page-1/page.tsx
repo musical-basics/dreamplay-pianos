@@ -681,7 +681,7 @@ export default function LandingPage1() {
                                     className="text-center bg-stone-800/60 rounded-2xl p-8 border border-stone-700/50"
                                 >
                                     <div
-                                        className="text-5xl md:text-6xl font-black text-amber-400 mb-4"
+                                        className="text-5xl md:text-6xl font-black text-white mb-4"
                                         style={{
                                             fontFamily: "var(--font-playfair)",
                                         }}
