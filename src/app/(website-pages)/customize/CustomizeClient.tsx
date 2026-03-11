@@ -991,6 +991,16 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         * All prices shown are the official retail MSRP. Shipping and applicable taxes will be calculated before dispatch.
                     </p>
 
+                    {/* Save My Build CTA */}
+                    <div className="text-center mt-6">
+                        <button
+                            onClick={() => setIsSaveModalOpen(true)}
+                            className="font-sans text-sm text-white/50 hover:text-white underline underline-offset-4 transition-colors cursor-pointer"
+                        >
+                            Not ready to reserve today? Save this configuration to your inbox.
+                        </button>
+                    </div>
+
                     {/* Pre-Order Logistics Box */}
                     <div className="mt-12 mx-auto max-w-2xl border border-white/15 bg-white/[0.04] backdrop-blur-md p-8 md:p-10">
                         <h4 className="font-serif text-xl text-white mb-6 text-center md:text-2xl">Pre-Order Logistics</h4>
@@ -1241,7 +1251,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         disabled={saveLoading}
                                         className="w-full bg-white text-black font-sans text-xs uppercase tracking-widest font-bold py-4 rounded-none hover:bg-white/90 transition-colors disabled:opacity-70 cursor-pointer"
                                     >
-                                        {saveLoading ? "Saving..." : "Save Build & Get Free Shipping"}
+                                        {saveLoading ? "Saving..." : "Save My Configuration"}
                                     </button>
 
                                     <button

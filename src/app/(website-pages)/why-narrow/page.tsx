@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
+import { InlineHandGuide } from "@/components/InlineHandGuide";
 
 /**
  * 3D Glassmorphic Donut Chart — SVG-based with gradient strokes, drop shadows, and glass inner ring
@@ -179,6 +180,11 @@ export default function WhyNarrowPage() {
                 <p className="font-sans text-base text-neutral-600 leading-relaxed">Hand span often needs to be at least one quarter larger than the octave just to reach 8ths, 9ths, and 10ths without strain.</p>
               </div>
             </div>
+          </div>
+
+          {/* ═══ INLINE PDF HAND GUIDE ═══ */}
+          <div className="w-full max-w-[80rem] px-6 mt-2">
+            <InlineHandGuide />
           </div>
         </section>
 

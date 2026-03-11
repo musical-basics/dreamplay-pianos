@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import OldTestimonialsSection from "@/components/checkout/OldTestimonialsSection";
+import { InlineHandGuide } from "@/components/InlineHandGuide";
 
 // --- HELPERS ---
 
@@ -343,6 +344,13 @@ export default function HowItWorksPage() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                {/* ═══ INLINE PDF HAND GUIDE ═══ */}
+                <section className="w-full bg-[#f5f5f0] flex justify-center pt-0 pb-0">
+                    <div className="w-full max-w-[80rem] px-4 md:px-6">
+                        <InlineHandGuide />
                     </div>
                 </section>
 

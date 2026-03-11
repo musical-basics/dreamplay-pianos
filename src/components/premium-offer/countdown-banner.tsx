@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
+import { FoundersBatchCapture } from "../FoundersBatchCapture"
 
 const DEADLINE = new Date("2026-03-02T00:00:00-08:00").getTime() // March 2, 2026 midnight PST
 
@@ -13,6 +14,7 @@ function pad(n: number) {
 export function CountdownBanner() {
     const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null)
     const [expired, setExpired] = useState(false)
+    const [isFoundersOpen, setIsFoundersOpen] = useState(false)
 
     useEffect(() => {
         function tick() {
@@ -35,16 +37,18 @@ export function CountdownBanner() {
 
     if (expired) {
         return (
-            <a
-                href="/register?offer=crowdfunding"
-                className="group bg-[#050505] border-b border-white/10 py-2.5 text-center flex items-center justify-center gap-2 w-full z-50 text-[10px] sm:text-xs text-white/70 uppercase tracking-[0.15em] font-sans font-medium hover:text-white transition-colors cursor-pointer"
-            >
-                <span className="text-amber-400 font-bold">🎉 Crowdfunding Special</span>
-                <span className="hidden sm:inline">| Register to unlock</span>
-                <span className="font-bold text-white/90">$300 OFF</span>
-                <span className="hidden md:inline text-white/50">your DreamPlay piano</span>
-                <ChevronRight size={14} className="text-white/40 group-hover:text-white/70 transition-colors" />
-            </a>
+            <>
+                <button
+                    onClick={() => setIsFoundersOpen(true)}
+                    className="group bg-[#050505] border-b border-white/10 py-2.5 text-center flex items-center justify-center gap-2 w-full z-50 text-[10px] sm:text-xs text-white/70 uppercase tracking-[0.15em] font-sans font-medium hover:text-white transition-colors cursor-pointer"
+                >
+                    <span className="text-amber-400 font-bold">🚀 Founder&apos;s Batch Allocations Open</span>
+                    <span className="hidden sm:inline">|</span>
+                    <span className="hidden sm:inline font-bold text-white/90">Secure your spot to lock in early-adopter pricing</span>
+                    <ChevronRight size={14} className="text-white/40 group-hover:text-white/70 transition-colors" />
+                </button>
+                <FoundersBatchCapture isOpen={isFoundersOpen} onClose={() => setIsFoundersOpen(false)} />
+            </>
         )
     }
 

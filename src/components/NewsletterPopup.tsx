@@ -90,19 +90,9 @@ export default function NewsletterPopup() {
                 }, 10000);
             }
 
-            // ── Popup Timers (dynamic from entries) ──
-            for (const entry of settings.entries) {
-                const popupType = entry.type as PopupType;
-                const seen = localStorage.getItem(`dp_v2_${popupType}_seen`) === "true";
-                if (!seen) {
-                    const timer = setTimeout(() => {
-                        if (localStorage.getItem("dp_v2_subscribed") !== "true") {
-                            setActivePopup(current => current === "none" ? popupType : current);
-                        }
-                    }, entry.delaySec * 1000);
-                    popupTimers.push(timer);
-                }
-            }
+            // ── Popup Timers DISABLED — using exit-intent only ──
+            // Timed popups removed per conversion optimization.
+            // Popups now fire only on exit-intent (see mouseleave handler below).
         };
 
         checkStatus();
@@ -115,10 +105,9 @@ export default function NewsletterPopup() {
         };
     }, []);
 
-    // --- UBIQUITOUS EXIT-INTENT (disabled — bypasses A/B delay timers) ---
+    // --- EXIT-INTENT POPUP ---
     useEffect(() => {
-        // TODO: re-enable once exit-intent is gated behind A/B delay
-        return;
+        // Show first unseen popup when user moves to leave the page
 
         const excludedPaths = ["/vip", "/login", "/register", "/activate", "/forgot-password", "/reset-password"];
         if (excludedPaths.includes(pathname)) return;
@@ -270,14 +259,14 @@ export default function NewsletterPopup() {
                             </div>
 
                             <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">
-                                {activePopup === "shipping" ? "Waitlist Exclusive" : activePopup === "discount" ? "Limited Time Offer" : "Free Resource"}
+                                {activePopup === "shipping" ? "Waitlist Exclusive" : activePopup === "discount" ? "Founder's Batch" : "Free Resource"}
                             </p>
 
                             <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
                                 {activePopup === "shipping"
                                     ? "Unlock Free Global Shipping."
                                     : activePopup === "discount"
-                                        ? "Save $300 on Your DreamPlay."
+                                        ? "Lock in Founder's Pricing."
                                         : "Are standard keys holding you back?"}
                             </h2>
 
@@ -285,7 +274,7 @@ export default function NewsletterPopup() {
                                 {activePopup === "shipping"
                                     ? "Join our VIP list and get a Free Shipping Pass applied to your next reservation. Limited availability."
                                     : activePopup === "discount"
-                                        ? "Enter your email to unlock an exclusive $300 discount code for any DreamPlay keyboard or bundle."
+                                        ? "Enter your email to secure early-adopter pricing for the DreamPlay One Founder's Batch, shipping August 2026."
                                         : "Enter your email to instantly download our Hand-Measuring Guide to see exactly which piano size will help you the most."}
                             </p>
                         </div>
@@ -316,7 +305,7 @@ export default function NewsletterPopup() {
                                     : activePopup === "shipping"
                                         ? "Get Free Shipping Pass"
                                         : activePopup === "discount"
-                                            ? "Unlock $300 Off"
+                                            ? "Secure My Spot"
                                             : "Get Free PDF Guide"}
                             </button>
 
