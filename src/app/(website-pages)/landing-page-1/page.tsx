@@ -2,6 +2,7 @@
 
 import { Playfair_Display, Inter } from "next/font/google"
 import { useState, useEffect, useRef } from "react"
+import { SpecialOfferHeader } from "@/components/special-offer/header"
 import {
     Check,
     Star,
@@ -304,34 +305,11 @@ export default function LandingPage1() {
             className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-stone-900`}
         >
             {/* ═══════════════════════════════════════════════════════
-                HEADER — Minimal (no nav links)
+                HEADER — SpecialOfferHeader (same as other pages)
             ═══════════════════════════════════════════════════════ */}
-            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200/60">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-                    <div
-                        className="text-2xl font-bold tracking-tight"
-                        style={{ fontFamily: "var(--font-playfair)" }}
-                    >
-                        DreamPlay
-                    </div>
-                    <button
-                        onClick={scrollToBuyBox}
-                        className="bg-stone-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-stone-700 transition-colors cursor-pointer"
-                    >
-                        Reserve Now
-                    </button>
-                </div>
-            </header>
-
-            {/* ═══════════════════════════════════════════════════
-                0. ANNOUNCEMENT BAR
-            ═══════════════════════════════════════════════════ */}
-            <div className="bg-stone-900 text-white text-center text-sm font-medium py-2.5 px-4">
-                <span className="inline-flex items-center gap-2 flex-wrap justify-center">
-                    <span className="animate-pulse text-amber-400">🔒</span>
-                    Founder&apos;s Batch — <strong>83% Claimed</strong> | Only <strong>42 Allocations</strong> Remaining
-                </span>
-            </div>
+            <SpecialOfferHeader forceOpaque />
+            {/* Spacer for fixed header */}
+            <div className="h-[100px]" />
 
             <main>
                 {/* ═══════════════════════════════════════════════════
