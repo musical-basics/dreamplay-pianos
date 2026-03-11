@@ -540,11 +540,11 @@ export default function LandingPage1() {
                                     key={i}
                                     className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
                                 >
-                                    <div className="text-3xl mb-4">
+                                    <div className="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center mb-4 border border-stone-200">
                                         {i < 3 ? (
-                                            <item.icon className="w-10 h-10 text-stone-700 stroke-[1.5]" />
+                                            <item.icon className="w-7 h-7 text-stone-700 stroke-[1.5]" />
                                         ) : (
-                                            item.emoji
+                                            <span className="text-2xl">{item.emoji}</span>
                                         )}
                                     </div>
                                     <h3 className="font-bold text-stone-900 mb-2">
