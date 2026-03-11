@@ -1,8 +1,21 @@
 "use client"
 
 import Image from "next/image"
+import { useState } from "react"
 
 export function HandComparisonSection() {
+    const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
+    const [lightboxAlt, setLightboxAlt] = useState("")
+
+    const openLightbox = (src: string, alt: string) => {
+        setLightboxSrc(src)
+        setLightboxAlt(alt)
+    }
+
+    const closeLightbox = () => {
+        setLightboxSrc(null)
+    }
+
     return (
         <section className="relative bg-white">
             <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
@@ -20,8 +33,11 @@ export function HandComparisonSection() {
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                    {/* Standard keyboard - strain → How It Works */}
-                    <a href="/how-it-works" className="relative group overflow-hidden block transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-sm">
+                    {/* Standard keyboard - strain */}
+                    <button
+                        onClick={() => openLightbox("/images/Biomechanical Impact on Small Hands.png", "Biomechanical Impact of Key Width on Small Hands")}
+                        className="relative group overflow-hidden block transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-sm cursor-zoom-in text-left"
+                    >
                         <div className="relative aspect-[4/3] overflow-hidden">
                             <Image
                                 src="/images/Biomechanical Impact on Small Hands.png"
@@ -46,10 +62,13 @@ export function HandComparisonSection() {
                                 Fingers flatten, tendons overextend, wrists twist. This is the #1 cause of piano-related injuries.
                             </p>
                         </div>
-                    </a>
+                    </button>
 
-                    {/* DreamPlay keyboard - relaxed → Product Information */}
-                    <a href="/product-information" className="relative group overflow-hidden block transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-sm">
+                    {/* DreamPlay keyboard - relaxed */}
+                    <button
+                        onClick={() => openLightbox("/images/DreamPlay Piano Hands.jpg", "Hand relaxed and naturally arched on DreamPlay keyboard")}
+                        className="relative group overflow-hidden block transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-sm cursor-zoom-in text-left"
+                    >
                         <div className="relative aspect-[4/3] overflow-hidden">
                             <Image
                                 src="/images/DreamPlay Piano Hands.jpg"
@@ -74,9 +93,35 @@ export function HandComparisonSection() {
                                 Fingers stay curved, wrists neutral. Play for hours without fatigue or pain.
                             </p>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
+
+            {/* Lightbox overlay */}
+            {lightboxSrc && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out"
+                    onClick={closeLightbox}
+                >
+                    <button
+                        onClick={closeLightbox}
+                        className="absolute top-4 right-4 text-white/70 hover:text-white text-3xl font-light z-10 w-10 h-10 flex items-center justify-center"
+                        aria-label="Close"
+                    >
+                        ×
+                    </button>
+                    <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+                        <Image
+                            src={lightboxSrc}
+                            alt={lightboxAlt}
+                            width={1600}
+                            height={1200}
+                            className="object-contain max-h-[90vh] w-auto rounded-lg"
+                            quality={95}
+                        />
+                    </div>
+                </div>
+            )}
         </section>
     )
 }
