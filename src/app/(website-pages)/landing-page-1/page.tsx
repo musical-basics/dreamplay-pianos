@@ -981,7 +981,7 @@ export default function LandingPage1() {
                     </div>
                     <button
                         onClick={scrollToBuyBox}
-                        className="flex-shrink-0 bg-[#111111] text-white px-6 py-3 text-sm font-bold tracking-widest uppercase border-2 border-[#111111] hover:bg-white hover:text-[#111111] transition-all duration-200 cursor-pointer"
+                        className="flex-shrink-0 bg-[#111111] text-white px-6 py-3 text-sm font-bold tracking-widest uppercase border-2 border-[#111111] hover:bg-transparent hover:text-[#111111] transition-all duration-200 cursor-pointer"
                     >
                         Reserve Now
                     </button>
