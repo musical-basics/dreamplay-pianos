@@ -1,19 +1,20 @@
 "use client"
 
 import { Playfair_Display, Inter } from "next/font/google"
-import Footer from "@/components/Footer"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import {
     Check,
     Star,
     ShieldCheck,
-    Truck,
-    Undo2,
+    Lock,
+    CalendarDays,
     ChevronDown,
     X,
+    Zap,
+    Hand,
     Brain,
-    Ruler,
-    Heart,
+    Music,
+    ArrowRight,
 } from "lucide-react"
 
 const playfair = Playfair_Display({
@@ -26,164 +27,294 @@ const inter = Inter({
     variable: "--font-inter",
 })
 
-/* ---------- DATA ---------- */
+/* ─────────────────────────────────────────────
+   DATA
+   ───────────────────────────────────────────── */
 
-const BENEFITS = [
-    "Relaxed reach — play a 10th comfortably",
-    "Zero strain on fast passages & big jumps",
-    "Built specifically for your hand size",
-]
-
-const BUNDLES = [
+const GALLERY_IMAGES = [
     {
-        qty: "73‑key",
-        label: "Portable Model",
-        price: "$1,899",
-        compare: "$2,199",
-        badge: null,
+        src: "https://a.storyblok.com/f/256972/4500x3000/1e07cbca12/piano_2.png/m/1000x0",
+        alt: "DreamPlay One — Front View",
     },
     {
-        qty: "88‑key",
-        label: "Most Popular",
-        price: "$2,499",
-        compare: "$2,799",
-        badge: "Most Popular",
+        src: "/images/DS6.0-Black-1-p-1080.png",
+        alt: "DreamPlay One DS6.0 — Side Angle",
     },
     {
-        qty: "88‑key Studio",
-        label: "Best Value",
-        price: "$2,999",
-        compare: "$3,499",
-        badge: "Best Value",
+        src: "/images/DS5.5-White-p-1080.png",
+        alt: "DreamPlay One DS5.5 — White Model",
+    },
+    {
+        src: "/images/DSDS6.0-Straightened-1-1024x788.jpg",
+        alt: "DreamPlay One DS6.0 — In Studio",
     },
 ]
 
-const TRUST_ICONS = [
-    { icon: ShieldCheck, label: "10‑Year Warranty" },
-    { icon: Undo2, label: "30‑Day Returns" },
-    { icon: Truck, label: "Free Shipping" },
+const TRUST_BADGES = [
+    { icon: ShieldCheck, label: "100% Refundable Deposit Anytime" },
+    { icon: Lock, label: "Funds Held Securely in Escrow" },
+    { icon: CalendarDays, label: "Guaranteed Monthly Updates" },
 ]
 
-const REVIEWS = [
+const ACCORDIONS = [
     {
-        name: "Sarah J.",
-        text: '"I can finally play Rachmaninoff without feeling like my hand is tearing apart. The 5.5‑inch octave is life‑changing."',
+        title: "Why Narrower Keys?",
+        content:
+            "Standard pianos use a 6.5-inch octave, a size locked in since the 1880s for large male hands. The DS5.5® (5.5-inch octave) and DS6.0® (6.0-inch octave) standards are scientifically sized to let smaller and average-sized hands play with a naturally relaxed arch — eliminating overstretching, pain, and injury.",
     },
     {
-        name: "David M.",
-        text: '"My students progress so much faster when they aren\'t fighting the instrument. Every studio needs a DreamPlay."',
+        title: "What's in the Box?",
+        content:
+            "DreamPlay One keyboard (73 or 88 keys), adjustable stand, sustain pedal, USB-C MIDI cable, power adapter, and a quick-start guide. Choose between DS5.5 or DS6.0 sizing at checkout.",
     },
     {
-        name: "Elena R.",
-        text: '"The build quality is incredible, but the narrower keys are the real magic. My tendinitis disappeared in weeks."',
+        title: "The Pre-Order Promise",
+        content:
+            "DreamPlay One is currently in the final design stage — what you see are production-intent renderings. Tooling begins shortly and you will receive monthly backstage photo and video updates showing your piano being built. Your deposit is 100% refundable at any time, no questions asked.",
+    },
+    {
+        title: "90-Day Home Trial",
+        content:
+            "Once your DreamPlay One arrives, you have a full 90 days to play it in your own home. If you are not completely satisfied for any reason, we will arrange free return shipping and issue a full refund. We also offer free exchanges if you'd like to try the other key size.",
     },
 ]
 
-const FAQS = [
+const PAIN_POINTS = [
+    {
+        icon: Zap,
+        emoji: "💢",
+        title: "Causes Active Pain",
+        desc: "86% of university piano majors experience pain or injury from overstretching (ulnar deviation).",
+    },
+    {
+        icon: Hand,
+        emoji: "✋",
+        title: "Unfair Advantage",
+        desc: "Standard 6.5\" octaves were built for massive male hands from the 1880s.",
+    },
     {
         icon: Brain,
-        q: "Why DreamPlay One Is Different",
-        a: "Most keyboards force every hand size onto the same 6.5‑inch octave, causing tension, missed notes, and injury. DreamPlay One offers scientifically‑sized DS5.5® and DS6.0® standards so you play with a naturally relaxed hand — no compromise.",
+        emoji: "🧠",
+        title: "Cognitive Overload",
+        desc: "You spend 90% of your time practicing \"the stretch\" instead of the music.",
     },
     {
-        icon: Ruler,
-        q: "What's the difference between DS5.5 and DS6.0?",
-        a: "DS5.5 features a 5.5‑inch octave span ideal for smaller hands. DS6.0 offers a 6.0‑inch octave for average‑sized hands wanting improved comfort. Use our online hand‑size guide to choose.",
-    },
-    {
-        icon: Heart,
-        q: "Will I have trouble adapting?",
-        a: "Most pianists adapt within minutes. Playing on narrower keys can actually improve your geographic awareness when you return to a standard keyboard.",
+        icon: Music,
+        emoji: "🎼",
+        title: "Limits Repertoire",
+        desc: "Late-Romantic pieces (Chopin, Rachmaninoff) become impossibly frustrating to reach.",
     },
 ]
 
-const COMPARISON = [
-    ["Ergonomic Key Width", false, true],
-    ["Reduced Injury Risk", false, true],
-    ["Premium Wooden Keys", true, true],
-    ["MIDI / USB‑C Output", true, true],
-    ["10‑Year Warranty", false, true],
-    ["Multiple Key Sizes", false, true],
-] as const
+const COMPARISON_ROWS = [
+    {
+        feature: "Reach a 10th comfortably",
+        dream: true,
+        standard: false,
+        note: "",
+        stdNote: "Not for 87% of women",
+    },
+    {
+        feature: "Maintains natural hand arch",
+        dream: true,
+        standard: false,
+        note: "",
+        stdNote: "Forces flat-finger stretching",
+    },
+    {
+        feature: "Eliminates ulnar deviation",
+        dream: true,
+        standard: false,
+        note: "",
+        stdNote: "Causes wrist strain",
+    },
+    {
+        feature: "Biologically accurate sizing",
+        dream: true,
+        standard: false,
+        note: "DS5.5 & DS6.0",
+        stdNote: "One-size-fits-all",
+    },
+]
 
-/* ---------- COMPONENT ---------- */
+const STATS = [
+    {
+        value: "87.1%",
+        label: "Of adult women possess a hand span too small for standard keyboards.",
+    },
+    {
+        value: "10–15 min",
+        label: "The average time it takes a pianist's brain to perfectly adapt to our DS6.0 size.",
+    },
+    {
+        value: "100%",
+        label: "Of children are currently learning on instruments that are biologically too large for them.",
+    },
+]
+
+const EXPERT_TESTIMONIALS = [
+    {
+        name: "Barbara Lister-Sink, Ed.D.",
+        role: "Salem College School of Music, Director of Graduate Music Program",
+        quote: "I cannot begin to describe the career-changing, and even life-changing, benefits our students have reaped from having these instruments to practice on daily. Their first response though was, 'Why did it take so long? Why did we have to suffer so unnecessarily?'",
+    },
+    {
+        name: "Claudia Wang",
+        role: "Master's Student, Southern Methodist University (SMU)",
+        quote: "Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.",
+    },
+    {
+        name: "Hubert Ness",
+        role: "Professor of Jazz Piano, HMDK University of Stuttgart",
+        quote: "Another surprising effect for me was that playing this [DS6.0] also has a positive effect when you go back to the normal keyboard.",
+    },
+]
+
+const TIMELINE_STEPS = [
+    {
+        step: "1",
+        title: "Reserve",
+        desc: "Lock in your discounted Founder's price today with a fully refundable $99 deposit.",
+        icon: "🔒",
+    },
+    {
+        step: "2",
+        title: "Build",
+        desc: "We tool the steel and assemble the tech. You get monthly backstage photo & video updates.",
+        icon: "🏗️",
+    },
+    {
+        step: "3",
+        title: "Ship",
+        desc: "Pay the remaining balance only when your piano is boxed and ready to ship — August 2026.",
+        icon: "📦",
+    },
+]
+
+/* ─────────────────────────────────────────────
+   COMPONENT
+   ───────────────────────────────────────────── */
 
 export default function LandingPage1() {
-    const [selectedBundle, setSelectedBundle] = useState(1)
+    const [activeImage, setActiveImage] = useState(0)
+    const [activeTestimonial, setActiveTestimonial] = useState(0)
     const [showSticky, setShowSticky] = useState(false)
-    const [activeReview, setActiveReview] = useState(0)
+    const [openAccordion, setOpenAccordion] = useState<number | null>(null)
+    const buyBoxRef = useRef<HTMLElement>(null)
 
     /* Sticky bar on scroll */
     useEffect(() => {
-        const onScroll = () => setShowSticky(window.scrollY > 600)
+        const onScroll = () => setShowSticky(window.scrollY > 700)
         window.addEventListener("scroll", onScroll)
         return () => window.removeEventListener("scroll", onScroll)
     }, [])
 
-    /* Auto‑rotate reviews */
+    /* Auto-rotate testimonials */
     useEffect(() => {
         const t = setInterval(
-            () => setActiveReview((p) => (p + 1) % REVIEWS.length),
-            5000
+            () =>
+                setActiveTestimonial(
+                    (p) => (p + 1) % EXPERT_TESTIMONIALS.length
+                ),
+            6000
         )
         return () => clearInterval(t)
     }, [])
 
+    const scrollToBuyBox = () => {
+        buyBoxRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
     return (
         <div
-            className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-stone-50 text-stone-900`}
+            className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-white text-stone-900`}
         >
-            {/* ── ANNOUNCEMENT BAR ── */}
-            <div className="bg-black text-white text-center py-2.5 text-sm font-semibold tracking-wider">
-                <span className="text-amber-400">NEW RELEASE</span> — Get your
-                DreamPlay One with{" "}
-                <span className="underline decoration-amber-400">$300 off</span>
-            </div>
-
-            {/* ── HEADER ── */}
-            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200">
+            {/* ═══════════════════════════════════════════════════════
+                HEADER — Minimal (no nav links)
+            ═══════════════════════════════════════════════════════ */}
+            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200/60">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
                     <div
-                        className="font-serif text-2xl font-bold tracking-tight"
+                        className="text-2xl font-bold tracking-tight"
                         style={{ fontFamily: "var(--font-playfair)" }}
                     >
                         DreamPlay
                     </div>
-                    <a
-                        href="#pricing"
-                        className="bg-black text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-stone-800 transition-colors"
+                    <button
+                        onClick={scrollToBuyBox}
+                        className="bg-stone-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-stone-700 transition-colors cursor-pointer"
                     >
-                        Get Yours Now
-                    </a>
+                        Reserve Now
+                    </button>
                 </div>
             </header>
 
             <main>
                 {/* ═══════════════════════════════════════════════════
-                    HERO  (NightSeal‑style PDP split layout)
+                    1. ABOVE-THE-FOLD BUY BOX
                 ═══════════════════════════════════════════════════ */}
-                <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16 grid md:grid-cols-2 gap-10 md:gap-14 items-start">
-                    {/* Left: Product image */}
-                    <div className="flex justify-center">
-                        <img
-                            src="https://a.storyblok.com/f/256972/4500x3000/1e07cbca12/piano_2.png/m/1000x0"
-                            alt="DreamPlay One Keyboard"
-                            className="w-full max-w-lg rounded-2xl shadow-xl object-cover aspect-[4/3]"
-                        />
+                <section
+                    ref={buyBoxRef}
+                    className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-14 grid md:grid-cols-2 gap-8 md:gap-14 items-start"
+                >
+                    {/* Left: Media Gallery */}
+                    <div className="space-y-4">
+                        {/* Main image */}
+                        <div className="relative overflow-hidden rounded-2xl bg-stone-100 aspect-[4/3]">
+                            <img
+                                src={GALLERY_IMAGES[activeImage].src}
+                                alt={GALLERY_IMAGES[activeImage].alt}
+                                className="w-full h-full object-cover transition-opacity duration-300"
+                            />
+                            {/* Feature callouts on first image */}
+                            {activeImage === 0 && (
+                                <>
+                                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm text-white text-[11px] font-semibold px-3 py-1.5 rounded-full">
+                                        15/16th Scale Keys
+                                    </div>
+                                    <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm text-white text-[11px] font-semibold px-3 py-1.5 rounded-full">
+                                        Bluetooth MIDI
+                                    </div>
+                                    <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white text-[11px] font-semibold px-3 py-1.5 rounded-full">
+                                        Premium Weighted Action
+                                    </div>
+                                </>
+                            )}
+                        </div>
+
+                        {/* Thumbnail row */}
+                        <div className="flex gap-2">
+                            {GALLERY_IMAGES.map((img, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setActiveImage(i)}
+                                    className={`flex-1 aspect-square rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${activeImage === i
+                                            ? "border-stone-900 shadow-md"
+                                            : "border-transparent opacity-60 hover:opacity-100"
+                                        }`}
+                                >
+                                    <img
+                                        src={img.src}
+                                        alt={img.alt}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Right: Product details */}
+                    {/* Right: Product Details */}
                     <div className="space-y-5">
-                        {/* Stars */}
-                        <div className="flex items-center gap-1">
+                        {/* Social proof stars */}
+                        <div className="flex items-center gap-1 flex-wrap">
                             {[1, 2, 3, 4, 5].map((i) => (
                                 <Star
                                     key={i}
-                                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                                    className="w-4 h-4 fill-amber-400 text-amber-400"
                                 />
                             ))}
                             <span className="text-stone-500 text-sm ml-2">
-                                4.9/5 from 300+ Pianists
+                                Backed by 208 Founders • $124,000+ Reserved
                             </span>
                         </div>
 
@@ -194,91 +325,100 @@ export default function LandingPage1() {
                         >
                             DreamPlay One
                         </h1>
+                        <p className="text-stone-500 text-sm -mt-2">
+                            DS5.5® & DS6.0® — Scientifically Sized Keys
+                        </p>
 
-                        {/* Price */}
-                        <div className="flex items-end gap-3">
-                            <span className="text-3xl font-black">
-                                {BUNDLES[selectedBundle].price}
-                            </span>
-                            <span className="text-stone-400 line-through text-lg mb-0.5">
-                                {BUNDLES[selectedBundle].compare}
-                            </span>
-                            <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded-full mb-1">
-                                SAVE $300
-                            </span>
+                        {/* Pricing */}
+                        <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-1">
+                            <div className="flex items-baseline gap-3 flex-wrap">
+                                <span className="text-3xl font-black">
+                                    $99
+                                </span>
+                                <span className="text-sm font-semibold text-stone-600">
+                                    Refundable Deposit
+                                </span>
+                            </div>
+                            <p className="text-sm text-stone-500">
+                                Locks in{" "}
+                                <span className="font-bold text-stone-800">
+                                    $1,099 Founder&apos;s Price
+                                </span>
+                                <span className="line-through text-stone-400 ml-2">
+                                    $1,499 MSRP
+                                </span>
+                            </p>
                         </div>
 
-                        {/* Benefit checks */}
-                        <div className="space-y-2.5">
-                            {BENEFITS.map((b, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-center gap-3 bg-stone-100 rounded-lg px-4 py-2.5 text-sm"
-                                >
-                                    <Check className="w-5 h-5 text-emerald-600 shrink-0" />
-                                    <span>{b}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Bundle selector */}
-                        <div className="pt-2 space-y-3">
-                            <h3 className="text-xs font-bold tracking-widest text-stone-400 uppercase">
-                                Choose Your Model
-                            </h3>
-                            {BUNDLES.map((b, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setSelectedBundle(i)}
-                                    className={`w-full flex items-center justify-between rounded-xl border-2 px-4 py-3 transition-all text-left relative ${selectedBundle === i
-                                            ? "border-black bg-white shadow-sm"
-                                            : "border-stone-200 bg-stone-50 hover:border-stone-300"
-                                        }`}
-                                >
-                                    {b.badge && (
-                                        <span className="absolute -top-2.5 left-4 bg-black text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                                            {b.badge}
-                                        </span>
-                                    )}
-                                    <div>
-                                        <span className="font-bold text-sm">
-                                            {b.qty}
-                                        </span>
-                                        <span className="text-stone-500 text-sm ml-2">
-                                            {b.label}
-                                        </span>
-                                    </div>
-                                    <div className="text-right">
-                                        <span className="font-bold">
-                                            {b.price}
-                                        </span>
-                                        <span className="text-stone-400 line-through text-sm ml-2">
-                                            {b.compare}
-                                        </span>
-                                    </div>
-                                </button>
-                            ))}
+                        {/* Urgency */}
+                        <div className="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+                            <div className="relative flex h-3 w-3">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                            </div>
+                            <p className="text-sm text-amber-900 font-medium">
+                                Batch 1 Delivery (August 2026) is{" "}
+                                <strong>83% Full</strong>. Only{" "}
+                                <strong>42 allocations</strong> remaining.
+                            </p>
                         </div>
 
                         {/* CTA */}
                         <a
                             href="/checkout"
-                            className="block w-full text-center bg-black text-white py-4 rounded-full text-lg font-bold hover:bg-stone-800 transition-colors shadow-lg shadow-black/15 mt-2"
+                            className="block w-full text-center bg-stone-900 text-white py-4 rounded-full text-lg font-bold hover:bg-stone-700 transition-colors shadow-lg shadow-stone-900/20"
                         >
-                            Add to Cart — {BUNDLES[selectedBundle].price}
+                            Secure My August Delivery
+                            <ArrowRight className="inline-block ml-2 w-5 h-5" />
                         </a>
 
-                        {/* Trust icons row */}
-                        <div className="flex items-center justify-center gap-8 pt-2">
-                            {TRUST_ICONS.map(({ icon: Icon, label }, i) => (
+                        {/* Trust badges */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                            {TRUST_BADGES.map(({ icon: Icon, label }, i) => (
                                 <div
                                     key={i}
                                     className="flex items-center gap-2 text-stone-500"
                                 >
-                                    <Icon className="w-5 h-5 text-amber-600" />
-                                    <span className="text-xs font-semibold">
+                                    <Icon className="w-4 h-4 text-emerald-600 shrink-0" />
+                                    <span className="text-xs font-medium leading-tight">
                                         {label}
                                     </span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Accordions */}
+                        <div className="divide-y divide-stone-200 border-t border-b border-stone-200 mt-4">
+                            {ACCORDIONS.map((item, i) => (
+                                <div key={i}>
+                                    <button
+                                        onClick={() =>
+                                            setOpenAccordion(
+                                                openAccordion === i ? null : i
+                                            )
+                                        }
+                                        className="w-full flex items-center justify-between py-4 text-left cursor-pointer group"
+                                    >
+                                        <span className="text-sm font-semibold text-stone-800 group-hover:text-stone-600 transition-colors">
+                                            {item.title}
+                                        </span>
+                                        <ChevronDown
+                                            className={`w-4 h-4 text-stone-400 transition-transform duration-300 ${openAccordion === i
+                                                    ? "rotate-180"
+                                                    : ""
+                                                }`}
+                                        />
+                                    </button>
+                                    <div
+                                        className={`overflow-hidden transition-all duration-300 ${openAccordion === i
+                                                ? "max-h-60 pb-4"
+                                                : "max-h-0"
+                                            }`}
+                                    >
+                                        <p className="text-sm text-stone-500 leading-relaxed pr-4">
+                                            {item.content}
+                                        </p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -286,35 +426,201 @@ export default function LandingPage1() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════
-                    TESTIMONIAL CAROUSEL  (NightSeal review slider)
+                    2. PROBLEM AGITATION ICON BAR
                 ═══════════════════════════════════════════════════ */}
-                <section className="bg-stone-100 py-10">
-                    <div className="max-w-2xl mx-auto px-4 text-center">
-                        <div className="bg-white rounded-2xl p-8 shadow-sm min-h-[160px] flex flex-col items-center justify-center relative">
-                            <div className="flex text-yellow-400 mb-4">
+                <section className="bg-stone-50 border-y border-stone-200 py-16 px-4">
+                    <div className="max-w-5xl mx-auto">
+                        <h2
+                            className="text-2xl md:text-3xl font-bold text-center mb-4"
+                            style={{ fontFamily: "var(--font-playfair)" }}
+                        >
+                            The Problem With &ldquo;Standard&rdquo; Pianos
+                        </h2>
+                        <p className="text-center text-stone-500 text-sm mb-12 max-w-xl mx-auto">
+                            For over a century, one key size has dominated —
+                            regardless of the pianist&apos;s hand.
+                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {PAIN_POINTS.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
+                                >
+                                    <div className="text-3xl mb-4">
+                                        {item.emoji}
+                                    </div>
+                                    <h3 className="font-bold text-stone-900 mb-2">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-sm text-stone-500 leading-relaxed">
+                                        {item.desc}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ═══════════════════════════════════════════════════
+                    3. COMPARISON TABLE
+                ═══════════════════════════════════════════════════ */}
+                <section className="py-20 px-4 max-w-4xl mx-auto">
+                    <h2
+                        className="text-2xl md:text-3xl font-bold text-center mb-4"
+                        style={{ fontFamily: "var(--font-playfair)" }}
+                    >
+                        Why DreamPlay Unlocks Your Potential
+                    </h2>
+                    <p className="text-center text-stone-500 text-sm mb-12 max-w-lg mx-auto">
+                        A side-by-side look at what changes when the keys
+                        finally fit your hands.
+                    </p>
+
+                    <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                        {/* Table header */}
+                        <div className="grid grid-cols-3 p-4 bg-stone-50 border-b border-stone-100 text-sm font-bold">
+                            <div className="text-stone-500">Feature</div>
+                            <div className="text-center text-emerald-700">
+                                DreamPlay One
+                            </div>
+                            <div className="text-center text-stone-400">
+                                Standard Piano
+                            </div>
+                        </div>
+
+                        {COMPARISON_ROWS.map((row, i) => (
+                            <div
+                                key={i}
+                                className={`grid grid-cols-3 px-4 py-4 text-sm items-center ${i % 2 === 0 ? "bg-white" : "bg-stone-50/50"
+                                    }`}
+                            >
+                                <div className="font-medium text-stone-700 pr-2">
+                                    {row.feature}
+                                </div>
+                                <div className="flex flex-col items-center gap-0.5">
+                                    <Check className="text-emerald-600 w-5 h-5" />
+                                    {row.note && (
+                                        <span className="text-[11px] text-emerald-600/70">
+                                            {row.note}
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="flex flex-col items-center gap-0.5">
+                                    <X className="text-stone-300 w-5 h-5" />
+                                    {row.stdNote && (
+                                        <span className="text-[11px] text-stone-400 text-center">
+                                            {row.stdNote}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ═══════════════════════════════════════════════════
+                    4. DATA-BACKED RESULTS
+                ═══════════════════════════════════════════════════ */}
+                <section className="bg-stone-900 text-white py-20 px-4">
+                    <div className="max-w-5xl mx-auto">
+                        <h2
+                            className="text-2xl md:text-3xl font-bold text-center mb-4"
+                            style={{ fontFamily: "var(--font-playfair)" }}
+                        >
+                            The Science is Clear.
+                        </h2>
+                        <p className="text-center text-stone-400 text-sm mb-14 max-w-lg mx-auto">
+                            Decades of peer-reviewed research confirm what
+                            pianists have always felt.
+                        </p>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {STATS.map((s, i) => (
+                                <div
+                                    key={i}
+                                    className="text-center bg-stone-800/60 rounded-2xl p-8 border border-stone-700/50"
+                                >
+                                    <div
+                                        className="text-5xl md:text-6xl font-black text-amber-400 mb-4"
+                                        style={{
+                                            fontFamily: "var(--font-playfair)",
+                                        }}
+                                    >
+                                        {s.value}
+                                    </div>
+                                    <p className="text-stone-300 text-sm leading-relaxed">
+                                        {s.label}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ═══════════════════════════════════════════════════
+                    5. EXPERT TESTIMONIAL SLIDER
+                ═══════════════════════════════════════════════════ */}
+                <section className="py-20 px-4 bg-stone-50">
+                    <div className="max-w-3xl mx-auto">
+                        <h2
+                            className="text-2xl md:text-3xl font-bold text-center mb-14"
+                            style={{ fontFamily: "var(--font-playfair)" }}
+                        >
+                            What the Experts Say
+                        </h2>
+
+                        {/* Active card */}
+                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-stone-200 min-h-[260px] flex flex-col items-center justify-center text-center relative">
+                            {/* Stars */}
+                            <div className="flex gap-0.5 mb-6">
                                 {[1, 2, 3, 4, 5].map((s) => (
                                     <Star
                                         key={s}
-                                        className="w-4 h-4 fill-current"
+                                        className="w-5 h-5 fill-amber-400 text-amber-400"
                                     />
                                 ))}
                             </div>
-                            <p className="text-stone-700 italic text-lg leading-relaxed mb-4 transition-opacity duration-300">
-                                {REVIEWS[activeReview].text}
-                            </p>
-                            <p className="text-stone-900 font-bold text-sm">
-                                {REVIEWS[activeReview].name}
-                            </p>
+
+                            <blockquote
+                                className="text-stone-700 text-lg md:text-xl leading-relaxed mb-6 max-w-2xl italic transition-opacity duration-500"
+                                style={{
+                                    fontFamily: "var(--font-playfair)",
+                                }}
+                            >
+                                &ldquo;
+                                {
+                                    EXPERT_TESTIMONIALS[activeTestimonial]
+                                        .quote
+                                }
+                                &rdquo;
+                            </blockquote>
+
+                            <div>
+                                <p className="font-bold text-stone-900 text-sm">
+                                    {
+                                        EXPERT_TESTIMONIALS[activeTestimonial]
+                                            .name
+                                    }
+                                </p>
+                                <p className="text-stone-500 text-xs mt-1">
+                                    {
+                                        EXPERT_TESTIMONIALS[activeTestimonial]
+                                            .role
+                                    }
+                                </p>
+                            </div>
                         </div>
+
                         {/* Dots */}
-                        <div className="flex justify-center gap-2 mt-5">
-                            {REVIEWS.map((_, i) => (
+                        <div className="flex justify-center gap-2 mt-6">
+                            {EXPERT_TESTIMONIALS.map((_, i) => (
                                 <button
                                     key={i}
-                                    onClick={() => setActiveReview(i)}
-                                    className={`w-2 h-2 rounded-full transition-all ${activeReview === i
+                                    onClick={() => setActiveTestimonial(i)}
+                                    className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${activeTestimonial === i
                                             ? "bg-stone-800 scale-125"
-                                            : "bg-stone-300"
+                                            : "bg-stone-300 hover:bg-stone-400"
                                         }`}
                                 />
                             ))}
@@ -323,364 +629,100 @@ export default function LandingPage1() {
                 </section>
 
                 {/* ═══════════════════════════════════════════════════
-                    PROBLEM / SOLUTION
+                    6. TRANSPARENCY / HOW IT WORKS TIMELINE
                 ═══════════════════════════════════════════════════ */}
-                <section className="py-20 px-4 max-w-5xl mx-auto">
-                    <div className="text-center mb-14">
+                <section className="py-20 px-4">
+                    <div className="max-w-4xl mx-auto">
                         <h2
-                            className="text-3xl md:text-4xl font-bold mb-4"
+                            className="text-2xl md:text-3xl font-bold text-center mb-4"
                             style={{ fontFamily: "var(--font-playfair)" }}
                         >
-                            Why standard keyboards hold you back.
+                            How Pre-Ordering Works
                         </h2>
-                        <p className="text-lg text-stone-500 max-w-2xl mx-auto">
-                            For over a century, the 6.5‑inch octave has favored
-                            large hands. If you have average or smaller hands,
-                            you're fighting the instrument — not just learning the
-                            music.
+                        <p className="text-center text-stone-500 text-sm mb-14 max-w-lg mx-auto">
+                            Transparent, simple, and risk-free. You&apos;re in
+                            control every step of the way.
                         </p>
-                    </div>
 
-                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        {/* Standard */}
-                        <div className="bg-red-50 p-8 rounded-2xl border border-red-100">
-                            <h3 className="text-xl font-bold text-red-900 mb-6 flex items-center gap-2">
-                                <span className="bg-red-200 text-red-700 p-1.5 rounded-full">
-                                    <X className="w-5 h-5" />
-                                </span>
-                                Standard Keys
-                            </h3>
-                            <ul className="space-y-4">
-                                {[
-                                    "Tension and pain reaching 8ths or 9ths",
-                                    "Missed notes & reduced accuracy during jumps",
-                                    "Increased risk of piano‑related injuries (RSI)",
-                                ].map((t, i) => (
-                                    <li
-                                        key={i}
-                                        className="flex items-start gap-3 text-red-800/80"
-                                    >
-                                        <X className="w-5 h-5 shrink-0 mt-0.5 text-red-400" />
-                                        <span>{t}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        {/* DreamPlay */}
-                        <div className="bg-emerald-50 p-8 rounded-2xl border border-emerald-100">
-                            <h3 className="text-xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
-                                <span className="bg-emerald-200 text-emerald-700 p-1.5 rounded-full">
-                                    <Check className="w-5 h-5" />
-                                </span>
-                                DreamPlay One
-                            </h3>
-                            <ul className="space-y-4">
-                                {[
-                                    "Easily reach a 9th or 10th with a relaxed hand",
-                                    "Improved accuracy & vastly better technical control",
-                                    "Play for hours without tension, fatigue, or pain",
-                                ].map((t, i) => (
-                                    <li
-                                        key={i}
-                                        className="flex items-start gap-3 text-emerald-800/80"
-                                    >
-                                        <Check className="w-5 h-5 shrink-0 mt-0.5 text-emerald-500" />
-                                        <span>{t}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+                        <div className="grid md:grid-cols-3 gap-8 relative">
+                            {/* Connecting line (desktop) */}
+                            <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-0.5 bg-stone-200"></div>
 
-                {/* ═══════════════════════════════════════════════════
-                    HOW IT WORKS
-                ═══════════════════════════════════════════════════ */}
-                <section className="bg-stone-900 text-white py-20 px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="text-center mb-16">
-                            <h2
-                                className="text-3xl md:text-4xl font-bold mb-4"
-                                style={{
-                                    fontFamily: "var(--font-playfair)",
-                                }}
-                            >
-                                Hand‑crafted for your anatomy.
-                            </h2>
-                            <p className="text-lg text-stone-400 max-w-2xl mx-auto">
-                                The DreamPlay One features DS5.5® and DS6.0®
-                                standard sizes, scientifically proven to
-                                accommodate a wider range of hand sizes.
-                            </p>
-                        </div>
-
-                        <div className="grid md:grid-cols-3 gap-10 text-center">
-                            {[
-                                {
-                                    step: "1",
-                                    title: "Measure Your Hand",
-                                    desc: "Use our online size guide to find your ideal keyboard width — 5.5″ or 6.0″ octave.",
-                                },
-                                {
-                                    step: "2",
-                                    title: "Choose Your Model",
-                                    desc: "Select the portable 73‑key or the full 88‑key studio model.",
-                                },
-                                {
-                                    step: "3",
-                                    title: "Play with Freedom",
-                                    desc: "Experience music exactly as the composers intended — without physical limits.",
-                                },
-                            ].map((s, i) => (
+                            {TIMELINE_STEPS.map((s, i) => (
                                 <div
                                     key={i}
-                                    className="flex flex-col items-center"
+                                    className="relative flex flex-col items-center text-center"
                                 >
-                                    <div className="w-16 h-16 bg-stone-800 rounded-full flex items-center justify-center text-2xl font-bold mb-6 ring-2 ring-stone-700">
+                                    <div className="w-24 h-24 bg-stone-100 rounded-2xl flex items-center justify-center text-4xl mb-6 border border-stone-200 relative z-10">
+                                        {s.icon}
+                                    </div>
+                                    <div className="absolute top-4 -left-2 bg-stone-900 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center z-20">
                                         {s.step}
                                     </div>
-                                    <h3 className="text-xl font-bold mb-3">
+                                    <h3
+                                        className="text-lg font-bold mb-2"
+                                        style={{
+                                            fontFamily: "var(--font-playfair)",
+                                        }}
+                                    >
                                         {s.title}
                                     </h3>
-                                    <p className="text-stone-400">{s.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* ═══════════════════════════════════════════════════
-                    COMPARISON TABLE
-                ═══════════════════════════════════════════════════ */}
-                <section className="py-20 px-4 max-w-4xl mx-auto">
-                    <h2
-                        className="text-3xl md:text-4xl font-bold text-center mb-12"
-                        style={{ fontFamily: "var(--font-playfair)" }}
-                    >
-                        The DreamPlay Difference
-                    </h2>
-
-                    <div className="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden">
-                        <div className="grid grid-cols-3 p-5 bg-stone-50 border-b border-stone-100 font-bold text-sm">
-                            <div>Features</div>
-                            <div className="text-center text-stone-400">
-                                Standard
-                            </div>
-                            <div className="text-center text-amber-700">
-                                DreamPlay One
-                            </div>
-                        </div>
-
-                        {COMPARISON.map(([feature, std, dp], i) => (
-                            <div
-                                key={i}
-                                className={`grid grid-cols-3 px-5 py-4 text-sm items-center ${i % 2 === 0 ? "bg-white" : "bg-stone-50/50"
-                                    }`}
-                            >
-                                <div className="font-medium text-stone-700">
-                                    {feature}
-                                </div>
-                                <div className="flex justify-center">
-                                    {std ? (
-                                        <Check className="text-stone-300 w-5 h-5" />
-                                    ) : (
-                                        <X className="text-stone-300 w-5 h-5" />
-                                    )}
-                                </div>
-                                <div className="flex justify-center">
-                                    {dp ? (
-                                        <Check className="text-amber-600 w-6 h-6" />
-                                    ) : (
-                                        <X className="text-stone-300 w-5 h-5" />
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* ═══════════════════════════════════════════════════
-                    MORE TESTIMONIALS
-                ═══════════════════════════════════════════════════ */}
-                <section className="bg-amber-50 py-20 px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <h2
-                            className="text-3xl md:text-4xl font-bold text-center mb-16 text-amber-950"
-                            style={{ fontFamily: "var(--font-playfair)" }}
-                        >
-                            Join hundreds of pianists who upgraded.
-                        </h2>
-
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {[
-                                {
-                                    name: "Sarah J.",
-                                    role: "Concert Pianist",
-                                    quote: "I can finally play Rachmaninoff without feeling like my hand is tearing. The 5.5‑inch octave changed my life.",
-                                },
-                                {
-                                    name: "David M.",
-                                    role: "Piano Teacher",
-                                    quote: "My students progress so much faster when they aren't fighting the instrument. Every studio needs one.",
-                                },
-                                {
-                                    name: "Elena R.",
-                                    role: "Amateur Pianist",
-                                    quote: "The build quality is incredible, but the narrower keys are the real magic. My tendinitis disappeared in weeks.",
-                                },
-                            ].map((r, i) => (
-                                <div
-                                    key={i}
-                                    className="bg-white p-8 rounded-2xl shadow-sm"
-                                >
-                                    <div className="flex text-yellow-400 mb-4">
-                                        {[1, 2, 3, 4, 5].map((s) => (
-                                            <Star
-                                                key={s}
-                                                className="w-4 h-4 fill-current"
-                                            />
-                                        ))}
-                                    </div>
-                                    <h4 className="font-bold text-lg mb-1">
-                                        {r.name}
-                                    </h4>
-                                    <p className="text-sm text-stone-500 mb-4">
-                                        {r.role}
-                                    </p>
-                                    <p className="text-stone-700 italic">
-                                        &ldquo;{r.quote}&rdquo;
+                                    <p className="text-sm text-stone-500 leading-relaxed max-w-xs">
+                                        {s.desc}
                                     </p>
                                 </div>
                             ))}
                         </div>
-                    </div>
-                </section>
 
-                {/* ═══════════════════════════════════════════════════
-                    ACCORDION FAQ  (NightSeal‑style)
-                ═══════════════════════════════════════════════════ */}
-                <section className="py-20 px-4 max-w-3xl mx-auto">
-                    <h2
-                        className="text-3xl md:text-4xl font-bold text-center mb-12"
-                        style={{ fontFamily: "var(--font-playfair)" }}
-                    >
-                        Frequently Asked Questions
-                    </h2>
-                    <div className="divide-y divide-stone-200 border-t border-stone-200">
-                        {FAQS.map((faq, i) => (
-                            <details
-                                key={i}
-                                className="group [&_summary::-webkit-details-marker]:hidden"
+                        {/* Final CTA */}
+                        <div className="text-center mt-16">
+                            <button
+                                onClick={scrollToBuyBox}
+                                className="inline-flex items-center gap-2 bg-stone-900 text-white px-8 py-4 rounded-full text-base font-bold hover:bg-stone-700 transition-colors shadow-lg shadow-stone-900/20 cursor-pointer"
                             >
-                                <summary className="flex cursor-pointer items-center gap-4 py-5 text-stone-900 font-medium select-none">
-                                    <faq.icon className="w-5 h-5 text-amber-600 shrink-0" />
-                                    <span className="flex-1 text-lg">
-                                        {faq.q}
-                                    </span>
-                                    <ChevronDown className="w-5 h-5 text-stone-400 transition-transform duration-300 group-open:rotate-180" />
-                                </summary>
-                                <div className="pb-5 pl-9 pr-4 text-stone-600 leading-relaxed">
-                                    {faq.a}
-                                </div>
-                            </details>
-                        ))}
-                    </div>
-                </section>
-
-                {/* ═══════════════════════════════════════════════════
-                    PRICING CTA
-                ═══════════════════════════════════════════════════ */}
-                <section
-                    id="pricing"
-                    className="bg-stone-900 text-white py-24 px-4"
-                >
-                    <div className="max-w-4xl mx-auto text-center">
-                        <h2
-                            className="text-4xl md:text-5xl font-bold mb-6"
-                            style={{ fontFamily: "var(--font-playfair)" }}
-                        >
-                            Ready to free your hands?
-                        </h2>
-                        <p className="text-xl text-stone-400 mb-10 max-w-2xl mx-auto">
-                            Join the revolution and experience the piano as it
-                            was meant to be played.
-                        </p>
-
-                        <div className="bg-stone-800 rounded-3xl p-8 md:p-12 mb-8 max-w-lg mx-auto border border-stone-700">
-                            <h3 className="text-2xl font-bold text-amber-500 mb-2">
-                                DreamPlay One (88‑key)
-                            </h3>
-                            <div className="flex justify-center items-end gap-3 mb-8">
-                                <span className="text-5xl font-black">
-                                    $2,499
-                                </span>
-                                <span className="text-stone-500 line-through text-xl font-medium mb-1">
-                                    $2,799
-                                </span>
-                            </div>
-
-                            <ul className="text-left space-y-4 mb-10 w-full max-w-sm mx-auto">
-                                {[
-                                    "Premium wooden key action",
-                                    "Choice of DS5.5 or DS6.0",
-                                    "Free worldwide shipping",
-                                    "30‑day money‑back guarantee",
-                                ].map((f, i) => (
-                                    <li
-                                        key={i}
-                                        className="flex items-center gap-3"
-                                    >
-                                        <Check className="text-amber-500 w-5 h-5 shrink-0" />
-                                        {f}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <a
-                                href="/checkout"
-                                className="block w-full bg-white text-black py-4 rounded-full text-lg font-bold hover:bg-amber-500 hover:text-white transition-colors duration-300"
-                            >
-                                Secure Yours Today
-                            </a>
+                                Secure My August Delivery
+                                <ArrowRight className="w-5 h-5" />
+                            </button>
+                            <p className="text-stone-400 text-xs mt-4">
+                                $99 fully refundable deposit • No risk
+                            </p>
                         </div>
-                        <p className="text-stone-500 text-sm flex items-center justify-center gap-2">
-                            <Truck className="w-4 h-4" /> Secure checkout. Ships
-                            within 48 hours.
-                        </p>
                     </div>
                 </section>
             </main>
 
-            {/* ── STICKY ATC BAR  (NightSeal‑style) ── */}
+            {/* ═══════════════════════════════════════════════════
+                7. STICKY MOBILE CTA FOOTER
+            ═══════════════════════════════════════════════════ */}
             <div
-                className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-stone-200 shadow-[0_-4px_20px_rgba(0,0,0,.08)] transition-transform duration-300 ${showSticky ? "translate-y-0" : "translate-y-full"
+                className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-stone-200 shadow-[0_-4px_24px_rgba(0,0,0,.10)] transition-transform duration-300 ${showSticky ? "translate-y-0" : "translate-y-full"
                     }`}
             >
                 <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
                     <div className="hidden sm:block">
-                        <h4 className="font-bold text-sm">DreamPlay One</h4>
+                        <h4 className="font-bold text-sm text-stone-900">
+                            DreamPlay Deposit
+                        </h4>
                         <div className="flex items-center gap-2 text-sm">
-                            <span className="font-bold text-amber-700">
-                                $2,499
+                            <span className="font-black text-stone-900">
+                                $99
                             </span>
-                            <span className="text-stone-400 line-through text-xs">
-                                $2,799
-                            </span>
-                            <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-                                SAVE $300
+                            <span className="text-stone-400 text-xs">
+                                locks in $1,099
                             </span>
                         </div>
                     </div>
-                    <a
-                        href="/checkout"
-                        className="flex-1 sm:flex-none text-center bg-black text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-stone-800 transition-colors"
+                    <div className="sm:hidden text-sm font-bold text-stone-900">
+                        DreamPlay Deposit — $99
+                    </div>
+                    <button
+                        onClick={scrollToBuyBox}
+                        className="flex-shrink-0 bg-stone-900 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-stone-700 transition-colors cursor-pointer"
                     >
-                        Add to Cart
-                    </a>
+                        Reserve Now
+                    </button>
                 </div>
             </div>
-
-            <Footer />
         </div>
     )
 }
