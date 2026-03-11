@@ -71,7 +71,7 @@ export default function NewsletterPopup() {
             } catch (e) {
                 console.error('A/B assign failed, using defaults:', e);
                 abBucketRef.current = 'control';
-                abSettingsRef.current = { entries: [{ type: 'pdf', delaySec: 30 }, { type: 'shipping', delaySec: 300 }, { type: 'discount', delaySec: 600 }] };
+                abSettingsRef.current = { entries: [{ type: 'discount', delaySec: 30 }, { type: 'pdf', delaySec: 100 }, { type: 'shipping', delaySec: 180 }] };
             }
 
             const settings = abSettingsRef.current!;
