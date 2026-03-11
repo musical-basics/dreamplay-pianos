@@ -28,7 +28,17 @@
             "**/old-homepage/**",
             "_old/**",
             "**/*.standalone.*",
-            "src/app/(website-pages)/customize/CustomizeClient.backup.tsx"
+            "src/app/(website-pages)/customize/CustomizeClient.backup.tsx",
+            "_backup_logic/**",
+            "_backup_repos/**",
+            "_backup_files/**",
+            "**/old-navbar.*",
+            "**/OldTestimonialsSection.*",
+            "docs/**",
+            "schema.sql",
+            "scripts/**",
+            "supabase/**",
+            "tsconfig.tsbuildinfo"
         ]
     }
 }
