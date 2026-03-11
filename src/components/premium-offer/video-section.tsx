@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useCallback, useEffect } from "react"
+import { useRef, useState, useCallback } from "react"
 import Image from "next/image"
 import { Play } from "lucide-react"
 
@@ -10,30 +10,9 @@ const VIDEO_SOURCES = [
 ]
 
 export function VideoSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isNearViewport, setIsNearViewport] = useState(false)
-
-  // Lazy-load: only inject <source> when section is within 200px of viewport
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsNearViewport(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin: "200px" },
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
 
   const playNextVideo = useCallback(() => {
     const nextIndex = (currentIndex + 1) % VIDEO_SOURCES.length
@@ -56,36 +35,33 @@ export function VideoSection() {
   }
 
   return (
-    <section ref={sectionRef} className="relative leading-[0] -mt-px bg-neutral-200">
-      <div className="relative w-full min-h-[60vh] md:min-h-0 md:aspect-video">
+    <section className="relative leading-[0] -mt-px bg-neutral-200">
+      <div className="relative w-full aspect-video">
         <video
           ref={videoRef}
           className="h-full w-full object-cover block"
           controls={isPlaying}
           playsInline
-          preload="none"
-          poster="/images/video-thumbnail-piano.png"
+          preload="metadata"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onEnded={playNextVideo}
         >
-          {isNearViewport && (
-            <source
-              src={VIDEO_SOURCES[0]}
-              type="video/mp4"
-            />
-          )}
+          <source
+            src={VIDEO_SOURCES[0]}
+            type="video/mp4"
+          />
           Your browser does not support the video element.
         </video>
 
         {!isPlaying && (
           <>
             <Image
-              src="/images/video-thumbnail-piano.png"
-              alt="DreamPlay Intro Video"
+              src="/images/Piano + Bench Frontal + Bundle.png"
+              alt="DreamPlay One with Bench"
               fill
               className="object-cover"
-              priority={false}
+              priority
             />
             <button
               onClick={handlePlay}
@@ -102,4 +78,3 @@ export function VideoSection() {
     </section>
   )
 }
-

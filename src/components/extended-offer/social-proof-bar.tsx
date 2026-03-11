@@ -17,10 +17,10 @@ export function SocialProofBar() {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <span className="font-serif text-lg text-background md:text-xl">
+      <span className="font-serif text-xl text-background md:text-2xl">
         {value}
       </span>
-      <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-background/40 md:text-[10px]">
+      <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-background/40 md:text-xs">
         {label}
       </span>
     </div>

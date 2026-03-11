@@ -20,7 +20,7 @@ export function StatsSection() {
           <p className="mt-2 font-sans text-sm uppercase tracking-[0.3em] text-white md:text-base">
             of Pianists Have Hands
           </p>
-          <p className="mt-4 font-sans text-xs uppercase tracking-[0.3em] text-white/80 md:text-sm">
+          <p className="mt-4 font-sans text-sm uppercase tracking-[0.3em] text-white/80 md:text-sm">
             Under
           </p>
           <p className="font-serif text-6xl text-white md:text-7xl">

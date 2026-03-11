@@ -24,12 +24,12 @@ export function HeroImageSection() {
                         <br />
                         Fit the Standard.
                     </h2>
-                    <p className="mt-8 max-w-md font-sans text-sm leading-relaxed text-white/80 md:text-base">
+                    <p className="mt-8 max-w-md font-sans text-sm font-medium leading-relaxed text-white/80 md:text-base">
                         {
                             'Most keyboards were built around one "standard" hand size. If your hands have ever felt too small for the piano, you are not alone.'
                         }
                     </p>
-                    <p className="mt-4 max-w-md font-sans text-sm leading-relaxed text-white/80 md:text-base">
+                    <p className="mt-4 max-w-md font-sans text-sm font-medium leading-relaxed text-white/80 md:text-base">
                         DreamPlay One is designed with narrower keys &ndash; so you can play
                         freely, naturally, and without strain.
                     </p>

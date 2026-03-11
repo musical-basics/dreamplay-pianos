@@ -8,7 +8,7 @@ import { useABAnalytics } from "@/hooks/use-ab-analytics"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import { RegisterModal } from "../RegisterModal"
-import { CountdownBanner } from "../premium-offer/countdown-banner"
+import { CountdownBanner } from "../extended-offer/countdown-banner"
 
 interface SpecialOfferHeaderProps {
     forceOpaque?: boolean;

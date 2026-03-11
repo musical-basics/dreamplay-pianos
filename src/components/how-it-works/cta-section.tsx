@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react"
-import { PricingSection } from "@/components/premium-offer/pricing-section"
+import { PricingSection } from "@/components/extended-offer/pricing-section"
 
 export function CtaSection({ hiddenProducts = [] }: { hiddenProducts?: string[] }) {
     return (

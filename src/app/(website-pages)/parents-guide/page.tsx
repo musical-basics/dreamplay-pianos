@@ -4,12 +4,12 @@ import Footer from "@/components/Footer"
 import { getHiddenProducts } from "@/actions/admin-actions"
 
 // Import the kids-focused components
-import { ChildHeroSection, ChildUpgradePath } from "@/components/premium-offer/child-hero-section"
-import { TradeInSection } from "@/components/premium-offer/trade-in-section"
-import { TradeInFaqSection } from "@/components/premium-offer/trade-in-faq-section"
-import { FeaturesSection } from "@/components/premium-offer/features-section"
-import { PricingSection } from "@/components/premium-offer/pricing-section"
-import { GuaranteeSection } from "@/components/premium-offer/guarantee-section"
+import { ChildHeroSection, ChildUpgradePath } from "@/components/extended-offer/child-hero-section"
+import { TradeInSection } from "@/components/extended-offer/trade-in-section"
+import { TradeInFaqSection } from "@/components/extended-offer/trade-in-faq-section"
+import { FeaturesSection } from "@/components/extended-offer/features-section"
+import { PricingSection } from "@/components/extended-offer/pricing-section"
+import { GuaranteeSection } from "@/components/extended-offer/guarantee-section"
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })

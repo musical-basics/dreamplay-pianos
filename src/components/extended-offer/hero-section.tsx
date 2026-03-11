@@ -28,17 +28,14 @@ export function HeroSection() {
         autoPlay
         muted
         playsInline
-        className="absolute inset-0 h-full w-full object-cover brightness-[0.7] contrast-[1.15] saturate-[0.85]"
+        className="absolute inset-0 h-full w-full object-cover"
         onEnded={handleEnded}
       >
         <source src={BG_VIDEOS[0]} type="video/mp4" />
       </video>
-      {/* Cool dark gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-slate-900/30 to-black/40" />
-      {/* Subtle cool wash */}
-      <div className="absolute inset-0 bg-slate-900/15 mix-blend-overlay" />
-      {/* Radial vignette */}
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)' }} />
+      {/* Subtle gradient for text readability — matches VH2/3/4 */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/[0.02] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
     </section>
   )
 }

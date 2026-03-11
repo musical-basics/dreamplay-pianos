@@ -1,6 +1,6 @@
 "use client"
 
-import { LazyVideo } from "@/components/premium-offer/LazyVideo"
+import { LazyVideo } from "@/components/extended-offer/LazyVideo"
 
 const BG_VIDEO = "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/DreamPlay%20Hero%20720p%20Video%20Hero%204%20Loop%20(Specs).mp4"
 

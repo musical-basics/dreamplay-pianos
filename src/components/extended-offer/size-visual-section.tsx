@@ -48,17 +48,17 @@ export function SizeVisualSection() {
     const selectedSize = sizes.find(s => s.id === selectedId)
 
     return (
-        <section className="relative overflow-hidden bg-[#f5f5f0]">
+        <section className="relative bg-[#f5f5f0]">
             <div className="mx-auto max-w-6xl px-6 py-20 md:py-28 lg:py-32">
                 <div className="mb-16 max-w-2xl">
-                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-black/50">
+                    <p className="font-sans text-sm uppercase tracking-[0.3em] text-black/50">
                         Introducing the Sizes
                     </p>
                     <h2 className="mt-4 font-serif text-3xl leading-tight text-black md:text-4xl lg:text-5xl text-balance">
                         Find your perfect fit.
                     </h2>
-                    <p className="mt-6 font-sans text-sm leading-relaxed text-black/60 md:text-base">
-                        Three DS Standard sizes — the same standard adopted by top
+                    <p className="mt-6 font-sans text-sm font-medium leading-relaxed text-black/60 md:text-base">
+                        Three DS Standard sizes, the same standard adopted by top
                         universities worldwide. A professional instrument for every hand.
                     </p>
                 </div>
@@ -104,7 +104,7 @@ export function SizeVisualSection() {
                                         }`}>
                                         {size.model}
                                     </h3>
-                                    <p className={`mt-3 font-sans text-sm leading-relaxed ${isDark ? 'text-white/60' : 'text-black/60'
+                                    <p className={`mt-3 font-sans text-sm font-medium leading-relaxed ${isDark ? 'text-white/60' : 'text-black/60'
                                         }`}>
                                         {size.description}
                                     </p>
@@ -155,7 +155,7 @@ export function SizeVisualSection() {
                                 </span>
                                 <div className="h-px flex-1 mt-4 bg-black/10" />
                             </div>
-                            <p className="mt-4 font-sans text-sm leading-relaxed text-black/70 md:text-base md:leading-relaxed max-w-3xl">
+                            <p className="mt-4 font-sans text-sm font-medium leading-relaxed text-black/70 md:text-base md:leading-relaxed max-w-3xl">
                                 {selectedSize.detail}
                             </p>
                         </div>

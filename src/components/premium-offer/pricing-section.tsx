@@ -6,7 +6,7 @@ const allTiers = [
     id: 'reservation',
     badge: null,
     title: "Lock My Spot",
-    subtitle: "Batch 1: August 2026",
+    subtitle: "Batch 1 — August 2026",
     price: "$99",
     msrp: null,
     description:
@@ -71,16 +71,16 @@ const allTiers = [
 export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: string[] }) {
   const tiers = allTiers.filter(t => !hiddenProducts.includes(t.id))
   return (
-    <section id="pricing" className="relative bg-foreground">
+    <section id="pricing" className="relative overflow-hidden bg-foreground">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28 lg:py-32">
         <div className="mb-16 max-w-2xl">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-background/50">
             Pre-Order Now
           </p>
-          <h2 className="mt-4 font-sans text-3xl leading-tight text-background md:text-4xl lg:text-5xl text-balance">
+          <h2 className="mt-4 font-serif text-3xl leading-tight text-background md:text-4xl lg:text-5xl text-balance">
             Reserve your DreamPlay One.
           </h2>
-          <p className="mt-6 font-sans text-sm font-medium leading-relaxed text-background/60 md:text-base">
+          <p className="mt-6 font-sans text-sm leading-relaxed text-background/60 md:text-base">
             Ships worldwide. Choose the size and color that suits you after
             placing your order.
           </p>
@@ -89,7 +89,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
 
 
         {/* Import Duties Call-out */}
-        <div className="mb-12 border border-white/15 px-6 py-5 max-w-2xl mt-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.1), 0 4px 24px rgba(0,0,0,0.2)' }}>
+        <div className="mb-12 border border-background/20 bg-background/5 px-6 py-5 max-w-2xl mt-4">
           <div className="flex items-start gap-3">
             <span className="mt-0.5 text-background/60 text-lg leading-none">⚖️</span>
             <div>
@@ -97,7 +97,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                 A Note on Duties & Taxes
               </p>
               <p className="mt-1 font-sans text-xs leading-relaxed text-background/60">
-                To guarantee the most accurate rates, standard import duties and local taxes are not included in the reservation price today. We ship Delivered Duty Paid (DDP), meaning we prepay and handle all customs clearance on your behalf, so there are no surprise carrier fees at your door. This applies to all shipping regions including the US, UK, EU, Australia, and Japan. We will calculate and invoice any applicable duties/taxes right before shipping.
+                To guarantee the most accurate rates, standard import duties and local taxes are not included in the reservation price today. We ship Delivered Duty Paid (DDP) — meaning we prepay and handle all customs clearance on your behalf, so there are no surprise carrier fees at your door. This applies to all shipping regions including the US, UK, EU, Australia, and Japan. We will calculate and invoice any applicable duties/taxes right before shipping.
               </p>
             </div>
           </div>
@@ -107,20 +107,10 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
           {tiers.map((tier) => (
             <div
               key={tier.title}
-              className={`relative flex flex-col border p-8 transition-all md:p-10 rounded-2xl ${tier.highlight
-                ? "border-white/20"
-                : "border-white/10"
+              className={`relative flex flex-col border p-8 transition-all md:p-10 ${tier.highlight
+                ? "border-background/30 bg-background/5"
+                : "border-background/10 bg-transparent"
                 }`}
-              style={{
-                background: tier.highlight
-                  ? 'rgba(255,255,255,0.18)'
-                  : 'rgba(255,255,255,0.12)',
-                backdropFilter: 'blur(24px) saturate(1.5)',
-                WebkitBackdropFilter: 'blur(24px) saturate(1.5)',
-                boxShadow: tier.highlight
-                  ? 'inset 0 1px 0 0 rgba(255,255,255,0.15), 0 8px 32px rgba(0,0,0,0.3)'
-                  : 'inset 0 1px 0 0 rgba(255,255,255,0.08), 0 4px 16px rgba(0,0,0,0.15)',
-              }}
             >
               {tier.badge && (
                 <span className="mb-4 self-start font-sans text-[10px] uppercase tracking-[0.3em] text-background/50">
@@ -128,7 +118,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                 </span>
               )}
 
-              <h3 className="font-sans text-xl text-background md:text-2xl">
+              <h3 className="font-serif text-xl text-background md:text-2xl">
                 {tier.title}
               </h3>
               <p className="mt-1 font-sans text-xs text-background/40">
@@ -136,7 +126,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
               </p>
 
               <div className="mt-6 flex items-baseline gap-3">
-                <p className="font-sans text-4xl text-background md:text-5xl">
+                <p className="font-serif text-4xl text-background md:text-5xl">
                   {tier.price}
                 </p>
                 {tier.msrp && (
@@ -146,7 +136,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                 )}
               </div>
 
-              <p className="mt-6 font-sans text-sm font-medium leading-relaxed text-background/60">
+              <p className="mt-6 font-sans text-sm leading-relaxed text-background/60">
                 {tier.description}
               </p>
 
@@ -158,7 +148,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                 {tier.includes.map((item) => (
                   <div key={item} className="flex items-center gap-2">
                     <span className="h-1 w-1 rounded-full bg-background/40" />
-                    <span className="font-sans text-sm font-medium text-background/70">
+                    <span className="font-sans text-sm text-background/70">
                       {item}
                     </span>
                   </div>
@@ -171,7 +161,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                   <p className="font-sans text-xs text-background/40">
                     Delivery
                   </p>
-                  <p className="font-sans text-sm font-medium text-background/70">
+                  <p className="font-sans text-sm text-background/70">
                     {tier.delivery}
                   </p>
                 </div>
@@ -180,7 +170,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                   <p className="font-sans text-xs text-background/40">
                     Backers
                   </p>
-                  <p className="font-sans text-sm font-medium text-background/70">
+                  <p className="font-sans text-sm text-background/70">
                     {tier.backers}
                   </p>
                 </div>
@@ -189,7 +179,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                   <p className="font-sans text-xs text-background/40">
                     Left
                   </p>
-                  <p className="font-sans text-sm font-medium text-background/70">
+                  <p className="font-sans text-sm text-background/70">
                     {tier.remaining} of {tier.total}
                   </p>
                 </div>
@@ -208,25 +198,14 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
               {/* CTA */}
               <a
                 href="/customize"
-                className={`mt-8 group flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-all rounded-xl ${tier.highlight
-                  ? "border-white/30 bg-white text-black hover:bg-white/90"
-                  : "border-white/30 bg-white text-black hover:bg-white/90"
+                className={`mt-8 group flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors ${tier.highlight
+                  ? "border-background bg-background text-foreground hover:bg-background/90"
+                  : "border-background/30 text-background hover:bg-background/10"
                   }`}
-                style={{
-                  backdropFilter: 'blur(12px)',
-                  WebkitBackdropFilter: 'blur(12px)',
-                }}
               >
                 Reserve for {tier.price}
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </a>
-              {/* Risk-Reversal Badge */}
-              <div className="mt-3 flex items-center justify-center gap-1.5 text-background/40">
-                <span className="text-xs">🛡️</span>
-                <span className="font-sans text-[10px] tracking-wide">
-                  100% Risk-Free · Full Refund if We Don&apos;t Ship
-                </span>
-              </div>
             </div>
           ))}
         </div>
