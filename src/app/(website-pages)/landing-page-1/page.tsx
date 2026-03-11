@@ -164,6 +164,11 @@ const STATS = [
 
 const EXPERT_TESTIMONIALS = [
     {
+        name: "Elizabeth Schumann",
+        role: "Director of Keyboard Studies, Stanford University",
+        quote: "We would never expect a world-class athlete to compete with equipment that does not fit their body. Yet we ask pianists, particularly women, to adapt to a one-size-fits-all design that was never built with them in mind.",
+    },
+    {
         name: "Barbara Lister-Sink, Ed.D.",
         role: "Salem College School of Music, Director of Graduate Music Program",
         quote: "I cannot begin to describe the career-changing, and even life-changing, benefits our students have reaped from having these instruments to practice on daily. Their first response though was, 'Why did it take so long? Why did we have to suffer so unnecessarily?'",
