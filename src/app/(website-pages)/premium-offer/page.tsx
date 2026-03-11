@@ -15,6 +15,7 @@ import { PricingSection } from "@/components/old-premium-offer/pricing-section"
 import { StanfordQuoteSection } from "@/components/old-premium-offer/stanford-quote-section"
 import { GuaranteeSection } from "@/components/old-premium-offer/guarantee-section"
 import { HeroImageSection } from "@/components/old-premium-offer/hero-image-section"
+import { HandComparisonSection } from "@/components/premium-offer/hand-comparison-section"
 import Footer from "@/components/Footer"
 import { getHiddenProducts } from "@/actions/admin-actions"
 
@@ -46,6 +47,7 @@ export default async function OldPremiumOfferPage() {
                     <SocialProofBar />
                     <VideoSection />
                 </section>
+                <HandComparisonSection />
                 <FeaturesSection />
                 <StanfordQuoteSection />
                 <HeroImageSection />
