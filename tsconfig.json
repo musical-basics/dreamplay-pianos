@@ -38,6 +38,7 @@
   ],
   "exclude": [
     "node_modules",
-    "_static_source"
+    "_static_source",
+    "_backup_files"
   ]
 }
