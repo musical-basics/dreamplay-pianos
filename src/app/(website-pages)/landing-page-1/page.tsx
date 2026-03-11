@@ -213,9 +213,9 @@ const FEATURES_DEEP = [
 
 const USER_TESTIMONIALS = [
     {
-        quote: "Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.",
-        name: "Claudia Wang",
-        role: "Master's Student, Southern Methodist University (SMU)",
+        quote: "I realize now, looking back, that most of the time I spent practicing was used trying to overcome difficulties because of my hand-size... If you spend 90% of the time trying to overcome limitations imposed by hand size, then you are truly disadvantaged.",
+        name: "Christopher Donison",
+        role: "Executive Artistic Director, Music by the Sea (Co-inventor of DS keyboards)",
     },
     {
         quote: "I can play for much longer and continue to play every day. I don't get frustrated from the pain and from being limited in my playing.",
@@ -223,9 +223,9 @@ const USER_TESTIMONIALS = [
         role: "Pianist, teacher, music director",
     },
     {
-        quote: "I realize now, looking back, that most of the time I spent practicing was used trying to overcome difficulties because of my hand-size... If you spend 90% of the time trying to overcome limitations imposed by hand size, then you are truly disadvantaged.",
-        name: "Christopher Donison",
-        role: "Executive Artistic Director, Music by the Sea (Co-inventor of DS keyboards)",
+        quote: "Everything is easier on the 6.0 for me… I feel very comfortable playing scales, fast passages, or big chords.",
+        name: "Claudia Wang",
+        role: "Master's Student, Southern Methodist University (SMU)",
     },
 ]
 
