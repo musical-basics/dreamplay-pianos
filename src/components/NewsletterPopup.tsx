@@ -90,9 +90,18 @@ export default function NewsletterPopup() {
                 }, 10000);
             }
 
-            // ── Popup Timers DISABLED — using exit-intent only ──
-            // Timed popups removed per conversion optimization.
-            // Popups now fire only on exit-intent (see mouseleave handler below).
+            // ── Timed Popup Triggers ──
+            for (const entry of settings.entries) {
+                const popupType = entry.type as PopupType;
+                if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') continue;
+
+                const timer = setTimeout(() => {
+                    if (localStorage.getItem('dp_v2_subscribed') === 'true') return;
+                    if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') return;
+                    setActivePopup(popupType);
+                }, entry.delaySec * 1000);
+                popupTimers.push(timer);
+            }
         };
 
         checkStatus();
