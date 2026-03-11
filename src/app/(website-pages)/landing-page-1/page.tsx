@@ -33,8 +33,8 @@ const inter = Inter({
 
 const GALLERY_IMAGES = [
     {
-        src: "https://a.storyblok.com/f/256972/4500x3000/1e07cbca12/piano_2.png/m/1000x0",
-        alt: "DreamPlay One — Front View",
+        src: "/images/DreamPlay Piano Hands.jpg",
+        alt: "DreamPlay One — Hands on Keys",
     },
     {
         src: "/images/DS6.0-Black-1-p-1080.png",
@@ -289,8 +289,8 @@ export default function LandingPage1() {
                                     key={i}
                                     onClick={() => setActiveImage(i)}
                                     className={`flex-1 aspect-square rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${activeImage === i
-                                            ? "border-stone-900 shadow-md"
-                                            : "border-transparent opacity-60 hover:opacity-100"
+                                        ? "border-stone-900 shadow-md"
+                                        : "border-transparent opacity-60 hover:opacity-100"
                                         }`}
                                 >
                                     <img
@@ -404,15 +404,15 @@ export default function LandingPage1() {
                                         </span>
                                         <ChevronDown
                                             className={`w-4 h-4 text-stone-400 transition-transform duration-300 ${openAccordion === i
-                                                    ? "rotate-180"
-                                                    : ""
+                                                ? "rotate-180"
+                                                : ""
                                                 }`}
                                         />
                                     </button>
                                     <div
                                         className={`overflow-hidden transition-all duration-300 ${openAccordion === i
-                                                ? "max-h-60 pb-4"
-                                                : "max-h-0"
+                                            ? "max-h-60 pb-4"
+                                            : "max-h-0"
                                             }`}
                                     >
                                         <p className="text-sm text-stone-500 leading-relaxed pr-4">
@@ -619,8 +619,8 @@ export default function LandingPage1() {
                                     key={i}
                                     onClick={() => setActiveTestimonial(i)}
                                     className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${activeTestimonial === i
-                                            ? "bg-stone-800 scale-125"
-                                            : "bg-stone-300 hover:bg-stone-400"
+                                        ? "bg-stone-800 scale-125"
+                                        : "bg-stone-300 hover:bg-stone-400"
                                         }`}
                                 />
                             ))}
