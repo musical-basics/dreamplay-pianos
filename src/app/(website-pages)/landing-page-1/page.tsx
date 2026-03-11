@@ -661,7 +661,7 @@ export default function LandingPage1() {
                 {/* ═══════════════════════════════════════════════════
                     4. DATA-BACKED RESULTS
                 ═══════════════════════════════════════════════════ */}
-                <section className="bg-stone-900 text-white py-20 px-4">
+                <section className="bg-[#0a0a0a] text-white py-20 px-4">
                     <div className="max-w-5xl mx-auto">
                         <h2
                             className="text-2xl md:text-3xl font-bold text-center mb-4"
@@ -678,7 +678,7 @@ export default function LandingPage1() {
                             {STATS.map((s, i) => (
                                 <div
                                     key={i}
-                                    className="text-center bg-stone-800/60 rounded-2xl p-8 border border-stone-700/50"
+                                    className="text-center bg-[#1a1a1a] rounded-2xl p-8 border border-white/10"
                                 >
                                     <div
                                         className="text-5xl md:text-6xl font-black text-white mb-4"
