@@ -20,6 +20,9 @@ import {
     Keyboard,
     Crosshair,
     RefreshCw,
+    LockKeyhole,
+    Wrench,
+    Package,
 } from "lucide-react"
 
 const playfair = Playfair_Display({
@@ -246,19 +249,19 @@ const TIMELINE_STEPS = [
         step: "1",
         title: "Reserve",
         desc: "Lock in your discounted Founder's price today with a fully refundable $99 deposit.",
-        icon: "🔒",
+        icon: LockKeyhole,
     },
     {
         step: "2",
         title: "Build",
         desc: "We tool the steel and assemble the tech. You get monthly backstage photo & video updates.",
-        icon: "🏗️",
+        icon: Wrench,
     },
     {
         step: "3",
         title: "Ship",
         desc: "Pay the remaining balance only when your piano is boxed and ready to ship — August 2026.",
-        icon: "📦",
+        icon: Package,
     },
 ]
 
@@ -575,8 +578,8 @@ export default function LandingPage1() {
                                     <div
                                         key={i}
                                         className={`flex flex-col md:flex-row items-center gap-8 md:gap-14 ${i % 2 === 1
-                                                ? "md:flex-row-reverse"
-                                                : ""
+                                            ? "md:flex-row-reverse"
+                                            : ""
                                             }`}
                                     >
                                         {/* Image */}
@@ -855,8 +858,8 @@ export default function LandingPage1() {
                                     key={i}
                                     className="relative flex flex-col items-center text-center"
                                 >
-                                    <div className="w-24 h-24 bg-stone-100 rounded-2xl flex items-center justify-center text-4xl mb-6 border border-stone-200 relative z-10">
-                                        {s.icon}
+                                    <div className="w-24 h-24 bg-stone-100 rounded-2xl flex items-center justify-center mb-6 border border-stone-200 relative z-10">
+                                        <s.icon className="w-10 h-10 text-stone-700 stroke-[1.5]" />
                                     </div>
                                     <div className="absolute top-4 -left-2 bg-stone-900 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center z-20">
                                         {s.step}
