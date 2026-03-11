@@ -9,6 +9,8 @@ import {
     Lock,
     CalendarDays,
     ChevronDown,
+    ChevronLeft,
+    ChevronRight,
     X,
     Zap,
     Hand,
@@ -716,48 +718,66 @@ export default function LandingPage1() {
                             className="text-2xl md:text-3xl font-bold text-center mb-14"
                             style={{ fontFamily: "var(--font-playfair)" }}
                         >
-                            What the Experts Say
+                            What Piano Professors At Top Universities Say
                         </h2>
 
-                        {/* Active card */}
-                        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-stone-200 min-h-[260px] flex flex-col items-center justify-center text-center relative">
-                            {/* Stars */}
-                            <div className="flex gap-0.5 mb-6">
-                                {[1, 2, 3, 4, 5].map((s) => (
-                                    <Star
-                                        key={s}
-                                        className="w-5 h-5 fill-amber-400 text-amber-400"
-                                    />
-                                ))}
-                            </div>
-
-                            <blockquote
-                                className="text-stone-700 text-lg md:text-xl leading-relaxed mb-6 max-w-2xl italic transition-opacity duration-500"
-                                style={{
-                                    fontFamily: "var(--font-playfair)",
-                                }}
+                        {/* Active card with chevrons */}
+                        <div className="relative">
+                            {/* Left chevron */}
+                            <button
+                                onClick={() => setActiveTestimonial((p) => (p - 1 + EXPERT_TESTIMONIALS.length) % EXPERT_TESTIMONIALS.length)}
+                                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full bg-white border border-stone-200 shadow-sm flex items-center justify-center hover:bg-stone-50 transition-colors cursor-pointer"
                             >
-                                &ldquo;
-                                {
-                                    EXPERT_TESTIMONIALS[activeTestimonial]
-                                        .quote
-                                }
-                                &rdquo;
-                            </blockquote>
+                                <ChevronLeft className="w-5 h-5 text-stone-600" />
+                            </button>
 
-                            <div>
-                                <p className="font-bold text-stone-900 text-sm">
+                            {/* Right chevron */}
+                            <button
+                                onClick={() => setActiveTestimonial((p) => (p + 1) % EXPERT_TESTIMONIALS.length)}
+                                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 rounded-full bg-white border border-stone-200 shadow-sm flex items-center justify-center hover:bg-stone-50 transition-colors cursor-pointer"
+                            >
+                                <ChevronRight className="w-5 h-5 text-stone-600" />
+                            </button>
+
+                            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-stone-200 min-h-[260px] flex flex-col items-center justify-center text-center relative">
+                                {/* Stars */}
+                                <div className="flex gap-0.5 mb-6">
+                                    {[1, 2, 3, 4, 5].map((s) => (
+                                        <Star
+                                            key={s}
+                                            className="w-5 h-5 fill-amber-400 text-amber-400"
+                                        />
+                                    ))}
+                                </div>
+
+                                <blockquote
+                                    className="text-stone-700 text-lg md:text-xl leading-relaxed mb-6 max-w-2xl italic transition-opacity duration-500"
+                                    style={{
+                                        fontFamily: "var(--font-playfair)",
+                                    }}
+                                >
+                                    &ldquo;
                                     {
                                         EXPERT_TESTIMONIALS[activeTestimonial]
-                                            .name
+                                            .quote
                                     }
-                                </p>
-                                <p className="text-stone-500 text-xs mt-1">
-                                    {
-                                        EXPERT_TESTIMONIALS[activeTestimonial]
-                                            .role
-                                    }
-                                </p>
+                                    &rdquo;
+                                </blockquote>
+
+                                <div>
+                                    <p className="font-bold text-stone-900 text-sm">
+                                        {
+                                            EXPERT_TESTIMONIALS[activeTestimonial]
+                                                .name
+                                        }
+                                    </p>
+                                    <p className="text-stone-500 text-xs mt-1">
+                                        {
+                                            EXPERT_TESTIMONIALS[activeTestimonial]
+                                                .role
+                                        }
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
