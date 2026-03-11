@@ -428,7 +428,7 @@ export default function LandingPage1() {
                         {/* CTA */}
                         <a
                             href="/checkout"
-                            className="block w-full text-center bg-stone-900 text-white py-4 rounded-full text-lg font-bold hover:bg-stone-700 transition-colors shadow-lg shadow-stone-900/20"
+                            className="block w-full text-center bg-[#111111] text-white py-4 text-sm font-bold tracking-widest uppercase hover:bg-black transition-colors"
                         >
                             Secure My August Delivery
                             <ArrowRight className="inline-block ml-2 w-5 h-5" />
@@ -883,7 +883,7 @@ export default function LandingPage1() {
                         <div className="text-center mt-16">
                             <button
                                 onClick={scrollToBuyBox}
-                                className="inline-flex items-center gap-2 bg-stone-900 text-white px-8 py-4 rounded-full text-base font-bold hover:bg-stone-700 transition-colors shadow-lg shadow-stone-900/20 cursor-pointer"
+                                className="inline-flex items-center gap-2 bg-[#111111] text-white px-8 py-4 text-sm font-bold tracking-widest uppercase hover:bg-black transition-colors cursor-pointer"
                             >
                                 Secure My August Delivery
                                 <ArrowRight className="w-5 h-5" />
@@ -981,7 +981,7 @@ export default function LandingPage1() {
                     </div>
                     <button
                         onClick={scrollToBuyBox}
-                        className="flex-shrink-0 bg-stone-900 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-stone-700 transition-colors cursor-pointer"
+                        className="flex-shrink-0 bg-[#111111] text-white px-6 py-3 text-sm font-bold tracking-widest uppercase hover:bg-black transition-colors cursor-pointer"
                     >
                         Reserve Now
                     </button>
