@@ -544,7 +544,7 @@ export default function LandingPage1() {
                                         {i < 3 ? (
                                             <item.icon className="w-7 h-7 text-stone-700 stroke-[1.5]" />
                                         ) : (
-                                            <span className="text-2xl">{item.emoji}</span>
+                                            <span className="text-3xl">{item.emoji}</span>
                                         )}
                                     </div>
                                     <h3 className="font-bold text-stone-900 mb-2">
