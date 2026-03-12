@@ -508,9 +508,10 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-sm text-white/60 mb-4">You can lock in our exclusive limited introductory price of just</p>
-                        <p className="font-serif text-6xl md:text-8xl text-white line-through text-white/30">$699</p>
+                        <p className="font-serif text-6xl md:text-8xl text-white">$699</p>
                         <p className="mt-4 font-sans text-lg text-white/80">for the keyboard TODAY for...</p>
-                        <p className="mt-2 font-sans text-sm text-white/50">Reservation price today</p>
+                        <p className="mt-6 font-serif text-6xl md:text-8xl text-white">??</p>
+                        <p className="mt-2 font-sans text-sm text-white/50">(reservation price today)</p>
                     </div>
                     <ScrollIndicator next={11} />
                 </section>
