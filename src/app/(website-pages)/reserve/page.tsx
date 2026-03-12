@@ -51,7 +51,7 @@ export default function ReservePage() {
   )
 
   return (
-    <>
+    <div className="v0-page">
       {/* Announcement Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white py-2 px-4 text-center">
         <p className="font-sans text-xs">
@@ -75,9 +75,8 @@ export default function ReservePage() {
           <button
             key={i}
             onClick={() => scrollToSlide(i)}
-            className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-              currentSlide === i ? "bg-white scale-125" : "bg-white/30 hover:bg-white/50"
-            }`}
+            className={`w-2 h-2 rounded-full transition-all cursor-pointer ${currentSlide === i ? "bg-white scale-125" : "bg-white/30 hover:bg-white/50"
+              }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
@@ -206,6 +205,6 @@ export default function ReservePage() {
         </section>
 
       </div>
-    </>
+    </div>
   )
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Inter, Playfair_Display } from "next/font/google";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ABTracker } from "@/components/features/analytics/ABTracker";
 import { EmailTracker } from "@/components/EmailTracker";
@@ -8,6 +9,16 @@ import Chatbot from "@/components/chatbot/Chatbot";
 import { getChatbotEnabled } from "@/actions/admin-actions";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
 
 export const metadata: Metadata = {
   title: "Introducing: DreamPlay One",
@@ -26,7 +37,7 @@ export default async function RootLayout({
   const isChatbotEnabled = await getChatbotEnabled();
 
   return (
-    <html lang="en" data-wf-site="68b99847f96fcca15429faec" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`} data-wf-site="68b99847f96fcca15429faec" suppressHydrationWarning>
       <head>
         <meta content="Webflow" name="generator" />
 

@@ -196,3 +196,17 @@ a {
     scrollbar-width: none;
   }
 }
+
+/* Scoped font override for v0-style pages (intro-offer, reserve) */
+.v0-page,
+.v0-page * {
+  --tw-font-sans: var(--font-inter, 'Inter'), 'Inter', sans-serif;
+}
+
+.v0-page .font-sans {
+  font-family: var(--font-inter, 'Inter'), 'Inter', sans-serif;
+}
+
+.v0-page .font-serif {
+  font-family: var(--font-playfair, 'Playfair Display'), 'Playfair Display', serif;
+}
