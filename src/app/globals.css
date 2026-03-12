@@ -207,6 +207,15 @@ a {
  *              body { font-family:Arial; font-size:14px; line-height:20px; color:#333 }
  */
 
+/* Base reset on the v0-page container — overrides Webflow body inheritance */
+.v0-page {
+  font-size: 16px;
+  line-height: 1.5;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Reset headings — Webflow forces bold + margins */
 .v0-page h1,
 .v0-page h2,
