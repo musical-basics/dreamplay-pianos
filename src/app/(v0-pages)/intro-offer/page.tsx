@@ -87,10 +87,7 @@ export default function IntroOfferPage() {
     }, [])
 
     const playVideo = () => {
-        if (videoRef.current) {
-            videoRef.current.play()
-            setIsVideoPlaying(true)
-        }
+        setIsVideoPlaying(true)
     }
 
     const ScrollIndicator = ({ next, dark }: { next: number; dark?: boolean }) => (
