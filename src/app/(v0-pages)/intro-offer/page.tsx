@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react"
 import { ChevronDown, ChevronRight, Play, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { SpecialOfferHeader } from "@/components/special-offer/header"
 
 const professorQuotes = [
     {
@@ -105,13 +106,8 @@ export default function IntroOfferPage() {
 
     return (
         <>
-            {/* Announcement Banner */}
-            <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white py-2 px-4 text-center">
-                <p className="font-sans text-xs">
-                    Prices go up in April 2026 to $1,099 MSRP.{" "}
-                    <Link href="/reserve" className="underline hover:no-underline">Reserve now</Link>
-                </p>
-            </div>
+            {/* Header */}
+            <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
 
             {/* Dot navigation */}
             <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
