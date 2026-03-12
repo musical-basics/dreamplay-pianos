@@ -538,11 +538,11 @@ export default function IntroOfferPage() {
                         </div>
                         <h2 className="font-serif text-3xl md:text-4xl text-black mb-8">Our Money Back Guarantee</h2>
                         <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-                            <span className="px-4 py-2 border border-black/20 font-sans text-sm">Full Refund</span>
-                            <span className="px-4 py-2 border border-black/20 font-sans text-sm">Cancel Anytime</span>
-                            <span className="px-4 py-2 border border-black/20 font-sans text-sm">90 Day Trial</span>
-                            <span className="px-4 py-2 border border-black/20 font-sans text-sm">No Risk</span>
-                            <span className="px-4 py-2 border border-black/20 font-sans text-sm">Free Shipping</span>
+                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">Full Refund</span>
+                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">Cancel Anytime</span>
+                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">90 Day Trial</span>
+                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">No Risk</span>
+                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">Free Shipping</span>
                         </div>
                         <div className="bg-neutral-100 p-8 md:p-12">
                             <p className="font-serif text-lg md:text-xl text-black leading-relaxed">
