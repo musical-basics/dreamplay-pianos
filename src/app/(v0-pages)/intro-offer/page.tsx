@@ -373,7 +373,7 @@ export default function IntroOfferPage() {
                                 muted
                                 playsInline
                             >
-                                <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/LED-Animation.mp4" type="video/mp4" />
+                                <source src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4" type="video/mp4" />
                             </video>
                             <div className="absolute inset-0 bg-black/40" />
                             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
