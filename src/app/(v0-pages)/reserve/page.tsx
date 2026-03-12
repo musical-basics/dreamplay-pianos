@@ -51,7 +51,7 @@ export default function ReservePage() {
   )
 
   return (
-    <div className="v0-page">
+    <>
       {/* Announcement Banner */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white py-2 px-4 text-center">
         <p className="font-sans text-xs">
@@ -205,6 +205,6 @@ export default function ReservePage() {
         </section>
 
       </div>
-    </div>
+    </>
   )
 }
