@@ -4,6 +4,7 @@ import { FeaturesGridSection } from "@/components/special-offer/features-grid-se
 import { FeaturesPianoSection } from "@/components/special-offer/features-piano-section"
 import Footer from "@/components/Footer"
 import Link from "next/link"
+import { UrgencySubtext } from "@/components/UrgencySubtext"
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -523,10 +524,10 @@ export default function ProductInformationPage() {
                         </h2>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
-                                href="/customize"
+                                href="/intro-offer"
                                 className="inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90"
                             >
-                                Configure Yours
+                                Reserve Now
                             </Link>
                             <Link
                                 href="/how-it-works"
@@ -535,6 +536,7 @@ export default function ProductInformationPage() {
                                 How It Works
                             </Link>
                         </div>
+                        <UrgencySubtext />
                     </div>
                 </section>
             </main>

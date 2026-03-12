@@ -19,6 +19,7 @@ import {
     BookOpen,
     Layers,
 } from "lucide-react";
+import { UrgencySubtext } from "@/components/UrgencySubtext";
 
 export default function LearnPage() {
     return (
@@ -130,10 +131,10 @@ export default function LearnPage() {
                         </p>
                         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                             <Link
-                                href="/customize"
+                                href="/intro-offer"
                                 className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200"
                             >
-                                Get DreamPlay One
+                                Reserve Now
                                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </Link>
                             <a
@@ -541,12 +542,13 @@ export default function LearnPage() {
                                 Start your piano journey today.
                             </p>
                             <Link
-                                href="/customize"
+                                href="/intro-offer"
                                 className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200"
                             >
-                                Configure Your DreamPlay One
+                                Reserve Now
                                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </Link>
+                            <UrgencySubtext />
                         </AnimatedSection>
                     </div>
                 </section>

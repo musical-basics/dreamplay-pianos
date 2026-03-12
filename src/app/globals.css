@@ -184,3 +184,15 @@ a {
   z-index: 1;
   /* Override the z-index: -100 from webflow.css */
 }
+
+/* Scrollbar Hiding Utilities */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

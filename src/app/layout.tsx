@@ -6,6 +6,7 @@ import { EmailTracker } from "@/components/EmailTracker";
 import NewsletterPopup from "@/components/NewsletterPopup";
 import Chatbot from "@/components/chatbot/Chatbot";
 import { getChatbotEnabled } from "@/actions/admin-actions";
+import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default async function RootLayout({
         </Script>
       </head>
       <body>
+        <AnnouncementBanner />
         <AnalyticsTracker />
         <ABTracker />
         <EmailTracker />

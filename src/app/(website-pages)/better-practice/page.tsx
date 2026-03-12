@@ -5,6 +5,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/animated-section";
 import { ArrowRight, Quote, Brain, Crosshair } from "lucide-react";
+import { UrgencySubtext } from "@/components/UrgencySubtext";
 
 export default function BetterPracticePage() {
     return (
@@ -239,10 +240,11 @@ export default function BetterPracticePage() {
                             <p className="mb-10 font-sans text-base text-white/60 md:text-lg">
                                 Stop limiting your repertoire. Secure your allocation today.
                             </p>
-                            <Link href="/customize" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200">
-                                Configure Yours
+                            <Link href="/intro-offer" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200">
+                                Reserve Now
                                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </Link>
+                            <UrgencySubtext />
                         </AnimatedSection>
                     </div>
                 </section>

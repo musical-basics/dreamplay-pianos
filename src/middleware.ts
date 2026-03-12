@@ -88,88 +88,12 @@ export async function middleware(request: NextRequest) {
     }
 
     // ========================================================================
-    // PRIORITY #2: HOMEPAGE A/B TEST (Global Round-Robin via Supabase)
+    // PRIORITY #2: HOMEPAGE → /intro-offer (replaces old A/B test)
     // ========================================================================
-    // Deterministic 1:1 alternation between /premium-offer and /landing-page-1.
-    // Uses a Supabase global counter for strict cross-visitor alternation.
     if (pathname === "/") {
-        const existingBucket = request.cookies.get("dp_homepage_ab")?.value;
-
-        if (existingBucket === "premium-offer" || existingBucket === "landing-page-1") {
-            // Returning visitor — redirect to their assigned page
-            const redirectUrl = request.nextUrl.clone();
-            redirectUrl.pathname = `/${existingBucket}`;
-            // Query params (UTM, discount, etc.) are preserved automatically via clone
-            const response = NextResponse.redirect(redirectUrl);
-            // Refresh cookie expiry
-            response.cookies.set("dp_homepage_ab", existingBucket, { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            return response;
-        }
-
-        // New visitor — get global counter from Supabase for true round-robin
-        let assignedBucket = "premium-offer"; // fallback
-        try {
-            const { data, error } = await supabase.rpc("increment_homepage_ab_counter");
-            if (!error && data !== null) {
-                assignedBucket = data % 2 === 0 ? "premium-offer" : "landing-page-1";
-            }
-        } catch (e) {
-            console.error("[Homepage AB] Counter error, falling back to premium-offer:", e);
-        }
-
         const redirectUrl = request.nextUrl.clone();
-        redirectUrl.pathname = `/${assignedBucket}`;
-        const response = NextResponse.redirect(redirectUrl);
-        response.cookies.set("dp_homepage_ab", assignedBucket, { path: "/", maxAge: 60 * 60 * 24 * 30 });
-        return response;
-    }
-
-    // ========================================================================
-    // PRIORITY #3: HARDCODED CHECKOUT A/B TEST (Round-Robin via Supabase)
-    // ========================================================================
-    // Deterministic 1:1 alternation between /checkout (PDP) and /customize (wizard).
-    // Uses a Supabase global counter for strict cross-visitor alternation.
-    if (pathname === "/customize") {
-        const existingBucket = request.cookies.get("dp_checkout_ab")?.value;
-
-        if (existingBucket === "checkout") {
-            // Returning visitor already assigned to PDP — rewrite
-            const rewriteUrl = request.nextUrl.clone();
-            rewriteUrl.pathname = "/checkout";
-            const response = NextResponse.rewrite(rewriteUrl);
-            response.cookies.set("dp_checkout_ab", "checkout", { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            return response;
-        }
-
-        if (existingBucket === "customize") {
-            // Returning visitor already assigned to wizard — pass through
-            const response = NextResponse.next();
-            response.cookies.set("dp_checkout_ab", "customize", { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            return response;
-        }
-
-        // New visitor — get global counter from Supabase for true round-robin
-        let assignedBucket = "customize"; // fallback
-        try {
-            const { data, error } = await supabase.rpc("increment_checkout_ab_counter");
-            if (!error && data !== null) {
-                assignedBucket = data % 2 === 0 ? "checkout" : "customize";
-            }
-        } catch (e) {
-            console.error("[Checkout AB] Counter error, falling back to customize:", e);
-        }
-
-        if (assignedBucket === "checkout") {
-            const rewriteUrl = request.nextUrl.clone();
-            rewriteUrl.pathname = "/checkout";
-            const response = NextResponse.rewrite(rewriteUrl);
-            response.cookies.set("dp_checkout_ab", "checkout", { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            return response;
-        } else {
-            const response = NextResponse.next();
-            response.cookies.set("dp_checkout_ab", "customize", { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            return response;
-        }
+        redirectUrl.pathname = `/intro-offer`;
+        return NextResponse.redirect(redirectUrl);
     }
 
     // ========================================================================

@@ -4,6 +4,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatedSection } from "@/components/animated-section";
+import { UrgencySubtext } from "@/components/UrgencySubtext";
 
 // --- Custom Slideshow Component ---
 const factorySlides = [
@@ -489,10 +490,11 @@ export default function OurStoryPage() {
                         <p className="font-sans text-base md:text-lg text-white/60 mb-12 max-w-xl">
                             Back our crowdfunding campaign and get early access.
                         </p>
-                        <a href="/customize" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
-                            Configure Yours
+                        <a href="/intro-offer" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
+                            Reserve Now
                             <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path></svg>
                         </a>
+                        <UrgencySubtext />
                     </div>
                 </section>
 

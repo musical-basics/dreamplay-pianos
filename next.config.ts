@@ -5,7 +5,27 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/checkout-pages/customize',
-        destination: '/customize',
+        destination: '/intro-offer',
+        permanent: true,
+      },
+      {
+        source: '/customize',
+        destination: '/intro-offer',
+        permanent: true,
+      },
+      {
+        source: '/checkout',
+        destination: '/intro-offer',
+        permanent: true,
+      },
+      {
+        source: '/premium-offer',
+        destination: '/intro-offer',
+        permanent: true,
+      },
+      {
+        source: '/extended-offer',
+        destination: '/intro-offer',
         permanent: true,
       },
       {
