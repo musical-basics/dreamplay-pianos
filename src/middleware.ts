@@ -125,10 +125,10 @@ export async function middleware(request: NextRequest) {
     }
 
     // ========================================================================
-    // PRIORITY #3: HARDCODED CHECKOUT A/B TEST (Round-Robin)
+    // PRIORITY #3: HARDCODED CHECKOUT A/B TEST (Round-Robin via Supabase)
     // ========================================================================
     // Deterministic 1:1 alternation between /checkout (PDP) and /customize (wizard).
-    // No randomization — uses a global counter cookie for strict alternation.
+    // Uses a Supabase global counter for strict cross-visitor alternation.
     if (pathname === "/customize") {
         const existingBucket = request.cookies.get("dp_checkout_ab")?.value;
 
@@ -137,7 +137,6 @@ export async function middleware(request: NextRequest) {
             const rewriteUrl = request.nextUrl.clone();
             rewriteUrl.pathname = "/checkout";
             const response = NextResponse.rewrite(rewriteUrl);
-            // Refresh cookie expiry
             response.cookies.set("dp_checkout_ab", "checkout", { path: "/", maxAge: 60 * 60 * 24 * 30 });
             return response;
         }
@@ -149,23 +148,26 @@ export async function middleware(request: NextRequest) {
             return response;
         }
 
-        // New visitor — use counter for deterministic alternation
-        const counterStr = request.cookies.get("dp_checkout_ab_counter")?.value || "0";
-        const counter = parseInt(counterStr, 10) || 0;
-        const assignedBucket = counter % 2 === 0 ? "checkout" : "customize";
-        const nextCounter = counter + 1;
+        // New visitor — get global counter from Supabase for true round-robin
+        let assignedBucket = "customize"; // fallback
+        try {
+            const { data, error } = await supabase.rpc("increment_checkout_ab_counter");
+            if (!error && data !== null) {
+                assignedBucket = data % 2 === 0 ? "checkout" : "customize";
+            }
+        } catch (e) {
+            console.error("[Checkout AB] Counter error, falling back to customize:", e);
+        }
 
         if (assignedBucket === "checkout") {
             const rewriteUrl = request.nextUrl.clone();
             rewriteUrl.pathname = "/checkout";
             const response = NextResponse.rewrite(rewriteUrl);
             response.cookies.set("dp_checkout_ab", "checkout", { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            response.cookies.set("dp_checkout_ab_counter", nextCounter.toString(), { path: "/", maxAge: 60 * 60 * 24 * 365 });
             return response;
         } else {
             const response = NextResponse.next();
             response.cookies.set("dp_checkout_ab", "customize", { path: "/", maxAge: 60 * 60 * 24 * 30 });
-            response.cookies.set("dp_checkout_ab_counter", nextCounter.toString(), { path: "/", maxAge: 60 * 60 * 24 * 365 });
             return response;
         }
     }
