@@ -1,139 +1,211 @@
-"use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Mail, Loader2 } from "lucide-react";
-import { Playfair_Display, Inter } from "next/font/google";
-import { subscribeToNewsletter } from "@/actions/email-actions";
-import { UrgencySubtext } from "@/components/UrgencySubtext";
+"use client"
 
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+import { useState, useRef, useEffect, useCallback } from "react"
+import { ChevronDown, ArrowRight, Mail } from "lucide-react"
+import Link from "next/link"
 
-const Timeline = () => (
-    <div className="w-full max-w-3xl flex flex-col md:flex-row items-center justify-between relative gap-6 md:gap-0 mb-16 px-4">
-        <div className="hidden md:block absolute top-[10px] left-0 right-0 h-1 bg-white/10 -z-10 rounded-full" />
-
-        <div className="relative z-10 flex flex-col items-center opacity-40 text-center">
-            <div className="w-4 h-4 rounded-full bg-white mb-2" />
-            <span className="text-[10px] font-bold uppercase tracking-widest">1st Batch (July)</span>
-            <span className="text-[10px] text-red-400 font-bold uppercase tracking-widest mt-1">FULL (150)</span>
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center text-center scale-110">
-            <div className="absolute -top-10 text-amber-400 animate-bounce text-2xl">👇</div>
-            <div className="w-6 h-6 rounded-full bg-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.6)] mb-2" />
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400">Order Today</span>
-            <span className="text-[10px] uppercase tracking-widest text-amber-400/70 mt-1">(August Shipping)</span>
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center opacity-40 text-center">
-            <div className="w-4 h-4 rounded-full bg-white mb-2" />
-            <span className="text-[10px] font-bold uppercase tracking-widest">2nd Batch (Dec)</span>
-        </div>
-    </div>
-);
+const TOTAL_SLIDES = 2
 
 export default function ReservePage() {
-    const [emailOpen, setEmailOpen] = useState(false);
-    const [email, setEmail] = useState("");
-    const [emailStatus, setEmailStatus] = useState<"idle" | "loading" | "success">("idle");
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [email, setEmail] = useState("")
+  const [showEmailForm, setShowEmailForm] = useState(false)
 
-    const handleThinkAboutIt = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!email) return;
-        setEmailStatus("loading");
-        await subscribeToNewsletter({ email, tags: ["Hesitated at Checkout"] });
-        setEmailStatus("success");
-    };
+  const scrollToSlide = useCallback((index: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    const clamped = Math.max(0, Math.min(index, TOTAL_SLIDES - 1))
+    el.scrollTo({ top: clamped * window.innerHeight, behavior: "smooth" })
+  }, [])
 
-    return (
-        <div className={`${playfair.variable} ${inter.variable} bg-[#050505] text-white font-sans antialiased h-[100dvh] w-full overflow-hidden relative`}>
-            <header className="absolute top-0 w-full p-6 z-50 flex justify-center bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
-                <Link href="/intro-offer" className="pointer-events-auto">
-                    <img src="/images/DreamPlay Logo White.png" alt="DreamPlay" className="h-6" />
-                </Link>
-            </header>
+  // Track current slide based on scroll position (for dot nav indicator)
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
 
-            <main className="h-[100dvh] w-full overflow-y-auto snap-y snap-mandatory no-scrollbar scroll-smooth pt-[72px]">
+    const onScroll = () => {
+      const slideIndex = Math.round(el.scrollTop / window.innerHeight)
+      setCurrentSlide(Math.max(0, Math.min(slideIndex, TOTAL_SLIDES - 1)))
+    }
 
-                {/* ══════════════════════════════════════════════════════════════════
-            SLIDE 1 — The Pitch & Timeline
-            ══════════════════════════════════════════════════════════════════ */}
-                <section className="h-[100dvh] w-full shrink-0 snap-start snap-always relative flex flex-col justify-center items-center text-center px-6">
-                    <p className="text-amber-400 uppercase tracking-widest text-sm font-bold mb-4">Eliminate strain forever.</p>
-                    <h1 className="font-serif text-[8rem] md:text-[12rem] font-bold leading-none mb-2">$99.</h1>
-                    <p className="text-xl md:text-3xl text-white/70 mb-12 font-serif">Pay the rest ($600) when we ship.</p>
+    el.addEventListener("scroll", onScroll, { passive: true })
+    return () => el.removeEventListener("scroll", onScroll)
+  }, [])
 
-                    <p className="max-w-xl text-white/80 leading-relaxed mb-12 text-sm md:text-base">
-                        Lock in your DreamPlay keyboard reservation now. Earlier backers receive their keyboards first.
-                    </p>
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowEmailForm(false)
+    setEmail("")
+  }
 
-                    <Timeline />
+  const ScrollIndicator = ({ next }: { next: number }) => (
+    <button
+      onClick={() => scrollToSlide(next)}
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer z-20"
+      aria-label="Next section"
+    >
+      <span className="font-sans text-xs uppercase tracking-[0.2em]">Scroll</span>
+      <ChevronDown className="w-5 h-5 animate-bounce" />
+    </button>
+  )
 
+  return (
+    <>
+      {/* Announcement Banner */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white py-2 px-4 text-center">
+        <p className="font-sans text-xs">
+          Prices go up in April 2026 to $1,099 MSRP.{" "}
+          <Link href="/intro-offer" className="underline hover:no-underline">Learn more</Link>
+        </p>
+      </div>
+
+      {/* Back link */}
+      <Link
+        href="/intro-offer"
+        className="fixed top-12 left-6 z-50 flex items-center gap-2 text-white/60 hover:text-white transition-colors font-sans text-sm"
+      >
+        <ArrowRight className="w-4 h-4 rotate-180" />
+        Back
+      </Link>
+
+      {/* Dot navigation */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+        {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => scrollToSlide(i)}
+            className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+              currentSlide === i ? "bg-white scale-125" : "bg-white/30 hover:bg-white/50"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      <div
+        ref={scrollRef}
+        className="h-screen overflow-y-scroll"
+        style={{ scrollSnapType: "y mandatory", scrollBehavior: "smooth" }}
+      >
+
+        {/* Slide 1: Price and Timeline */}
+        <section className="h-screen relative bg-black flex items-center justify-center pt-12" style={{ scrollSnapAlign: "start" }}>
+          <div className="w-full max-w-4xl mx-auto px-6 text-center">
+            <div className="mb-8">
+              <p className="font-serif text-7xl md:text-9xl text-white">$99</p>
+              <p className="mt-2 font-sans text-base text-white/60">Pay the rest ($600) when we ship</p>
+            </div>
+            <p className="font-serif text-xl md:text-2xl text-white/80 italic mb-8">
+              Eliminate strain forever.
+            </p>
+            <p className="font-sans text-base text-white/70 max-w-xl mx-auto mb-12">
+              Lock in your DreamPlay keyboard reservation now. Earlier backers receive their keyboards first.
+            </p>
+            {/* Timeline */}
+            <div className="relative mb-12">
+              <div className="h-2 bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full" />
+              <div className="flex justify-between mt-4">
+                <div className="text-left">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-emerald-400">Earliest Backers</p>
+                  <p className="font-sans text-xs text-white/50">1st Production Batch</p>
+                  <p className="font-sans text-xs text-white/40">150 backers - July</p>
+                </div>
+                <div className="text-center relative">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2">
+                    <div className="w-4 h-4 bg-white rounded-full animate-pulse" />
+                    <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white mx-auto mt-1" />
+                  </div>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold">Order Today</p>
+                  <p className="font-sans text-xs text-white/70">August Shipping</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-purple-400">Second Batch</p>
+                  <p className="font-sans text-xs text-white/50">December</p>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => scrollToSlide(1)}
+              className="inline-flex items-center gap-3 bg-white px-12 py-5 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors cursor-pointer"
+            >
+              Next Step <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+          <ScrollIndicator next={1} />
+        </section>
+
+        {/* Slide 2: Confirmation */}
+        <section className="h-screen relative bg-neutral-950 flex items-center justify-center pt-12" style={{ scrollSnapAlign: "start" }}>
+          <div className="w-full max-w-3xl mx-auto px-6 text-center">
+            <div className="bg-white/5 border border-white/10 p-8 md:p-12 mb-8">
+              <p className="font-serif text-xl md:text-2xl text-white leading-relaxed mb-8">
+                This reservation is for <span className="text-white font-semibold">all sizes and colors</span> of the DreamPlay One keyboard.
+              </p>
+              <p className="font-sans text-base text-white/70">
+                You will receive a{" "}
+                <span className="text-white">Step by Step Customize your DreamPlay Keyboard Configuration Link</span>{" "}
+                immediately following your reservation.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 mb-8">
+              {!showEmailForm ? (
+                <>
+                  <a
+                    href="https://checkout.dreamplaypianos.com/reserve"
+                    className="inline-flex items-center justify-center gap-3 bg-white px-12 py-5 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors w-full"
+                  >
+                    Yes, I Want to Purchase Now <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <button
+                    onClick={() => setShowEmailForm(true)}
+                    className="inline-flex items-center justify-center gap-3 border border-white/30 px-12 py-5 font-sans text-sm uppercase tracking-widest text-white hover:bg-white/10 transition-colors w-full cursor-pointer"
+                  >
+                    Let Me Think About It <Mail className="w-5 h-5" />
+                  </button>
+                </>
+              ) : (
+                <form onSubmit={handleEmailSubmit} className="flex flex-col gap-4">
+                  <p className="font-sans text-sm text-white/60 mb-2">Enter your email and we&apos;ll send you a reminder:</p>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="w-full px-6 py-4 bg-white/10 border border-white/20 text-white placeholder:text-white/40 font-sans text-sm focus:outline-none focus:border-white/40"
+                    required
+                  />
+                  <div className="flex gap-4">
                     <button
-                        onClick={() => document.getElementById('slide-2')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="bg-white text-black px-12 py-5 uppercase tracking-widest font-black text-sm md:text-lg hover:scale-105 transition-transform flex items-center gap-3 shadow-2xl"
+                      type="submit"
+                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-white/90 transition-colors"
                     >
-                        Next Step <ArrowRight size={20} />
+                      Send Reminder
                     </button>
-                </section>
+                    <button
+                      type="button"
+                      onClick={() => setShowEmailForm(false)}
+                      className="px-6 py-4 border border-white/30 font-sans text-xs uppercase tracking-widest text-white hover:bg-white/10 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+            <p className="font-sans text-xs text-white/40 mb-8">
+              Prices go up in April 2026 to $1,099/$1,199 MSRP.
+            </p>
+            <div className="border-t border-white/10 pt-8">
+              <blockquote className="font-serif text-base text-white/60 italic">
+                &ldquo;Everything is easier for me now. The stretches that used to cause pain are now comfortable. I can finally focus on the music instead of fighting the instrument.&rdquo;
+              </blockquote>
+              <p className="mt-4 font-sans text-xs text-white/40">— Claudia Wang, Professional Pianist</p>
+            </div>
+          </div>
+        </section>
 
-                {/* ══════════════════════════════════════════════════════════════════
-            SLIDE 2 — Final Commit & Analytics
-            ══════════════════════════════════════════════════════════════════ */}
-                <section id="slide-2" className="h-[100dvh] w-full shrink-0 snap-start snap-always relative flex flex-col justify-center items-center text-center px-6 bg-neutral-900 border-t border-white/10">
-                    <h2 className="font-serif text-3xl md:text-5xl max-w-4xl leading-tight mb-6 text-balance font-bold">
-                        This reservation is for all sizes and colors of the DreamPlay One keyboard.
-                    </h2>
-                    <p className="text-white/60 text-sm md:text-lg max-w-2xl mb-12 leading-relaxed">
-                        You will receive a Step by Step &quot;Customize your DreamPlay Keyboard Configuration&quot; Link immediately following your successful reservation.
-                    </p>
-
-                    <div className="flex flex-col md:flex-row gap-4 w-full max-w-4xl mb-8">
-                        <a
-                            href="https://dreamplay-pianos.myshopify.com/cart/clear?return_to=%2Fcart%2F52213397291322%3A1%3Fnote%3Dcheckout_source%3Areserve_page"
-                            className="flex-1 bg-amber-400 text-black py-6 px-4 text-sm md:text-base font-black uppercase tracking-widest hover:bg-amber-300 transition-colors shadow-[0_0_30px_rgba(251,191,36,0.3)] flex items-center justify-center text-center"
-                        >
-                            YES I WANT TO PURCHASE NOW
-                        </a>
-
-                        {!emailOpen ? (
-                            <button
-                                onClick={() => setEmailOpen(true)}
-                                className="flex-1 border border-white/30 bg-transparent text-white py-6 px-4 text-xs md:text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
-                            >
-                                LET ME THINK ABOUT IT
-                            </button>
-                        ) : emailStatus === "success" ? (
-                            <div className="flex-1 flex items-center justify-center border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 py-6 px-4 text-xs font-bold uppercase tracking-widest">
-                                Saved! Check your inbox.
-                            </div>
-                        ) : (
-                            <form onSubmit={handleThinkAboutIt} className="flex-1 flex border border-white/30 p-1 bg-black">
-                                <input
-                                    type="email"
-                                    placeholder="Enter email to save spot"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="bg-transparent text-white px-4 py-4 outline-none w-full text-sm"
-                                />
-                                <button type="submit" disabled={emailStatus === "loading"} className="bg-white text-black px-6 text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors shrink-0 flex items-center justify-center min-w-[100px]">
-                                    {emailStatus === "loading" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Save Spot"}
-                                </button>
-                            </form>
-                        )}
-                    </div>
-
-                    <UrgencySubtext className="mb-12" />
-
-                    <p className="text-xs text-white/40 italic font-serif mt-8 absolute bottom-8 px-6">
-                        &quot;Everything is easier for me... I feel very comfortable playing scales, fast passages, or big chords.&quot;
-                        <span className="font-sans font-bold uppercase tracking-widest not-italic mt-2 block text-[10px] text-white/60">— Claudia Wang</span>
-                    </p>
-                </section>
-
-            </main>
-        </div>
-    );
+      </div>
+    </>
+  )
 }
