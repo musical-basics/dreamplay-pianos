@@ -92,10 +92,10 @@ export default function IntroOfferPage() {
         }
     }
 
-    const ScrollIndicator = ({ next }: { next: number }) => (
+    const ScrollIndicator = ({ next, dark }: { next: number; dark?: boolean }) => (
         <button
             onClick={() => scrollToSlide(next)}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer z-20"
+            className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-colors cursor-pointer z-20 ${dark ? "text-black/60 hover:text-black" : "text-white/60 hover:text-white"}`}
             aria-label="Next section"
         >
             <span className="font-sans text-xs uppercase tracking-[0.2em]">Scroll</span>
@@ -490,7 +490,7 @@ export default function IntroOfferPage() {
                         <p className="font-sans text-sm text-black/60 mb-2">Here&apos;s how much DreamPlay One will cost once our product is officially released:</p>
                         <p className="font-serif text-7xl md:text-9xl text-black">$1,099</p>
                     </div>
-                    <ScrollIndicator next={9} />
+                    <ScrollIndicator next={9} dark />
                 </section>
 
                 {/* Slide 10: But Wait */}
@@ -552,7 +552,7 @@ export default function IntroOfferPage() {
                             View our full shipping &amp; taxes policy
                         </Link>
                     </div>
-                    <ScrollIndicator next={13} />
+                    <ScrollIndicator next={13} dark />
                 </section>
 
                 {/* Slide 14: Founder Quotes */}
@@ -646,7 +646,7 @@ export default function IntroOfferPage() {
                             </Link>
                         </div>
                     </div>
-                    <ScrollIndicator next={16} />
+                    <ScrollIndicator next={16} dark />
                 </section>
 
                 {/* Slide 17: Buyers Guide */}
