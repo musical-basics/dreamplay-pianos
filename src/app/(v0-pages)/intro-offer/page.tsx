@@ -25,14 +25,14 @@ const professorQuotes = [
 ]
 
 const factoryImages = [
-    "https://dreamplaypianos.com/images/manufacturing-1.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-2.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-3.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-4.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-5.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-6.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-7.jpg",
-    "https://dreamplaypianos.com/images/manufacturing-8.jpg",
+    "/images/factory-pictures/exterior.jpeg",
+    "/images/factory-pictures/hq.jpg",
+    "/images/factory-pictures/smt.jpeg",
+    "/images/factory-pictures/mold.jpeg",
+    "/images/factory-pictures/chassis.jpeg",
+    "/images/factory-pictures/action.jpeg",
+    "/images/factory-pictures/keys.jpeg",
+    "/images/factory-pictures/keybeds.jpeg",
 ]
 
 const founderQuotes = [
