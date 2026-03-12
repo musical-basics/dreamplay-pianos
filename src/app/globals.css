@@ -210,3 +210,24 @@ a {
 .v0-page .font-serif {
   font-family: var(--font-playfair, 'Playfair Display'), 'Playfair Display', serif;
 }
+
+/* Reset Webflow heading overrides inside v0 pages */
+.v0-page h1,
+.v0-page h2,
+.v0-page h3,
+.v0-page h4,
+.v0-page h5,
+.v0-page h6 {
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  font-size: inherit;
+}
+
+/* Reset general Webflow body/element overrides */
+.v0-page p,
+.v0-page blockquote,
+.v0-page cite {
+  line-height: inherit;
+  margin: 0;
+}
