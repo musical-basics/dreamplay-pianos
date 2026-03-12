@@ -531,7 +531,7 @@ export default function IntroOfferPage() {
                     <div className="max-w-3xl mx-auto text-center px-6">
                         <div className="flex items-center justify-center gap-4 mb-8">
                             <div className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
