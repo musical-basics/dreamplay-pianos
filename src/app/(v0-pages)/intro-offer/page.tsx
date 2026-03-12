@@ -260,7 +260,7 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${quoteHorizontalSlide * 100}%)` }}>
                         {professorQuotes.map((quote, index) => (
-                            <div key={index} className="h-full w-full flex-shrink-0 flex items-center justify-center px-6 md:px-16 lg:px-24">
+                            <div key={index} className="h-full w-full flex-shrink-0 flex items-center justify-center px-6 md:px-16 lg:px-24 relative">
                                 <div className="max-w-4xl">
                                     <div className="border-l-2 border-white/20 pl-8 md:pl-12">
                                         <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed text-white/90 italic">
