@@ -158,7 +158,14 @@ export default function IntroOfferPage() {
                                 <p className="mt-4 font-sans text-sm text-white/60">2 minute introduction</p>
                             </>
                         ) : (
-                            <div className="w-full max-w-4xl" style={{ perspective: "1000px" }}>
+                            <div className="w-full max-w-6xl relative" style={{ perspective: "1000px" }}>
+                                <button
+                                    onClick={() => setIsVideoPlaying(false)}
+                                    className="absolute -top-10 right-0 z-30 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                                    aria-label="Close video"
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
                                 <video
                                     ref={videoRef}
                                     className="w-full aspect-video rounded-2xl shadow-2xl"
