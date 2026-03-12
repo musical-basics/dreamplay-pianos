@@ -563,7 +563,7 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${founderHorizontalSlide * 100}%)` }}>
                         {founderQuotes.map((quote, index) => (
-                            <div key={index} className="h-full w-full flex-shrink-0 flex items-center">
+                            <div key={index} className="h-full w-full flex-shrink-0 flex items-center relative">
                                 <div className="w-full max-w-6xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
                                     <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden flex-shrink-0">
                                         <Image src={quote.image} alt={quote.author} fill className="object-cover" />
