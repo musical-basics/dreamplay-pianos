@@ -158,15 +158,18 @@ export default function IntroOfferPage() {
                                 <p className="mt-4 font-sans text-sm text-white/60">2 minute introduction</p>
                             </>
                         ) : (
-                            <video
-                                ref={videoRef}
-                                className="w-full max-w-4xl aspect-video"
-                                controls
-                                autoPlay
-                                playsInline
-                            >
-                                <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Final%204k%20Video%20DreamPlay%20Intro.mp4" type="video/mp4" />
-                            </video>
+                            <div className="w-full max-w-4xl" style={{ perspective: "1000px" }}>
+                                <video
+                                    ref={videoRef}
+                                    className="w-full aspect-video rounded-2xl shadow-2xl"
+                                    style={{ transform: "rotateX(2deg) rotateY(-1deg)", transformOrigin: "center center" }}
+                                    controls
+                                    autoPlay
+                                    playsInline
+                                >
+                                    <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Final%204k%20Video%20DreamPlay%20Intro.mp4" type="video/mp4" />
+                                </video>
+                            </div>
                         )}
                     </div>
                     <ScrollIndicator next={1} />
