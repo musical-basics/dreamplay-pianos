@@ -359,14 +359,14 @@ export default function IntroOfferPage() {
                                 </div>
                                 <div className="order-1 md:order-2 relative aspect-video md:aspect-[4/5] landscape:aspect-[3/2] landscape:max-h-[60vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto w-full lg:max-w-none group hidden landscape:max-md:hidden md:block">
                                     <Image
-                                        src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg"
-                                        alt="Franz Liszt, a pianist with large hands who helped standardize the modern wide keyboard"
+                                        src="/images/Chopin_portrait.jpeg"
+                                        alt="Frédéric Chopin, who composed masterpieces on a narrower piano keyboard"
                                         fill
                                         className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                                     <div className="absolute bottom-4 left-0 right-0 text-center">
-                                        <p className="text-white/80 font-sans text-[10px] uppercase tracking-widest">Franz Liszt (1811–1886)</p>
+                                        <p className="text-white/80 font-sans text-[10px] uppercase tracking-widest">Frédéric Chopin (1810–1849)</p>
                                     </div>
                                 </div>
                             </div>
