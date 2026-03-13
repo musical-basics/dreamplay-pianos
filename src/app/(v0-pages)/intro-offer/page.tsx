@@ -715,6 +715,8 @@ export default function IntroOfferPage() {
                                 <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                             </button>
                         </div>
+
+                        {/* Product Slide 2: Video */}
                         <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-black">
                             <video
                                 className="w-full h-full object-cover"
@@ -736,7 +738,79 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setProductHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                aria-label="Previous"
+                            >
+                                <ChevronRight className="w-6 h-6 text-white" />
+                            </button>
+                            <button
+                                onClick={() => setProductHorizontalSlide(2)}
+                                className="absolute right-4 md:right-8 bottom-6 md:bottom-8 z-20 flex items-center gap-2 group cursor-pointer"
+                            >
+                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Next Slide</span>
+                                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+                            </button>
+                        </div>
+
+                        {/* Product Slide 3: Designed for Learning (from /learn) */}
+                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-[#050505] px-6 md:px-16 overflow-y-auto">
+                            <div className="w-full max-w-6xl mx-auto py-12">
+                                <div className="text-center mb-8">
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">Purpose-Built Hardware</p>
+                                    <h2 className="font-serif text-3xl md:text-5xl text-white leading-tight">
+                                        Designed for learning.
+                                        <br />
+                                        <span className="text-white/40">Built to last.</span>
+                                    </h2>
+                                </div>
+
+                                {/* Full-width keyboard video */}
+                                <div className="relative mb-8 overflow-hidden rounded-xl border border-white/10">
+                                    <video
+                                        className="w-full"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                    >
+                                        <source src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/Clip-3.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
+
+                                {/* Two-column detail grid */}
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    <div className="relative overflow-hidden border border-white/10 rounded-lg">
+                                        <Image
+                                            src="/images/learn/keyboard-back-ports.jpg"
+                                            alt="DreamPlay One back panel - USB, MIDI, Aux, Pedal, DC ports"
+                                            width={600}
+                                            height={400}
+                                            className="w-full object-cover"
+                                        />
+                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6">
+                                            <h3 className="font-serif text-lg md:text-xl font-semibold text-white">Full Connectivity</h3>
+                                            <p className="mt-1 font-sans text-xs text-white/50">USB to Host, MIDI Out, Aux In, Pedal, DC Power</p>
+                                        </div>
+                                    </div>
+                                    <div className="relative overflow-hidden border border-white/10 rounded-lg">
+                                        <Image
+                                            src="/images/learn/keyboard-led-lights.jpg"
+                                            alt="LED keys close-up with colored lights"
+                                            width={600}
+                                            height={400}
+                                            className="w-full object-cover"
+                                        />
+                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6">
+                                            <h3 className="font-serif text-lg md:text-xl font-semibold text-white">Custom LED System</h3>
+                                            <p className="mt-1 font-sans text-xs text-white/50">Color-coded keys guide every note</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => setProductHorizontalSlide(1)}
+                                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
                                 <ChevronRight className="w-6 h-6 text-white" />
