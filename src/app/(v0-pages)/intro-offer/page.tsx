@@ -198,7 +198,7 @@ export default function IntroOfferPage() {
                                 {/* Pulsating play button — bottom left */}
                                 <button
                                     onClick={playVideo}
-                                    className="absolute bottom-12 left-8 md:left-12 group cursor-pointer"
+                                    className="absolute bottom-12 left-6 md:left-16 lg:left-24 group cursor-pointer"
                                 >
                                     {/* Outer pulsating ring */}
                                     <span className="absolute inset-0 -m-3 rounded-full border-2 border-white/20 animate-ping" />
