@@ -569,10 +569,10 @@ export default function IntroOfferPage() {
                                 {index < professorQuotes.length - 1 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index + 1)}
-                                        className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                        className="absolute right-4 md:right-8 bottom-6 md:bottom-8 z-20 flex items-center gap-2 group cursor-pointer"
                                         aria-label="Next quote"
                                     >
-                                        <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                        <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Next Slide</span>
                                         <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                                     </button>
                                 )}
@@ -631,12 +631,12 @@ export default function IntroOfferPage() {
                                 Learn more about our product <ArrowRight className="w-4 h-4" />
                             </Link>
 
-                            {/* SWIPE indicator — right side */}
+                            {/* Next slide indicator — bottom right */}
                             <button
                                 onClick={() => setProductHorizontalSlide(1)}
-                                className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                className="absolute right-4 md:right-8 bottom-6 md:bottom-8 z-20 flex items-center gap-2 group cursor-pointer"
                             >
-                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Next Slide</span>
                                 <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                             </button>
                         </div>
@@ -692,10 +692,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(1)}
-                                className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                className="absolute right-4 md:right-8 bottom-6 md:bottom-8 z-20 flex items-center gap-2 group cursor-pointer"
                                 aria-label="Next"
                             >
-                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Next Slide</span>
                                 <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                             </button>
                         </div>
