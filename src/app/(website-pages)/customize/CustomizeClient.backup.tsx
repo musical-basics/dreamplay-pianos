@@ -91,7 +91,7 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
             tagline: 'Perfect for smaller hands',
             description: 'Ideal for women and children',
             zone: 'Zone A',
-            imgSrc: '/images/DS5.5-white_1.png'
+            imgSrc: '/images/ds55-white-narrow-keys-alt.png'
         },
         'DS6.0': {
             name: 'DreamPlay One DS6.0',
@@ -105,7 +105,7 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
             tagline: 'Standard keys for large hands',
             description: 'For the small percentage with larger hands',
             zone: 'Zone C',
-            imgSrc: '/images/DS6.5-Black.png'
+            imgSrc: '/images/ds65-black-standard-digital-piano.png'
         }
     };
 
@@ -674,7 +674,7 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
                                     </div>
                                 )}
                                 <div className="relative h-56 w-full overflow-hidden border-b border-white/5 transition-all duration-500 md:h-72" style={{ background: color === 'Black' ? 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)' : 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)' }}>
-                                    <img src={color === 'Black' ? "/images/DS6.5-Black.png" : "/images/DS5.5-White.png"} alt={color} className="absolute left-1/2 top-1/2 h-[85%] w-auto max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain transition-all duration-500 group-hover:scale-105" />
+                                    <img src={color === 'Black' ? "/images/ds65-black-standard-digital-piano.png" : "/images/ds55-white-narrow-keys-piano.png"} alt={color} className="absolute left-1/2 top-1/2 h-[85%] w-auto max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain transition-all duration-500 group-hover:scale-105" />
                                 </div>
                                 <div className="p-5 md:p-8">
                                     <div className="mb-2 flex items-center gap-2 md:mb-3 md:gap-3">

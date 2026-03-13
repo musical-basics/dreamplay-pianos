@@ -75,7 +75,7 @@ export default function HistoricalFactsPage() {
                 {/* ═══ HERO — DARK ═══ */}
                 <section id="the-myth" className="relative min-h-screen flex flex-col items-center justify-center px-6 bg-[#050505] text-white overflow-hidden pb-12">
                     <div className="absolute inset-0 opacity-20">
-                        <img src="/images/Hero-Image-Final-Version.jpg" alt="Piano History" className="w-full h-full object-cover" />
+                        <img src="/images/dreamplay-one-hero.jpg" alt="Piano History" className="w-full h-full object-cover" />
                     </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-[#050505]/80 to-[#050505]" />
 
@@ -125,7 +125,7 @@ export default function HistoricalFactsPage() {
                                 </div>
                                 <div className="relative group">
                                     <div className="aspect-[4/5] overflow-hidden rounded-none border border-neutral-200 bg-neutral-100 flex items-center justify-center relative">
-                                        <img src="/images/article-main-placeholder.jpg" alt="Historical Fortepiano" className="w-full h-full object-cover transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-105" />
+                                        <img src="/images/article-placeholder.jpg" alt="Historical Fortepiano" className="w-full h-full object-cover transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-105" />
                                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <p className="text-white font-sans text-sm tracking-widest uppercase">Historical Fortepiano Keys</p>
                                             <p className="text-white/70 font-sans text-xs tracking-widest uppercase mt-2">[ Replace Image ]</p>

@@ -29,7 +29,7 @@ export default function BuyProductPage() {
 
                             <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] md:aspect-[2/1] animate-fade-in-up delay-200">
                                 <Image
-                                    src="/images/DS6.0-Black-1.png"
+                                    src="/images/ds60-black-narrow-keys-piano.png"
                                     alt="DreamPlay One"
                                     fill
                                     className="object-contain transform scale-125"

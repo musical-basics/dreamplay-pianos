@@ -325,7 +325,7 @@ figure {
 }
 
 .section-hero {
-  background-image: linear-gradient(#0000 31%, #000), url('../images/Hero-Image-Final-Version.jpg');
+  background-image: linear-gradient(#0000 31%, #000), url('../images/dreamplay-one-hero.jpg');
   background-position: 0 0, 50% 25%;
   background-repeat: repeat, repeat;
   background-size: auto, cover;

@@ -230,7 +230,7 @@ export default function HowItWorksPage() {
 
                                 <div className="bg-[#0a0a0a] rounded-none p-6 flex items-center gap-6 mt-auto relative z-10 border border-white/10">
                                     <div className="w-20 h-20 relative rounded-none overflow-hidden bg-black flex-shrink-0">
-                                        <Image src="/images/generated-hand-image.jpg" alt="Hand span guide" fill className="object-cover opacity-80" />
+                                        <Image src="/images/hand-size-comparison.jpg" alt="Hand span guide" fill className="object-cover opacity-80" />
                                     </div>
                                     <div>
                                         <div className="font-sans text-base font-semibold mb-1 text-white">How to measure</div>

@@ -300,7 +300,7 @@ export default function IntroOfferPage() {
                         {/* Stats Slide (55%) */}
                         <div className="h-full w-full flex-shrink-0 relative">
                             <Image
-                                src="https://dreamplaypianos.com/images/_DSC1180-2-copy.jpg"
+                                src="https://dreamplaypianos.com/images/pianist-hands-on-narrow-keys.jpg"
                                 alt="Hands playing piano"
                                 fill
                                 className="object-cover"
@@ -748,7 +748,7 @@ export default function IntroOfferPage() {
                 {/* Slide 15: Ready to Take Next Step */}
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <Image
-                        src="/images/Hero-Image-Final-Version.jpg"
+                        src="/images/dreamplay-one-hero.jpg"
                         alt="DreamPlay One"
                         fill
                         className="object-cover"

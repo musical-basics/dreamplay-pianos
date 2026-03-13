@@ -329,7 +329,7 @@ export default function OurStoryPage() {
                                 </div>
                                 <div className="order-2 flex items-start lg:-mt-[200px]">
                                     <div className="w-full aspect-video overflow-hidden rounded-none border border-white/10">
-                                        <img src="/images/vlcsnap-2025-11-25-19h10m12s384.png" alt="Workshop" className="w-full h-full object-cover transition-all duration-700 grayscale" />
+                                        <img src="/images/dreamplay-piano-snapshot.png" alt="Workshop" className="w-full h-full object-cover transition-all duration-700 grayscale" />
                                     </div>
                                 </div>
                             </div>
@@ -351,7 +351,7 @@ export default function OurStoryPage() {
                     </div>
                     {/* Full Width Image */}
                     <div className="relative w-full aspect-[21/9] overflow-hidden">
-                        <img src="/images/article-main-placeholder.jpg" alt="Piano close up" className="w-full h-full object-cover transition-all duration-700" />
+                        <img src="/images/article-placeholder.jpg" alt="Piano close up" className="w-full h-full object-cover transition-all duration-700" />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50"></div>
                     </div>
 

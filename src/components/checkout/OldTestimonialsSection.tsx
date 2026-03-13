@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const stories = [
     {
-        image: "/images/_DSC1180-2-copy.jpg",
+        image: "/images/pianist-hands-on-narrow-keys.jpg",
         quote: `"I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears. A lifetime of struggling with a seemingly insurmountable problem vanishes in the moment they realize, 'It's not me that is the problem; it is the instrument!' Following on that, the joy of possibility overwhelms them."`,
         avatar: "/images/carol-leone.png",
         name: "Dr. Carol Leone",
@@ -20,7 +20,7 @@ const stories = [
         school: "harmonypianostudio.com"
     },
     {
-        image: "/images/person-practicing-piano-with-glowing-led-keys.jpg",
+        image: "/images/practicing-piano-led-keys.jpg",
         quote: `"My favorite story is from a piano performance major, who couldn't believe that playing the piano didn't have to hurt. The instrument restored her joy for piano repertoire. She had been preparing to change over to harpsichord due to keyboard size issues. I will never forget the day she first played a Chopin ballade on the DS5.5. She literally could not stop beaming."`,
         avatar: "/images/Kathryn-Ananda-Owens.png",
         name: "Kathryn-Ananda Owens",

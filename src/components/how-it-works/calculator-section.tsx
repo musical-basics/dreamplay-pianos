@@ -116,7 +116,7 @@ export function CalculatorSection() {
 
                         <div className="bg-[#0a0a0a] p-4 md:p-6 flex items-center gap-4 md:gap-6 mt-auto border border-white/10">
                             <div className="w-16 h-16 md:w-20 md:h-20 relative overflow-hidden bg-black flex-shrink-0">
-                                <Image src="/images/generated-hand-image.jpg" alt="Hand span guide" fill className="object-cover opacity-80" />
+                                <Image src="/images/hand-size-comparison.jpg" alt="Hand span guide" fill className="object-cover opacity-80" />
                             </div>
                             <div>
                                 <div className="font-sans text-sm md:text-base font-semibold mb-1 text-white">How to measure</div>

@@ -50,11 +50,11 @@ const GALLERY_IMAGES = [
         alt: "DreamPlay One, Hands on Keys",
     },
     {
-        src: "/images/DS6.0-Black-1-p-1080.png",
+        src: "/images/ds60-black-narrow-keys-piano.png",
         alt: "DreamPlay One DS6.0, Side Angle",
     },
     {
-        src: "/images/DS5.5-White-p-1080.png",
+        src: "/images/ds55-white-narrow-keys-piano.png",
         alt: "DreamPlay One DS5.5, White Model",
     },
     {
@@ -197,13 +197,13 @@ const FEATURES_DEEP = [
     {
         headline: "Sized for Your Hands",
         copy: "DS5.5 and DS6.0 octaves let your hands play in a natural arch: no overstretching, no strain. It's the first piano sized for the pianist, not the other way around.",
-        img: "/images/DS5.5-White-p-1080.png",
+        img: "/images/ds55-white-narrow-keys-piano.png",
         icon: Keyboard,
     },
     {
         headline: "Studio-Ready MIDI",
         copy: "Connect to any DAW, play any virtual instrument, layer sounds. DreamPlay One is a production-grade controller with Bluetooth and USB-C MIDI.",
-        img: "/images/DS6.0-Black-1-p-1080.png",
+        img: "/images/ds60-black-narrow-keys-piano.png",
         icon: Crosshair,
     },
     {

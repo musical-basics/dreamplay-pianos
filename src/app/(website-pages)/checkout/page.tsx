@@ -17,7 +17,7 @@ const PRODUCT_IMAGES = {
         "/images/learn/keyboard-led-lights.jpg"
     ],
     White: [
-        "/images/DS5.5-white_1.png",
+        "/images/ds55-white-narrow-keys-alt.png",
         "/images/piano-front-2.jpg",
         "/images/piano-in-the-box.png",
         "/images/learn/keyboard-led-lights.jpg"

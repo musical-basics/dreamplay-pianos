@@ -4,7 +4,7 @@ export default function ProductJsonLd() {
         "@type": "Product",
         "name": "DreamPlay One Digital Piano",
         "description": "A premium digital piano with narrow keys designed specifically for small hands, children, and preventing hand injury. Available in DS5.5 (7/8ths) and DS6.0 (15/16ths) sizes.",
-        "image": "https://dreamplaypianos.com/images/Hero-Image-Final-Version.jpg",
+        "image": "https://dreamplaypianos.com/images/dreamplay-one-hero.jpg",
         "brand": {
             "@type": "Brand",
             "name": "DreamPlay Pianos"

@@ -464,7 +464,7 @@ export default function ShippingPage() {
                             {/* DS6.5 */}
                             <div className="reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-300 border border-white/10 bg-white/5 rounded-none p-8 hover:border-white/20 transition-all">
                                 <div className="aspect-[4/3] bg-[#0a0a0a] rounded-none mb-6 flex items-center justify-center p-4">
-                                    <Image src="/images/DS6.5-Black.png" alt="DreamPlay DS6.5 standard size digital piano" width={400} height={300} className="max-h-full object-contain" />
+                                    <Image src="/images/ds65-black-standard-digital-piano.png" alt="DreamPlay DS6.5 standard size digital piano" width={400} height={300} className="max-h-full object-contain" />
                                 </div>
                                 <div className="flex justify-between items-start mb-2">
                                     <h3 className="font-serif text-2xl font-bold">DS6.5</h3>
