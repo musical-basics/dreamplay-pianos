@@ -81,6 +81,10 @@ export default function IntroOfferPage() {
 
     // Hand Measurement Popup State
     const [showHandPopup, setShowHandPopup] = useState(false)
+    const [handPopupStep, setHandPopupStep] = useState<1 | 2>(1) // 1 = email capture, 2 = guide revealed
+    const [handPopupEmail, setHandPopupEmail] = useState("")
+    const [handPopupSubmitting, setHandPopupSubmitting] = useState(false)
+    const [handPopupError, setHandPopupError] = useState("")
 
     // ─── Landscape Hint Logic ───
     useEffect(() => {
@@ -135,6 +139,38 @@ export default function IntroOfferPage() {
     const closeHandPopup = () => {
         setShowHandPopup(false)
         sessionStorage.setItem("dp_hand_popup_seen", "true")
+    }
+
+    const handleHandPopupEmailSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!handPopupEmail.trim()) return
+        setHandPopupSubmitting(true)
+        setHandPopupError("")
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: "",
+                    email: handPopupEmail.trim(),
+                    subject: "Hand Sizing Guide Request",
+                    message: "User requested the hand sizing guide via the 45s popup on /intro-offer.",
+                }),
+            })
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}))
+                throw new Error(data.error || "Something went wrong")
+            }
+            // Save email for autofill on other forms
+            localStorage.setItem("dp_user_email", handPopupEmail.trim())
+            setContactEmail(handPopupEmail.trim())
+            // Move to step 2: reveal the guide
+            setHandPopupStep(2)
+        } catch (err: any) {
+            setHandPopupError(err.message || "Something went wrong. Please try again.")
+        } finally {
+            setHandPopupSubmitting(false)
+        }
     }
 
     const handleHandPopupCTA = () => {
@@ -255,7 +291,7 @@ export default function IntroOfferPage() {
                 </div>
             )}
 
-            {/* Hand Measurement Popup (45s delay) */}
+            {/* Hand Measurement Popup (45s delay) — Email-gated */}
             {showHandPopup && (
                 <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">
                     <div className="relative w-full max-w-md bg-[#0a0a0f] border border-white/20 p-8 rounded-3xl shadow-2xl text-center">
@@ -267,36 +303,88 @@ export default function IntroOfferPage() {
                             <X className="w-5 h-5" />
                         </button>
 
-                        {/* Hand image */}
-                        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10">
-                            <Image
-                                src="/images/hand-size-comparison.jpg"
-                                alt="How to measure your hand span for the right piano key size"
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
+                        {handPopupStep === 1 ? (
+                            <>
+                                {/* Step 1: Email Capture */}
+                                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10">
+                                    <Image
+                                        src="/images/hand-size-comparison.jpg"
+                                        alt="How to measure your hand span"
+                                        fill
+                                        className="object-cover opacity-60 blur-[2px]"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <p className="font-serif text-2xl md:text-3xl text-white drop-shadow-lg px-4">🖐️ Find Your Perfect Fit</p>
+                                    </div>
+                                </div>
 
-                        <h3 className="text-2xl font-serif text-white mb-3">What&apos;s Your Hand Size?</h3>
-                        <p className="text-sm font-sans text-white/60 mb-2 leading-relaxed">
-                            Spread your hand wide. Measure from the <strong className="text-white/80">tip of your thumb</strong> to the <strong className="text-white/80">tip of your pinky</strong>.
-                        </p>
-                        <p className="text-xs font-sans text-white/40 mb-6">
-                            Use a ruler or tape measure to find your span in inches.
-                        </p>
+                                <h3 className="text-2xl font-serif text-white mb-2">What&apos;s Your Hand Size?</h3>
+                                <p className="text-sm font-sans text-white/60 mb-6 leading-relaxed">
+                                    Enter your email to get our free hand sizing guide and find the perfect key size for you.
+                                </p>
 
-                        <button
-                            onClick={handleHandPopupCTA}
-                            className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer mb-3"
-                        >
-                            Try Our Size Calculator
-                        </button>
-                        <button
-                            onClick={closeHandPopup}
-                            className="w-full py-3 border border-white/20 text-white/60 font-sans uppercase tracking-widest text-xs rounded-full hover:bg-white/5 transition-colors cursor-pointer"
-                        >
-                            Maybe Later
-                        </button>
+                                <form onSubmit={handleHandPopupEmailSubmit} className="space-y-3">
+                                    <input
+                                        type="email"
+                                        required
+                                        value={handPopupEmail}
+                                        onChange={(e) => setHandPopupEmail(e.target.value)}
+                                        placeholder="your@email.com"
+                                        className="w-full px-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/30 font-sans text-sm focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition-colors"
+                                    />
+                                    {handPopupError && (
+                                        <p className="text-red-400 text-xs font-sans">{handPopupError}</p>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        disabled={handPopupSubmitting}
+                                        className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {handPopupSubmitting ? "Sending..." : "Get the Free Guide"}
+                                    </button>
+                                </form>
+
+                                <button
+                                    onClick={closeHandPopup}
+                                    className="mt-3 w-full py-3 text-white/40 font-sans text-xs hover:text-white/60 transition-colors cursor-pointer"
+                                >
+                                    No thanks
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                {/* Step 2: Guide Revealed */}
+                                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10">
+                                    <Image
+                                        src="/images/hand-size-comparison.jpg"
+                                        alt="How to measure your hand span for the right piano key size"
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+
+                                <h3 className="text-2xl font-serif text-white mb-3">Here&apos;s How to Measure</h3>
+                                <p className="text-sm font-sans text-white/60 mb-2 leading-relaxed">
+                                    Spread your hand wide. Measure from the <strong className="text-white/80">tip of your thumb</strong> to the <strong className="text-white/80">tip of your pinky</strong>.
+                                </p>
+                                <p className="text-xs font-sans text-white/40 mb-6">
+                                    Use a ruler or tape measure to find your span in inches.
+                                </p>
+
+                                <button
+                                    onClick={handleHandPopupCTA}
+                                    className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer mb-3"
+                                >
+                                    Try Our Size Calculator
+                                </button>
+                                <button
+                                    onClick={closeHandPopup}
+                                    className="w-full py-3 border border-white/20 text-white/60 font-sans uppercase tracking-widest text-xs rounded-full hover:bg-white/5 transition-colors cursor-pointer"
+                                >
+                                    Close
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             )}
