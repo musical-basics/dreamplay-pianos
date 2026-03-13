@@ -122,8 +122,9 @@ export default function IntroOfferPage() {
     const [priorityPopupError, setPriorityPopupError] = useState("")
     const [priorityPopupSuccess, setPriorityPopupSuccess] = useState(false)
 
-    // ─── Landscape Hint Logic ───
+    // ─── Landscape Hint Logic (DISABLED — to re-enable, remove the early return below) ───
     useEffect(() => {
+        return // DISABLED: landscape hint turned off
         if (typeof window === "undefined") return
         if (sessionStorage.getItem("dp_landscape_seen")) return
 
