@@ -37,18 +37,11 @@ export function CountdownBanner() {
 
     if (expired) {
         return (
-            <>
-                <button
-                    onClick={() => setIsFoundersOpen(true)}
-                    className="group bg-[#050505] border-b border-white/10 py-2.5 text-center flex items-center justify-center gap-2 w-full z-50 text-[10px] sm:text-xs text-white/70 uppercase tracking-[0.15em] font-sans font-medium hover:text-white transition-colors cursor-pointer"
-                >
-                    <span className="text-amber-400 font-bold">🚀 Founder&apos;s Batch Allocations Open</span>
-                    <span className="hidden sm:inline">|</span>
-                    <span className="hidden sm:inline font-bold text-white/90">Secure your spot to lock in early-adopter pricing</span>
-                    <ChevronRight size={14} className="text-white/40 group-hover:text-white/70 transition-colors" />
-                </button>
-                <FoundersBatchCapture isOpen={isFoundersOpen} onClose={() => setIsFoundersOpen(false)} />
-            </>
+            <div
+                className="bg-[#050505] border-b border-white/10 py-2.5 text-center flex items-center justify-center gap-2 w-full z-50 text-[10px] sm:text-xs text-white/70 uppercase tracking-[0.15em] font-sans font-medium"
+            >
+                <span className="text-white/90 font-bold">Prices go up in April 2026 to MSRP ($1099)</span>
+            </div>
         )
     }
 
