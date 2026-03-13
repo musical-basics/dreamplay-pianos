@@ -209,18 +209,27 @@ export default function IntroOfferPage() {
         setTimeout(() => setStatsHorizontalSlide(2), 600)
     }
 
-    // ─── $25 Store Credit Popup (3 minutes) ───
+    // ─── $25 Store Credit Popup (90 seconds + 3 minutes) ───
     useEffect(() => {
         if (typeof window === "undefined") return
         if (sessionStorage.getItem("dp_credit_popup_seen")) return
 
-        const timer = setTimeout(() => {
+        const timer90s = setTimeout(() => {
+            if (!sessionStorage.getItem("dp_credit_popup_seen") && !showHandPopup) {
+                setShowCreditPopup(true)
+            }
+        }, 90000) // 90 seconds
+
+        const timer3m = setTimeout(() => {
             if (!sessionStorage.getItem("dp_credit_popup_seen") && !showHandPopup) {
                 setShowCreditPopup(true)
             }
         }, 180000) // 3 minutes
 
-        return () => clearTimeout(timer)
+        return () => {
+            clearTimeout(timer90s)
+            clearTimeout(timer3m)
+        }
     }, [showHandPopup])
 
     const closeCreditPopup = () => {
