@@ -5,6 +5,7 @@ import { FeaturesPianoSection } from "@/components/special-offer/features-piano-
 import Footer from "@/components/Footer"
 import Link from "next/link"
 import { UrgencySubtext } from "@/components/UrgencySubtext"
+import { SizeVisualSection } from "@/components/premium-offer/size-visual-section"
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -302,6 +303,9 @@ export default function ProductInformationPage() {
                         </p>
                     </div>
                 </section>
+
+                {/* Size Visual Section — Find Your Perfect Fit */}
+                <SizeVisualSection />
 
                 {/* Features Overview — LIGHT */}
                 <section className="bg-white">
