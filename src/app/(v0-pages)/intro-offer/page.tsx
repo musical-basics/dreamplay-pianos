@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { ChevronDown, ChevronRight, Play, ArrowRight, Send, Loader2, CheckCircle2 } from "lucide-react"
+import { ChevronDown, ChevronRight, Play, ArrowRight, Send, Loader2, CheckCircle2, Smartphone, X } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
@@ -75,6 +75,45 @@ export default function IntroOfferPage() {
     const [isContactSubmitted, setIsContactSubmitted] = useState(false)
     const [contactError, setContactError] = useState("")
 
+    // Landscape Hint State
+    const [showLandscapeHint, setShowLandscapeHint] = useState(false)
+
+    // ─── Landscape Hint Logic ───
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        if (sessionStorage.getItem("dp_landscape_seen")) return
+
+        let timer: NodeJS.Timeout
+
+        const checkOrientation = () => {
+            const isMobilePortrait = window.innerWidth < 768 && window.innerHeight > window.innerWidth
+            if (!isMobilePortrait) {
+                setShowLandscapeHint(false)
+                sessionStorage.setItem("dp_landscape_seen", "true")
+            }
+        }
+
+        const isMobilePortrait = window.innerWidth < 768 && window.innerHeight > window.innerWidth
+        if (isMobilePortrait) {
+            timer = setTimeout(() => {
+                if (!sessionStorage.getItem("dp_landscape_seen")) {
+                    setShowLandscapeHint(true)
+                }
+            }, 2500)
+        }
+
+        window.addEventListener("resize", checkOrientation)
+        return () => {
+            if (timer) clearTimeout(timer)
+            window.removeEventListener("resize", checkOrientation)
+        }
+    }, [])
+
+    const closeLandscapeHint = () => {
+        setShowLandscapeHint(false)
+        sessionStorage.setItem("dp_landscape_seen", "true")
+    }
+
     useEffect(() => {
         const savedEmail = localStorage.getItem("dp_user_email")
         const savedName = localStorage.getItem("dp_user_first_name")
@@ -142,6 +181,50 @@ export default function IntroOfferPage() {
 
     return (
         <>
+            {/* Landscape Hint Popup */}
+            {showLandscapeHint && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6 md:hidden">
+                    <style dangerouslySetInnerHTML={{
+                        __html: `
+                        @keyframes tilt-phone {
+                            0% { transform: rotate(0deg); }
+                            20% { transform: rotate(0deg); }
+                            50% { transform: rotate(-90deg); }
+                            80% { transform: rotate(-90deg); }
+                            100% { transform: rotate(0deg); }
+                        }
+                        .animate-tilt {
+                            animation: tilt-phone 3s ease-in-out infinite;
+                        }
+                    `}} />
+                    <div className="relative w-full max-w-sm bg-[#0a0a0f] border border-white/20 p-8 rounded-3xl shadow-2xl text-center">
+                        <button
+                            onClick={closeLandscapeHint}
+                            className="absolute top-4 right-4 text-white/40 hover:text-white cursor-pointer"
+                            aria-label="Close"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        <div className="flex justify-center mb-6">
+                            <Smartphone className="w-16 h-16 text-amber-400 animate-tilt" strokeWidth={1.5} />
+                        </div>
+
+                        <h3 className="text-2xl font-serif text-white mb-3">Rotate your phone</h3>
+                        <p className="text-sm font-sans text-white/60 mb-8 leading-relaxed">
+                            A piano is a horizontal instrument. For the best visual experience, please turn your phone sideways.
+                        </p>
+
+                        <button
+                            onClick={closeLandscapeHint}
+                            className="w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white/90 transition-colors cursor-pointer"
+                        >
+                            Continue in Portrait
+                        </button>
+                    </div>
+                </div>
+            )}
+
             {/* Header */}
             <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
 
