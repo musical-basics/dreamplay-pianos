@@ -366,15 +366,11 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${learnHorizontalSlide * 100}%)` }}>
                         <div className="h-full w-full flex-shrink-0 relative">
-                            <video
+                            <img
+                                src="/images/DreamPlay piano with Midi app copy.png"
+                                alt="DreamPlay Piano with MIDI App"
                                 className="absolute inset-0 w-full h-full object-cover"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                            >
-                                <source src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4" type="video/mp4" />
-                            </video>
+                            />
                             <div className="absolute inset-0 bg-black/40" />
                             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
                                 <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-3xl text-balance">
@@ -392,8 +388,18 @@ export default function IntroOfferPage() {
                                 <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
-                        <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-neutral-950">
-                            <div className="text-center px-6">
+                        <div className="h-full w-full flex-shrink-0 relative">
+                            <video
+                                className="absolute inset-0 w-full h-full object-cover"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                            >
+                                <source src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4" type="video/mp4" />
+                            </video>
+                            <div className="absolute inset-0 bg-black/50" />
+                            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
                                 <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">Learn Your Favorite Songs</h2>
                                 <p className="font-sans text-white/60 max-w-xl mx-auto mb-12">Our companion app guides you through every note with visual feedback and progress tracking.</p>
                                 <Link
