@@ -5,7 +5,7 @@ import { ChevronDown, ArrowRight, Mail } from "lucide-react"
 import Link from "next/link"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
 
-const TOTAL_SLIDES = 2
+const TOTAL_SLIDES = 3
 
 export default function ReservePage() {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -150,19 +150,36 @@ export default function ReservePage() {
           <ScrollIndicator next={1} />
         </section>
 
-        {/* Slide 2: Confirmation */}
+        {/* Slide 2: Reservation Info */}
         <section className="h-screen relative bg-neutral-950 flex items-center justify-center pt-12" style={{ scrollSnapAlign: "start" }}>
           <div className="w-full max-w-3xl mx-auto px-6 text-center">
             <div className="bg-white/5 border border-white/10 p-8 md:p-12 mb-8">
               <p className="font-serif text-xl md:text-2xl text-white leading-relaxed mb-8">
                 This reservation is for <span className="text-white font-semibold">all sizes and colors</span> of the DreamPlay One keyboard.
               </p>
-              <p className="font-sans text-base text-white/70">
-                You will receive a{" "}
-                <span className="text-white">Step by Step Customize your DreamPlay Keyboard Configuration Link</span>{" "}
-                immediately following your reservation.
+              <p className="font-serif text-lg md:text-xl text-white/80 mb-8">
+                Following your reservation, here&apos;s what will happen:
               </p>
+              <ol className="text-left space-y-6 font-sans text-base text-white/70 list-decimal list-inside">
+                <li>You will receive a <span className="text-white font-medium">Step by Step Customize your DreamPlay Keyboard Configuration Link</span> immediately following your reservation.</li>
+                <li>At any time before we are ready to ship you your keyboard, you may adjust or cancel your reservation.</li>
+                <li>3 weeks before your delivery, we will confirm with you your address.</li>
+                <li>We want you to love your keyboard. For 90 days, you may return with full return shipping expenses paid, or exchange for a different size.</li>
+              </ol>
             </div>
+            <button
+              onClick={() => scrollToSlide(2)}
+              className="inline-flex items-center gap-3 bg-white px-12 py-5 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors cursor-pointer"
+            >
+              Continue <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+          <ScrollIndicator next={2} />
+        </section>
+
+        {/* Slide 3: Purchase / Think About It */}
+        <section className="h-screen relative bg-neutral-950 flex items-center justify-center pt-12" style={{ scrollSnapAlign: "start" }}>
+          <div className="w-full max-w-3xl mx-auto px-6 text-center">
             <div className="flex flex-col gap-4 mb-8">
               {!showEmailForm ? (
                 <>
