@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ArrowRight, Menu, X, User, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { getHomepage, syncHomepageAB } from "@/lib/homepage-ab"
 import { useABAnalytics } from "@/hooks/use-ab-analytics"
@@ -64,6 +64,8 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
     const { trackClick } = useABAnalytics("special_offer_variant", { trackTime: false })
     const [scrolled, setScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [hideNav, setHideNav] = useState(false)
+    const lastScrollY = useRef(0)
     const [user, setUser] = useState<any>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
 
@@ -83,9 +85,18 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 100)
+            const currentY = window.scrollY;
+            setScrolled(currentY > 100);
+
+            // Hide/show on mobile based on scroll direction
+            if (currentY > lastScrollY.current && currentY > 80) {
+                setHideNav(true);  // scrolling down
+            } else if (currentY < lastScrollY.current - 10) {
+                setHideNav(false); // scrolling up (with 10px threshold to avoid jitter)
+            }
+            lastScrollY.current = currentY;
         }
-        window.addEventListener("scroll", handleScroll)
+        window.addEventListener("scroll", handleScroll, { passive: true })
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
@@ -100,6 +111,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
             <header
                 className={cn(
                     "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 flex flex-col",
+                    hideNav && !isMobileMenuOpen ? "max-md:-translate-y-full" : "translate-y-0",
                     className
                 )}
             >
