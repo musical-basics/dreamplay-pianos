@@ -44,6 +44,22 @@ Our on-page and technical SEO strategies are heavily optimized around the follow
     * `src/app/(website-pages)/product-information/page.tsx` (directly)
     * `src/app/(website-pages)/checkout/layout.tsx` (via layout, since page is client-side)
 
+### Open Graph Image ✅
+* **File:** `src/app/opengraph-image.jpg` — 1200×630 hero image auto-detected by Next.js.
+* Ensures branded social sharing cards on Twitter, Facebook, iMessage, etc.
+
+### Single h1 Per Page ✅
+* **Fixed:** `src/app/(website-pages)/information-and-policies/shipping/page.tsx`
+* Merged two `<h1>` tags into one using `<span>` + `<br/>` to preserve visual styling.
+
+### Canonical Tag Safety ✅
+* **A/B variants** (`/premium-offer`, `/extended-offer`, `/landing-page-one`, `/landing-page-1`) correctly point canonical → `https://dreamplaypianos.com`.
+* **Content pages** (`/how-it-works`, `/buyers-guide`, `/product-information`, etc.) use self-referencing canonicals via `metadataBase` — they are NOT pointed to root.
+
+### Image Optimization (Shipping Page) ✅
+* Converted 5 raw `<img>` tags to Next.js `<Image>` on the shipping page for automatic WebP/AVIF conversion and responsive sizing.
+* Added keyword-rich alt text to all images.
+
 ---
 
 ## 3. Remaining TODO

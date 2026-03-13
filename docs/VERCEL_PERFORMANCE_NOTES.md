@@ -35,7 +35,28 @@ Make sure these files use ISR so they load instantly but still reflect Admin Pan
 
 ---
 
+## 3. Font Loading Optimization (Eliminating Render-Blocking JS)
+**The Problem:** `src/app/(website-pages)/layout.tsx` was using a legacy Webflow-era `WebFont.load()` script with `strategy="beforeInteractive"` to fetch Lato and Manrope. This blocked the page from rendering, increased CLS, and added an external JS dependency.
+
+**The Fix:**
+- Migrated Lato and Manrope to `next/font/google` (same approach as Inter and Playfair in root layout).
+- Fonts are now downloaded at **build time** and served locally from Vercel's Edge CDN — zero runtime JS overhead.
+- Removed the `webfont.js` script and `WebFont.load()` call entirely.
+
+---
+
+## 4. Image Optimization (Raw `<img>` → Next.js `<Image>`)
+**The Problem:** Legacy components (e.g., the Shipping page) were using raw `<img>` tags, bypassing Vercel's automatic image optimization. Mobile users were downloading full desktop-sized images.
+
+**The Fix:**
+- Converted all raw `<img>` tags on the Shipping page to `next/image` `<Image>` components.
+- Vercel now automatically serves WebP/AVIF, resizes for the user's viewport, and lazy-loads below-the-fold images.
+
+---
+
 ## Summary Checklist for Future Pages
 1. **Never query Postgres in Middleware.** If you need dynamic routing based on data, use Vercel KV (Redis) or hardcode it.
 2. **Avoid `force-dynamic` on marketing pages.**
 3. **Use `export const revalidate = 60;`** on any page that pulls data from the admin panel (Supabase) so you get the best of both worlds: instant CDN speeds + updated content.
+4. **Always use `next/font/google`** for fonts — never load fonts via external JS.
+5. **Always use `<Image>`** instead of raw `<img>` tags for automatic optimization.
