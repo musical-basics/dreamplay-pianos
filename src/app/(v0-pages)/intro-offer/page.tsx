@@ -5,6 +5,7 @@ import { ChevronDown, ChevronRight, Play, ArrowRight, Send, Loader2, CheckCircle
 import Link from "next/link"
 import Image from "next/image"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
+import { LazyVideo } from "@/components/extended-offer/LazyVideo"
 import DonutChart from "@/components/DonutChart"
 
 const professorQuotes = [
@@ -496,15 +497,10 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${learnHorizontalSlide * 100}%)` }}>
                         <div className="h-full w-full flex-shrink-0 relative">
-                            <video
-                                className="absolute inset-0 w-full h-full object-cover"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                            >
-                                <source src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4" type="video/mp4" />
-                            </video>
+                            <LazyVideo
+                                src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4"
+                                className="absolute inset-0"
+                            />
                             <div className="absolute inset-0 bg-black/50" />
                             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
                                 <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">Learn Your Favorite Songs</h2>
@@ -644,24 +640,17 @@ export default function IntroOfferPage() {
                     <ScrollIndicator next={10} />
                 </section>
 
-                {/* Slide 11: Lock in $699 */}
+                {/* Slide 11: Pricing ($699 + $99 deposit) */}
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-sm text-white/60 mb-4">TODAY, You can lock in our exclusive, <span className="underline">limited introductory</span> price of just</p>
-                        <p className="font-serif text-6xl md:text-8xl text-white">$699</p>
-
-                    </div>
-                    <ScrollIndicator next={11} />
-                </section>
-
-                {/* Slide 12: $99 Deposit */}
-                <section className="h-screen relative bg-black flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
-                    <div className="text-center px-6">
+                        <p className="font-serif text-6xl md:text-8xl text-white mb-12">$699</p>
+                        <div className="w-16 border-t border-white/20 mx-auto mb-12" />
                         <p className="font-sans text-sm text-white/60 mb-2">Due Today:</p>
-                        <p className="font-serif text-8xl md:text-[12rem] text-white">$99</p>
+                        <p className="font-serif text-5xl md:text-7xl text-white">$99</p>
                         <p className="mt-4 font-sans text-sm text-white/50">Pay the rest when your keyboard is ready to ship</p>
                     </div>
-                    <ScrollIndicator next={12} />
+                    <ScrollIndicator next={11} />
                 </section>
 
                 {/* Slide 13: Money Back Guarantee */}
@@ -699,7 +688,7 @@ export default function IntroOfferPage() {
                             View our full shipping &amp; taxes policy
                         </Link>
                     </div>
-                    <ScrollIndicator next={13} dark />
+                    <ScrollIndicator next={12} dark />
                 </section>
 
                 {/* Slide 14: Founder Quotes */}
@@ -753,7 +742,7 @@ export default function IntroOfferPage() {
                             />
                         ))}
                     </div>
-                    <ScrollIndicator next={14} />
+                    <ScrollIndicator next={13} />
                 </section>
 
                 {/* Slide 15: Ready to Take Next Step */}
@@ -775,7 +764,7 @@ export default function IntroOfferPage() {
                         </Link>
                         <p className="mt-6 font-sans text-sm text-white/50">Receive it by August 2026</p>
                     </div>
-                    <ScrollIndicator next={15} />
+                    <ScrollIndicator next={14} />
                 </section>
 
                 {/* Slide 16: FAQ / Contact Form */}
@@ -866,7 +855,7 @@ export default function IntroOfferPage() {
                             </form>
                         )}
                     </div>
-                    <ScrollIndicator next={16} dark />
+                    <ScrollIndicator next={15} dark />
                 </section>
 
                 {/* Slide 17: Buyers Guide */}
