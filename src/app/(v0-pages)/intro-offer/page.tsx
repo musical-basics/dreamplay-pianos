@@ -195,10 +195,10 @@ export default function IntroOfferPage() {
                                 </h1>
                                 <p className="mt-6 font-sans text-sm md:text-base text-white/50">Click to watch our official launch video</p>
 
-                                {/* Pulsating play button — bottom left */}
+                                {/* Pulsating play button — below text on mobile, bottom-left on desktop */}
                                 <button
                                     onClick={playVideo}
-                                    className="absolute bottom-12 left-6 md:left-16 lg:left-24 group cursor-pointer"
+                                    className="mt-8 md:mt-0 md:absolute md:bottom-12 md:left-16 lg:left-24 group cursor-pointer relative"
                                 >
                                     {/* Outer pulsating ring */}
                                     <span className="absolute inset-0 -m-3 rounded-full border-2 border-white/20 animate-ping" />
@@ -206,10 +206,10 @@ export default function IntroOfferPage() {
                                     <span className="absolute inset-0 -m-2 rounded-full border border-white/10 animate-pulse" />
                                     {/* Button */}
                                     <span
-                                        className="relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 group-hover:bg-white/20 transition-all"
+                                        className="relative flex items-center justify-center w-16 h-16 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 group-hover:bg-white/20 transition-all"
                                         style={{ boxShadow: "0 0 30px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.04)" }}
                                     >
-                                        <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
+                                        <Play className="w-6 h-6 md:w-10 md:h-10 text-white fill-white ml-1" />
                                     </span>
                                 </button>
                             </>
