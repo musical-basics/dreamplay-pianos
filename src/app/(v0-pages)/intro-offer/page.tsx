@@ -204,9 +204,13 @@ export default function IntroOfferPage() {
                                 <p className="mt-4 font-sans text-sm text-white/60">2 minute introduction</p>
                             </>
                         ) : (
-                            <div className="fixed inset-0 z-50 bg-black md:relative md:inset-auto md:z-auto md:bg-transparent md:w-full md:max-w-6xl" style={{ perspective: "1000px" }}>
+                            <div
+                                className="fixed inset-0 z-50 bg-black flex items-center justify-center md:relative md:inset-auto md:z-auto md:bg-transparent md:w-full md:max-w-6xl md:block"
+                                style={{ perspective: "1000px" }}
+                                onClick={() => setIsVideoPlaying(false)}
+                            >
                                 <button
-                                    onClick={() => setIsVideoPlaying(false)}
+                                    onClick={(e) => { e.stopPropagation(); setIsVideoPlaying(false); }}
                                     className="absolute top-4 right-4 md:-top-10 md:right-0 z-30 w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-full bg-white/20 md:bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                                     aria-label="Close video"
                                 >
@@ -219,6 +223,7 @@ export default function IntroOfferPage() {
                                     controls
                                     autoPlay
                                     playsInline
+                                    onClick={(e) => e.stopPropagation()}
                                 >
                                     <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Final%204k%20Video%20DreamPlay%20Intro.mp4" type="video/mp4" />
                                 </video>
