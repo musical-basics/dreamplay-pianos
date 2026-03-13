@@ -190,18 +190,28 @@ export default function IntroOfferPage() {
                     <div className="relative z-10 flex flex-col items-center text-center px-6">
                         {!isVideoPlaying ? (
                             <>
+                                <h1 className="font-serif text-4xl md:text-6xl lg:text-8xl text-white leading-tight max-w-4xl text-balance" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.5)" }}>
+                                    The Piano That Fits <em className="text-amber-400 not-italic font-serif italic">Your</em> Hands
+                                </h1>
+                                <p className="mt-6 font-sans text-sm md:text-base text-white/50">Click to watch our official launch video</p>
+
+                                {/* Pulsating play button — bottom left */}
                                 <button
                                     onClick={playVideo}
-                                    className="group relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all mb-8"
+                                    className="absolute bottom-12 left-8 md:left-12 group cursor-pointer"
                                 >
-                                    <div className="absolute inset-0 rounded-full bg-white/5 animate-pulse" />
-                                    <div className="absolute inset-2 rounded-full border border-white/20" />
-                                    <Play className="w-12 h-12 md:w-16 md:h-16 text-white fill-white ml-2" />
+                                    {/* Outer pulsating ring */}
+                                    <span className="absolute inset-0 -m-3 rounded-full border-2 border-white/20 animate-ping" />
+                                    {/* Middle glow ring */}
+                                    <span className="absolute inset-0 -m-2 rounded-full border border-white/10 animate-pulse" />
+                                    {/* Button */}
+                                    <span
+                                        className="relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 group-hover:bg-white/20 transition-all"
+                                        style={{ boxShadow: "0 0 30px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.04)" }}
+                                    >
+                                        <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
+                                    </span>
                                 </button>
-                                <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-3xl text-balance">
-                                    Click to watch our official launch video
-                                </h1>
-                                <p className="mt-4 font-sans text-sm text-white/60">2 minute introduction</p>
                             </>
                         ) : (
                             <div
