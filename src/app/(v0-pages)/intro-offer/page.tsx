@@ -204,18 +204,18 @@ export default function IntroOfferPage() {
                                 <p className="mt-4 font-sans text-sm text-white/60">2 minute introduction</p>
                             </>
                         ) : (
-                            <div className="w-full max-w-6xl relative" style={{ perspective: "1000px" }}>
+                            <div className="fixed inset-0 z-50 bg-black md:relative md:inset-auto md:z-auto md:bg-transparent md:w-full md:max-w-6xl" style={{ perspective: "1000px" }}>
                                 <button
                                     onClick={() => setIsVideoPlaying(false)}
-                                    className="absolute -top-10 right-0 z-30 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                                    className="absolute top-4 right-4 md:-top-10 md:right-0 z-30 w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-full bg-white/20 md:bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                                     aria-label="Close video"
                                 >
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                    <svg className="w-5 h-5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                                 </button>
                                 <video
                                     ref={videoRef}
-                                    className="w-full aspect-video rounded-2xl shadow-2xl"
-                                    style={{ transform: "rotateX(2deg) rotateY(-1deg)", transformOrigin: "center center" }}
+                                    className="w-full h-full object-contain md:aspect-video md:h-auto md:rounded-2xl md:shadow-2xl"
+                                    style={{ transform: "rotateX(0deg)", transformOrigin: "center center" }}
                                     controls
                                     autoPlay
                                     playsInline
