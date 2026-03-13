@@ -727,7 +727,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 6: Expected Shipping */}
-                <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6 max-w-5xl mx-auto">
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50 mb-4">Expected Shipping</p>
                         <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white">August 2026</h2>
@@ -748,7 +748,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 7: Manufacturing */}
-                <section className="h-screen relative bg-black flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-black flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="w-full max-w-6xl px-6">
                         <div className="text-center mb-8">
                             <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50 mb-2">Behind the Scenes</p>
@@ -779,7 +779,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 8: Social Proof */}
-                <section className="h-screen relative bg-black flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-black flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50 mb-8">Join the Movement</p>
                         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
@@ -801,7 +801,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 9: Official Price */}
-                <section className="h-screen relative bg-white flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-white flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-black/50 mb-4">Official Release Price</p>
                         <p className="font-sans text-sm text-black/60 mb-2">Here&apos;s how much DreamPlay One will cost once our product is officially released:</p>
@@ -811,7 +811,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 10: But Wait */}
-                <section className="h-screen relative bg-black flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-black flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white italic">But wait...</h2>
                     </div>
@@ -819,7 +819,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 11: Pricing ($699 + $99 deposit) */}
-                <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-sm text-white/60 mb-4">TODAY, You can lock in our exclusive, <span className="underline">limited introductory</span> price of just</p>
                         <p className="font-serif text-6xl md:text-8xl text-white mb-12">$699</p>
@@ -832,7 +832,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 13: Money Back Guarantee */}
-                <section className="h-screen relative bg-white flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-white flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="max-w-3xl mx-auto text-center px-6">
                         <div className="flex items-center justify-center gap-4 mb-8">
                             <div className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center">
@@ -1037,7 +1037,7 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 17: Buyers Guide */}
-                <section className="h-screen relative bg-neutral-100 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
+                <section className="h-screen relative bg-neutral-100 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-black/50 mb-4">Find Your Perfect Fit</p>
                         <h2 className="font-serif text-3xl md:text-4xl text-black mb-12">Visit Our Buyer&apos;s Guide</h2>
