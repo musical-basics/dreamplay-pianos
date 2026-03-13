@@ -12,7 +12,7 @@ const stories = [
         school: "SMU Meadows School of the Arts"
     },
     {
-        image: "/images/pianist-playing-grand-piano-warm-lighting.jpg",
+        image: "/images/girl playing piano.jpg",
         quote: `"I can play for much longer and continue to play every day. I don't get frustrated from the pain and from being limited in my playing."`,
         avatar: "/images/Jen-McCabe.png",
         name: "Jen McCabe",
