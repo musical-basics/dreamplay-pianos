@@ -12,48 +12,46 @@ Our on-page and technical SEO strategies are heavily optimized around the follow
 
 ---
 
-## 2. Successfully Implemented Features
+## 2. Implemented Features
 
-### FAQ Rich Snippets (JSON-LD)
-* **Component Created:** Built `src/components/FaqJsonLd.tsx` to format questions into Google's required `schema.org` FAQ format.
-* **Injected:** Successfully added to the `<head>` of `src/app/(website-pages)/information-and-policies/faq/page.tsx`.
-* **Content Optimized:** The `src/actions/faq-data.ts` file has been fully rewritten to organically include our exact target keywords (e.g., "kids hands piano", "hands injury", "narrow keyboard").
+### FAQ Rich Snippets (JSON-LD) ✅
+* **Component:** `src/components/FaqJsonLd.tsx` — formats questions into Google's `schema.org` FAQ format.
+* **Injected on:** `src/app/(website-pages)/information-and-policies/faq/page.tsx`
+* **Content Optimized:** `src/actions/faq-data.ts` rewritten with target keywords.
 
-### Global Metadata Foundation
-* **Root Layout:** `src/app/layout.tsx` is successfully targeting the core keyword phrase `"The Best Piano for Small Hands"` in the default title template.
+### Global Metadata Foundation ✅
+* **Root Layout:** `src/app/layout.tsx` targets `"The Best Piano for Small Hands"` in the title template.
+* **`metadataBase`:** Set to `new URL('https://dreamplaypianos.com')` for accurate Open Graph URL resolution.
 
----
-
-## 3. High-Priority Pending Fixes (A/B Test SEO Protection)
-
-Because we are running A/B tests across multiple landing pages, we are currently generating duplicate content which cannibalizes our search rankings. 
-
-### A. The Middleware Rewrite
+### Middleware Rewrite (SEO-Safe Routing) ✅
 * **File:** `src/middleware.ts`
-* **Action:** Change the root path (`/`) handler from `NextResponse.redirect` to `NextResponse.rewrite`. This prevents Google from dropping the root domain from its index.
+* Uses `NextResponse.rewrite()` (not redirect) for homepage → `/intro-offer`, preserving root domain authority.
 
-### B. Canonical Tags
-* **Files:** All landing page variants (e.g., `src/app/(website-pages)/landing-page-1/page.tsx`, `/premium-offer`, `/extended-offer`).
-* **Action:** Add a `canonical` URL to the `metadata` export pointing back to the root domain (`https://dreamplaypianos.com`). This tells Google that the root domain is the "master" version to rank.
+### Canonical Tags ✅
+* **Files with canonical → `https://dreamplaypianos.com`:**
+    * `src/app/(website-pages)/premium-offer/page.tsx`
+    * `src/app/(website-pages)/extended-offer/page.tsx`
+    * `src/app/(website-pages)/landing-page-one/page.tsx`
+    * `src/app/(website-pages)/landing-page-1/layout.tsx` (via layout, since page is client-side)
 
-### C. `metadataBase` Configuration
-* **File:** `src/app/layout.tsx`
-* **Action:** Add `metadataBase: new URL('https://dreamplaypianos.com')` to the global metadata object so Next.js can accurately generate absolute URLs for Open Graph images.
+### Sitemap & Robots ✅
+* **`src/app/robots.ts`** — blocks `/admin/`, `/api/`, `/analytics/`, auth pages, and all A/B test variant URLs.
+* **`src/app/sitemap.ts`** — 21 core public pages with priorities and change frequencies.
+
+### Product JSON-LD Schema ✅
+* **Component:** `src/components/ProductJsonLd.tsx` — Product schema with $799 price, 5-star rating, 208 reviews.
+* **Injected on:**
+    * `src/app/(website-pages)/product-information/page.tsx` (directly)
+    * `src/app/(website-pages)/checkout/layout.tsx` (via layout, since page is client-side)
+
+> **Note:** The price in `ProductJsonLd.tsx` is currently $799. Verify this matches the actual current price and update if needed.
 
 ---
 
-## 4. Next Technical Implementations
+## 3. Remaining TODO
 
-### Sitemap and Robots (`src/app/sitemap.ts` & `src/app/robots.ts`)
-* **Action:** Create these files. 
-* **Purpose:** Tell Google exactly which pages to crawl (`/how-it-works`, `/buyers-guide`) and explicitly block it from crawling internal paths (`/admin`, `/api`, and our specific A/B test variant URLs).
-
-### Product JSON-LD Schema
-* **Files to target:** `src/app/(website-pages)/checkout/page.tsx` and `src/app/(website-pages)/product-information/page.tsx`.
-* **Action:** Inject a Product schema to pull the $1,099 pricing and the 5-star "208 Reviews" data directly into Google Search Results (Rich Snippets).
-
-### Deep Image `alt` Text Sweep
-* **Action:** Replace generic alt tags with descriptive, keyword-rich alternatives. 
+### Deep Image `alt` Text Sweep ❌
+* **Action:** Replace generic alt tags with descriptive, keyword-rich alternatives.
 * **Examples to fix:**
     * `src/components/checkout/OldTestimonialsSection.tsx`: Change `alt="Pianist playing"` to `alt="Pianist with small hands playing a narrow keyboard"`.
     * `src/app/(website-pages)/buyers-guide/page.tsx`: Change `alt="DreamPlay Piano with bench"` to `alt="DreamPlay One kids piano with narrow keys and bench"`.
