@@ -106,6 +106,13 @@ export default function IntroOfferPage() {
     const [handPopupSubmitting, setHandPopupSubmitting] = useState(false)
     const [handPopupError, setHandPopupError] = useState("")
 
+    // $25 Store Credit Popup State (3 minutes)
+    const [showCreditPopup, setShowCreditPopup] = useState(false)
+    const [creditPopupEmail, setCreditPopupEmail] = useState("")
+    const [creditPopupSubmitting, setCreditPopupSubmitting] = useState(false)
+    const [creditPopupError, setCreditPopupError] = useState("")
+    const [creditPopupSuccess, setCreditPopupSuccess] = useState(false)
+
     // ─── Landscape Hint Logic ───
     useEffect(() => {
         if (typeof window === "undefined") return
@@ -200,10 +207,63 @@ export default function IntroOfferPage() {
         setTimeout(() => setStatsHorizontalSlide(2), 600)
     }
 
+    // ─── $25 Store Credit Popup (3 minutes) ───
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        if (sessionStorage.getItem("dp_credit_popup_seen")) return
+
+        const timer = setTimeout(() => {
+            if (!sessionStorage.getItem("dp_credit_popup_seen") && !showHandPopup) {
+                setShowCreditPopup(true)
+            }
+        }, 180000) // 3 minutes
+
+        return () => clearTimeout(timer)
+    }, [showHandPopup])
+
+    const closeCreditPopup = () => {
+        setShowCreditPopup(false)
+        sessionStorage.setItem("dp_credit_popup_seen", "true")
+    }
+
+    const handleCreditPopupSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!creditPopupEmail.trim()) return
+        setCreditPopupSubmitting(true)
+        setCreditPopupError("")
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: "$25 Credit Popup",
+                    email: creditPopupEmail.trim(),
+                    subject: "$25 Store Credit - Accessories",
+                    message: "User claimed $25 store credit for accessories via 3-minute popup on /intro-offer.",
+                }),
+            })
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}))
+                throw new Error(data.error || "Something went wrong")
+            }
+            localStorage.setItem("dp_user_email", creditPopupEmail.trim())
+            setContactEmail(creditPopupEmail.trim())
+            setCreditPopupSuccess(true)
+        } catch (err: any) {
+            setCreditPopupError(err.message || "Something went wrong. Please try again.")
+        } finally {
+            setCreditPopupSubmitting(false)
+        }
+    }
+
     useEffect(() => {
         const savedEmail = localStorage.getItem("dp_user_email")
         const savedName = localStorage.getItem("dp_user_first_name")
-        if (savedEmail) setContactEmail(savedEmail)
+        if (savedEmail) {
+            setContactEmail(savedEmail)
+            setCreditPopupEmail(savedEmail)
+            setHandPopupEmail(savedEmail)
+        }
         if (savedName) setContactName(savedName)
     }, [])
 
@@ -453,6 +513,87 @@ export default function IntroOfferPage() {
                                     className="w-full py-3 border border-white/20 text-white/60 font-sans uppercase tracking-widest text-xs rounded-full hover:bg-white/5 transition-colors cursor-pointer"
                                 >
                                     Close
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* $25 Store Credit Popup (3 min delay) */}
+            {showCreditPopup && (
+                <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">
+                    <div className="relative w-full max-w-md bg-[#0a0a0f] border border-white/20 p-8 rounded-3xl shadow-2xl text-center">
+                        <button
+                            onClick={closeCreditPopup}
+                            className="absolute top-4 right-4 text-white/40 hover:text-white cursor-pointer"
+                            aria-label="Close"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        {!creditPopupSuccess ? (
+                            <>
+                                <div className="text-5xl mb-4">🎁</div>
+                                <h3 className="text-2xl font-serif text-white mb-2">Get $25 Store Credit</h3>
+                                <p className="text-sm font-sans text-white/60 mb-4 leading-relaxed">
+                                    Enter your email and we&apos;ll send you <strong className="text-amber-400">$25 off</strong> any piano accessory:
+                                </p>
+                                <div className="flex flex-col gap-2 text-left mb-6">
+                                    <div className="flex items-center gap-3 text-sm text-white/70 bg-white/5 rounded-xl px-4 py-3 border border-white/10">
+                                        <span className="text-lg">🪑</span>
+                                        <span>Adjustable Height Bench</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-sm text-white/70 bg-white/5 rounded-xl px-4 py-3 border border-white/10">
+                                        <span className="text-lg">🎹</span>
+                                        <span>Premium Keyboard Stand</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-sm text-white/70 bg-white/5 rounded-xl px-4 py-3 border border-white/10">
+                                        <span className="text-lg">🎧</span>
+                                        <span>Premium Headphones</span>
+                                    </div>
+                                </div>
+
+                                <form onSubmit={handleCreditPopupSubmit} className="space-y-3">
+                                    <input
+                                        type="email"
+                                        required
+                                        value={creditPopupEmail}
+                                        onChange={(e) => setCreditPopupEmail(e.target.value)}
+                                        placeholder="your@email.com"
+                                        className="w-full px-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/30 font-sans text-sm focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition-colors"
+                                    />
+                                    {creditPopupError && (
+                                        <p className="text-red-400 text-xs font-sans">{creditPopupError}</p>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        disabled={creditPopupSubmitting}
+                                        className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {creditPopupSubmitting ? "Claiming..." : "Claim My $25 Credit"}
+                                    </button>
+                                </form>
+
+                                <button
+                                    onClick={closeCreditPopup}
+                                    className="mt-3 w-full py-3 text-white/40 font-sans text-xs hover:text-white/60 transition-colors cursor-pointer"
+                                >
+                                    No thanks
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <div className="text-5xl mb-4">✅</div>
+                                <h3 className="text-2xl font-serif text-white mb-2">You&apos;re All Set!</h3>
+                                <p className="text-sm font-sans text-white/60 mb-6 leading-relaxed">
+                                    Your <strong className="text-amber-400">$25 store credit</strong> has been reserved. We&apos;ll send the details to your email.
+                                </p>
+                                <button
+                                    onClick={closeCreditPopup}
+                                    className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer"
+                                >
+                                    Continue Browsing
                                 </button>
                             </>
                         )}
