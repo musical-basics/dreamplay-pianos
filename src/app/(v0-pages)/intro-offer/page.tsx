@@ -107,17 +107,25 @@ export default function IntroOfferPage() {
             <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
 
             {/* Dot navigation */}
-            <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
-                {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
-                    <button
-                        key={i}
-                        onClick={() => scrollToSlide(i)}
-                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${currentSlide === i ? "bg-white scale-125" : "bg-white/30 hover:bg-white/50"
-                            }`}
-                        aria-label={`Go to slide ${i + 1}`}
-                    />
-                ))}
-            </div>
+            {(() => {
+                const lightSlides = [8, 9, 12, 15] // slides with white/light backgrounds
+                const isDark = lightSlides.includes(currentSlide)
+                return (
+                    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+                        {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => scrollToSlide(i)}
+                                className={`w-2 h-2 rounded-full transition-all cursor-pointer ${currentSlide === i
+                                        ? isDark ? "bg-black scale-125" : "bg-white scale-125"
+                                        : isDark ? "bg-black/30 hover:bg-black/50" : "bg-white/30 hover:bg-white/50"
+                                    }`}
+                                aria-label={`Go to slide ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                )
+            })()}
 
             {/*
         This single div is both the viewport (h-screen, overflow-hidden)
