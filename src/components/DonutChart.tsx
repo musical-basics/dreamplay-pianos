@@ -44,9 +44,9 @@ const DonutChart = ({ percent, label, theme = "light" }: { percent: number; labe
     const uniqueId = `donut-${percent}-${label.replace(/\s/g, '')}`;
 
     return (
-        <div ref={ref} className="flex flex-col items-center">
-            <div className="relative w-[220px] h-[220px] flex items-center justify-center">
-                <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="transform -rotate-90 drop-shadow-2xl">
+        <div ref={ref} className="flex flex-col items-center w-full">
+            <div className="relative w-full max-w-[220px] aspect-square flex items-center justify-center">
+                <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`} className="transform -rotate-90 drop-shadow-2xl">
                     <defs>
                         <filter id={`${uniqueId}-shadow`} x="-20%" y="-20%" width="140%" height="140%">
                             <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="rgba(0,0,0,0.5)" />
@@ -95,8 +95,8 @@ const DonutChart = ({ percent, label, theme = "light" }: { percent: number; labe
                 <div
                     className="absolute rounded-full"
                     style={{
-                        width: size - strokeWidth * 2 - 16,
-                        height: size - strokeWidth * 2 - 16,
+                        width: '60%',
+                        height: '60%',
                         background: theme === "dark"
                             ? "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.06) 0%, rgba(10,10,15,0.95) 60%)"
                             : "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.8) 0%, rgba(245,245,245,0.95) 60%)",
@@ -108,7 +108,7 @@ const DonutChart = ({ percent, label, theme = "light" }: { percent: number; labe
 
                 <div className="absolute z-10 flex flex-col items-center">
                     <span
-                        className="text-5xl font-bold text-[#c0392b]"
+                        className="text-3xl md:text-5xl font-bold text-[#c0392b]"
                         style={{
                             textShadow: theme === "dark"
                                 ? "0 0 20px rgba(192,57,43,0.3), 0 2px 4px rgba(0,0,0,0.5)"
