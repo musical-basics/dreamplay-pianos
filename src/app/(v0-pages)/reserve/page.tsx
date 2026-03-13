@@ -151,7 +151,7 @@ export default function ReservePage() {
               {!showEmailForm ? (
                 <>
                   <a
-                    href="https://checkout.dreamplaypianos.com/reserve"
+                    href="https://dreamplay-pianos.myshopify.com/cart/clear?return_to=/cart/53150736253242:1"
                     className="inline-flex items-center justify-center gap-3 bg-white px-12 py-5 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors w-full"
                   >
                     Yes, I Want to Purchase Now <ArrowRight className="w-5 h-5" />
