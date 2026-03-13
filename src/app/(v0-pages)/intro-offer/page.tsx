@@ -691,8 +691,15 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 15: Ready to Take Next Step */}
-                <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
-                    <div className="text-center px-6">
+                <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
+                    <Image
+                        src="/images/Hero-Image-Final-Version.jpg"
+                        alt="DreamPlay One"
+                        fill
+                        className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60" />
+                    <div className="relative z-10 text-center px-6">
                         <h2 className="font-serif text-3xl md:text-5xl text-white mb-8">Ready to take the next step?</h2>
                         <Link
                             href="/reserve"
