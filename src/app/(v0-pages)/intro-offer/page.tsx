@@ -195,10 +195,10 @@ export default function IntroOfferPage() {
                                 </h1>
                                 <p className="mt-6 font-sans text-sm md:text-base text-white/50">Click to watch our official launch video</p>
 
-                                {/* Pulsating play button — below text on mobile, bottom-left on desktop */}
+                                {/* Pulsating play button — centered below subtitle */}
                                 <button
                                     onClick={playVideo}
-                                    className="mt-8 md:mt-0 md:absolute md:bottom-12 md:left-16 lg:left-24 group cursor-pointer relative"
+                                    className="mt-8 group cursor-pointer relative"
                                 >
                                     {/* Outer pulsating ring */}
                                     <span className="absolute inset-0 -m-3 rounded-full border-2 border-white/20 animate-ping" />
