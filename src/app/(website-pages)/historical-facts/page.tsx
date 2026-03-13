@@ -95,7 +95,7 @@ export default function HistoricalFactsPage() {
                         <div className="w-full max-w-3xl mx-auto aspect-video rounded-none border border-white/20 bg-[#0a0a0f] shadow-2xl relative overflow-hidden group">
                             <iframe
                                 className="absolute top-0 left-0 w-full h-full z-10"
-                                src="https://www.youtube.com/embed/ZXlknl-Jc48"
+                                src="https://www.youtube.com/embed/ZXlknI-Jc48"
                                 title="Piano's Darkest Secret"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
