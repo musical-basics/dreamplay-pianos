@@ -39,12 +39,10 @@ Our on-page and technical SEO strategies are heavily optimized around the follow
 * **`src/app/sitemap.ts`** — 21 core public pages with priorities and change frequencies.
 
 ### Product JSON-LD Schema ✅
-* **Component:** `src/components/ProductJsonLd.tsx` — Product schema with $799 price, 5-star rating, 208 reviews.
+* **Component:** `src/components/ProductJsonLd.tsx` — Product schema with $699 price, 5-star rating, 208 reviews.
 * **Injected on:**
     * `src/app/(website-pages)/product-information/page.tsx` (directly)
     * `src/app/(website-pages)/checkout/layout.tsx` (via layout, since page is client-side)
-
-> **Note:** The price in `ProductJsonLd.tsx` is currently $799. Verify this matches the actual current price and update if needed.
 
 ---
 
