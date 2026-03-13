@@ -297,11 +297,66 @@ export default function IntroOfferPage() {
                                 <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
-                        {/* Stats Slide (55%) */}
+                        {/* Horizontal Slide 1: History */}
+                        <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-[#0a0a0f] px-6 md:px-16">
+                            <div className="w-full max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                                <div className="space-y-6 order-2 md:order-1">
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber-400 font-bold mb-2">Historical Context</p>
+                                    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight text-white">
+                                        Beethoven and Chopin wrote their masterpieces while playing a narrower piano keyboard than our modern one.
+                                    </h2>
+                                    <p className="font-sans text-base md:text-lg text-white/80 leading-relaxed font-medium italic border-l-2 border-amber-400 pl-4">
+                                        Why are small and medium-handed pianists playing an oversized keyboard meant for large hands?
+                                    </p>
+                                    <div className="space-y-4 font-sans text-sm text-white/60 mt-6">
+                                        <p>• Prior to the 1880s, pianos featured much narrower keys, perfectly suited for rapid, intricate finger work.</p>
+                                        <p>• The modern 6.5&quot; octave was standardized in the late 19th century merely to accommodate heavy cast-iron frames and large hammers.</p>
+                                        <p>• It was built for the massive hands of romantic giants like Liszt, not the average pianist.</p>
+                                    </div>
+                                    <div className="pt-4">
+                                        <Link
+                                            href="/historical-facts"
+                                            target="_blank"
+                                            className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 bg-white/5 hover:bg-white/10 text-white font-sans text-xs uppercase tracking-widest transition-colors rounded-full"
+                                        >
+                                            Learn more about history <ArrowRight className="w-4 h-4" />
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="order-1 md:order-2 relative aspect-video md:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto w-full lg:max-w-none group">
+                                    <Image
+                                        src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg"
+                                        alt="Franz Liszt, a pianist with large hands who helped standardize the modern wide keyboard"
+                                        fill
+                                        className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                                    <div className="absolute bottom-4 left-0 right-0 text-center">
+                                        <p className="text-white/80 font-sans text-[10px] uppercase tracking-widest">Franz Liszt (1811–1886)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setStatsHorizontalSlide(0)}
+                                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                aria-label="Previous"
+                            >
+                                <ChevronRight className="w-6 h-6 text-white" />
+                            </button>
+                            <button
+                                onClick={() => setStatsHorizontalSlide(2)}
+                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                aria-label="Next"
+                            >
+                                <ChevronRight className="w-6 h-6 text-white" />
+                            </button>
+                        </div>
+
+                        {/* Horizontal Slide 2: Stats Slide (55%) */}
                         <div className="h-full w-full flex-shrink-0 relative">
                             <Image
-                                src="https://dreamplaypianos.com/images/pianist-hands-on-narrow-keys.jpg"
-                                alt="Hands playing piano"
+                                src="/images/pianist-hands-on-narrow-keys.jpg"
+                                alt="Hands playing narrow keys piano"
                                 fill
                                 className="object-cover"
                             />
@@ -333,21 +388,22 @@ export default function IntroOfferPage() {
                                 </div>
                             </div>
                             <button
-                                onClick={() => setStatsHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                onClick={() => setStatsHorizontalSlide(1)}
+                                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
                                 <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                             <button
-                                onClick={() => setStatsHorizontalSlide(2)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                onClick={() => setStatsHorizontalSlide(3)}
+                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
                                 <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
-                        {/* Pain Point Slide */}
+
+                        {/* Horizontal Slide 3: Pain Point Slide */}
                         <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16">
                             <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-8 md:mb-12 text-center" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.4)" }}>
                                 Biomechanical Impact on Small Hands
@@ -368,13 +424,24 @@ export default function IntroOfferPage() {
                                 Learn more about the science <ChevronRight className="w-4 h-4" />
                             </Link>
                             <button
-                                onClick={() => setStatsHorizontalSlide(1)}
+                                onClick={() => setStatsHorizontalSlide(2)}
                                 className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
                                 <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
+                    </div>
+                    <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                        {[0, 1, 2, 3].map((i) => (
+                            <button
+                                key={i}
+                                onClick={() => setStatsHorizontalSlide(i)}
+                                className={`h-2 rounded-full transition-all cursor-pointer ${statsHorizontalSlide === i ? "bg-white w-6" : "bg-white/30 w-2"
+                                    }`}
+                                aria-label={`Slide ${i + 1}`}
+                            />
+                        ))}
                     </div>
                     <ScrollIndicator next={2} />
                 </section>
