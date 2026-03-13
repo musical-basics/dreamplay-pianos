@@ -117,8 +117,8 @@ export default function IntroOfferPage() {
                                 key={i}
                                 onClick={() => scrollToSlide(i)}
                                 className={`w-2 h-2 rounded-full transition-all cursor-pointer ${currentSlide === i
-                                        ? isDark ? "bg-black scale-125" : "bg-white scale-125"
-                                        : isDark ? "bg-black/30 hover:bg-black/50" : "bg-white/30 hover:bg-white/50"
+                                    ? isDark ? "bg-black scale-125" : "bg-white scale-125"
+                                    : isDark ? "bg-black/30 hover:bg-black/50" : "bg-white/30 hover:bg-white/50"
                                     }`}
                                 aria-label={`Go to slide ${i + 1}`}
                             />
@@ -193,7 +193,59 @@ export default function IntroOfferPage() {
                 {/* Slide 2: 55% Stats with horizontal swipe */}
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${statsHorizontalSlide * 100}%)` }}>
-                        {/* Stats Slide */}
+                        {/* Hidden Barrier Slide (from /how-it-works) */}
+                        <div className="h-full w-full flex-shrink-0 relative bg-[#050505] flex items-center justify-center overflow-y-auto">
+                            <div className="w-full max-w-5xl px-6 py-12">
+                                <div className="text-center mb-12">
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">The Data</p>
+                                    <h2 className="font-serif text-3xl md:text-5xl tracking-tight leading-tight text-white">The Hidden Barrier</h2>
+                                </div>
+                                <div className="grid md:grid-cols-2 gap-12 lg:gap-16 mb-12">
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-center mb-6">
+                                            <div className="font-serif text-5xl font-bold mb-2 text-[#c0392b]">87%</div>
+                                            <div className="font-sans text-lg font-medium text-white/60 mb-2">of females</div>
+                                            <p className="font-sans text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed">
+                                                Have hand spans smaller than the 8.5 inch minimum that standard keyboards expect.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-center mb-6">
+                                            <div className="font-serif text-5xl font-bold mb-2 text-[#c0392b]">24%</div>
+                                            <div className="font-sans text-lg font-medium text-white/60 mb-2">of males</div>
+                                            <p className="font-sans text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed">
+                                                Also fall below the comfortable reach threshold for a standard 6.5 inch keyboard.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="border-t border-white/10 pt-10 grid md:grid-cols-2 gap-8 text-center md:text-left">
+                                    <div className="px-4">
+                                        <div className="font-serif text-5xl font-bold mb-2 text-white">8.5&quot;</div>
+                                        <div className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">The Threshold</div>
+                                        <p className="font-sans text-sm leading-relaxed text-white/60">
+                                            Minimum hand span needed to play a conventional 6.5 inch keyboard from Yamaha or Steinway with real comfort.
+                                        </p>
+                                    </div>
+                                    <div className="px-4">
+                                        <div className="font-serif text-5xl font-bold mb-2 text-white">25 to 30%</div>
+                                        <div className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">Larger Reach Required</div>
+                                        <p className="font-sans text-sm leading-relaxed text-white/60">
+                                            Hand span often needs to be at least one quarter larger than the octave just to reach 8ths, 9ths, and 10ths without strain.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setStatsHorizontalSlide(1)}
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                aria-label="Next"
+                            >
+                                <ChevronRight className="w-6 h-6 text-white" />
+                            </button>
+                        </div>
+                        {/* Stats Slide (55%) */}
                         <div className="h-full w-full flex-shrink-0 relative">
                             <Image
                                 src="https://dreamplaypianos.com/images/_DSC1180-2-copy.jpg"
@@ -229,7 +281,14 @@ export default function IntroOfferPage() {
                                 </div>
                             </div>
                             <button
-                                onClick={() => setStatsHorizontalSlide(1)}
+                                onClick={() => setStatsHorizontalSlide(0)}
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
+                                aria-label="Previous"
+                            >
+                                <ChevronRight className="w-6 h-6 text-black" />
+                            </button>
+                            <button
+                                onClick={() => setStatsHorizontalSlide(2)}
                                 className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
@@ -253,7 +312,7 @@ export default function IntroOfferPage() {
                                 </Link>
                             </div>
                             <button
-                                onClick={() => setStatsHorizontalSlide(0)}
+                                onClick={() => setStatsHorizontalSlide(1)}
                                 className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
