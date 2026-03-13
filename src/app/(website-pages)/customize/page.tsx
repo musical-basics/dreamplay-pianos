@@ -1,7 +1,8 @@
+import { Suspense } from 'react'
 import CustomizeClient from './CustomizeClient'
 import { getCustomizePageUrls, getHiddenProducts } from '@/actions/admin-actions'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function CustomizePage() {
     const [urls, hiddenProducts] = await Promise.all([
@@ -9,5 +10,9 @@ export default async function CustomizePage() {
         getHiddenProducts()
     ])
 
-    return <CustomizeClient urls={urls} hiddenProducts={hiddenProducts} />
+    return (
+        <Suspense>
+            <CustomizeClient urls={urls} hiddenProducts={hiddenProducts} />
+        </Suspense>
+    )
 }

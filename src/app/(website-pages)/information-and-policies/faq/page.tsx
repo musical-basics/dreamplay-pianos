@@ -9,7 +9,7 @@ export const metadata = {
     description: "Everything you need to know about the science of hand span and the engineering behind DreamPlay keyboards.",
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function FAQPage() {
     // Fetch live data from the database (or defaults if DB is empty)
