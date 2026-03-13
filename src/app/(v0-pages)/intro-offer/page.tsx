@@ -432,27 +432,32 @@ export default function IntroOfferPage() {
                 {/* Slide 4: DreamPlay One Hero */}
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${productHorizontalSlide * 100}%)` }}>
-                        <div className="h-full w-full flex-shrink-0 relative">
-                            <Image
-                                src="https://dreamplaypianos.com/images/Piano%20Front%202.jpg"
-                                alt="DreamPlay One"
-                                fill
-                                className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/50" />
-                            <div className="absolute inset-0 flex items-center justify-center z-10 text-center px-6">
-                                <div>
-                                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/60" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>Introducing</p>
-                                    <h2 className="mt-2 font-serif text-4xl md:text-6xl lg:text-7xl text-white" style={{ textShadow: "0 0 30px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.5)" }}>DreamPlay One</h2>
-                                    <p className="mt-4 max-w-md mx-auto font-sans text-base text-white/80" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>88 weighted keys. Narrower by design. Built for hands that don&apos;t fit the standard.</p>
-                                </div>
+                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16">
+                            {/* Text */}
+                            <p className="font-sans text-[10px] md:text-xs uppercase tracking-[0.3em] text-amber-400 mb-3">Introducing</p>
+                            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white text-center" style={{ textShadow: "0 0 30px rgba(255,255,255,0.1)" }}>DreamPlay One</h2>
+                            <p className="mt-4 max-w-lg mx-auto font-sans text-sm md:text-base text-white/60 text-center">
+                                The world&apos;s first premium digital piano with ergonomically scaled keys
+                            </p>
+
+                            {/* Glassmorphism hero card */}
+                            <div className="mt-8 md:mt-12 relative w-full max-w-3xl rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
+                                <Image
+                                    src="https://dreamplaypianos.com/images/Piano%20Front%202.jpg"
+                                    alt="DreamPlay One digital piano front view with narrow keys for small hands"
+                                    width={1200}
+                                    height={700}
+                                    className="w-full h-auto object-cover"
+                                />
                             </div>
+
+                            {/* SWIPE indicator — right side */}
                             <button
                                 onClick={() => setProductHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
-                                aria-label="Next"
+                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 group-hover:text-white/70 transition-colors [writing-mode:vertical-lr]">Swipe</span>
+                                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-colors" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-black">
