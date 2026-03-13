@@ -661,6 +661,11 @@ export default function IntroOfferPage() {
                                 <strong>Our promise:</strong> When we are ready to ship to you, we will reach out to confirm with you, your exact shipping address. At this point, you may cancel and get a 100% full refund (no fees) if you changed your mind.
                             </p>
                         </div>
+                        <div className="bg-neutral-100 p-8 md:p-12 mt-4">
+                            <p className="font-serif text-lg md:text-xl text-black leading-relaxed">
+                                When you reserve, your reservation is held in a separate escrow account and at any time you may request a full refund.
+                            </p>
+                        </div>
                         <Link
                             href="/shipping"
                             className="mt-8 inline-block font-sans text-sm text-black/60 underline hover:no-underline"
