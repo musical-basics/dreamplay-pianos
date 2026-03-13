@@ -334,17 +334,17 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setStatsHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                             <button
                                 onClick={() => setStatsHorizontalSlide(2)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
                         {/* Pain Point Slide */}
@@ -365,10 +365,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setStatsHorizontalSlide(1)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
                     </div>
@@ -394,25 +394,25 @@ export default function IntroOfferPage() {
                                 {index < professorQuotes.length - 1 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index + 1)}
-                                        className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
+                                        className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
                                         aria-label="Next quote"
                                     >
-                                        <ChevronRight className="w-6 h-6 text-black" />
+                                        <ChevronRight className="w-6 h-6 text-white" />
                                     </button>
                                 )}
                                 {index > 0 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index - 1)}
-                                        className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
+                                        className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                         aria-label="Previous quote"
                                     >
-                                        <ChevronRight className="w-6 h-6 text-black" />
+                                        <ChevronRight className="w-6 h-6 text-white" />
                                     </button>
                                 )}
                             </div>
                         ))}
                     </div>
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                    <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                         {professorQuotes.map((_, i) => (
                             <button
                                 key={i}
@@ -446,10 +446,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setProductHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-black">
@@ -473,10 +473,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setProductHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
                     </div>
@@ -492,9 +492,9 @@ export default function IntroOfferPage() {
                                 alt="DreamPlay Piano with MIDI App"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-black/60" />
+                            <div className="absolute inset-0 bg-black/75" />
                             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
-                                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-3xl text-balance">
+                                <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight max-w-3xl text-balance" style={{ textShadow: "0 4px 12px rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.5)" }}>
                                     Dedicated learning app to improving even faster
                                 </h2>
                                 <p className="mt-6 font-sans text-base text-white/70 max-w-xl">
@@ -503,10 +503,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative">
@@ -532,10 +532,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-black" />
+                                <ChevronRight className="w-6 h-6 text-white" />
                             </button>
                         </div>
                     </div>
@@ -728,7 +728,7 @@ export default function IntroOfferPage() {
                             </div>
                         ))}
                     </div>
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                    <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                         {founderQuotes.map((_, i) => (
                             <button
                                 key={i}
