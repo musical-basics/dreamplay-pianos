@@ -180,6 +180,7 @@ export default function ReservePage() {
         {/* Slide 3: Purchase / Think About It */}
         <section className="h-screen relative bg-neutral-950 flex items-center justify-center pt-12" style={{ scrollSnapAlign: "start" }}>
           <div className="w-full max-w-3xl mx-auto px-6 text-center">
+            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-12 leading-tight">Ready to Escape<br />Strain Forever?</h2>
             <div className="flex flex-col gap-4 mb-8">
               {!showEmailForm ? (
                 <>
@@ -187,7 +188,7 @@ export default function ReservePage() {
                     href="https://dreamplay-pianos.myshopify.com/cart/clear?return_to=/cart/53150736253242:1"
                     className="inline-flex items-center justify-center gap-3 bg-white px-12 py-5 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors w-full"
                   >
-                    Yes, I Want to Purchase Now <ArrowRight className="w-5 h-5" />
+                    Yes, Purchase Now <ArrowRight className="w-5 h-5" />
                   </a>
                   <button
                     onClick={() => setShowEmailForm(true)}
