@@ -505,7 +505,7 @@ export default function IntroOfferPage() {
                                     <p className="font-sans text-base md:text-lg text-white/80 leading-relaxed font-medium italic border-l-2 border-amber-400 pl-4">
                                         Why are small and medium-handed pianists playing an oversized keyboard meant for large hands?
                                     </p>
-                                    <div className="space-y-2 landscape:space-y-1 font-sans text-sm landscape:text-xs text-white/60 mt-4 landscape:mt-2">
+                                    <div className="space-y-2 landscape:space-y-1 font-sans text-base md:text-lg landscape:text-xs text-white/60 mt-4 landscape:mt-2">
                                         <p>• Prior to the 1880s, pianos featured much narrower keys, perfectly suited for rapid, intricate finger work.</p>
                                         <p>• The modern 6.5&quot; octave was standardized in the late 19th century merely to accommodate heavy cast-iron frames and large hammers.</p>
                                         <p>• It was built for the massive hands of romantic giants like Liszt, not the average pianist.</p>
@@ -522,14 +522,14 @@ export default function IntroOfferPage() {
                                 </div>
                                 <div className="order-1 md:order-2 relative aspect-video md:aspect-[4/5] landscape:aspect-[3/2] landscape:max-h-[60vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto w-full lg:max-w-none group hidden landscape:max-md:hidden md:block">
                                     <Image
-                                        src="/images/Chopin_portrait.jpeg"
-                                        alt="Frédéric Chopin, who composed masterpieces on a narrower piano keyboard"
+                                        src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg"
+                                        alt="Franz Liszt, a pianist with large hands who helped standardize the modern wide keyboard"
                                         fill
                                         className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                                     <div className="absolute bottom-4 left-0 right-0 text-center">
-                                        <p className="text-white/80 font-sans text-[10px] uppercase tracking-widest">Frédéric Chopin (1810–1849)</p>
+                                        <p className="text-white/80 font-sans text-[10px] uppercase tracking-widest">Franz Liszt (1811–1886)</p>
                                     </div>
                                 </div>
                             </div>
