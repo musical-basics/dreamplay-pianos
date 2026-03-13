@@ -33,10 +33,31 @@ export default function ReservePage() {
     return () => el.removeEventListener("scroll", onScroll)
   }, [])
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null)
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setShowEmailForm(false)
-    setEmail("")
+    setIsSubmitting(true)
+    try {
+      const { subscribeToNewsletter } = await import("@/actions/email-actions")
+      const result = await subscribeToNewsletter({
+        email,
+        tags: ["reserve_reminder"],
+      })
+      if (result.success) {
+        setToast({ message: "You're on the list! We'll send you a reminder.", type: "success" })
+        setShowEmailForm(false)
+        setEmail("")
+      } else {
+        setToast({ message: result.error || "Something went wrong. Please try again.", type: "error" })
+      }
+    } catch {
+      setToast({ message: "Something went wrong. Please try again.", type: "error" })
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => setToast(null), 4000)
+    }
   }
 
   const ScrollIndicator = ({ next }: { next: number }) => (
@@ -177,9 +198,10 @@ export default function ReservePage() {
                   <div className="flex gap-4">
                     <button
                       type="submit"
-                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-white/90 transition-colors"
+                      disabled={isSubmitting}
+                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-white/90 transition-colors disabled:opacity-50"
                     >
-                      Send Reminder
+                      {isSubmitting ? "Sending..." : "Send Reminder"}
                     </button>
                     <button
                       type="button"
@@ -197,14 +219,22 @@ export default function ReservePage() {
             </p>
             <div className="border-t border-white/10 pt-8">
               <blockquote className="font-serif text-base text-white/60 italic">
-                &ldquo;Everything is easier for me now. The stretches that used to cause pain are now comfortable. I can finally focus on the music instead of fighting the instrument.&rdquo;
+                &ldquo;Everything is easier on the 6.0 for me... I feel very comfortable playing scales, fast passages, or big chords&rdquo;
               </blockquote>
-              <p className="mt-4 font-sans text-xs text-white/40">— Claudia Wang, Professional Pianist</p>
+              <p className="mt-4 font-sans text-xs text-white/40">— Claudia Wang</p>
+              <p className="font-sans text-xs text-white/30">Master&apos;s Student at Southern Methodist University (SMU), Dallas</p>
+              <p className="font-sans text-xs text-white/30">Pianist With 7.2&quot; Handspan</p>
             </div>
           </div>
         </section>
 
       </div>
+      {toast && (
+        <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg font-sans text-sm shadow-lg transition-all ${toast.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
+          }`}>
+          {toast.message}
+        </div>
+      )}
     </>
   )
 }

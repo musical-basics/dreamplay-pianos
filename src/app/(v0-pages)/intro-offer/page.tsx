@@ -43,9 +43,9 @@ const founderQuotes = [
         image: "https://dreamplaypianos.com/images/carnegie-hall-performance.png"
     },
     {
-        quote: "Everything is easier for me now. The stretches that used to cause pain are now comfortable. I can finally focus on the music instead of fighting the instrument.",
+        quote: "Everything is easier on the 6.0 for me... I feel very comfortable playing scales, fast passages, or big chords",
         author: "Claudia Wang",
-        title: "Professional Pianist & Early Backer",
+        title: "Master's Student at SMU, Dallas · 7.2\" Handspan",
         image: "https://dreamplaypianos.com/images/claudia-wang.jpg"
     }
 ]
