@@ -149,6 +149,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 items={[
                                     { label: "Our Story", href: "/our-story" },
                                     { label: "The DS Standard", href: "/about-us/ds-standard" },
+                                    { label: "Historical Facts", href: "/historical-facts" },
                                 ]}
                             />
 
@@ -232,6 +233,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">About Us</div>
                                 <Link href="/our-story" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Our Story</Link>
                                 <Link href="/about-us/ds-standard" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>The DS Standard</Link>
+                                <Link href="/historical-facts" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Historical Facts</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Manufacturing & Shipping</div>
