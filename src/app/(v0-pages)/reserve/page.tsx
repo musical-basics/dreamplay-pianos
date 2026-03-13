@@ -213,7 +213,7 @@ export default function ReservePage() {
               Prices go up in April 2026 to $1,099/$1,199 MSRP.
             </p>
             <div className="border-t border-white/10 pt-8">
-              <blockquote className="font-serif text-base text-white/60 italic">
+              <blockquote className="font-serif text-xl md:text-2xl text-white/60 italic">
                 &ldquo;Everything is easier on the 6.0 for me... I feel very comfortable playing scales, fast passages, or big chords&rdquo;
               </blockquote>
               <p className="mt-4 font-sans text-xs text-white/40">— Claudia Wang</p>
