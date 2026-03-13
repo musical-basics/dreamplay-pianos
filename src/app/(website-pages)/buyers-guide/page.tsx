@@ -180,7 +180,7 @@ export default function BuyersGuidePage() {
                     <div className="max-w-4xl mx-auto px-6 py-12">
                         <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl">
                             <Image
-                                src="/images/Piano Front 2.jpg"
+                                src="/images/keyboards/Piano Front 2.jpg"
                                 alt="DreamPlay One kids piano with narrow keys and bench"
                                 fill
                                 className="object-cover"

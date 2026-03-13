@@ -30,7 +30,7 @@ export const DEFAULT_FAQ_ITEMS: FAQItem[] = [
             <li><strong>100% of children</strong> play on keyboards that do not fit their growing hands.</li>
         </ul>
         <div class="my-8 bg-neutral-50 border border-neutral-200 rounded-xl p-6 flex flex-col items-center justify-center text-center">
-            <img src="/images/Hand-Size-Chart-Data-1024x336.jpg" alt="Hand size demographic data" class="mx-auto max-w-full h-auto mix-blend-multiply rounded" />
+            <img src="/images/hands/Hand-Size-Chart-Data-1024x336.jpg" alt="Hand size demographic data" class="mx-auto max-w-full h-auto mix-blend-multiply rounded" />
             <p class="text-xs text-neutral-500 mt-4 font-sans"><strong>Figure 1:</strong> Data collected at the 2004 MTNA National Convention showing adult hand span distributions vs. keyboard suitability.</p>
         </div>
         <p>This means nearly nine out of every ten female pianists are dedicating their careers to an instrument that is biologically too large for them.</p>`
@@ -50,7 +50,7 @@ export const DEFAULT_FAQ_ITEMS: FAQItem[] = [
         answer: `<p>When a small-handed pianist attempts to play octaves or large chords on a standard keyboard, they are forced completely out of an "anatomically neutral" position into a state of maximum stretch known as <strong>hyperabduction</strong>.</p>
         <p>To achieve the span, players depress keys with their fingers splayed completely flat, destroying the supportive, bridge-like arch of the hand. This is often accompanied by severe <strong>ulnar deviation</strong> (bending the wrist sharply toward the pinky finger).</p>
         <div class="my-6 p-4 border border-neutral-200 bg-neutral-50 rounded-xl">
-            <img src="/images/Biomechanical Impact.jpeg" alt="Analysis of Hand Posture showing differences in thumb and 5th finger stretching" class="w-full h-auto rounded mix-blend-multiply" />
+            <img src="/images/hands/Biomechanical Impact.jpeg" alt="Analysis of Hand Posture showing differences in thumb and 5th finger stretching" class="w-full h-auto rounded mix-blend-multiply" />
             <p class="text-xs text-neutral-500 mt-3 text-center uppercase tracking-widest font-semibold">Figure 2: Clinical comparison of small hands on a standard vs narrower keyboard.</p>
         </div>
         <p>Playing repetitively while in simultaneous hyperabduction and ulnar deviation severely strains the lumbrical muscles, stresses wrist tendons, and compresses the median nerve.</p>`

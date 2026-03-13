@@ -97,7 +97,7 @@ function ActivateForm() {
                 {/* Brand */}
                 <div className="text-center mb-10">
                     <a href="/" className="inline-block mb-8">
-                        <img src="/images/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 mx-auto" />
+                        <img src="/images/logos/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 mx-auto" />
                     </a>
                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">Founder&apos;s Club</p>
                     <h1 className="font-serif text-3xl text-white tracking-tight mb-3">Lock in your Free Shipping.</h1>

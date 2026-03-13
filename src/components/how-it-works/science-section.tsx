@@ -32,7 +32,7 @@ export function ScienceSection() {
                         className="group relative block w-full overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/10 transition-transform duration-500 hover:scale-[1.01]"
                     >
                         <Image
-                            src="/images/Biomechanical Impact on Small Hands copy.png"
+                            src="/images/hands/Biomechanical Impact on Small Hands copy.png"
                             alt="Diagram showing how wide piano keys cause hands injury in pianists with small hands"
                             width={1200}
                             height={900}
@@ -130,7 +130,7 @@ export function ScienceSection() {
                 >
                     <div className="relative max-w-5xl w-full mx-4 md:mx-8">
                         <Image
-                            src="/images/Biomechanical Impact on Small Hands copy.png"
+                            src="/images/hands/Biomechanical Impact on Small Hands copy.png"
                             alt="Diagram showing how wide piano keys cause hands injury in pianists with small hands"
                             width={1200}
                             height={900}

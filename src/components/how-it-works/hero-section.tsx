@@ -8,7 +8,7 @@ export function HowItWorksHero() {
             desc: "Designed for pianists with hands under 7.6 inches. Play octaves and 9ths with ease.",
             keys: "88",
             width: "Narrowest",
-            img: "/images/ds55-white-narrow-keys-piano.png",
+            img: "/images/keyboards/ds55-white-narrow-keys-piano.png",
             recommended: false,
         },
         {
@@ -17,7 +17,7 @@ export function HowItWorksHero() {
             desc: "Designed for pianists with hands between 7.6 and 8.5 inches. Play octaves effortlessly.",
             keys: "88",
             width: "Narrow",
-            img: "/images/ds60-black-narrow-keys-piano.png",
+            img: "/images/keyboards/ds60-black-narrow-keys-piano.png",
             recommended: true,
         },
         {
@@ -26,7 +26,7 @@ export function HowItWorksHero() {
             desc: "For the small percentage with larger hands. Conventional sizing.",
             keys: "88",
             width: "Standard",
-            img: "/images/ds65-black-standard-digital-piano.png",
+            img: "/images/keyboards/ds65-black-standard-digital-piano.png",
             recommended: false,
         },
     ]

@@ -4,25 +4,25 @@ import Image from "next/image";
 
 const stories = [
     {
-        image: "/images/pianist-hands-on-narrow-keys.jpg",
+        image: "/images/marketing/pianist-hands-on-narrow-keys.jpg",
         quote: `"I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears. A lifetime of struggling with a seemingly insurmountable problem vanishes in the moment they realize, 'It's not me that is the problem; it is the instrument!' Following on that, the joy of possibility overwhelms them."`,
-        avatar: "/images/carol-leone.png",
+        avatar: "/images/marketing/carol-leone.png",
         name: "Dr. Carol Leone",
         role: "Chair of Piano Studies",
         school: "SMU Meadows School of the Arts"
     },
     {
-        image: "/images/girl playing piano.jpg",
+        image: "/images/stock/girl playing piano.jpg",
         quote: `"I can play for much longer and continue to play every day. I don't get frustrated from the pain and from being limited in my playing."`,
-        avatar: "/images/Jen-McCabe.png",
+        avatar: "/images/marketing/Jen-McCabe.png",
         name: "Jen McCabe",
         role: "Pianist, teacher, music director",
         school: "harmonypianostudio.com"
     },
     {
-        image: "/images/practicing-piano-led-keys.jpg",
+        image: "/images/marketing/practicing-piano-led-keys.jpg",
         quote: `"My favorite story is from a piano performance major, who couldn't believe that playing the piano didn't have to hurt. The instrument restored her joy for piano repertoire. She had been preparing to change over to harpsichord due to keyboard size issues. I will never forget the day she first played a Chopin ballade on the DS5.5. She literally could not stop beaming."`,
-        avatar: "/images/Kathryn-Ananda-Owens.png",
+        avatar: "/images/marketing/Kathryn-Ananda-Owens.png",
         name: "Kathryn-Ananda Owens",
         role: "Professor of Music - Piano",
         school: "St Olaf College, Minnesota"

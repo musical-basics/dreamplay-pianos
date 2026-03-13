@@ -66,7 +66,7 @@ export default function Navbar() {
                     >
                         <img
                             loading="lazy"
-                            src="/images/Logo.svg"
+                            src="/images/logos/Logo.svg"
                             alt="DreamPlay Pianos"
                             className={`navigation_logo ${isCustomizePage ? 'brightness-0 invert' : ''}`}
                         />

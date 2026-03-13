@@ -5,7 +5,7 @@ export function BundleShowcase() {
     <section className="sticky top-0 z-50 bg-black text-white min-h-[70vh]">
       <div className="relative w-full h-full min-h-[70vh]">
         <Image
-          src="/images/piano-bench-bundle.png"
+          src="/images/accessories/piano-bench-bundle.png"
           alt="DreamPlay Piano and Bench Bundle"
           fill
           className="object-cover object-center"

@@ -12,7 +12,7 @@ export default function TermsOfServicePage() {
             <header className="border-b border-white/10">
                 <div className="mx-auto max-w-3xl px-6 py-8">
                     <Link href="/" className="inline-block mb-6">
-                        <img src="/images/DreamPlay Logo White.png" alt="DreamPlay" className="h-5" />
+                        <img src="/images/logos/DreamPlay Logo White.png" alt="DreamPlay" className="h-5" />
                     </Link>
                 </div>
             </header>

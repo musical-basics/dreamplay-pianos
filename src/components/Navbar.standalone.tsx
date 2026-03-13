@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
  * - React
  * 
  * Assets Required:
- * - /images/Logo.svg (or update the logo path)
+ * - /images/logos/Logo.svg (or update the logo path)
  */
 
 // ============================================================================
@@ -519,7 +519,7 @@ export default function Navbar() {
           >
             <img
               loading="lazy"
-              src="/images/Logo.svg"
+              src="/images/logos/Logo.svg"
               alt="DreamPlay Pianos"
               className={`navigation_logo ${isCustomizePage ? 'brightness-0 invert' : ''}`}
             />

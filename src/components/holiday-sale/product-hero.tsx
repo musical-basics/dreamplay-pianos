@@ -5,7 +5,7 @@ export function ProductHero() {
     <section className="relative h-[600px] bg-neutral-100">
       <div className="relative w-full h-full overflow-hidden">
         <Image
-          src="/images/piano-front-2.jpg"
+          src="/images/keyboards/piano-front-2.jpg"
           alt="DreamPlay Digital Piano with bench"
           fill
           className="object-cover object-[center_40%]"

@@ -64,7 +64,7 @@ export function VideoSection() {
           controls={isPlaying}
           playsInline
           preload="none"
-          poster="/images/video-thumbnail-piano.png"
+          poster="/images/marketing/video-thumbnail-piano.png"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onEnded={playNextVideo}
@@ -81,7 +81,7 @@ export function VideoSection() {
         {!isPlaying && (
           <>
             <Image
-              src="/images/video-thumbnail-piano.png"
+              src="/images/marketing/video-thumbnail-piano.png"
               alt="DreamPlay Intro Video"
               fill
               className="object-cover"

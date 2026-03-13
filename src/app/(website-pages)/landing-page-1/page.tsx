@@ -46,19 +46,19 @@ const inter = Inter({
 
 const GALLERY_IMAGES = [
     {
-        src: "/images/DreamPlay Piano Hands.jpg",
+        src: "/images/marketing/DreamPlay Piano Hands.jpg",
         alt: "DreamPlay One, Hands on Keys",
     },
     {
-        src: "/images/ds60-black-narrow-keys-piano.png",
+        src: "/images/keyboards/ds60-black-narrow-keys-piano.png",
         alt: "DreamPlay One DS6.0, Side Angle",
     },
     {
-        src: "/images/ds55-white-narrow-keys-piano.png",
+        src: "/images/keyboards/ds55-white-narrow-keys-piano.png",
         alt: "DreamPlay One DS5.5, White Model",
     },
     {
-        src: "/images/DSDS6.0-Straightened-1-1024x788.jpg",
+        src: "/images/keyboards/DSDS6.0-Straightened-1-1024x788.jpg",
         alt: "DreamPlay One DS6.0, In Studio",
     },
 ]
@@ -197,19 +197,19 @@ const FEATURES_DEEP = [
     {
         headline: "Sized for Your Hands",
         copy: "DS5.5 and DS6.0 octaves let your hands play in a natural arch: no overstretching, no strain. It's the first piano sized for the pianist, not the other way around.",
-        img: "/images/ds55-white-narrow-keys-piano.png",
+        img: "/images/keyboards/ds55-white-narrow-keys-piano.png",
         icon: Keyboard,
     },
     {
         headline: "Studio-Ready MIDI",
         copy: "Connect to any DAW, play any virtual instrument, layer sounds. DreamPlay One is a production-grade controller with Bluetooth and USB-C MIDI.",
-        img: "/images/ds60-black-narrow-keys-piano.png",
+        img: "/images/keyboards/ds60-black-narrow-keys-piano.png",
         icon: Crosshair,
     },
     {
         headline: "Your Brain Adapts in Minutes",
         copy: "Studies show pianists adapt to narrower keys in 10–15 minutes. Your muscle memory transfers seamlessly. Only the pain disappears.",
-        img: "/images/DreamPlay Piano Hands.jpg",
+        img: "/images/marketing/DreamPlay Piano Hands.jpg",
         icon: RefreshCw,
     },
 ]

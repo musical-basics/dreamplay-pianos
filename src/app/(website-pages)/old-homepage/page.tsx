@@ -163,12 +163,12 @@ export default function Home() {
                   <div className="product-content-wrapper">
                     <div>
                       <div className="div-block-9">
-                        <img src="/images/ds55-white-narrow-keys-alt.png" loading="lazy" sizes="(max-width: 5000px) 100vw, 5000px" srcSet="/images/ds55-white-narrow-keys-alt.png 500w, /images/ds55-white-narrow-keys-alt.png 800w, /images/ds55-white-narrow-keys-alt.png 1080w, /images/ds55-white-narrow-keys-alt.png 1600w, /images/ds55-white-narrow-keys-alt.png 2000w, /images/ds55-white-narrow-keys-alt.png 2600w, /images/ds55-white-narrow-keys-alt.png 3200w, /images/ds55-white-narrow-keys-alt.png 5000w" alt="" id="loader-piano-1" />
-                        <img src="/images/zone-a-small-hands-diagram.png" loading="lazy" sizes="(max-width: 1808px) 100vw, 1808px" srcSet="/images/zone-a-small-hands-diagram.png 500w, /images/zone-a-small-hands-diagram.png 800w, /images/zone-a-small-hands-diagram.png 1080w, /images/zone-a-small-hands-diagram.png 1600w, /images/zone-a-small-hands-diagram.png 1808w" alt="" id="loader-hand-1" />
-                        <img src="/images/ds60-black-narrow-keys-side.png" loading="lazy" sizes="(max-width: 1224px) 100vw, 1224px" srcSet="/images/ds60-black-narrow-keys-side.png 500w, /images/ds60-black-narrow-keys-side.png 800w, /images/ds60-black-narrow-keys-side.png 1080w, /images/ds60-black-narrow-keys-side.png 1224w" alt="" id="loader-piano-2" />
-                        <img src="/images/zone-b-medium-hands-diagram.png" loading="lazy" sizes="(max-width: 1802px) 100vw, 1802px" srcSet="/images/zone-b-medium-hands-diagram.png 500w, /images/zone-b-medium-hands-diagram.png 800w, /images/zone-b-medium-hands-diagram.png 1080w, /images/zone-b-medium-hands-diagram.png 1600w, /images/zone-b-medium-hands-diagram.png 1802w" alt="" id="loader-hand-2" />
-                        <img src="/images/ds65-black-standard-digital-piano.png" loading="lazy" sizes="(max-width: 5000px) 100vw, 5000px" srcSet="/images/ds65-black-standard-digital-piano.png 500w, /images/ds65-black-standard-digital-piano.png 800w, /images/ds65-black-standard-digital-piano.png 1080w, /images/ds65-black-standard-digital-piano.png 1600w, /images/ds65-black-standard-digital-piano.png 2000w, /images/ds65-black-standard-digital-piano.png 2600w, /images/ds65-black-standard-digital-piano.png 3200w, /images/ds65-black-standard-digital-piano.png 5000w" alt="" id="loader-piano-3" className="image-5" />
-                        <img src="/images/zone-c-standard-hands-diagram.png" loading="lazy" sizes="(max-width: 1808px) 100vw, 1808px" srcSet="/images/zone-c-standard-hands-diagram.png 500w, /images/zone-c-standard-hands-diagram.png 800w, /images/zone-c-standard-hands-diagram.png 1080w, /images/zone-c-standard-hands-diagram.png 1600w, /images/zone-c-standard-hands-diagram.png 1808w" alt="" id="loader-hand-3" />
+                        <img src="/images/keyboards/ds55-white-narrow-keys-alt.png" loading="lazy" sizes="(max-width: 5000px) 100vw, 5000px" srcSet="/images/keyboards/ds55-white-narrow-keys-alt.png 500w, /images/keyboards/ds55-white-narrow-keys-alt.png 800w, /images/keyboards/ds55-white-narrow-keys-alt.png 1080w, /images/keyboards/ds55-white-narrow-keys-alt.png 1600w, /images/keyboards/ds55-white-narrow-keys-alt.png 2000w, /images/keyboards/ds55-white-narrow-keys-alt.png 2600w, /images/keyboards/ds55-white-narrow-keys-alt.png 3200w, /images/keyboards/ds55-white-narrow-keys-alt.png 5000w" alt="" id="loader-piano-1" />
+                        <img src="/images/hands/zone-a-small-hands-diagram.png" loading="lazy" sizes="(max-width: 1808px) 100vw, 1808px" srcSet="/images/hands/zone-a-small-hands-diagram.png 500w, /images/hands/zone-a-small-hands-diagram.png 800w, /images/hands/zone-a-small-hands-diagram.png 1080w, /images/hands/zone-a-small-hands-diagram.png 1600w, /images/hands/zone-a-small-hands-diagram.png 1808w" alt="" id="loader-hand-1" />
+                        <img src="/images/keyboards/ds60-black-narrow-keys-side.png" loading="lazy" sizes="(max-width: 1224px) 100vw, 1224px" srcSet="/images/keyboards/ds60-black-narrow-keys-side.png 500w, /images/keyboards/ds60-black-narrow-keys-side.png 800w, /images/keyboards/ds60-black-narrow-keys-side.png 1080w, /images/keyboards/ds60-black-narrow-keys-side.png 1224w" alt="" id="loader-piano-2" />
+                        <img src="/images/hands/zone-b-medium-hands-diagram.png" loading="lazy" sizes="(max-width: 1802px) 100vw, 1802px" srcSet="/images/hands/zone-b-medium-hands-diagram.png 500w, /images/hands/zone-b-medium-hands-diagram.png 800w, /images/hands/zone-b-medium-hands-diagram.png 1080w, /images/hands/zone-b-medium-hands-diagram.png 1600w, /images/hands/zone-b-medium-hands-diagram.png 1802w" alt="" id="loader-hand-2" />
+                        <img src="/images/keyboards/ds65-black-standard-digital-piano.png" loading="lazy" sizes="(max-width: 5000px) 100vw, 5000px" srcSet="/images/keyboards/ds65-black-standard-digital-piano.png 500w, /images/keyboards/ds65-black-standard-digital-piano.png 800w, /images/keyboards/ds65-black-standard-digital-piano.png 1080w, /images/keyboards/ds65-black-standard-digital-piano.png 1600w, /images/keyboards/ds65-black-standard-digital-piano.png 2000w, /images/keyboards/ds65-black-standard-digital-piano.png 2600w, /images/keyboards/ds65-black-standard-digital-piano.png 3200w, /images/keyboards/ds65-black-standard-digital-piano.png 5000w" alt="" id="loader-piano-3" className="image-5" />
+                        <img src="/images/hands/zone-c-standard-hands-diagram.png" loading="lazy" sizes="(max-width: 1808px) 100vw, 1808px" srcSet="/images/hands/zone-c-standard-hands-diagram.png 500w, /images/hands/zone-c-standard-hands-diagram.png 800w, /images/hands/zone-c-standard-hands-diagram.png 1080w, /images/hands/zone-c-standard-hands-diagram.png 1600w, /images/hands/zone-c-standard-hands-diagram.png 1808w" alt="" id="loader-hand-3" />
                       </div>
                       {/* Embedded Sizing Section with Tailwind via CDN in source but we can just use styles provided */}
                       <div>
@@ -277,23 +277,23 @@ export default function Home() {
                     <div className="feature-card-block">
                       {/* Feature Cards - I'll just copy structure */}
                       <div className="feature-card-wrap">
-                        <div className="f-card-icon-block"><img src="/images/image-3.svg" loading="lazy" alt="" className="f-card-icon" /></div>
+                        <div className="f-card-icon-block"><img src="/images/icons/image-3.svg" loading="lazy" alt="" className="f-card-icon" /></div>
                         <div className="f-card-text-block"><div className="p-regular">Built-in Metronome</div></div>
                       </div>
                       {/* ... (repeated for other cards) ... */}
                       {/* For brevity in this tool call I included key ones, but I'll paste all. 
                         Wait, I must produce the full file. */}
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/image-4.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Recording &amp; Playback</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/Feature-Icon.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">256-note Polyphony</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/Feature-Icon_1.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="small">Dual-Sensor Velocity Keys</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/Feature-Icon-5.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">MIDI Sequencing</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/volume-icon.png" loading="lazy" srcSet="/images/volume-icon.png 500w, /images/volume-icon.png 512w" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">18 Essential Presets</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/monitor.png" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Backlit LCD Screen</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/grand-piano-icon.png" loading="lazy" srcSet="/images/grand-piano-icon.png 500w, /images/grand-piano-icon.png 600w" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Grand Piano Sound</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/headphone-icon.png" loading="lazy" width={200} height={200} alt="" srcSet="/images/headphone-icon.png 500w, /images/headphone-icon.png 512w" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">High-fidelity Speakers and Headphone Audio</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/Feature-Icon-4.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">88 Graded, Weighted Keys</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/bluetooth-app-icon.png" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Bluetooth Connectivity</div></div></div>
-                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/LED-lights.png" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">LED&nbsp;Lighting<br />For Every Key</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/image-4.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Recording &amp; Playback</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/Feature-Icon.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">256-note Polyphony</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/Feature-Icon_1.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="small">Dual-Sensor Velocity Keys</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/Feature-Icon-5.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">MIDI Sequencing</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/volume-icon.png" loading="lazy" srcSet="/images/icons/volume-icon.png 500w, /images/icons/volume-icon.png 512w" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">18 Essential Presets</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/monitor.png" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Backlit LCD Screen</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/grand-piano-icon.png" loading="lazy" srcSet="/images/icons/grand-piano-icon.png 500w, /images/icons/grand-piano-icon.png 600w" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Grand Piano Sound</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/headphone-icon.png" loading="lazy" width={200} height={200} alt="" srcSet="/images/icons/headphone-icon.png 500w, /images/icons/headphone-icon.png 512w" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">High-fidelity Speakers and Headphone Audio</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/Feature-Icon-4.svg" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">88 Graded, Weighted Keys</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/bluetooth-app-icon.png" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">Bluetooth Connectivity</div></div></div>
+                      <div className="feature-card-wrap"><div className="f-card-icon-block"><img src="/images/icons/LED-lights.png" loading="lazy" alt="" className="f-card-icon" /></div><div className="f-card-text-block"><div className="p-regular">LED&nbsp;Lighting<br />For Every Key</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -317,7 +317,7 @@ export default function Home() {
                   <div className="product-cards">
                     <div className="product-card-wrapper">
                       <div className="product-card-block">
-                        <div className="product-image-wrap"><img src="/images/dreamplay-one-hero-studio.jpg" loading="lazy" width={1024} height={200} alt="" srcSet="/images/dreamplay-one-hero-studio.jpg 500w, /images/dreamplay-one-hero-studio.jpg 800w, /images/dreamplay-one-hero-studio.jpg 1080w, /images/dreamplay-one-hero-studio.jpg 1600w, /images/dreamplay-one-hero-studio.jpg 2000w, /images/dreamplay-one-hero-studio.jpg 2600w, /images/dreamplay-one-hero-studio.jpg 3000w" sizes="100vw" className="product-picture" /></div>
+                        <div className="product-image-wrap"><img src="/images/marketing/dreamplay-one-hero-studio.jpg" loading="lazy" width={1024} height={200} alt="" srcSet="/images/marketing/dreamplay-one-hero-studio.jpg 500w, /images/marketing/dreamplay-one-hero-studio.jpg 800w, /images/marketing/dreamplay-one-hero-studio.jpg 1080w, /images/marketing/dreamplay-one-hero-studio.jpg 1600w, /images/marketing/dreamplay-one-hero-studio.jpg 2000w, /images/marketing/dreamplay-one-hero-studio.jpg 2600w, /images/marketing/dreamplay-one-hero-studio.jpg 3000w" sizes="100vw" className="product-picture" /></div>
                       </div>
                       <div className="product-card-content-wrap">
                         <div className="product-card-content-block">
@@ -332,7 +332,7 @@ export default function Home() {
                     </div>
                     <div className="product-card-wrapper is-reversed">
                       <div className="product-card-block">
-                        <div className="product-image-wrap"><img src="/images/article-placeholder.jpg" loading="lazy" width={100} height="Auto" alt="" srcSet="/images/article-placeholder.jpg 500w, /images/article-placeholder.jpg 800w, /images/article-placeholder.jpg 1024w" sizes="100px" className="product-picture" /></div>
+                        <div className="product-image-wrap"><img src="/images/stock/article-placeholder.jpg" loading="lazy" width={100} height="Auto" alt="" srcSet="/images/stock/article-placeholder.jpg 500w, /images/stock/article-placeholder.jpg 800w, /images/stock/article-placeholder.jpg 1024w" sizes="100px" className="product-picture" /></div>
                       </div>
                       <div className="product-card-content-wrap">
                         <div className="product-card-content-block">
@@ -347,7 +347,7 @@ export default function Home() {
                     </div>
                     <div className="product-card-wrapper">
                       <div className="product-card-block">
-                        <div className="product-image-wrap"><img src="/images/pianist-hands-on-narrow-keys.jpg" loading="lazy" sizes="100vw" srcSet="/images/pianist-hands-on-narrow-keys.jpg 500w, /images/pianist-hands-on-narrow-keys.jpg 800w, /images/pianist-hands-on-narrow-keys.jpg 1080w, /images/pianist-hands-on-narrow-keys.jpg 1600w, /images/pianist-hands-on-narrow-keys.jpg 2000w, /images/pianist-hands-on-narrow-keys.jpg 2600w, /images/pianist-hands-on-narrow-keys.jpg 3000w" alt="" className="product-picture" /></div>
+                        <div className="product-image-wrap"><img src="/images/marketing/pianist-hands-on-narrow-keys.jpg" loading="lazy" sizes="100vw" srcSet="/images/marketing/pianist-hands-on-narrow-keys.jpg 500w, /images/marketing/pianist-hands-on-narrow-keys.jpg 800w, /images/marketing/pianist-hands-on-narrow-keys.jpg 1080w, /images/marketing/pianist-hands-on-narrow-keys.jpg 1600w, /images/marketing/pianist-hands-on-narrow-keys.jpg 2000w, /images/marketing/pianist-hands-on-narrow-keys.jpg 2600w, /images/marketing/pianist-hands-on-narrow-keys.jpg 3000w" alt="" className="product-picture" /></div>
                       </div>
                       <div className="product-card-content-wrap">
                         <div className="product-card-content-block">
@@ -386,13 +386,13 @@ export default function Home() {
                         <div className="slider-image-wrap">
                           <img
                             className="slider-imge"
-                            src="/images/Profile-Image_1.webp"
+                            src="/images/marketing/Profile-Image_1.webp"
                             width="Auto"
                             height="Auto"
                             alt=""
                             sizes="100vw"
                             loading="lazy"
-                            srcSet="/images/Profile-Image_1Profile%20Image.webp 500w, /images/Profile-Image_1.webp 768w"
+                            srcSet="/images/marketing/Profile-Image_1Profile%20Image.webp 500w, /images/marketing/Profile-Image_1.webp 768w"
                           />
                         </div>
                         {/* This part uses Webflow Slider typically (w-slider). 
@@ -407,7 +407,7 @@ export default function Home() {
                                     <p className="p-xxl _w-bold text-white">I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears. A lifetime of struggling with a seemingly insurmountable problem vanishes in the moment they realize, &quot;It&#x27;s not me that is the problem; it is the instrument!&quot; Following on that, the joy of possibility overwhelms them.</p>
                                   </div>
                                   <div className="slide-author-wrap">
-                                    <div className="slide-author-image-block"><img src="/images/carol-leone.jpeg" loading="lazy" width="Auto" alt="" className="s-author-image" /></div>
+                                    <div className="slide-author-image-block"><img src="/images/marketing/carol-leone.jpeg" loading="lazy" width="Auto" alt="" className="s-author-image" /></div>
                                     <div className="author-desc-block">
                                       <div className="author-name-block"><div className="p-large text-white">Dr. Carol Leone</div></div>
                                       <div className="author-text-block"><div className="p-small grey">Chair of Piano Studies</div><div className="p-small grey">SMU Meadows School of the Arts in Dallas, Texas,</div></div>
@@ -424,7 +424,7 @@ export default function Home() {
                                     <p className="p-xxl _w-bold text-white">My favorite story is from a piano performance major, who couldn’t believe that playing the piano didn’t have to hurt. The instrument restored her joy for piano repertoire. She had been preparing to change over to harpsichord due to keyboard size issues. I will never forget the day she first played a Chopin ballade on the DS5.5. She literally could not stop beaming.</p>
                                   </div>
                                   <div className="slide-author-wrap">
-                                    <div className="slide-author-image-block"><img src="/images/Kathryn-Ananda-Owens.png" loading="lazy" alt="" className="s-author-image" /></div>
+                                    <div className="slide-author-image-block"><img src="/images/marketing/Kathryn-Ananda-Owens.png" loading="lazy" alt="" className="s-author-image" /></div>
                                     <div className="author-desc-block">
                                       <div className="author-name-block"><div className="p-large text-white">Kathryn-Ananda Owens</div></div>
                                       <div className="author-text-block"><div className="p-small grey">Professor of Music - Piano</div><div className="p-small grey">St Olaf College, Minnesota</div></div>
@@ -441,7 +441,7 @@ export default function Home() {
                                     <p className="p-xxl _w-bold text-white">I can play for much longer and continue to play every day. I don’t get frustrated from the pain and from being limited in my playing.<br /><br />- Jen McCabe, <em>harmonypianostudio.com</em><br /></p>
                                   </div>
                                   <div className="slide-author-wrap">
-                                    <div className="slide-author-image-block"><img src="/images/Jen-McCabe.png" loading="lazy" alt="" className="s-author-image" /></div>
+                                    <div className="slide-author-image-block"><img src="/images/marketing/Jen-McCabe.png" loading="lazy" alt="" className="s-author-image" /></div>
                                     <div className="author-desc-block">
                                       <div className="author-name-block"><div className="p-large text-white">Jen McCabe</div></div>
                                       <div className="author-text-block"><div className="p-small grey">Pianist, teacher, music director</div><div className="p-small grey">North Park, Chicago, IL</div></div>
@@ -512,12 +512,12 @@ export default function Home() {
                           <div data-w-id="a343a42c-8900-04d5-8f4b-feda93bf949b" className="swiper-wrapper">
                             <div className="swiper-slide">
                               <div className="discount-image-wrap">
-                                <div className="slider-image-block"><img src="/images/ds60-black-narrow-keys-piano.png" loading="lazy" sizes="100vw" srcSet="/images/ds60-black-narrow-keys-piano.png 500w, /images/ds60-black-narrow-keys-piano.png 800w, /images/ds60-black-narrow-keys-piano.png 1080w, /images/ds60-black-narrow-keys-piano.png 1600w, /images/ds60-black-narrow-keys-piano.png 2000w, /images/ds60-black-narrow-keys-piano.png 2600w, /images/ds60-black-narrow-keys-piano.png 3200w, /images/ds60-black-narrow-keys-piano.png 6144w" alt="" className="discount-im" /></div>
+                                <div className="slider-image-block"><img src="/images/keyboards/ds60-black-narrow-keys-piano.png" loading="lazy" sizes="100vw" srcSet="/images/keyboards/ds60-black-narrow-keys-piano.png 500w, /images/keyboards/ds60-black-narrow-keys-piano.png 800w, /images/keyboards/ds60-black-narrow-keys-piano.png 1080w, /images/keyboards/ds60-black-narrow-keys-piano.png 1600w, /images/keyboards/ds60-black-narrow-keys-piano.png 2000w, /images/keyboards/ds60-black-narrow-keys-piano.png 2600w, /images/keyboards/ds60-black-narrow-keys-piano.png 3200w, /images/keyboards/ds60-black-narrow-keys-piano.png 6144w" alt="" className="discount-im" /></div>
                               </div>
                             </div>
                             <div className="swiper-slide">
                               <div className="discount-image-wrap">
-                                <div className="slider-image-block"><img src="/images/ds55-white-narrow-keys-piano.png" loading="lazy" sizes="100vw" srcSet="/images/ds55-white-narrow-keys-piano.png 500w, /images/ds55-white-narrow-keys-piano.png 800w, /images/ds55-white-narrow-keys-piano.png 1080w, /images/ds55-white-narrow-keys-piano.png 1600w, /images/ds55-white-narrow-keys-piano.png 2000w, /images/ds55-white-narrow-keys-piano.png 2600w, /images/ds55-white-narrow-keys-piano.png 3200w, /images/ds55-white-narrow-keys-piano.png 6144w" alt="" className="discount-im" /></div>
+                                <div className="slider-image-block"><img src="/images/keyboards/ds55-white-narrow-keys-piano.png" loading="lazy" sizes="100vw" srcSet="/images/keyboards/ds55-white-narrow-keys-piano.png 500w, /images/keyboards/ds55-white-narrow-keys-piano.png 800w, /images/keyboards/ds55-white-narrow-keys-piano.png 1080w, /images/keyboards/ds55-white-narrow-keys-piano.png 1600w, /images/keyboards/ds55-white-narrow-keys-piano.png 2000w, /images/keyboards/ds55-white-narrow-keys-piano.png 2600w, /images/keyboards/ds55-white-narrow-keys-piano.png 3200w, /images/keyboards/ds55-white-narrow-keys-piano.png 6144w" alt="" className="discount-im" /></div>
                               </div>
                             </div>
                           </div>

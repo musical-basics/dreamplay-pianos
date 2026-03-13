@@ -15,7 +15,7 @@ export function CreatorSection() {
           <div className="relative lg:w-2/5">
             <div className="relative aspect-[3/4] overflow-hidden rounded-sm">
               <Image
-                src="/images/carnegie-hall-performance.png"
+                src="/images/marketing/carnegie-hall-performance.png"
                 alt="Lionel Yu performing at a concert venue"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"

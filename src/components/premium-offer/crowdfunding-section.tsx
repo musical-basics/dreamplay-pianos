@@ -7,7 +7,7 @@ export function CrowdfundingSection() {
   return (
     <section className="relative min-h-screen overflow-hidden">
       <Image
-        src="/images/Main-Product-In-Studio-1-1_1.avif"
+        src="/images/keyboards/Main-Product-In-Studio-1-1_1.avif"
         alt="DreamPlay One keyboard in studio"
         fill
         sizes="100vw"

@@ -29,7 +29,7 @@ export default function BuyProductPage() {
 
                             <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] md:aspect-[2/1] animate-fade-in-up delay-200">
                                 <Image
-                                    src="/images/ds60-black-narrow-keys-piano.png"
+                                    src="/images/keyboards/ds60-black-narrow-keys-piano.png"
                                     alt="DreamPlay One"
                                     fill
                                     className="object-contain transform scale-125"
@@ -52,7 +52,7 @@ export default function BuyProductPage() {
                                 {/* Benefit 1 */}
                                 <div className="flex items-start gap-4">
                                     <div className="w-8 h-8 flex-shrink-0 relative mt-1">
-                                        <Image src="/images/Frame-85.svg" alt="Price Icon" fill className="object-contain" />
+                                        <Image src="/images/icons/Frame-85.svg" alt="Price Icon" fill className="object-contain" />
                                     </div>
                                     <div>
                                         <p className="font-medium text-lg text-neutral-900 leading-snug">
@@ -64,7 +64,7 @@ export default function BuyProductPage() {
                                 {/* Benefit 2 */}
                                 <div className="flex items-start gap-4">
                                     <div className="w-8 h-8 flex-shrink-0 relative mt-1">
-                                        <Image src="/images/Vector-6.svg" alt="Journal Icon" fill className="object-contain" />
+                                        <Image src="/images/icons/Vector-6.svg" alt="Journal Icon" fill className="object-contain" />
                                     </div>
                                     <div>
                                         <p className="font-medium text-lg text-neutral-900 leading-snug">
@@ -76,7 +76,7 @@ export default function BuyProductPage() {
                                 {/* Benefit 3 */}
                                 <div className="flex items-start gap-4">
                                     <div className="w-8 h-8 flex-shrink-0 relative mt-1">
-                                        <Image src="/images/Frame-84.svg" alt="Music Icon" fill className="object-contain" />
+                                        <Image src="/images/icons/Frame-84.svg" alt="Music Icon" fill className="object-contain" />
                                     </div>
                                     <div>
                                         <p className="font-medium text-lg text-neutral-900 leading-snug">
@@ -88,7 +88,7 @@ export default function BuyProductPage() {
                                 {/* Benefit 4 */}
                                 <div className="flex items-start gap-4">
                                     <div className="w-8 h-8 flex-shrink-0 relative mt-1">
-                                        <Image src="/images/Frame-82.svg" alt="Shipping Icon" fill className="object-contain" />
+                                        <Image src="/images/icons/Frame-82.svg" alt="Shipping Icon" fill className="object-contain" />
                                     </div>
                                     <div>
                                         <p className="font-medium text-lg text-neutral-900 leading-snug">

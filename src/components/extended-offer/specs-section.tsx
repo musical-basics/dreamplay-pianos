@@ -121,7 +121,7 @@ export function SpecsSection() {
                 className="group relative mb-12 max-w-xs overflow-hidden rounded-md border border-neutral-800 transition-all hover:border-neutral-600 hover:shadow-lg cursor-pointer"
               >
                 <Image
-                  src="/images/Main Product With Dimensions Info.JPG"
+                  src="/images/keyboards/Main Product With Dimensions Info.JPG"
                   alt="DreamPlay One keyboard with dimensions"
                   width={400}
                   height={200}

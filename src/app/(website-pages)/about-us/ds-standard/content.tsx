@@ -18,7 +18,7 @@ export default function DSStandardContent() {
                     <div className="container max-w-6xl mx-auto px-6 relative z-10 text-center">
                         <AnimatedSection>
                             <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-10 relative">
-                                <Image src="/images/DS Logo Registered 1200-Recovered.jpg" alt="DS Standard Registered Logo" fill className="object-contain" style={{ filter: "invert(1)" }} />
+                                <Image src="/images/logos/DS Logo Registered 1200-Recovered.jpg" alt="DS Standard Registered Logo" fill className="object-contain" style={{ filter: "invert(1)" }} />
                             </div>
                             <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 text-white/50 font-sans text-[10px] uppercase tracking-[0.3em] mb-8">
                                 Official Licensed Partner
@@ -39,7 +39,7 @@ export default function DSStandardContent() {
                         <div className="grid lg:grid-cols-2 gap-16 items-center">
                             <AnimatedSection>
                                 <div className="relative aspect-[4/3] rounded-none overflow-hidden border border-neutral-200">
-                                    <Image src="/images/DSDS6.0-Straightened-1-1024x788.jpg" alt="DS Logo on Piano Keys" fill className="object-cover transition-all duration-700" />
+                                    <Image src="/images/keyboards/DSDS6.0-Straightened-1-1024x788.jpg" alt="DS Logo on Piano Keys" fill className="object-cover transition-all duration-700" />
                                 </div>
                             </AnimatedSection>
                             <AnimatedSection delay={100}>
@@ -83,7 +83,7 @@ export default function DSStandardContent() {
                             </AnimatedSection>
                             <AnimatedSection delay={100} className="order-1 lg:order-2">
                                 <div className="relative aspect-[4/5] w-full rounded-none overflow-hidden border border-white/10">
-                                    <Image src="/images/products_DS5.5-Yamaha-CFX-3-1024x711.jpg" alt="DS5.5 Yamaha CFX Piano" fill className="object-cover transition-all duration-700" />
+                                    <Image src="/images/keyboards/products_DS5.5-Yamaha-CFX-3-1024x711.jpg" alt="DS5.5 Yamaha CFX Piano" fill className="object-cover transition-all duration-700" />
                                 </div>
                             </AnimatedSection>
                         </div>
@@ -100,7 +100,7 @@ export default function DSStandardContent() {
                         </div>
                         <AnimatedSection>
                             <div className="relative w-full aspect-[3/1] min-h-[300px] bg-white rounded-none overflow-hidden p-6 md:p-8 border border-neutral-200">
-                                <Image src="/images/Hand-Size-Chart-Data-1024x336.jpg" alt="Hand Size Chart Data" fill className="object-contain" />
+                                <Image src="/images/hands/Hand-Size-Chart-Data-1024x336.jpg" alt="Hand Size Chart Data" fill className="object-contain" />
                             </div>
                             <p className="text-center font-sans text-sm text-neutral-500 mt-8 max-w-4xl mx-auto leading-relaxed">
                                 The graph illustrates the wide diversity of hand spans among pianists. The colored zones indicate which keyboard size (DS5.5, DS6.0, or Standard) is ergonomically appropriate for each hand span range.
@@ -206,7 +206,7 @@ export default function DSStandardContent() {
                             </div>
                             {/* Carnegie Hall Image */}
                             <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-none overflow-hidden border border-neutral-200 group">
-                                <Image src="/images/carnegie-hall-performance.png" alt="Performance on stage" fill className="object-cover transition-all duration-700" />
+                                <Image src="/images/marketing/carnegie-hall-performance.png" alt="Performance on stage" fill className="object-cover transition-all duration-700" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/40 to-transparent"></div>
                                 <div className="absolute bottom-8 left-8 font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-800 font-medium">
                                     The Goal: A DS Keyboard on Every Stage

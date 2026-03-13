@@ -94,7 +94,7 @@ export function FeaturesPianoSection() {
                     {/* Piano image with overlay */}
                     <div className="relative overflow-hidden border border-neutral-200">
                         <img
-                            src="/images/Main%20Product%20Grey%20Background.JPG"
+                            src="/images/keyboards/Main%20Product%20Grey%20Background.JPG"
                             alt="DreamPlay One Features"
                             className="w-full h-auto"
                         />

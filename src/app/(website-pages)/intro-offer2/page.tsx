@@ -101,7 +101,7 @@ export default function IntroOffer2Page() {
                     SECTION 1 — HERO / LAUNCH VIDEO
                 ═══════════════════════════════════════════════════════════ */}
                 <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050505] text-center">
-                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-40" poster="/images/Main-Product-In-Studio-1-1_1.avif">
+                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-40" poster="/images/keyboards/Main-Product-In-Studio-1-1_1.avif">
                         <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Final%204k%20Video%20DreamPlay%20Intro.mp4" type="video/mp4" />
                     </video>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-transparent to-[#050505]/90" />
@@ -181,7 +181,7 @@ export default function IntroOffer2Page() {
                                 </div>
                                 <div className="p-6 md:p-10">
                                     <Image
-                                        src="/images/Biomechanical Impact on Small Hands copy.png"
+                                        src="/images/hands/Biomechanical Impact on Small Hands copy.png"
                                         alt="Biomechanical Impact of Key Width on Small Hands"
                                         width={1200}
                                         height={900}
@@ -238,7 +238,7 @@ export default function IntroOffer2Page() {
                 <section className="relative overflow-hidden bg-[#050505] text-white border-t border-white/10">
                     {/* Hero Image */}
                     <div className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-                        <img src="/images/piano-front-2.jpg" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="DreamPlay One" />
+                        <img src="/images/keyboards/piano-front-2.jpg" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="DreamPlay One" />
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505]" />
                         <AnimatedSection className="relative z-10 text-center px-6">
                             <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">The Instrument</p>
@@ -255,7 +255,7 @@ export default function IntroOffer2Page() {
                     <div className="py-24 md:py-32 px-6">
                         <div className="container mx-auto max-w-5xl">
                             <AnimatedSection className="text-center">
-                                <img src="/images/DS6.0-Black-transparent v2.png" className="w-full max-w-4xl mx-auto object-contain mb-12" alt="DreamPlay One Renders" />
+                                <img src="/images/keyboards/DS6.0-Black-transparent v2.png" className="w-full max-w-4xl mx-auto object-contain mb-12" alt="DreamPlay One Renders" />
                                 <Link href="/product-information" target="_blank" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
                                     Click here for all product information
                                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -488,7 +488,7 @@ export default function IntroOffer2Page() {
 
                         <div className="grid md:grid-cols-2 gap-8">
                             <AnimatedSection className="border border-white/10 bg-[#0a0a0f] p-8 md:p-12 text-center">
-                                <img src="/images/carnegie-hall-performance.png" className="w-24 h-24 rounded-full object-cover mx-auto mb-8 border-2 border-white/20" alt="Lionel Yu" />
+                                <img src="/images/marketing/carnegie-hall-performance.png" className="w-24 h-24 rounded-full object-cover mx-auto mb-8 border-2 border-white/20" alt="Lionel Yu" />
                                 <blockquote className="font-serif text-lg md:text-xl leading-relaxed text-white/90 mb-8">
                                     &quot;I watched enough of my students struggle, both adults and children, that I want to make this keyboard for them. To show them what is possible when the piano finally fits one&apos;s hands.&quot;
                                 </blockquote>

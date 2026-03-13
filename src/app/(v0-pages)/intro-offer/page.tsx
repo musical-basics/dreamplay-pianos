@@ -45,13 +45,13 @@ const founderQuotes = [
         quote: "I watched enough of my students struggle, both adults and children, that I want to make this keyboard for them. To show them what is possible when the piano finally fits one's hands.",
         author: "Lionel Yu",
         title: "Founder & Concert Pianist",
-        image: "https://dreamplaypianos.com/images/carnegie-hall-performance.png"
+        image: "https://dreamplaypianos.com/images/marketing/carnegie-hall-performance.png"
     },
     {
         quote: "Everything is easier on the 6.0 for me... I feel very comfortable playing scales, fast passages, or big chords",
         author: "Claudia Wang",
         title: "Master's Student at SMU, Dallas · 7.2\" Handspan",
-        image: "/images/claudia-wang.jpeg"
+        image: "/images/marketing/claudia-wang.jpeg"
     }
 ]
 
@@ -482,7 +482,7 @@ export default function IntroOfferPage() {
                                 {/* Step 1: Email Capture */}
                                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10">
                                     <Image
-                                        src="/images/hand-size-comparison.jpg"
+                                        src="/images/hands/hand-size-comparison.jpg"
                                         alt="How to measure your hand span"
                                         fill
                                         className="object-cover opacity-60 blur-[2px]"
@@ -530,7 +530,7 @@ export default function IntroOfferPage() {
                                 {/* Step 2: Guide Revealed */}
                                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10">
                                     <Image
-                                        src="/images/hand-size-comparison.jpg"
+                                        src="/images/hands/hand-size-comparison.jpg"
                                         alt="How to measure your hand span for the right piano key size"
                                         fill
                                         className="object-cover"
@@ -749,7 +749,7 @@ export default function IntroOfferPage() {
                 <section className="h-screen snap-start relative flex items-center justify-center bg-black" style={{ scrollSnapAlign: "start" }}>
                     <div className="absolute inset-0">
                         <Image
-                            src="https://dreamplaypianos.com/images/Main-Product-In-Studio-1-1_1.avif"
+                            src="https://dreamplaypianos.com/images/keyboards/Main-Product-In-Studio-1-1_1.avif"
                             alt="DreamPlay One"
                             fill
                             className="object-cover opacity-40"
@@ -844,7 +844,7 @@ export default function IntroOfferPage() {
                                 </div>
                                 <div className="order-1 md:order-2 relative aspect-video md:aspect-[4/5] landscape:aspect-[3/2] landscape:max-h-[60vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto w-full lg:max-w-none group hidden landscape:max-md:hidden md:block">
                                     <Image
-                                        src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg"
+                                        src="/images/stock/franz-liszt-in-colour-1546939903-large-article-0.jpg"
                                         alt="Franz Liszt, a pianist with large hands who helped standardize the modern wide keyboard"
                                         fill
                                         className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
@@ -944,7 +944,7 @@ export default function IntroOfferPage() {
                         {/* Horizontal Slide 3: Stats Slide (55%) */}
                         <div className="h-full w-full flex-shrink-0 relative overflow-y-auto">
                             <Image
-                                src="/images/pianist-hands-on-narrow-keys.jpg"
+                                src="/images/marketing/pianist-hands-on-narrow-keys.jpg"
                                 alt="Hands playing narrow keys piano"
                                 fill
                                 className="object-cover"
@@ -1260,7 +1260,7 @@ export default function IntroOfferPage() {
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative">
                             <img
-                                src="/images/DreamPlay piano with Midi app copy.png"
+                                src="/images/marketing/DreamPlay piano with Midi app copy.png"
                                 alt="DreamPlay Piano with MIDI App"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
@@ -1291,7 +1291,7 @@ export default function IntroOfferPage() {
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50 mb-4">Expected Shipping</p>
                         <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white">August 2026</h2>
                         <div className="mt-8 mx-auto max-w-3xl">
-                            <img src="/images/Worldmap.png" alt="World Map showing shipping regions" className="w-full h-auto object-contain opacity-70" />
+                            <img src="/images/stock/Worldmap.png" alt="World Map showing shipping regions" className="w-full h-auto object-contain opacity-70" />
                         </div>
                         <p className="mt-6 font-sans text-base text-white/60 max-w-md mx-auto">
                             We&apos;re working hard to bring DreamPlay One to your doorstep.
@@ -1485,7 +1485,7 @@ export default function IntroOfferPage() {
                 {/* Slide 15: Ready to Take Next Step */}
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <Image
-                        src="/images/dreamplay-one-hero.jpg"
+                        src="/images/marketing/dreamplay-one-hero.jpg"
                         alt="DreamPlay One"
                         fill
                         className="object-cover"

@@ -230,7 +230,7 @@ export default function HowItWorksPage() {
 
                                 <div className="bg-[#0a0a0a] rounded-none p-6 flex items-center gap-6 mt-auto relative z-10 border border-white/10">
                                     <div className="w-20 h-20 relative rounded-none overflow-hidden bg-black flex-shrink-0">
-                                        <Image src="/images/hand-size-comparison.jpg" alt="Hand span guide" fill className="object-cover opacity-80" />
+                                        <Image src="/images/hands/hand-size-comparison.jpg" alt="Hand span guide" fill className="object-cover opacity-80" />
                                     </div>
                                     <div>
                                         <div className="font-sans text-base font-semibold mb-1 text-white">How to measure</div>
@@ -366,7 +366,7 @@ export default function HowItWorksPage() {
                                     className="group relative border border-white/10 hover:border-white/25 transition-all duration-300 cursor-pointer overflow-hidden w-full mb-3"
                                 >
                                     <Image
-                                        src="/images/Biomechanical Impact on Small Hands copy.png"
+                                        src="/images/hands/Biomechanical Impact on Small Hands copy.png"
                                         alt="Biomechanical Impact of Key Width on Small Hands"
                                         width={1200}
                                         height={900}
@@ -551,7 +551,7 @@ export default function HowItWorksPage() {
                 >
                     <div className="relative max-w-5xl w-full mx-4 md:mx-8">
                         <Image
-                            src="/images/Biomechanical Impact on Small Hands copy.png"
+                            src="/images/hands/Biomechanical Impact on Small Hands copy.png"
                             alt="Biomechanical Impact of Key Width on Small Hands"
                             width={1200}
                             height={900}

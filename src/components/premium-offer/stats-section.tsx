@@ -4,7 +4,7 @@ export function StatsSection() {
   return (
     <section className="relative min-h-screen overflow-hidden">
       <Image
-        src="/images/pianist-hands-on-narrow-keys.jpg"
+        src="/images/marketing/pianist-hands-on-narrow-keys.jpg"
         alt="Hands playing piano"
         fill
         sizes="100vw"

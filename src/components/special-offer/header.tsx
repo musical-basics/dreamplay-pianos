@@ -139,7 +139,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                             className="flex items-center gap-2 cursor-pointer"
                         >
                             <img
-                                src={useDarkText ? "/images/Logo.svg" : "/images/DreamPlay Logo White.png"}
+                                src={useDarkText ? "/images/logos/Logo.svg" : "/images/logos/DreamPlay Logo White.png"}
                                 alt="DreamPlay Pianos"
                                 className={`h-8 transition-all ${useDarkText ? "brightness-0" : ""}`}
                             />

@@ -18,7 +18,7 @@ export function HeroSection() {
         <section ref={sectionRef} className="relative h-screen flex items-center bg-neutral-900 overflow-hidden">
             <div className="absolute inset-0">
                 <img
-                    src="/images/dreamplay-one-hero.jpg"
+                    src="/images/marketing/dreamplay-one-hero.jpg"
                     alt="Pianist playing a narrow keyboard designed for small hands"
                     className="w-full h-full object-cover opacity-60"
                 />

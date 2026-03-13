@@ -91,21 +91,21 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
             tagline: 'Perfect for smaller hands',
             description: 'Ideal for women and children',
             zone: 'Zone A',
-            imgSrc: '/images/ds55-white-narrow-keys-alt.png'
+            imgSrc: '/images/keyboards/ds55-white-narrow-keys-alt.png'
         },
         'DS6.0': {
             name: 'DreamPlay One DS6.0',
             tagline: 'Perfect for average hands',
             description: 'Ideal for most men and women',
             zone: 'Zone B',
-            imgSrc: '/images/DS6.0-Black-transparent v2.png'
+            imgSrc: '/images/keyboards/DS6.0-Black-transparent v2.png'
         },
         'DS6.5': {
             name: 'DreamPlay One DS6.5',
             tagline: 'Standard keys for large hands',
             description: 'For the small percentage with larger hands',
             zone: 'Zone C',
-            imgSrc: '/images/ds65-black-standard-digital-piano.png'
+            imgSrc: '/images/keyboards/ds65-black-standard-digital-piano.png'
         }
     };
 
@@ -408,7 +408,7 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
                             {/* Hidden Logo since it's in Main Navbar */}
                             <div className="hidden">
                                 <Link href="/" className="flex items-center gap-2 group">
-                                    <img src="/images/Logo-White.svg" alt="DreamPlay" className="h-6 md:h-8 w-auto transition-transform group-hover:scale-105" />
+                                    <img src="/images/logos/Logo-White.svg" alt="DreamPlay" className="h-6 md:h-8 w-auto transition-transform group-hover:scale-105" />
                                 </Link>
                             </div>
 
@@ -674,7 +674,7 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
                                     </div>
                                 )}
                                 <div className="relative h-56 w-full overflow-hidden border-b border-white/5 transition-all duration-500 md:h-72" style={{ background: color === 'Black' ? 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)' : 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)' }}>
-                                    <img src={color === 'Black' ? "/images/ds65-black-standard-digital-piano.png" : "/images/ds55-white-narrow-keys-piano.png"} alt={color} className="absolute left-1/2 top-1/2 h-[85%] w-auto max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain transition-all duration-500 group-hover:scale-105" />
+                                    <img src={color === 'Black' ? "/images/keyboards/ds65-black-standard-digital-piano.png" : "/images/keyboards/ds55-white-narrow-keys-piano.png"} alt={color} className="absolute left-1/2 top-1/2 h-[85%] w-auto max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain transition-all duration-500 group-hover:scale-105" />
                                 </div>
                                 <div className="p-5 md:p-8">
                                     <div className="mb-2 flex items-center gap-2 md:mb-3 md:gap-3">
@@ -887,7 +887,7 @@ export default function CustomizeClient({ urls }: CustomizeClientProps) {
 
                                     <div className="bg-black/30 rounded-3xl p-6 flex items-center gap-6">
                                         <div className="w-20 h-20 rounded-xl bg-black/20 overflow-hidden flex-shrink-0">
-                                            <Image src="/images/Picture3.avif" alt="Hand" width={80} height={80} className="w-full h-full object-cover" />
+                                            <Image src="/images/stock/Picture3.avif" alt="Hand" width={80} height={80} className="w-full h-full object-cover" />
                                         </div>
                                         <div>
                                             <h4 className="font-semibold mb-2">How to measure</h4>

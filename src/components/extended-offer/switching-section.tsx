@@ -65,7 +65,7 @@ export function SwitchingSection() {
                     <div className="relative flex-1">
                         <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
                             <Image
-                                src="/images/David-Linda.jpg"
+                                src="/images/marketing/David-Linda.jpg"
                                 alt="Pianists Linda Gould and David Steinbuhler switching between keyboard sizes"
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 50vw"

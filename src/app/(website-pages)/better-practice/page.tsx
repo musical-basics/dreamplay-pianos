@@ -15,7 +15,7 @@ export default function BetterPracticePage() {
                 {/* ═══ HERO — DARK ═══ */}
                 <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#050505] py-20 text-center">
                     <div className="absolute inset-0">
-                        <img src="/images/BW Piano (1).jpg" alt="" className="h-full w-full object-cover opacity-30" />
+                        <img src="/images/stock/BW Piano (1).jpg" alt="" className="h-full w-full object-cover opacity-30" />
                     </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-transparent to-[#050505]"></div>
                     <AnimatedSection className="relative z-10 mx-auto max-w-4xl px-6">

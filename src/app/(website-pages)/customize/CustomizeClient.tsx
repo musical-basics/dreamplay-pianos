@@ -163,21 +163,21 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             tagline: '7/8ths Size',
             description: 'Designed for pianists with hands under 7.6 inches. Play octaves and 9ths with ease.',
             zone: 'Zone A',
-            imgSrc: '/images/ds55-white-narrow-keys-alt.png'
+            imgSrc: '/images/keyboards/ds55-white-narrow-keys-alt.png'
         },
         'DS6.0': {
             name: 'DS6.0',
             tagline: '15/16ths Size',
             description: 'Designed for pianists with hands between 7.6 and 8.5 inches. Play octaves effortlessly.',
             zone: 'Zone B',
-            imgSrc: '/images/DS6.0-Black-transparent v2.png'
+            imgSrc: '/images/keyboards/DS6.0-Black-transparent v2.png'
         },
         'DS6.5': {
             name: 'DS6.5',
             tagline: 'Standard Size',
             description: 'For the small percentage with larger hands. Conventional sizing.',
             zone: 'Zone C',
-            imgSrc: '/images/ds65-black-standard-digital-piano.png'
+            imgSrc: '/images/keyboards/ds65-black-standard-digital-piano.png'
         }
     };
 
@@ -834,7 +834,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         </div>
                                     )}
                                     <div className={`relative flex h-72 w-full items-center justify-center border-b p-8 transition-colors duration-500 ${isSelected ? 'border-black/20' : 'border-black/10'}`} style={{ backgroundColor: color === 'Black' ? '#e5e5e5' : '#ffffff' }}>
-                                        <Image src={color === 'Black' ? "/images/ds65-black-standard-digital-piano.png" : "/images/ds55-white-narrow-keys-alt.png"} alt={color} width={800} height={500} className="h-auto w-full max-h-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
+                                        <Image src={color === 'Black' ? "/images/keyboards/ds65-black-standard-digital-piano.png" : "/images/keyboards/ds55-white-narrow-keys-alt.png"} alt={color} width={800} height={500} className="h-auto w-full max-h-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="flex w-full flex-1 flex-col p-8 md:p-10">
                                         <div className="mb-4 flex items-center gap-4">
@@ -1166,7 +1166,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                                 <div className="mt-auto flex items-start gap-6 border-t border-white/10 pt-8">
                                     <div className="relative h-16 w-16 shrink-0 bg-black grayscale border border-white/10">
-                                        <Image src="/images/hand-size-comparison.jpg" alt="Hand span" fill className="object-cover opacity-60" />
+                                        <Image src="/images/hands/hand-size-comparison.jpg" alt="Hand span" fill className="object-cover opacity-60" />
                                     </div>
                                     <div>
                                         <div className="mb-2 font-serif text-lg text-white">How to measure</div>

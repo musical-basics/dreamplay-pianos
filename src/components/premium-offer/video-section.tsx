@@ -57,7 +57,7 @@ export function VideoSection() {
         {!isPlaying && (
           <>
             <Image
-              src="/images/Piano + Bench Frontal + Bundle.png"
+              src="/images/keyboards/Piano + Bench Frontal + Bundle.png"
               alt="DreamPlay One with Bench"
               fill
               className="object-cover"

@@ -41,7 +41,7 @@ export function SizeFinderSection() {
           </div>
           <div className="relative flex-1 overflow-hidden rounded-sm">
             <Image
-              src="/images/Zone B Hand.jpg"
+              src="/images/hands/Zone B Hand.jpg"
               alt="Hand demonstrating natural span measurement"
               width={600}
               height={340}

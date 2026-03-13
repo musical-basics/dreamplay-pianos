@@ -281,7 +281,7 @@ export default function OurStoryPage() {
                                 </div>
                                 <div className="relative group">
                                     <div className="aspect-[4/5] overflow-hidden rounded-none border border-neutral-200">
-                                        <img src="/images/carnegie-hall-performance.png" alt="Pianist performing" className="w-full h-full object-cover transition-all duration-700" />
+                                        <img src="/images/marketing/carnegie-hall-performance.png" alt="Pianist performing" className="w-full h-full object-cover transition-all duration-700" />
                                     </div>
                                 </div>
                             </div>
@@ -296,7 +296,7 @@ export default function OurStoryPage() {
                             </span>
                             <div className="grid md:grid-cols-[200px_1fr] lg:grid-cols-[280px_1fr] gap-8 items-start">
                                 <div className="relative overflow-hidden rounded-none border border-neutral-200">
-                                    <img src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg" alt="Franz Liszt" className="w-full h-auto object-cover transition-all duration-700" />
+                                    <img src="/images/stock/franz-liszt-in-colour-1546939903-large-article-0.jpg" alt="Franz Liszt" className="w-full h-auto object-cover transition-all duration-700" />
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <div className="w-1 h-full min-h-[100px] bg-blue-600 flex-shrink-0"></div>
@@ -329,7 +329,7 @@ export default function OurStoryPage() {
                                 </div>
                                 <div className="order-2 flex items-start lg:-mt-[200px]">
                                     <div className="w-full aspect-video overflow-hidden rounded-none border border-white/10">
-                                        <img src="/images/dreamplay-piano-snapshot.png" alt="Workshop" className="w-full h-full object-cover transition-all duration-700 grayscale" />
+                                        <img src="/images/marketing/dreamplay-piano-snapshot.png" alt="Workshop" className="w-full h-full object-cover transition-all duration-700 grayscale" />
                                     </div>
                                 </div>
                             </div>
@@ -351,7 +351,7 @@ export default function OurStoryPage() {
                     </div>
                     {/* Full Width Image */}
                     <div className="relative w-full aspect-[21/9] overflow-hidden">
-                        <img src="/images/article-placeholder.jpg" alt="Piano close up" className="w-full h-full object-cover transition-all duration-700" />
+                        <img src="/images/stock/article-placeholder.jpg" alt="Piano close up" className="w-full h-full object-cover transition-all duration-700" />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50"></div>
                     </div>
 
@@ -395,7 +395,7 @@ export default function OurStoryPage() {
                                 </div>
                                 <div className="relative mt-8 lg:mt-0">
                                     <div className="aspect-[4/3] overflow-hidden rounded-none border border-neutral-200">
-                                        <img src="/images/LionelYuPlayingPiano.jpg" alt="Lionel Yu Playing Piano" className="w-full h-full object-cover transition-all duration-700" />
+                                        <img src="/images/marketing/LionelYuPlayingPiano.jpg" alt="Lionel Yu Playing Piano" className="w-full h-full object-cover transition-all duration-700" />
                                     </div>
                                 </div>
                             </div>

@@ -25,7 +25,7 @@ export function TrustSection() {
           <div className="relative lg:w-2/5">
             <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
               <Image
-                src="/images/packaging-care 2x Upscaled-2.jpg"
+                src="/images/accessories/packaging-care 2x Upscaled-2.jpg"
                 alt="DreamPlay manufacturing facility"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'A premium digital piano featuring ergonomically narrower keys designed to eliminate strain, prevent injury, and let you play freely.',
     url: 'https://dreamplaypianos.com',
     siteName: 'DreamPlay Pianos',
-    images: [{ url: '/images/dreamplay-one-hero.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/images/marketing/dreamplay-one-hero.jpg', width: 1200, height: 630 }],
     locale: 'en_US',
     type: 'website',
   },
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
   },
   icons: {
-    icon: "/images/favicon.png",
-    apple: "/images/webclip.png",
+    icon: "/images/logos/favicon.png",
+    apple: "/images/logos/webclip.png",
   },
 };
 

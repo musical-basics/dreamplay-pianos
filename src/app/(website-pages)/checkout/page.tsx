@@ -11,15 +11,15 @@ import { trackEmailConversion } from "@/components/EmailTracker";
 
 const PRODUCT_IMAGES = {
     Black: [
-        "/images/DS6.0-Black-transparent v2.png",
-        "/images/piano-front-2.jpg",
-        "/images/Piano + Bench Frontal + Bundle.png",
+        "/images/keyboards/DS6.0-Black-transparent v2.png",
+        "/images/keyboards/piano-front-2.jpg",
+        "/images/keyboards/Piano + Bench Frontal + Bundle.png",
         "/images/learn/keyboard-led-lights.jpg"
     ],
     White: [
-        "/images/ds55-white-narrow-keys-alt.png",
-        "/images/piano-front-2.jpg",
-        "/images/piano-in-the-box.png",
+        "/images/keyboards/ds55-white-narrow-keys-alt.png",
+        "/images/keyboards/piano-front-2.jpg",
+        "/images/accessories/piano-in-the-box.png",
         "/images/learn/keyboard-led-lights.jpg"
     ]
 };

@@ -35,12 +35,12 @@ export function HandComparisonSection() {
                 <div className="grid gap-4 md:grid-cols-2">
                     {/* Standard keyboard - strain */}
                     <button
-                        onClick={() => openLightbox("/images/Biomechanical Impact on Small Hands.png", "Biomechanical Impact of Key Width on Small Hands")}
+                        onClick={() => openLightbox("/images/hands/Biomechanical Impact on Small Hands.png", "Biomechanical Impact of Key Width on Small Hands")}
                         className="relative group overflow-hidden block transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-sm cursor-zoom-in text-left"
                     >
                         <div className="relative aspect-[4/3] overflow-hidden">
                             <Image
-                                src="/images/Biomechanical Impact on Small Hands.png"
+                                src="/images/hands/Biomechanical Impact on Small Hands.png"
                                 alt="Hand straining on a standard 6.5 inch octave keyboard"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -66,12 +66,12 @@ export function HandComparisonSection() {
 
                     {/* DreamPlay keyboard - relaxed */}
                     <button
-                        onClick={() => openLightbox("/images/DreamPlay Piano Hands.jpg", "Hand relaxed and naturally arched on DreamPlay keyboard")}
+                        onClick={() => openLightbox("/images/marketing/DreamPlay Piano Hands.jpg", "Hand relaxed and naturally arched on DreamPlay keyboard")}
                         className="relative group overflow-hidden block transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-sm cursor-zoom-in text-left"
                     >
                         <div className="relative aspect-[4/3] overflow-hidden">
                             <Image
-                                src="/images/DreamPlay Piano Hands.jpg"
+                                src="/images/marketing/DreamPlay Piano Hands.jpg"
                                 alt="Hand relaxed and naturally arched on DreamPlay keyboard"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"

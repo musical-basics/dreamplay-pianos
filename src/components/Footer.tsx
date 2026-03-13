@@ -71,7 +71,7 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <div>
             <Link href="/" className="inline-block mb-8">
-              <img src="/images/Logo.svg" alt="DreamPlay Logo" className="h-7 w-auto opacity-90" />
+              <img src="/images/logos/Logo.svg" alt="DreamPlay Logo" className="h-7 w-auto opacity-90" />
             </Link>
             <p className="text-[13px] leading-[1.8] text-white/[0.35] max-w-[280px] tracking-[0.01em] mb-8">
               Pianos designed for the human hand. Experience the joy of possibility without the strain.

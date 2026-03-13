@@ -104,7 +104,7 @@ export default function Reserve2Page() {
             {/* Minimal header — just logo, no nav links */}
             <header className="fixed top-0 w-full p-6 z-50 flex justify-center bg-gradient-to-b from-[#050505] via-[#050505]/80 to-transparent pointer-events-none">
                 <Link href="/intro-offer2" className="pointer-events-auto">
-                    <img src="/images/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 hover:opacity-80 transition-opacity" />
+                    <img src="/images/logos/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 hover:opacity-80 transition-opacity" />
                 </Link>
             </header>
 

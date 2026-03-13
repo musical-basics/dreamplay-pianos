@@ -5,7 +5,7 @@ export function HeroImageSection() {
         <section className="relative min-h-screen overflow-hidden">
             <div className="absolute inset-0">
                 <Image
-                    src="/images/dreamplay-one-hero.jpg"
+                    src="/images/marketing/dreamplay-one-hero.jpg"
                     alt="Hand in black suit playing piano keys"
                     fill
                     className="object-cover"

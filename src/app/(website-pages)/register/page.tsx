@@ -111,7 +111,7 @@ function RegisterContent() {
                 {/* Logo / Brand */}
                 <div className="text-center mb-10">
                     <a href="/" className="inline-block mb-8">
-                        <img src="/images/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 mx-auto" />
+                        <img src="/images/logos/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 mx-auto" />
                     </a>
                 </div>
 

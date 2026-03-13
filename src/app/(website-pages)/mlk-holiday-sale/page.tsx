@@ -20,7 +20,7 @@ export default function MLKHolidaySalePage() {
             {/* Sticky Hero Image - Bottom Layer */}
             <div className="w-full bg-black sticky top-0 z-0">
                 <img
-                    src="/images/mlk-hero.jpg"
+                    src="/images/banners/mlk-hero.jpg"
                     alt="MLK Holiday Sale"
                     className="w-full h-auto object-cover"
                 />
