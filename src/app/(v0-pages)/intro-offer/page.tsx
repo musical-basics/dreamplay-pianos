@@ -425,15 +425,18 @@ export default function IntroOfferPage() {
 
                 {/* Slide 6: Expected Shipping */}
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
-                    <div className="text-center px-6">
+                    <div className="text-center px-6 max-w-5xl mx-auto">
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50 mb-4">Expected Shipping</p>
                         <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white">August 2026</h2>
-                        <p className="mt-8 font-sans text-base text-white/60 max-w-md mx-auto">
+                        <div className="mt-8 mx-auto max-w-3xl">
+                            <img src="/images/Worldmap.png" alt="World Map showing shipping regions" className="w-full h-auto object-contain opacity-70" />
+                        </div>
+                        <p className="mt-6 font-sans text-base text-white/60 max-w-md mx-auto">
                             We&apos;re working hard to bring DreamPlay One to your doorstep.
                         </p>
                         <Link
                             href="/shipping"
-                            className="mt-8 inline-flex items-center gap-2 border border-white/30 px-8 py-4 font-sans text-xs uppercase tracking-widest text-white hover:bg-white/10 transition-colors"
+                            className="mt-6 inline-flex items-center gap-2 border border-white/30 px-8 py-4 font-sans text-xs uppercase tracking-widest text-white hover:bg-white/10 transition-colors"
                         >
                             View Shipping Details <ArrowRight className="w-4 h-4" />
                         </Link>
