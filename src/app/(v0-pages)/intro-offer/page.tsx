@@ -397,10 +397,11 @@ export default function IntroOfferPage() {
                                 {index < professorQuotes.length - 1 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index + 1)}
-                                        className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
                                         aria-label="Next quote"
                                     >
-                                        <ChevronRight className="w-6 h-6 text-white" />
+                                        <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                        <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                                     </button>
                                 )}
                                 {index > 0 && (
@@ -441,7 +442,7 @@ export default function IntroOfferPage() {
                             </p>
 
                             {/* Glassmorphism hero card */}
-                            <div className="mt-8 md:mt-12 relative w-full max-w-3xl rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
+                            <div className="mt-6 md:mt-10 relative w-full max-w-5xl rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
                                 <Image
                                     src="https://dreamplaypianos.com/images/Piano%20Front%202.jpg"
                                     alt="DreamPlay One digital piano front view with narrow keys for small hands"
@@ -511,10 +512,11 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative">
