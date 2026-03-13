@@ -32,6 +32,9 @@ export const metadata = {
     title: "DreamPlay One | Small Hands Piano with Narrow Keys",
     description:
         "The DreamPlay One is a premium digital piano with narrow keys, designed for pianists with small hands. Prevent hand injury and play freely.",
+    alternates: {
+        canonical: 'https://dreamplaypianos.com',
+    },
 }
 
 export default async function OldPremiumOfferPage() {

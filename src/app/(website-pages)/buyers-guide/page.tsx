@@ -181,7 +181,7 @@ export default function BuyersGuidePage() {
                         <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl">
                             <Image
                                 src="/images/Piano Front 2.jpg"
-                                alt="DreamPlay Piano with bench"
+                                alt="DreamPlay One kids piano with narrow keys and bench"
                                 fill
                                 className="object-cover"
                                 priority

@@ -35,6 +35,9 @@ export const metadata = {
     title: "Narrow Keyboard Piano for Small Hands & Kids | DreamPlay One",
     description:
         "The DreamPlay One features narrow keys (DS5.5 & DS6.0) to help pianists with small hands play without overstretching or hand injury. Ideal for adults and kids.",
+    alternates: {
+        canonical: 'https://dreamplaypianos.com',
+    },
 }
 
 export default async function ExtendedOfferPage() {

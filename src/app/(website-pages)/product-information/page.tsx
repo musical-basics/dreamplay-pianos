@@ -278,11 +278,14 @@ function ComparisonTable3Col({ title, subtitle, data }: { title: string, subtitl
     )
 }
 
+import ProductJsonLd from "@/components/ProductJsonLd"
+
 /* ── Page ──────────────────────────────────────────────── */
 
 export default function ProductInformationPage() {
     return (
         <div className={`${playfair.variable} ${inter.variable} font-sans antialiased`}>
+            <ProductJsonLd />
             <SpecialOfferHeader />
             <main>
                 {/* Hero */}

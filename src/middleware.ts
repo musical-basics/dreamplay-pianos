@@ -91,9 +91,9 @@ export async function middleware(request: NextRequest) {
     // PRIORITY #2: HOMEPAGE → /intro-offer (replaces old A/B test)
     // ========================================================================
     if (pathname === "/") {
-        const redirectUrl = request.nextUrl.clone();
-        redirectUrl.pathname = `/intro-offer`;
-        return NextResponse.redirect(redirectUrl);
+        const rewriteUrl = request.nextUrl.clone();
+        rewriteUrl.pathname = `/intro-offer`;
+        return NextResponse.rewrite(rewriteUrl);
     }
 
     // ========================================================================

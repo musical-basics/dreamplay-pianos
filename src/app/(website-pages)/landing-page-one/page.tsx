@@ -24,6 +24,9 @@ const inter = Inter({
 export const metadata = {
     title: "DreamPlay One - Piano Keyboard for Every Hand",
     description: "DreamPlay One is designed with narrower keys so you can play freely, naturally, and without strain.",
+    alternates: {
+        canonical: 'https://dreamplaypianos.com',
+    },
 }
 
 export const dynamic = 'force-dynamic';

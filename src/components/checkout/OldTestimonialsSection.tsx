@@ -52,7 +52,7 @@ export default function OldTestimonialsSection() {
                     <div className="relative aspect-square w-full overflow-hidden bg-neutral-100">
                         <Image
                             src={story.image}
-                            alt="Pianist playing"
+                            alt="Adult pianist with small hands playing a narrow keyboard without injury"
                             fill
                             className="object-cover transition-opacity duration-500"
                         />
@@ -87,7 +87,7 @@ export default function OldTestimonialsSection() {
                     <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100 mb-6">
                         <Image
                             src={story.image}
-                            alt="Pianist playing"
+                            alt="Adult pianist with small hands playing a narrow keyboard without injury"
                             fill
                             className="object-cover"
                         />
