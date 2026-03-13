@@ -5,6 +5,7 @@ import { ChevronDown, ChevronRight, Play, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
+import DonutChart from "@/components/DonutChart"
 
 const professorQuotes = [
     {
@@ -209,6 +210,13 @@ export default function IntroOfferPage() {
                                                 Have hand spans smaller than the 8.5 inch minimum that standard keyboards expect.
                                             </p>
                                         </div>
+                                        <div className="bg-white/[0.03] border border-white/10 rounded-none p-8 w-full max-w-sm flex flex-col items-center">
+                                            <DonutChart percent={87} label="" theme="dark" />
+                                            <div className="flex gap-8 text-xs font-medium text-white/50 mt-6">
+                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#c0392b]"></span>Too small</div>
+                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#1e7a3a]"></span>Comfortable</div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="flex flex-col items-center">
                                         <div className="text-center mb-6">
@@ -217,6 +225,13 @@ export default function IntroOfferPage() {
                                             <p className="font-sans text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed">
                                                 Also fall below the comfortable reach threshold for a standard 6.5 inch keyboard.
                                             </p>
+                                        </div>
+                                        <div className="bg-white/[0.03] border border-white/10 rounded-none p-8 w-full max-w-sm flex flex-col items-center">
+                                            <DonutChart percent={24} label="" theme="dark" />
+                                            <div className="flex gap-8 text-xs font-medium text-white/50 mt-6">
+                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#c0392b]"></span>Too small</div>
+                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#1e7a3a]"></span>Comfortable</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
