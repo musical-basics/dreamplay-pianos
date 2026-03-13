@@ -347,24 +347,28 @@ export default function IntroOfferPage() {
                             </button>
                         </div>
                         {/* Pain Point Slide */}
-                        <div className="h-full w-full flex-shrink-0 relative">
-                            <Image
-                                src="https://dreamplaypianos.com/images/Biomechanical%20Impact%20on%20Small%20Hands.png"
-                                alt="Pain points"
-                                fill
-                                className="object-contain bg-black"
-                            />
-                            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20">
-                                <Link
-                                    href="/how-it-works"
-                                    className="inline-flex items-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-white/90 transition-colors"
-                                >
-                                    Learn More <ArrowRight className="w-4 h-4" />
-                                </Link>
+                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16">
+                            <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-8 md:mb-12 text-center" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.4)" }}>
+                                Biomechanical Impact on Small Hands
+                            </h2>
+                            <div className="relative w-full max-w-4xl rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm">
+                                <Image
+                                    src="https://dreamplaypianos.com/images/Biomechanical%20Impact%20on%20Small%20Hands.png"
+                                    alt="Diagram showing how wide piano keys cause hands injury in pianists with small hands"
+                                    width={1200}
+                                    height={700}
+                                    className="w-full h-auto object-contain"
+                                />
                             </div>
+                            <Link
+                                href="/how-it-works"
+                                className="mt-8 md:mt-10 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 border border-white/20 text-white font-sans text-sm hover:bg-white/20 transition-all"
+                            >
+                                Learn more about the science <ChevronRight className="w-4 h-4" />
+                            </Link>
                             <button
                                 onClick={() => setStatsHorizontalSlide(1)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
                                 <ChevronRight className="w-6 h-6 text-white" />
