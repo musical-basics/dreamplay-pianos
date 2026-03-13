@@ -338,9 +338,9 @@ export default function IntroOfferPage() {
                                 loop
                                 muted
                                 playsInline
-                                poster="https://dreamplaypianos.com/images/Piano%20+%20Bench%20Frontal%20+%20Bundle.png"
+                                poster=""
                             >
-                                <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/DreamPlay-Product-Render.mp4" type="video/mp4" />
+                                <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Clip%202.m4v" type="video/mp4" />
                             </video>
                             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20">
                                 <Link
