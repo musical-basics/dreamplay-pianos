@@ -46,7 +46,7 @@ const founderQuotes = [
         quote: "Everything is easier on the 6.0 for me... I feel very comfortable playing scales, fast passages, or big chords",
         author: "Claudia Wang",
         title: "Master's Student at SMU, Dallas · 7.2\" Handspan",
-        image: "https://dreamplaypianos.com/images/claudia-wang.jpg"
+        image: "/images/claudia-wang.jpeg"
     }
 ]
 
