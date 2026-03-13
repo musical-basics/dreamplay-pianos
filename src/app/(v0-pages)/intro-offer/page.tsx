@@ -454,10 +454,10 @@ export default function IntroOfferPage() {
                             {/* SWIPE indicator — right side */}
                             <button
                                 onClick={() => setProductHorizontalSlide(1)}
-                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
+                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
                             >
-                                <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 group-hover:text-white/70 transition-colors [writing-mode:vertical-lr]">Swipe</span>
-                                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-colors" />
+                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-black">
