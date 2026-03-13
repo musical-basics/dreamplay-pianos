@@ -406,14 +406,17 @@ export default function LandingPage1() {
                         </p>
 
                         {/* Pricing */}
-                        <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-1">
+                        <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-2">
                             <div className="flex items-baseline gap-3 flex-wrap">
-                                <span className="text-3xl font-black">
+                                <span className="text-xl font-black text-stone-400 line-through">
                                     $99
                                 </span>
-                                <span className="text-sm font-semibold text-stone-600">
+                                <span className="text-sm text-stone-400 line-through">
                                     Refundable Deposit
                                 </span>
+                            </div>
+                            <div className="text-2xl md:text-3xl font-black text-stone-900 leading-tight">
+                                $29 <span className="text-lg md:text-xl font-bold">DUE TODAY TO SECURE YOUR SPOT</span>
                             </div>
                             <p className="text-sm text-stone-500">
                                 Locks in{" "}
