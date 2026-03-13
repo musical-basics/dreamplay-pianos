@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { ChevronDown, ChevronRight, Play, ArrowRight } from "lucide-react"
+import { ChevronDown, ChevronRight, Play, ArrowRight, Send, Loader2, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
@@ -65,6 +65,43 @@ export default function IntroOfferPage() {
     const [productHorizontalSlide, setProductHorizontalSlide] = useState(0)
     const [learnHorizontalSlide, setLearnHorizontalSlide] = useState(0)
     const [founderHorizontalSlide, setFounderHorizontalSlide] = useState(0)
+
+    // Contact form states
+    const [contactName, setContactName] = useState("")
+    const [contactEmail, setContactEmail] = useState("")
+    const [contactMessage, setContactMessage] = useState("")
+    const [isContactSubmitting, setIsContactSubmitting] = useState(false)
+    const [isContactSubmitted, setIsContactSubmitted] = useState(false)
+    const [contactError, setContactError] = useState("")
+
+    useEffect(() => {
+        const savedEmail = localStorage.getItem("dp_user_email")
+        const savedName = localStorage.getItem("dp_user_first_name")
+        if (savedEmail) setContactEmail(savedEmail)
+        if (savedName) setContactName(savedName)
+    }, [])
+
+    const handleContactSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setIsContactSubmitting(true)
+        setContactError("")
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: contactName, email: contactEmail, subject: "Intro Offer Inquiry", message: contactMessage }),
+            })
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}))
+                throw new Error(data.error || "Failed to send message")
+            }
+            setIsContactSubmitted(true)
+        } catch (err: any) {
+            setContactError(err.message || "Something went wrong. Please try again.")
+        } finally {
+            setIsContactSubmitting(false)
+        }
+    }
 
     const scrollToSlide = useCallback((index: number) => {
         const el = scrollRef.current
@@ -727,27 +764,93 @@ export default function IntroOfferPage() {
                     <ScrollIndicator next={15} />
                 </section>
 
-                {/* Slide 16: FAQ / Contact */}
-                <section className="h-screen relative bg-white flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
-                    <div className="text-center px-6 max-w-2xl">
-                        <h2 className="font-serif text-3xl md:text-4xl text-black mb-6">Still have questions?</h2>
-                        <p className="font-sans text-base text-black/60 mb-8">
-                            Visit our FAQ, or contact us here. We would love to hear from you. If you truly believe that this keyboard will change your piano playing experience, please tell us your story. We want to deliver your dream keyboard.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link
-                                href="/faq"
-                                className="inline-flex items-center gap-2 border border-black px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-black hover:text-white transition-colors"
-                            >
-                                View FAQ <ArrowRight className="w-4 h-4" />
-                            </Link>
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center gap-2 bg-black px-8 py-4 font-sans text-xs uppercase tracking-widest text-white hover:bg-black/80 transition-colors"
-                            >
-                                Contact Us <ArrowRight className="w-4 h-4" />
-                            </Link>
+                {/* Slide 16: FAQ / Contact Form */}
+                <section className="h-screen relative bg-white flex items-center justify-center overflow-y-auto" style={{ scrollSnapAlign: "start" }}>
+                    <div className="w-full max-w-2xl px-6 py-12">
+                        <div className="text-center mb-8">
+                            <h2 className="font-serif text-3xl md:text-4xl text-black mb-3">Still have questions?</h2>
+                            <p className="font-sans text-sm text-black/50">
+                                We&apos;d love to hear from you. Tell us your story.
+                            </p>
                         </div>
+
+                        {isContactSubmitted ? (
+                            <div className="text-center py-12">
+                                <div className="mx-auto w-14 h-14 bg-green-50 border border-green-200 flex items-center justify-center mb-5">
+                                    <CheckCircle2 className="w-7 h-7 text-green-600" />
+                                </div>
+                                <h3 className="font-serif text-2xl text-neutral-900 mb-3">Message Sent</h3>
+                                <p className="font-sans text-sm text-neutral-500">We typically respond within 24–48 hours.</p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleContactSubmit}>
+                                {contactError && (
+                                    <div className="mb-4 p-3 border border-red-200 bg-red-50 text-red-700 text-sm font-sans">
+                                        {contactError}
+                                    </div>
+                                )}
+                                <div className="grid gap-4 md:grid-cols-2 mb-4">
+                                    <div>
+                                        <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-1.5">Name</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={contactName}
+                                            onChange={(e) => setContactName(e.target.value)}
+                                            placeholder="Your name"
+                                            className="w-full px-4 py-3 border border-neutral-300 bg-white text-neutral-900 placeholder-neutral-400 focus:border-black focus:ring-0 outline-none font-sans text-sm transition-colors"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-1.5">Email</label>
+                                        <input
+                                            type="email"
+                                            required
+                                            value={contactEmail}
+                                            onChange={(e) => setContactEmail(e.target.value)}
+                                            placeholder="you@email.com"
+                                            className="w-full px-4 py-3 border border-neutral-300 bg-white text-neutral-900 placeholder-neutral-400 focus:border-black focus:ring-0 outline-none font-sans text-sm transition-colors"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-1.5">Message</label>
+                                    <textarea
+                                        required
+                                        rows={4}
+                                        value={contactMessage}
+                                        onChange={(e) => setContactMessage(e.target.value)}
+                                        placeholder="Tell us how we can help..."
+                                        className="w-full px-4 py-3 border border-neutral-300 bg-white text-neutral-900 placeholder-neutral-400 focus:border-black focus:ring-0 outline-none font-sans text-sm transition-colors resize-none"
+                                    />
+                                </div>
+                                <div className="flex flex-col sm:flex-row items-center gap-3">
+                                    <button
+                                        type="submit"
+                                        disabled={isContactSubmitting}
+                                        className="flex-1 w-full sm:w-auto flex items-center justify-center gap-2 bg-black text-white font-sans text-xs uppercase tracking-widest font-bold py-4 hover:bg-neutral-800 transition-colors disabled:opacity-50 cursor-pointer"
+                                    >
+                                        {isContactSubmitting ? (
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                        ) : (
+                                            <>
+                                                Send Message
+                                                <Send className="w-3 h-3" />
+                                            </>
+                                        )}
+                                    </button>
+                                    <Link
+                                        href="/faq"
+                                        className="flex-shrink-0 inline-flex items-center gap-2 border border-black px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-black hover:text-white transition-colors"
+                                    >
+                                        View FAQ <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                </div>
+                                <p className="text-center text-neutral-400 font-sans text-[10px] uppercase tracking-widest mt-3">
+                                    We typically respond within 24–48 hours
+                                </p>
+                            </form>
+                        )}
                     </div>
                     <ScrollIndicator next={16} dark />
                 </section>
