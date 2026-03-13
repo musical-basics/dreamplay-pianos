@@ -81,6 +81,7 @@ Use lowercase, hyphenated tags that identify the source:
 | `reserve/page.tsx` (v0) | `reserve_reminder` | "Let me think about it" |
 | `intro-offer/page.tsx` (hand popup) | `hand-guide-popup` | 45s timer popup |
 | `intro-offer/page.tsx` ($25 credit popup) | `$25-credit-popup` | 3-minute timer popup |
+| `intro-offer/page.tsx` (priority shipping popup) | `priority-shipping-popup` | 6-minute timer popup |
 | `checkout/ProductSelectionForm.tsx` | varies | Checkout flow |
 
 ### ✅ Contact Forms (Using `submitContactForm` — subscribes + sends notification)

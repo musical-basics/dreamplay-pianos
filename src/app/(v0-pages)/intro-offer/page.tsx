@@ -114,6 +114,13 @@ export default function IntroOfferPage() {
     const [creditPopupError, setCreditPopupError] = useState("")
     const [creditPopupSuccess, setCreditPopupSuccess] = useState(false)
 
+    // Priority Shipping Popup State (6 minutes)
+    const [showPriorityPopup, setShowPriorityPopup] = useState(false)
+    const [priorityPopupEmail, setPriorityPopupEmail] = useState("")
+    const [priorityPopupSubmitting, setPriorityPopupSubmitting] = useState(false)
+    const [priorityPopupError, setPriorityPopupError] = useState("")
+    const [priorityPopupSuccess, setPriorityPopupSuccess] = useState(false)
+
     // ─── Landscape Hint Logic ───
     useEffect(() => {
         if (typeof window === "undefined") return
@@ -243,6 +250,48 @@ export default function IntroOfferPage() {
         }
     }
 
+    // ─── Priority Shipping Popup (6 minutes) ───
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        if (sessionStorage.getItem("dp_priority_popup_seen")) return
+
+        const timer = setTimeout(() => {
+            if (!sessionStorage.getItem("dp_priority_popup_seen") && !showHandPopup && !showCreditPopup) {
+                setShowPriorityPopup(true)
+            }
+        }, 360000) // 6 minutes
+
+        return () => clearTimeout(timer)
+    }, [showHandPopup, showCreditPopup])
+
+    const closePriorityPopup = () => {
+        setShowPriorityPopup(false)
+        sessionStorage.setItem("dp_priority_popup_seen", "true")
+    }
+
+    const handlePriorityPopupSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!priorityPopupEmail.trim()) return
+        setPriorityPopupSubmitting(true)
+        setPriorityPopupError("")
+        try {
+            const result = await subscribeToNewsletter({
+                email: priorityPopupEmail.trim(),
+                tags: ["priority-shipping-popup"],
+            })
+            if (!result.success) {
+                throw new Error(result.error || "Something went wrong")
+            }
+            localStorage.setItem("dp_user_email", priorityPopupEmail.trim())
+            setContactEmail(priorityPopupEmail.trim())
+            setPriorityPopupSuccess(true)
+        } catch (err: any) {
+            setPriorityPopupError(err.message || "Something went wrong. Please try again.")
+        } finally {
+            setPriorityPopupSubmitting(false)
+        }
+    }
+
     useEffect(() => {
         const savedEmail = localStorage.getItem("dp_user_email")
         const savedName = localStorage.getItem("dp_user_first_name")
@@ -250,6 +299,7 @@ export default function IntroOfferPage() {
             setContactEmail(savedEmail)
             setCreditPopupEmail(savedEmail)
             setHandPopupEmail(savedEmail)
+            setPriorityPopupEmail(savedEmail)
         }
         if (savedName) setContactName(savedName)
     }, [])
@@ -574,6 +624,73 @@ export default function IntroOfferPage() {
                                 <button
                                     onClick={closeCreditPopup}
                                     className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer"
+                                >
+                                    Continue Browsing
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* Priority Shipping Popup (6 min delay) */}
+            {showPriorityPopup && (
+                <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">
+                    <div className="relative w-full max-w-md bg-[#0a0a0f] border border-white/20 p-8 rounded-3xl shadow-2xl text-center">
+                        <button
+                            onClick={closePriorityPopup}
+                            className="absolute top-4 right-4 text-white/40 hover:text-white cursor-pointer"
+                            aria-label="Close"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        {!priorityPopupSuccess ? (
+                            <>
+                                <div className="text-5xl mb-4">🚀</div>
+                                <h3 className="text-2xl font-serif text-white mb-2">Get Priority Shipping</h3>
+                                <p className="text-sm font-sans text-white/60 mb-6 leading-relaxed">
+                                    Enter your email to get <strong className="text-emerald-400">priority status</strong> for early shipping. Be among the first to receive your DreamPlay One.
+                                </p>
+
+                                <form onSubmit={handlePriorityPopupSubmit} className="space-y-3">
+                                    <input
+                                        type="email"
+                                        required
+                                        value={priorityPopupEmail}
+                                        onChange={(e) => setPriorityPopupEmail(e.target.value)}
+                                        placeholder="your@email.com"
+                                        className="w-full px-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/30 font-sans text-sm focus:outline-none focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30 transition-colors"
+                                    />
+                                    {priorityPopupError && (
+                                        <p className="text-red-400 text-xs font-sans">{priorityPopupError}</p>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        disabled={priorityPopupSubmitting}
+                                        className="w-full py-4 bg-emerald-500 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-emerald-400 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {priorityPopupSubmitting ? "Securing..." : "Get Priority Status"}
+                                    </button>
+                                </form>
+
+                                <button
+                                    onClick={closePriorityPopup}
+                                    className="mt-3 w-full py-3 text-white/40 font-sans text-xs hover:text-white/60 transition-colors cursor-pointer"
+                                >
+                                    No thanks
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <div className="text-5xl mb-4">✅</div>
+                                <h3 className="text-2xl font-serif text-white mb-2">Priority Secured!</h3>
+                                <p className="text-sm font-sans text-white/60 mb-6 leading-relaxed">
+                                    You&apos;re on the <strong className="text-emerald-400">priority list</strong> for early shipping. We&apos;ll keep you updated.
+                                </p>
+                                <button
+                                    onClick={closePriorityPopup}
+                                    className="w-full py-4 bg-emerald-500 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-emerald-400 transition-colors cursor-pointer"
                                 >
                                     Continue Browsing
                                 </button>
