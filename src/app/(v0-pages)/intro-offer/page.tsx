@@ -370,7 +370,7 @@ export default function IntroOfferPage() {
         fetch(analyticsTrackUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ eventName: 'slide_view', path: '/intro-offer', metadata }),
+            body: JSON.stringify({ eventName: 'slide_view', path: typeof window !== 'undefined' ? window.location.pathname : '/intro-offer', metadata }),
             keepalive: true,
         }).catch(() => { })
     }, [analyticsTrackUrl])
