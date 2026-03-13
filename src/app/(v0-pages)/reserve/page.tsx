@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { ChevronDown, ArrowRight, Mail } from "lucide-react"
 import Link from "next/link"
+import { SpecialOfferHeader } from "@/components/special-offer/header"
 
 const TOTAL_SLIDES = 2
 
@@ -73,13 +74,7 @@ export default function ReservePage() {
 
   return (
     <>
-      {/* Announcement Banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white py-2 px-4 text-center">
-        <p className="font-sans text-xs">
-          Prices go up in April 2026 to $1,099 MSRP.{" "}
-          <Link href="/intro-offer" className="underline hover:no-underline">Learn more</Link>
-        </p>
-      </div>
+      <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
 
       {/* Back link */}
       <Link
