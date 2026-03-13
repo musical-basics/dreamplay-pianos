@@ -222,10 +222,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setStatsHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <ChevronRight className="w-6 h-6 text-black" />
                             </button>
                         </div>
                         {/* Pain Point Slide */}
@@ -246,10 +246,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setStatsHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <ChevronRight className="w-6 h-6 text-black" />
                             </button>
                         </div>
                     </div>
@@ -263,7 +263,7 @@ export default function IntroOfferPage() {
                             <div key={index} className="h-full w-full flex-shrink-0 flex items-center justify-center px-6 md:px-16 lg:px-24 relative">
                                 <div className="max-w-4xl">
                                     <div className="border-l-2 border-white/20 pl-8 md:pl-12">
-                                        <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed text-white/90 italic">
+                                        <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed text-white/90">
                                             &ldquo;{quote.quote}&rdquo;
                                         </blockquote>
                                         <div className="mt-8 flex flex-col gap-1">
@@ -275,19 +275,19 @@ export default function IntroOfferPage() {
                                 {index < professorQuotes.length - 1 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index + 1)}
-                                        className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                        className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
                                         aria-label="Next quote"
                                     >
-                                        <ChevronRight className="w-6 h-6 text-white" />
+                                        <ChevronRight className="w-6 h-6 text-black" />
                                     </button>
                                 )}
                                 {index > 0 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index - 1)}
-                                        className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                        className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
                                         aria-label="Previous quote"
                                     >
-                                        <ChevronRight className="w-6 h-6 text-white" />
+                                        <ChevronRight className="w-6 h-6 text-black" />
                                     </button>
                                 )}
                             </div>
@@ -317,18 +317,20 @@ export default function IntroOfferPage() {
                                 fill
                                 className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 z-10">
-                                <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50">Introducing</p>
-                                <h2 className="mt-2 font-serif text-4xl md:text-6xl lg:text-7xl text-white">DreamPlay One</h2>
-                                <p className="mt-4 max-w-md font-sans text-base text-white/70">88 weighted keys. Narrower by design. Built for hands that don&apos;t fit the standard.</p>
+                            <div className="absolute inset-0 bg-black/40" />
+                            <div className="absolute inset-0 flex items-center justify-center z-10 text-center px-6">
+                                <div>
+                                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50">Introducing</p>
+                                    <h2 className="mt-2 font-serif text-4xl md:text-6xl lg:text-7xl text-white">DreamPlay One</h2>
+                                    <p className="mt-4 max-w-md mx-auto font-sans text-base text-white/70">88 weighted keys. Narrower by design. Built for hands that don&apos;t fit the standard.</p>
+                                </div>
                             </div>
                             <button
                                 onClick={() => setProductHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <ChevronRight className="w-6 h-6 text-black" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-black">
@@ -352,10 +354,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setProductHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <ChevronRight className="w-6 h-6 text-black" />
                             </button>
                         </div>
                     </div>
@@ -382,10 +384,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(1)}
-                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+                                className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer"
                                 aria-label="Next"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <ChevronRight className="w-6 h-6 text-black" />
                             </button>
                         </div>
                         <div className="h-full w-full flex-shrink-0 relative">
@@ -411,10 +413,10 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(0)}
-                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer rotate-180"
+                                className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/10 hover:bg-black/20 transition-colors cursor-pointer rotate-180"
                                 aria-label="Previous"
                             >
-                                <ChevronRight className="w-6 h-6 text-white" />
+                                <ChevronRight className="w-6 h-6 text-black" />
                             </button>
                         </div>
                     </div>
@@ -574,7 +576,7 @@ export default function IntroOfferPage() {
                                         <Image src={quote.image} alt={quote.author} fill className="object-cover" />
                                     </div>
                                     <div className="flex-1 text-center lg:text-left">
-                                        <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl text-white/90 italic leading-relaxed">
+                                        <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl text-white/90 leading-relaxed">
                                             &ldquo;{quote.quote}&rdquo;
                                         </blockquote>
                                         <div className="mt-6">
