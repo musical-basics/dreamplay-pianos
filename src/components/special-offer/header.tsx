@@ -116,7 +116,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
             <header
                 className={cn(
                     "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 flex flex-col",
-                    hideNav && !isMobileMenuOpen ? "max-md:-translate-y-full" : "translate-y-0",
+                    hideNav && !isMobileMenuOpen ? "max-lg:-translate-y-full" : "translate-y-0",
                     className
                 )}
             >
