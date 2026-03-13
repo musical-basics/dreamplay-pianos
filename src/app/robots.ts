@@ -9,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: [
                     '/api/',
                     '/admin/',
+                    '/analytics/',
                     '/login',
                     '/register',
                     '/forgot-password',
@@ -17,6 +18,8 @@ export default function robots(): MetadataRoute.Robots {
                     // Landing page variants — canonical is root /
                     '/intro-offer',
                     '/intro-offer2',
+                    '/extended-offer',
+                    '/premium-offer',
                     '/landing-page-1',
                     '/landing-page-one',
                     '/special-offer',
