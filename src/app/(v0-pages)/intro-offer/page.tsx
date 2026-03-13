@@ -55,6 +55,26 @@ const founderQuotes = [
 
 const TOTAL_SLIDES = 17
 
+const SLIDE_LABELS = [
+    "Launch Video",
+    "History & Stats",
+    "Professor Quotes",
+    "DreamPlay One Hero",
+    "LEDs / Learning App",
+    "Expected Shipping",
+    "Manufacturing",
+    "Social Proof",
+    "Official Price",
+    "But Wait",
+    "Pricing",
+    "Money Back Guarantee",
+    "Founder Quotes",
+    "Ready / CTA",
+    "FAQ / Contact",
+    "Buyers Guide",
+    "Footer",
+]
+
 export default function IntroOfferPage() {
     const scrollRef = useRef<HTMLDivElement>(null)
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -229,6 +249,57 @@ export default function IntroOfferPage() {
         el.addEventListener("scroll", onScroll, { passive: true })
         return () => el.removeEventListener("scroll", onScroll)
     }, [])
+
+    // ─── Slide-Level Analytics ───
+    const slideEnteredAt = useRef(Date.now())
+    const lastTrackedSlide = useRef(0)
+    const analyticsTrackUrl = process.env.NEXT_PUBLIC_ANALYTICS_TRACK_URL || 'https://data.dreamplaypianos.com/api/track'
+
+    const sendSlideEvent = useCallback((slideNum: number, durationSeconds: number) => {
+        if (durationSeconds < 1) return // skip sub-second noise
+        const metadata: Record<string, any> = {
+            slide_number: slideNum,
+            slide_label: SLIDE_LABELS[slideNum] || `Slide ${slideNum + 1}`,
+            duration_seconds: durationSeconds,
+        }
+        const savedEmail = typeof window !== 'undefined' ? localStorage.getItem('dp_user_email') : null
+        if (savedEmail) metadata.email = savedEmail
+
+        fetch(analyticsTrackUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventName: 'slide_view', path: '/intro-offer', metadata }),
+            keepalive: true,
+        }).catch(() => { })
+    }, [analyticsTrackUrl])
+
+    useEffect(() => {
+        if (currentSlide === lastTrackedSlide.current) return
+        // Fire event for the PREVIOUS slide with its duration
+        const prevSlide = lastTrackedSlide.current
+        const duration = Math.round((Date.now() - slideEnteredAt.current) / 1000)
+        sendSlideEvent(prevSlide, duration)
+
+        // Reset for new slide
+        lastTrackedSlide.current = currentSlide
+        slideEnteredAt.current = Date.now()
+    }, [currentSlide, sendSlideEvent])
+
+    // Fire final slide event on page leave
+    useEffect(() => {
+        const handleLeave = () => {
+            if (document.visibilityState === 'hidden') {
+                const duration = Math.round((Date.now() - slideEnteredAt.current) / 1000)
+                sendSlideEvent(lastTrackedSlide.current, duration)
+            }
+        }
+        document.addEventListener('visibilitychange', handleLeave)
+        window.addEventListener('pagehide', () => {
+            const duration = Math.round((Date.now() - slideEnteredAt.current) / 1000)
+            sendSlideEvent(lastTrackedSlide.current, duration)
+        })
+        return () => document.removeEventListener('visibilitychange', handleLeave)
+    }, [sendSlideEvent])
 
     const playVideo = () => {
         setIsVideoPlaying(true)
