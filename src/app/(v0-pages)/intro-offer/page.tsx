@@ -420,12 +420,12 @@ export default function IntroOfferPage() {
                                 fill
                                 className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-black/40" />
+                            <div className="absolute inset-0 bg-black/50" />
                             <div className="absolute inset-0 flex items-center justify-center z-10 text-center px-6">
                                 <div>
-                                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50">Introducing</p>
-                                    <h2 className="mt-2 font-serif text-4xl md:text-6xl lg:text-7xl text-white">DreamPlay One</h2>
-                                    <p className="mt-4 max-w-md mx-auto font-sans text-base text-white/70">88 weighted keys. Narrower by design. Built for hands that don&apos;t fit the standard.</p>
+                                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/60" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>Introducing</p>
+                                    <h2 className="mt-2 font-serif text-4xl md:text-6xl lg:text-7xl text-white" style={{ textShadow: "0 0 30px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.5)" }}>DreamPlay One</h2>
+                                    <p className="mt-4 max-w-md mx-auto font-sans text-base text-white/80" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>88 weighted keys. Narrower by design. Built for hands that don&apos;t fit the standard.</p>
                                 </div>
                             </div>
                             <button
@@ -479,7 +479,7 @@ export default function IntroOfferPage() {
                             <div className="absolute inset-0 bg-black/75" />
                             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
                                 <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight max-w-3xl text-balance" style={{ textShadow: "0 4px 12px rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.5)" }}>
-                                    Dedicated learning app to improving even faster
+                                    Dedicated learning app to improve even faster.
                                 </h2>
                                 <p className="mt-6 font-sans text-base text-white/70 max-w-xl">
                                     LED lights above every key make learning songs fast and fun. Want a classic look? They toggle off completely.
