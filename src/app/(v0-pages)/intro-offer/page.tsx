@@ -8,6 +8,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header"
 import { CalculatorSection } from "@/components/how-it-works/calculator-section"
 import { LazyVideo } from "@/components/extended-offer/LazyVideo"
 import DonutChart from "@/components/DonutChart"
+import { subscribeToNewsletter } from "@/actions/email-actions"
 
 const professorQuotes = [
     {
@@ -174,19 +175,12 @@ export default function IntroOfferPage() {
         setHandPopupSubmitting(true)
         setHandPopupError("")
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: "Hand Guide Popup",
-                    email: handPopupEmail.trim(),
-                    subject: "Hand Sizing Guide Request",
-                    message: "User requested the hand sizing guide via the 45s popup on /intro-offer.",
-                }),
+            const result = await subscribeToNewsletter({
+                email: handPopupEmail.trim(),
+                tags: ["hand-guide-popup"],
             })
-            if (!res.ok) {
-                const data = await res.json().catch(() => ({}))
-                throw new Error(data.error || "Something went wrong")
+            if (!result.success) {
+                throw new Error(result.error || "Something went wrong")
             }
             // Save email for autofill on other forms
             localStorage.setItem("dp_user_email", handPopupEmail.trim())
@@ -232,19 +226,12 @@ export default function IntroOfferPage() {
         setCreditPopupSubmitting(true)
         setCreditPopupError("")
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: "$25 Credit Popup",
-                    email: creditPopupEmail.trim(),
-                    subject: "$25 Store Credit - Accessories",
-                    message: "User claimed $25 store credit for accessories via 3-minute popup on /intro-offer.",
-                }),
+            const result = await subscribeToNewsletter({
+                email: creditPopupEmail.trim(),
+                tags: ["$25-credit-popup"],
             })
-            if (!res.ok) {
-                const data = await res.json().catch(() => ({}))
-                throw new Error(data.error || "Something went wrong")
+            if (!result.success) {
+                throw new Error(result.error || "Something went wrong")
             }
             localStorage.setItem("dp_user_email", creditPopupEmail.trim())
             setContactEmail(creditPopupEmail.trim())
