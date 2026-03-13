@@ -373,7 +373,7 @@ export default function IntroOfferPage() {
                                 alt="DreamPlay Piano with MIDI App"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-black/40" />
+                            <div className="absolute inset-0 bg-black/60" />
                             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
                                 <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-3xl text-balance">
                                     Dedicated learning app to improving even faster
