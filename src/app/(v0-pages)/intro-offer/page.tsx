@@ -79,6 +79,9 @@ export default function IntroOfferPage() {
     // Landscape Hint State
     const [showLandscapeHint, setShowLandscapeHint] = useState(false)
 
+    // Hand Measurement Popup State
+    const [showHandPopup, setShowHandPopup] = useState(false)
+
     // ─── Landscape Hint Logic ───
     useEffect(() => {
         if (typeof window === "undefined") return
@@ -113,6 +116,32 @@ export default function IntroOfferPage() {
     const closeLandscapeHint = () => {
         setShowLandscapeHint(false)
         sessionStorage.setItem("dp_landscape_seen", "true")
+    }
+
+    // ─── Hand Measurement Popup (45s) ───
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        if (sessionStorage.getItem("dp_hand_popup_seen")) return
+
+        const timer = setTimeout(() => {
+            if (!sessionStorage.getItem("dp_hand_popup_seen")) {
+                setShowHandPopup(true)
+            }
+        }, 45000)
+
+        return () => clearTimeout(timer)
+    }, [])
+
+    const closeHandPopup = () => {
+        setShowHandPopup(false)
+        sessionStorage.setItem("dp_hand_popup_seen", "true")
+    }
+
+    const handleHandPopupCTA = () => {
+        closeHandPopup()
+        // Scroll to slide 2 (section index 1 = stats carousel), then set to calculator (slide 2)
+        scrollToSlide(1)
+        setTimeout(() => setStatsHorizontalSlide(2), 600)
     }
 
     useEffect(() => {
@@ -221,6 +250,52 @@ export default function IntroOfferPage() {
                             className="w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white/90 transition-colors cursor-pointer"
                         >
                             Continue in Portrait
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Hand Measurement Popup (45s delay) */}
+            {showHandPopup && (
+                <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6">
+                    <div className="relative w-full max-w-md bg-[#0a0a0f] border border-white/20 p-8 rounded-3xl shadow-2xl text-center">
+                        <button
+                            onClick={closeHandPopup}
+                            className="absolute top-4 right-4 text-white/40 hover:text-white cursor-pointer"
+                            aria-label="Close"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        {/* Hand image */}
+                        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-white/10">
+                            <Image
+                                src="/images/hand-size-comparison.jpg"
+                                alt="How to measure your hand span for the right piano key size"
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+
+                        <h3 className="text-2xl font-serif text-white mb-3">What&apos;s Your Hand Size?</h3>
+                        <p className="text-sm font-sans text-white/60 mb-2 leading-relaxed">
+                            Spread your hand wide. Measure from the <strong className="text-white/80">tip of your thumb</strong> to the <strong className="text-white/80">tip of your pinky</strong>.
+                        </p>
+                        <p className="text-xs font-sans text-white/40 mb-6">
+                            Use a ruler or tape measure to find your span in inches.
+                        </p>
+
+                        <button
+                            onClick={handleHandPopupCTA}
+                            className="w-full py-4 bg-amber-500 text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-amber-400 transition-colors cursor-pointer mb-3"
+                        >
+                            Try Our Size Calculator
+                        </button>
+                        <button
+                            onClick={closeHandPopup}
+                            className="w-full py-3 border border-white/20 text-white/60 font-sans uppercase tracking-widest text-xs rounded-full hover:bg-white/5 transition-colors cursor-pointer"
+                        >
+                            Maybe Later
                         </button>
                     </div>
                 </div>
