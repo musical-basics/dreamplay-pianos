@@ -9,6 +9,7 @@ import { CalculatorSection } from "@/components/how-it-works/calculator-section"
 import { LazyVideo } from "@/components/extended-offer/LazyVideo"
 import DonutChart from "@/components/DonutChart"
 import { subscribeToNewsletter, submitContactForm } from "@/actions/email-actions"
+import { HorizontalBuyersGuide } from "@/components/buyers-guide/HorizontalBuyersGuide"
 
 const professorQuotes = [
     {
@@ -1584,40 +1585,8 @@ export default function IntroOfferPage() {
                     <ScrollIndicator next={15} dark />
                 </section>
 
-                {/* Slide 17: Buyers Guide */}
-                <section className="h-screen relative bg-neutral-100 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
-                    <div className="text-center px-6">
-                        <p className="font-sans text-xs uppercase tracking-[0.3em] text-black/50 mb-4">Find Your Perfect Fit</p>
-                        <h2 className="font-serif text-3xl md:text-4xl text-black mb-12">Visit Our Buyer&apos;s Guide</h2>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <Link
-                                href="/buyers-guide?type=adult"
-                                className="group flex flex-col items-center gap-4 p-8 bg-white hover:shadow-xl transition-shadow"
-                            >
-                                <div className="w-24 h-24 bg-neutral-200 rounded-full flex items-center justify-center">
-                                    <svg className="w-12 h-12 text-black/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </div>
-                                <span className="font-sans text-sm uppercase tracking-widest text-black">Adult Pianists</span>
-                            </Link>
-                            <Link
-                                href="/buyers-guide?type=child"
-                                className="group flex flex-col items-center gap-4 p-8 bg-white hover:shadow-xl transition-shadow"
-                            >
-                                <div className="w-24 h-24 bg-neutral-200 rounded-full flex items-center justify-center">
-                                    <svg className="w-10 h-10 text-black/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </div>
-                                <span className="font-sans text-sm uppercase tracking-widest text-black">Child Pianists</span>
-                            </Link>
-                        </div>
-                        <p className="mt-12 font-sans text-xs text-black/40">
-                            Prices go up in April 2026 to $1,099 MSRP
-                        </p>
-                    </div>
-                </section>
+                {/* Slide 17: Buyer's Guide (Horizontal) */}
+                <HorizontalBuyersGuide />
 
             </div>
         </>
