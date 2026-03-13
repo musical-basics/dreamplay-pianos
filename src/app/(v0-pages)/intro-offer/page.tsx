@@ -519,7 +519,7 @@ export default function IntroOfferPage() {
                 {/* Slide 12: $99 Deposit */}
                 <section className="h-screen relative bg-black flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
-                        <p className="font-sans text-sm text-white/60 mb-2">...for the tiny deposit of</p>
+                        <p className="font-sans text-sm text-white/60 mb-2">Due Today:</p>
                         <p className="font-serif text-8xl md:text-[12rem] text-white">$99</p>
                         <p className="mt-4 font-sans text-sm text-white/50">Pay the rest when your keyboard is ready to ship</p>
                     </div>
