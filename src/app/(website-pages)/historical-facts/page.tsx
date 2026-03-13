@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/animated-section";
@@ -75,7 +76,7 @@ export default function HistoricalFactsPage() {
                 {/* ═══ HERO — DARK ═══ */}
                 <section id="the-myth" className="relative min-h-screen flex flex-col items-center justify-center px-6 bg-[#050505] text-white overflow-hidden pb-12">
                     <div className="absolute inset-0 opacity-20">
-                        <img src="/images/dreamplay-one-hero.jpg" alt="Piano History" className="w-full h-full object-cover" />
+                        <Image src="/images/dreamplay-one-hero.jpg" alt="DreamPlay One narrow keys piano - historical piano keyboard context" fill className="object-cover" />
                     </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-[#050505]/80 to-[#050505]" />
 
@@ -125,7 +126,7 @@ export default function HistoricalFactsPage() {
                                 </div>
                                 <div className="relative group">
                                     <div className="aspect-[4/5] overflow-hidden rounded-none border border-neutral-200 bg-neutral-100 flex items-center justify-center relative">
-                                        <img src="/images/article-placeholder.jpg" alt="Historical Fortepiano" className="w-full h-full object-cover transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-105" />
+                                        <Image src="/images/article-placeholder.jpg" alt="Historical fortepiano with narrow keys" fill className="object-cover transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-105" />
                                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <p className="text-white font-sans text-sm tracking-widest uppercase">Historical Fortepiano Keys</p>
                                             <p className="text-white/70 font-sans text-xs tracking-widest uppercase mt-2">[ Replace Image ]</p>
@@ -160,7 +161,7 @@ export default function HistoricalFactsPage() {
 
                                 <AnimatedSection delay={200} className="order-2 lg:order-1 relative">
                                     <div className="w-full aspect-[4/5] overflow-hidden rounded-none border border-white/10 relative group bg-neutral-900 flex items-center justify-center">
-                                        <img src="/images/factory-pictures/action.jpeg" alt="Piano Action Mechanics" className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100" />
+                                        <Image src="/images/factory-pictures/action.jpeg" alt="Piano action mechanics showing heavy hammers that drove wider key design" fill className="object-cover transition-all duration-700 grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100" />
                                     </div>
                                     <p className="mt-4 text-xs text-white/40 font-sans tracking-wide text-center">Mechanics required larger actions, shifting the design focus away from ergonomics.</p>
                                 </AnimatedSection>
@@ -177,7 +178,7 @@ export default function HistoricalFactsPage() {
                             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                                 <div className="order-2 lg:order-1 relative group">
                                     <div className="aspect-[4/3] overflow-hidden rounded-none border border-neutral-200 bg-white relative flex items-center justify-center">
-                                        <img src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg" alt="Franz Liszt" className="w-full h-full object-cover transition-all duration-700 opacity-90 group-hover:opacity-100 group-hover:scale-105" />
+                                        <Image src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg" alt="Franz Liszt, pianist with large hands who helped standardize wide keyboard" fill className="object-cover transition-all duration-700 opacity-90 group-hover:opacity-100 group-hover:scale-105" />
                                     </div>
                                     <p className="mt-4 text-xs text-neutral-400 font-sans tracking-wide text-center">Franz Liszt and his contemporaries composed for their own massive anatomies.</p>
                                 </div>

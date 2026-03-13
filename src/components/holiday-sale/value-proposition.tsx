@@ -1,6 +1,7 @@
 "use client"
 
 import { Check, Truck, Package, Clock, Gift } from "lucide-react"
+import Image from "next/image"
 
 export function ValueProposition() {
   const items = [
@@ -50,27 +51,27 @@ export function ValueProposition() {
         <div className="grid grid-cols-2 lg:hidden w-full">
           {/* Slot 1: Bench */}
           <div className="aspect-square relative overflow-hidden flex items-center justify-center group" style={{ backgroundColor: imageSlots.benchTop.bg }}>
-            <img src="/holiday-sale/images/slot-1-bench.png" alt={imageSlots.benchTop.label} className="w-full h-full object-cover" />
+            <Image src="/holiday-sale/images/slot-1-bench.png" alt={imageSlots.benchTop.label} fill className="object-cover" />
           </div>
           {/* Slot 2: Keyboard */}
           <div className="aspect-square relative overflow-hidden flex items-center justify-center group" style={{ backgroundColor: imageSlots.keyboardTop.bg }}>
-            <img src="/holiday-sale/images/slot-2-piano-top.png" alt={imageSlots.keyboardTop.label} className="w-full h-full object-cover" />
+            <Image src="/holiday-sale/images/slot-2-piano-top.png" alt={imageSlots.keyboardTop.label} fill className="object-cover" />
           </div>
           {/* Slot 3: Rest */}
           <div className="aspect-square relative overflow-hidden flex items-center justify-center group" style={{ backgroundColor: imageSlots.pianoMusicRest.bg }}>
-            <img src="/holiday-sale/images/slot-3-piano-rest-gray-2.png" alt={imageSlots.pianoMusicRest.label} className="w-full h-full object-cover" />
+            <Image src="/holiday-sale/images/slot-3-piano-rest-gray-2.png" alt={imageSlots.pianoMusicRest.label} fill className="object-cover" />
           </div>
           {/* Slot 4: Pedal */}
           <div className="aspect-square relative overflow-hidden flex items-center justify-center group" style={{ backgroundColor: imageSlots.pianoStandDark.bg }}>
-            <img src="/holiday-sale/images/slot-4-pedal.jpg" alt={imageSlots.pianoStandDark.label} className="w-full h-full object-cover" />
+            <Image src="/holiday-sale/images/slot-4-pedal.jpg" alt={imageSlots.pianoStandDark.label} fill className="object-cover" />
           </div>
           {/* Slot 5: X-Stand */}
           <div className="aspect-square relative overflow-hidden flex items-center justify-center group" style={{ backgroundColor: imageSlots.xStand.bg }}>
-            <img src="/holiday-sale/images/slot-5-x-stand.png" alt={imageSlots.xStand.label} className="w-full h-full object-cover" />
+            <Image src="/holiday-sale/images/slot-5-x-stand.png" alt={imageSlots.xStand.label} fill className="object-cover" />
           </div>
           {/* Slot 6: Stand */}
           <div className="aspect-square relative overflow-hidden flex items-center justify-center group" style={{ backgroundColor: imageSlots.pianoAngled.bg }}>
-            <img src="/holiday-sale/images/slot-6-piano-stand.png" alt={imageSlots.pianoAngled.label} className="w-full h-full object-cover" />
+            <Image src="/holiday-sale/images/slot-6-piano-stand.png" alt={imageSlots.pianoAngled.label} fill className="object-cover" />
           </div>
         </div>
 
@@ -83,10 +84,11 @@ export function ValueProposition() {
               className="h-full relative overflow-hidden flex items-center justify-center group"
               style={{ width: "28.63%", backgroundColor: imageSlots.benchTop.bg }}
             >
-              <img
+              <Image
                 src="/holiday-sale/images/slot-1-bench.png"
                 alt={imageSlots.benchTop.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="hidden absolute inset-0 flex items-center justify-center text-neutral-400 text-xs font-medium">
@@ -99,10 +101,11 @@ export function ValueProposition() {
               className="h-full relative overflow-hidden flex items-center justify-center group"
               style={{ width: "35.27%", backgroundColor: imageSlots.keyboardTop.bg }}
             >
-              <img
+              <Image
                 src="/holiday-sale/images/slot-2-piano-top.png"
                 alt={imageSlots.keyboardTop.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="hidden absolute inset-0 flex items-center justify-center text-neutral-400 text-xs font-medium">
@@ -115,10 +118,11 @@ export function ValueProposition() {
               className="h-full relative overflow-hidden flex items-center justify-center group"
               style={{ width: "36.10%", backgroundColor: imageSlots.pianoMusicRest.bg }}
             >
-              <img
+              <Image
                 src="/holiday-sale/images/slot-3-piano-rest-gray-2.png"
                 alt={imageSlots.pianoMusicRest.label}
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="hidden absolute inset-0 flex items-center justify-center text-neutral-400 text-xs font-medium">
@@ -134,10 +138,11 @@ export function ValueProposition() {
               className="h-full relative overflow-hidden flex items-center justify-center group"
               style={{ width: "28.63%", backgroundColor: imageSlots.pianoStandDark.bg }}
             >
-              <img
+              <Image
                 src="/holiday-sale/images/slot-4-pedal.jpg"
                 alt={imageSlots.pianoStandDark.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="hidden absolute inset-0 flex items-center justify-center text-neutral-400 text-xs font-medium">
@@ -150,10 +155,11 @@ export function ValueProposition() {
               className="h-full relative overflow-hidden flex items-center justify-center group"
               style={{ width: "35.27%", backgroundColor: imageSlots.xStand.bg }}
             >
-              <img
+              <Image
                 src="/holiday-sale/images/slot-5-x-stand.png"
                 alt={imageSlots.xStand.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="hidden absolute inset-0 flex items-center justify-center text-neutral-400 text-xs font-medium">
@@ -166,10 +172,11 @@ export function ValueProposition() {
               className="h-full relative overflow-hidden flex items-center justify-center group"
               style={{ width: "36.10%", backgroundColor: imageSlots.pianoAngled.bg }}
             >
-              <img
+              <Image
                 src="/holiday-sale/images/slot-6-piano-stand.png"
                 alt={imageSlots.pianoAngled.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="hidden absolute inset-0 flex items-center justify-center text-neutral-400 text-xs font-medium">

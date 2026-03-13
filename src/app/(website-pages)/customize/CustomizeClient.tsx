@@ -766,7 +766,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         ? isSelected ? 'border-black/15 bg-neutral-100' : 'border-black/10 bg-neutral-50'
                                         : isSelected ? 'border-white/30 bg-black/30' : 'border-white/15 bg-black/15'
                                         }`}>
-                                        <img src={kb.imgSrc} alt={kb.name} className="w-auto max-w-[90%] max-h-[80%] object-contain transition-transform duration-700 group-hover:scale-105" />
+                                        <Image src={kb.imgSrc} alt={kb.name} width={600} height={400} className="w-auto max-w-[90%] max-h-[80%] object-contain transition-transform duration-700 group-hover:scale-105" />
                                     </div>
 
                                     <div className="flex w-full flex-1 flex-col p-8 md:p-10">
@@ -834,7 +834,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         </div>
                                     )}
                                     <div className={`relative flex h-72 w-full items-center justify-center border-b p-8 transition-colors duration-500 ${isSelected ? 'border-black/20' : 'border-black/10'}`} style={{ backgroundColor: color === 'Black' ? '#e5e5e5' : '#ffffff' }}>
-                                        <img src={color === 'Black' ? "/images/ds65-black-standard-digital-piano.png" : "/images/ds55-white-narrow-keys-alt.png"} alt={color} className="h-auto w-full max-h-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
+                                        <Image src={color === 'Black' ? "/images/ds65-black-standard-digital-piano.png" : "/images/ds55-white-narrow-keys-alt.png"} alt={color} width={800} height={500} className="h-auto w-full max-h-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="flex w-full flex-1 flex-col p-8 md:p-10">
                                         <div className="mb-4 flex items-center gap-4">
