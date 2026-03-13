@@ -232,60 +232,44 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${statsHorizontalSlide * 100}%)` }}>
                         {/* Hidden Barrier Slide (from /how-it-works) */}
-                        <div className="h-full w-full flex-shrink-0 relative bg-[#050505] flex items-center justify-center overflow-y-auto">
-                            <div className="w-full max-w-5xl px-6 py-12">
-                                <div className="text-center mb-12">
+                        <div className="h-full w-full flex-shrink-0 relative bg-[#050505] flex items-center justify-center">
+                            <div className="w-full max-w-5xl px-6 py-8">
+                                <div className="text-center mb-6 md:mb-12">
                                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">The Data</p>
                                     <h2 className="font-serif text-3xl md:text-5xl tracking-tight leading-tight text-white">The Hidden Barrier</h2>
                                 </div>
-                                <div className="grid md:grid-cols-2 gap-12 lg:gap-16 mb-12">
+                                <div className="grid grid-cols-2 gap-4 md:gap-12 lg:gap-16">
                                     <div className="flex flex-col items-center">
-                                        <div className="text-center mb-6">
-                                            <div className="font-serif text-5xl font-bold mb-2 text-[#c0392b]">87%</div>
-                                            <div className="font-sans text-lg font-medium text-white/60 mb-2">of females</div>
-                                            <p className="font-sans text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed">
+                                        <div className="text-center mb-3 md:mb-6">
+                                            <div className="font-serif text-3xl md:text-5xl font-bold mb-1 md:mb-2 text-[#c0392b]">87%</div>
+                                            <div className="font-sans text-sm md:text-lg font-medium text-white/60 mb-1 md:mb-2">of females</div>
+                                            <p className="font-sans text-xs md:text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed hidden md:block">
                                                 Have hand spans smaller than the 8.5 inch minimum that standard keyboards expect.
                                             </p>
                                         </div>
-                                        <div className="bg-white/[0.03] border border-white/10 rounded-none p-8 w-full max-w-sm flex flex-col items-center">
+                                        <div className="bg-white/[0.03] border border-white/10 rounded-none p-4 md:p-8 w-full max-w-sm flex flex-col items-center">
                                             <DonutChart percent={87} label="" theme="dark" />
-                                            <div className="flex gap-8 text-xs font-medium text-white/50 mt-6">
-                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#c0392b]"></span>Too small</div>
-                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#1e7a3a]"></span>Comfortable</div>
+                                            <div className="flex gap-4 md:gap-8 text-[10px] md:text-xs font-medium text-white/50 mt-4 md:mt-6">
+                                                <div className="flex items-center gap-1.5 md:gap-2.5"><span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#c0392b]"></span>Too small</div>
+                                                <div className="flex items-center gap-1.5 md:gap-2.5"><span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#1e7a3a]"></span>Comfortable</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <div className="text-center mb-6">
-                                            <div className="font-serif text-5xl font-bold mb-2 text-[#c0392b]">24%</div>
-                                            <div className="font-sans text-lg font-medium text-white/60 mb-2">of males</div>
-                                            <p className="font-sans text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed">
+                                        <div className="text-center mb-3 md:mb-6">
+                                            <div className="font-serif text-3xl md:text-5xl font-bold mb-1 md:mb-2 text-[#c0392b]">24%</div>
+                                            <div className="font-sans text-sm md:text-lg font-medium text-white/60 mb-1 md:mb-2">of males</div>
+                                            <p className="font-sans text-xs md:text-sm text-white/40 max-w-[260px] mx-auto leading-relaxed hidden md:block">
                                                 Also fall below the comfortable reach threshold for a standard 6.5 inch keyboard.
                                             </p>
                                         </div>
-                                        <div className="bg-white/[0.03] border border-white/10 rounded-none p-8 w-full max-w-sm flex flex-col items-center">
+                                        <div className="bg-white/[0.03] border border-white/10 rounded-none p-4 md:p-8 w-full max-w-sm flex flex-col items-center">
                                             <DonutChart percent={24} label="" theme="dark" />
-                                            <div className="flex gap-8 text-xs font-medium text-white/50 mt-6">
-                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#c0392b]"></span>Too small</div>
-                                                <div className="flex items-center gap-2.5"><span className="w-2.5 h-2.5 rounded-full bg-[#1e7a3a]"></span>Comfortable</div>
+                                            <div className="flex gap-4 md:gap-8 text-[10px] md:text-xs font-medium text-white/50 mt-4 md:mt-6">
+                                                <div className="flex items-center gap-1.5 md:gap-2.5"><span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#c0392b]"></span>Too small</div>
+                                                <div className="flex items-center gap-1.5 md:gap-2.5"><span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#1e7a3a]"></span>Comfortable</div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="border-t border-white/10 pt-10 grid md:grid-cols-2 gap-8 text-center md:text-left">
-                                    <div className="px-4">
-                                        <div className="font-serif text-5xl font-bold mb-2 text-white">8.5&quot;</div>
-                                        <div className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">The Threshold</div>
-                                        <p className="font-sans text-sm leading-relaxed text-white/60">
-                                            Minimum hand span needed to play a conventional 6.5 inch keyboard from Yamaha or Steinway with real comfort.
-                                        </p>
-                                    </div>
-                                    <div className="px-4">
-                                        <div className="font-serif text-5xl font-bold mb-2 text-white">25 to 30%</div>
-                                        <div className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">Larger Reach Required</div>
-                                        <p className="font-sans text-sm leading-relaxed text-white/60">
-                                            Hand span often needs to be at least one quarter larger than the octave just to reach 8ths, 9ths, and 10ths without strain.
-                                        </p>
                                     </div>
                                 </div>
                             </div>
