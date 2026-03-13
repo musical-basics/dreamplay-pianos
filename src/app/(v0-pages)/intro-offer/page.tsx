@@ -151,7 +151,7 @@ export default function IntroOfferPage() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: "",
+                    name: "Hand Guide Popup",
                     email: handPopupEmail.trim(),
                     subject: "Hand Sizing Guide Request",
                     message: "User requested the hand sizing guide via the 45s popup on /intro-offer.",
