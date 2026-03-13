@@ -13,14 +13,14 @@ const professorQuotes = [
         title: "Director of Keyboard Studies, Stanford University"
     },
     {
-        quote: "The standard keyboard width was established over a century ago, without consideration for the diversity of human hand sizes. This has created unnecessary barriers for countless talented pianists.",
+        quote: "I often witness pianists place their hands for the first time on a keyboard that better suits their hand span. How often the pianist spontaneously bursts into tears. A lifetime of struggling with a seemingly insurmountable problem vanishes in the moment they realize, 'It's not me that is the problem; it is the instrument!' Following on that, the joy of possibility overwhelms them.",
         author: "Dr. Carol Leone",
-        title: "Professor of Piano, Southern Methodist University"
+        title: "Chair of Piano Studies, SMU Meadows School of the Arts"
     },
     {
-        quote: "Hand span requirements in advanced repertoire often exclude pianists with smaller hands from performing certain works. This is not a limitation of ability, but of equipment.",
-        author: "Dr. Rhonda Boyle",
-        title: "International Piano Ergonomics Expert"
+        quote: "I cannot begin to describe the career-changing, and even life-changing, benefits our students have reaped from having these instruments to practice on daily. Their first response though was, 'Why did it take so long? Why did we have to suffer so unnecessarily?'",
+        author: "Barbara Lister-Sink, Ed.D.",
+        title: "Salem College School of Music, Director, Graduate Music Program"
     }
 ]
 
