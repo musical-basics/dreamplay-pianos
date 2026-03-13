@@ -2,6 +2,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import FAQList from "@/components/faq-list";
 import { getFaqItems } from "@/actions/faq-actions";
+import FaqJsonLd from "@/components/FaqJsonLd";
 
 export const metadata = {
     title: "FAQ & Research – DreamPlay Pianos",
@@ -24,6 +25,7 @@ export default async function FAQPage() {
 
     return (
         <div className="min-h-screen bg-white text-neutral-900 font-sans selection:bg-neutral-200">
+            <FaqJsonLd items={faqItems} />
             <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
 
             <main className="pt-32 pb-24">
