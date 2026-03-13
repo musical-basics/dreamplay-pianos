@@ -84,8 +84,12 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
     const router = useRouter()
 
     useEffect(() => {
-        const handleScroll = () => {
-            const currentY = window.scrollY;
+        const handleScroll = (e?: Event) => {
+            // Support both window scroll and container scroll (e.g. snap-scroll divs)
+            let currentY = window.scrollY;
+            if (currentY === 0 && e?.target && e.target !== document) {
+                currentY = (e.target as HTMLElement).scrollTop || 0;
+            }
             setScrolled(currentY > 100);
 
             // Hide/show on mobile based on scroll direction
@@ -96,8 +100,9 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
             }
             lastScrollY.current = currentY;
         }
-        window.addEventListener("scroll", handleScroll, { passive: true })
-        return () => window.removeEventListener("scroll", handleScroll)
+        // capture: true catches scroll events from nested scrollable containers
+        document.addEventListener("scroll", handleScroll, { capture: true, passive: true })
+        return () => document.removeEventListener("scroll", handleScroll, { capture: true } as EventListenerOptions)
     }, [])
 
     const isScrolled = forceOpaque || scrolled || isMobileMenuOpen;
