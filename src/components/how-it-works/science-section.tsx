@@ -15,7 +15,7 @@ export function ScienceSection() {
                         Clinical Research
                     </p>
                     <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-neutral-900 mb-6">
-                        Standard keyboards<br />weren&apos;t designed for you.
+                        How Standard Keys<br />Cause Hands Injury.
                     </h2>
                     <p className="font-sans text-lg md:text-xl text-neutral-500 leading-relaxed max-w-2xl mx-auto">
                         When small-handed pianists play octaves or large chords, they&apos;re forced into a state
@@ -33,7 +33,7 @@ export function ScienceSection() {
                     >
                         <Image
                             src="/images/Biomechanical Impact on Small Hands copy.png"
-                            alt="Biomechanical Impact of Key Width on Small Hands"
+                            alt="Diagram showing how wide piano keys cause hands injury in pianists with small hands"
                             width={1200}
                             height={900}
                             className="w-full h-auto group-hover:brightness-[1.02] transition-all duration-500 object-contain"
@@ -131,7 +131,7 @@ export function ScienceSection() {
                     <div className="relative max-w-5xl w-full mx-4 md:mx-8">
                         <Image
                             src="/images/Biomechanical Impact on Small Hands copy.png"
-                            alt="Biomechanical Impact of Key Width on Small Hands"
+                            alt="Diagram showing how wide piano keys cause hands injury in pianists with small hands"
                             width={1200}
                             height={900}
                             className="w-full h-auto object-contain"

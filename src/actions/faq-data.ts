@@ -268,5 +268,26 @@ export const DEFAULT_FAQ_ITEMS: FAQItem[] = [
         answer: `<p>Because our pre-orders ship months in advance and global trade policies frequently update, standard import duties and local taxes (like VAT) are not included in your initial checkout price.</p>
         <p>We want to ensure you are charged the most accurate and fair rate at the time of delivery. Therefore, we utilize a <strong>Delivered Duty Paid (DDP)</strong> shipping method — meaning we prepay and handle all customs clearance on your behalf, so you never deal with a carrier demanding fees at your door. This applies to all shipping regions including the US, UK, EU, Australia, and Japan.</p>
         <p>Right before your instrument is ready to ship, we will calculate the active customs requirement and send you a secure invoice for any applicable taxes. We handle all the complex customs clearance on our end, ensuring your keyboard arrives straight to your door without any unexpected carrier brokerage fees or delays.</p>`
-    }
+    },
+
+    // ==========================================
+    // CATEGORY 4: SEO — COMMON SEARCH QUESTIONS
+    // ==========================================
+    {
+        id: '401',
+        category: 'Common Questions',
+        question: "Is a narrow keyboard better for small hands?",
+        answer: `<p>Yes. A narrow keyboard, like the DreamPlay One, reduces the distance between notes. This allows pianists with small hands to play octaves and large chords without the strain that often leads to hands injury.</p>
+        <p>On a standard 6.5-inch octave keyboard, pianists with small hands are forced into <strong>hyperabduction</strong> — a state of maximum stretch that destroys the natural arch of the hand. A narrow keyboard with a 5.5 or 6.0-inch octave eliminates this dangerous overextension entirely.</p>
+        <p>Studies using surface electromyography (EMG) have confirmed a <strong>drastic reduction in muscle fatigue</strong> when small-handed pianists switch to narrower keys.</p>`
+    },
+    {
+        id: '402',
+        category: 'Common Questions',
+        question: "What is the best kids piano for learning?",
+        answer: `<p>Because children have naturally small hands, forcing them to learn on a standard piano can cause bad habits that are extremely difficult to unlearn later. A kids hands piano with narrow keys — like the DreamPlay One DS5.5 — allows them to learn proper technique from day one.</p>
+        <p>The DS5.5 features a <strong>7/8ths size narrow keyboard</strong> specifically designed for smaller hands. Children can reach octaves comfortably, maintain a natural hand arch, and develop correct posture without straining.</p>
+        <p>Unlike toy keyboards, the DreamPlay One is a full 88-key, graded hammer-action instrument with professional-grade touch dynamics. It's a real piano that fits smaller hands — not a compromise.</p>
+        <p>As your child's hands grow, you can upgrade to the DS6.0 (15/16ths size) through our free trade-in program.</p>`
+    },
 ];

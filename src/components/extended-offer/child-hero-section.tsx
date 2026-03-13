@@ -31,9 +31,9 @@ export function ChildHeroSection() {
                         A Piano That Grows With Them
                     </p>
                     <h2 className="mt-4 font-serif text-2xl leading-tight text-white md:text-4xl lg:text-5xl text-balance">
-                        Their First Real Piano.
+                        The Perfect Kids Piano.
                         <br />
-                        Built for Little Hands.
+                        Built for Small Hands.
                     </h2>
                     <p className="mt-5 max-w-md font-sans text-base font-medium leading-relaxed text-white/80 md:text-xl">
                         Children deserve keys that actually fit. Start on the DS5.5,

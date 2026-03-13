@@ -19,7 +19,7 @@ export function HeroSection() {
             <div className="absolute inset-0">
                 <img
                     src="/images/Hero-Image-Final-Version.jpg"
-                    alt="Playing DreamPlay One"
+                    alt="Pianist playing a narrow keyboard designed for small hands"
                     className="w-full h-full object-cover opacity-60"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 via-neutral-900/80 to-transparent" />
@@ -32,14 +32,14 @@ export function HeroSection() {
                         className={`text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 text-white transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                             }`}
                     >
-                        Standard Piano Keys Are Too Wide
+                        The Premium Digital Piano for Small Hands
                     </h1>
 
                     <p
                         className={`text-xl md:text-2xl text-neutral-300 max-w-2xl mb-12 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                             }`}
                     >
-                        Stop wasting time practicing on a keyboard that's too big for your hands.
+                        Experience a narrow keyboard designed to eliminate overstretching, prevent hands injury, and let you play freely.
                     </p>
 
                     <Link

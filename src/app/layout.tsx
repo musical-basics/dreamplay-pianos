@@ -16,8 +16,11 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Introducing: DreamPlay One",
-  description: "The keyboard that feels like a dream to play.",
+  title: {
+    template: '%s | DreamPlay Pianos',
+    default: 'DreamPlay One | The Best Piano for Small Hands',
+  },
+  description: 'Discover the DreamPlay One, a premium digital piano with narrow keys designed specifically for small hands, children, and preventing hand injury.',
   icons: {
     icon: "/images/favicon.png",
     apple: "/images/webclip.png",

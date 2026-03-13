@@ -29,9 +29,9 @@ const inter = Inter({
 })
 
 export const metadata = {
-    title: "DreamPlay One - Piano Keyboard for Every Hand",
+    title: "DreamPlay One | Small Hands Piano with Narrow Keys",
     description:
-        "DreamPlay One is designed with narrower keys so you can play freely, naturally, and without strain.",
+        "The DreamPlay One is a premium digital piano with narrow keys, designed for pianists with small hands. Prevent hand injury and play freely.",
 }
 
 export default async function OldPremiumOfferPage() {

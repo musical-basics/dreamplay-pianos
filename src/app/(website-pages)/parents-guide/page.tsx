@@ -15,8 +15,8 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata = {
-    title: "For Parents & Children - DreamPlay One",
-    description: "The piano that grows with them. Start on the DS5.5 and upgrade to the DS6.0 for free when their hands grow.",
+    title: "The Ultimate Kids Piano | Narrow Keys for Children - DreamPlay",
+    description: "Looking for a kids hands piano? The DreamPlay One features a 7/8ths size narrow keyboard that grows with your child, preventing bad habits and hand injury.",
 }
 
 export default async function ParentsGuidePage() {
