@@ -332,17 +332,17 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${statsHorizontalSlide * 100}%)` }}>
                         {/* Horizontal Slide 0: History (Beethoven/Chopin) */}
-                        <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-[#0a0a0f] px-6 md:px-16">
-                            <div className="w-full max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                                <div className="space-y-6 order-2 md:order-1">
-                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber-400 font-bold mb-2">Historical Context</p>
-                                    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight text-white">
+                        <div className="h-full w-full flex-shrink-0 relative flex items-center justify-center bg-[#0a0a0f] px-6 md:px-16 overflow-y-auto">
+                            <div className="w-full max-w-6xl mx-auto grid md:grid-cols-2 gap-4 landscape:gap-3 md:gap-12 items-center py-16 landscape:py-4">
+                                <div className="space-y-4 landscape:space-y-2 order-2 md:order-1">
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber-400 font-bold mb-2 landscape:mb-0">Historical Context</p>
+                                    <h2 className="font-serif text-2xl landscape:text-xl md:text-4xl lg:text-5xl tracking-tight leading-tight text-white">
                                         Beethoven and Chopin wrote their masterpieces while playing a narrower piano keyboard than our modern one.
                                     </h2>
                                     <p className="font-sans text-base md:text-lg text-white/80 leading-relaxed font-medium italic border-l-2 border-amber-400 pl-4">
                                         Why are small and medium-handed pianists playing an oversized keyboard meant for large hands?
                                     </p>
-                                    <div className="space-y-4 font-sans text-sm text-white/60 mt-6">
+                                    <div className="space-y-2 landscape:space-y-1 font-sans text-sm landscape:text-xs text-white/60 mt-4 landscape:mt-2">
                                         <p>• Prior to the 1880s, pianos featured much narrower keys, perfectly suited for rapid, intricate finger work.</p>
                                         <p>• The modern 6.5&quot; octave was standardized in the late 19th century merely to accommodate heavy cast-iron frames and large hammers.</p>
                                         <p>• It was built for the massive hands of romantic giants like Liszt, not the average pianist.</p>
@@ -357,7 +357,7 @@ export default function IntroOfferPage() {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="order-1 md:order-2 relative aspect-video md:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto w-full lg:max-w-none group">
+                                <div className="order-1 md:order-2 relative aspect-video md:aspect-[4/5] landscape:aspect-[3/2] landscape:max-h-[60vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto w-full lg:max-w-none group hidden landscape:max-md:hidden md:block">
                                     <Image
                                         src="/images/franz-liszt-in-colour-1546939903-large-article-0.jpg"
                                         alt="Franz Liszt, a pianist with large hands who helped standardize the modern wide keyboard"
@@ -380,10 +380,10 @@ export default function IntroOfferPage() {
                         </div>
 
                         {/* Horizontal Slide 1: Hidden Barrier (87% / 24%) */}
-                        <div className="h-full w-full flex-shrink-0 relative bg-[#050505] flex items-center justify-center">
-                            <div className="w-full max-w-5xl px-6 py-8">
-                                <div className="text-center mb-6 md:mb-12">
-                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">The Data</p>
+                        <div className="h-full w-full flex-shrink-0 relative bg-[#050505] flex items-center justify-center overflow-y-auto">
+                            <div className="w-full max-w-5xl px-6 py-8 landscape:py-3">
+                                <div className="text-center mb-4 landscape:mb-2 md:mb-12">
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2 landscape:mb-1">The Data</p>
                                     <h2 className="font-serif text-3xl md:text-5xl tracking-tight leading-tight text-white">The Hidden Barrier</h2>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4 md:gap-12 lg:gap-16">
@@ -438,7 +438,7 @@ export default function IntroOfferPage() {
                         </div>
 
                         {/* Horizontal Slide 2: Calculator ("Am I in that 87%?") */}
-                        <div className="h-full w-full flex-shrink-0 relative bg-black flex items-center justify-center overflow-y-auto">
+                        <div className="h-full w-full flex-shrink-0 relative bg-black flex items-center justify-center overflow-y-auto overflow-x-hidden">
                             <CalculatorSection />
                             <button
                                 onClick={() => setStatsHorizontalSlide(1)}
@@ -457,7 +457,7 @@ export default function IntroOfferPage() {
                         </div>
 
                         {/* Horizontal Slide 3: Stats Slide (55%) */}
-                        <div className="h-full w-full flex-shrink-0 relative">
+                        <div className="h-full w-full flex-shrink-0 relative overflow-y-auto">
                             <Image
                                 src="/images/pianist-hands-on-narrow-keys.jpg"
                                 alt="Hands playing narrow keys piano"
@@ -508,7 +508,7 @@ export default function IntroOfferPage() {
                         </div>
 
                         {/* Horizontal Slide 4: Pain Point (Biomechanical) */}
-                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16">
+                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16 overflow-y-auto">
                             <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-8 md:mb-12 text-center" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.4)" }}>
                                 Biomechanical Impact on Small Hands
                             </h2>
@@ -554,7 +554,7 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${quoteHorizontalSlide * 100}%)` }}>
                         {professorQuotes.map((quote, index) => (
-                            <div key={index} className="h-full w-full flex-shrink-0 flex items-center justify-center px-6 md:px-16 lg:px-24 relative">
+                            <div key={index} className="h-full w-full flex-shrink-0 flex items-center justify-center px-6 md:px-16 lg:px-24 relative overflow-y-auto">
                                 <div className="max-w-4xl">
                                     <div className="border-l-2 border-white/20 pl-8 md:pl-12">
                                         <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed text-white/90">
@@ -605,7 +605,7 @@ export default function IntroOfferPage() {
                 {/* Slide 4: DreamPlay One Hero */}
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${productHorizontalSlide * 100}%)` }}>
-                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16">
+                        <div className="h-full w-full flex-shrink-0 relative flex flex-col items-center justify-center bg-black px-6 md:px-16 overflow-y-auto">
                             {/* Text */}
                             <p className="font-sans text-[10px] md:text-xs uppercase tracking-[0.3em] text-amber-400 mb-3">Introducing</p>
                             <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white text-center" style={{ textShadow: "0 0 30px rgba(255,255,255,0.1)" }}>DreamPlay One</h2>
@@ -674,7 +674,7 @@ export default function IntroOfferPage() {
                 {/* Slide 5: LEDs / Learning App */}
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${learnHorizontalSlide * 100}%)` }}>
-                        <div className="h-full w-full flex-shrink-0 relative">
+                        <div className="h-full w-full flex-shrink-0 relative overflow-y-auto">
                             <LazyVideo
                                 src="https://pub-9dd0751c546645238416e02409ccf084.r2.dev/videos/DreamPlay%20Grid%20Hero.mp4"
                                 className="absolute inset-0"
