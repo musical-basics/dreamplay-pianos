@@ -621,9 +621,8 @@ export default function IntroOfferPage() {
                 {/* Slide 11: Lock in $699 */}
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
-                        <p className="font-sans text-sm text-white/60 mb-4">You can lock in our exclusive, <span className="underline">limited introductory</span> price of just</p>
+                        <p className="font-sans text-sm text-white/60 mb-4">TODAY, You can lock in our exclusive, <span className="underline">limited introductory</span> price of just</p>
                         <p className="font-serif text-6xl md:text-8xl text-white">$699</p>
-                        <p className="mt-4 font-sans text-lg text-white/80">TODAY for...</p>
 
                     </div>
                     <ScrollIndicator next={11} />
