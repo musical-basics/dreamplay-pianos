@@ -1,8 +1,24 @@
 import Script from "next/script";
+import { Lato, Manrope } from "next/font/google";
 import NewsletterPopup from "@/components/NewsletterPopup";
 import Chatbot from "@/components/chatbot/Chatbot";
 import { getChatbotEnabled } from "@/actions/admin-actions";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
+
+const lato = Lato({
+    subsets: ["latin"],
+    weight: ["100", "300", "400", "700", "900"],
+    style: ["normal", "italic"],
+    variable: "--font-lato",
+    display: "swap",
+});
+
+const manrope = Manrope({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700", "800"],
+    variable: "--font-manrope",
+    display: "swap",
+});
 
 export default async function WebsitePagesLayout({
     children,
@@ -12,7 +28,7 @@ export default async function WebsitePagesLayout({
     const isChatbotEnabled = await getChatbotEnabled();
 
     return (
-        <>
+        <div className={`${lato.variable} ${manrope.variable}`}>
             {/* Webflow CSS — loaded in body since nested layouts can't add to <head> */}
             {/* eslint-disable-next-line @next/next/no-css-tags */}
             <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
@@ -25,10 +41,7 @@ export default async function WebsitePagesLayout({
             <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css" />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-            <Script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" strategy="beforeInteractive" />
-            <Script id="webfont-load" strategy="beforeInteractive">
-                {`WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Manrope:regular,500,600,700,800"]  }});`}
-            </Script>
+
 
             <AnnouncementBanner />
             {children}
@@ -43,6 +56,6 @@ export default async function WebsitePagesLayout({
             <Script src="/js/webflow.js" strategy="lazyOnload" />
             <Script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js" strategy="lazyOnload" />
             <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" strategy="lazyOnload" />
-        </>
+        </div>
     );
 }

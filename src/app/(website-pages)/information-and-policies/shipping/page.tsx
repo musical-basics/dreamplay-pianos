@@ -4,6 +4,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import Link from "next/link";
+import Image from "next/image";
 
 function InlineShippingCTA() {
     const [email, setEmail] = useState("");
@@ -166,12 +167,14 @@ export default function ShippingPage() {
                 {/* ═══ HERO — LIGHT ═══ */}
                 <section className="bg-neutral-50 text-black pt-32 pb-20 overflow-hidden">
                     <div className="max-w-5xl mx-auto px-6 text-center">
-                        <h1 className="font-serif text-4xl md:text-6xl tracking-tight leading-tight mb-2 text-black reveal-el opacity-0 translate-y-8 transition-all duration-700">Global Delivery.</h1>
-                        <h1 className="font-serif text-4xl md:text-6xl tracking-tight leading-tight mb-12 text-[#0066cc] reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-100">Discounted Shipping.</h1>
+                        <h1 className="font-serif text-4xl md:text-6xl tracking-tight leading-tight mb-12 reveal-el opacity-0 translate-y-8 transition-all duration-700">
+                            <span className="text-black">Global Delivery.</span><br />
+                            <span className="text-[#0066cc]">Discounted Shipping.</span>
+                        </h1>
 
                         {/* World Map */}
                         <div className="max-w-4xl mx-auto mb-16 reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-200">
-                            <img src="/images/Worldmap.png" alt="World Map showing shipping regions" className="w-full h-auto object-contain" />
+                            <Image src="/images/Worldmap.png" alt="World map showing DreamPlay piano shipping regions across US, Europe, and Asia" width={1200} height={600} className="w-full h-auto object-contain" />
                         </div>
 
                         {/* Map Legend */}
@@ -317,7 +320,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-200">
                                 <div className="border border-neutral-200 overflow-hidden bg-neutral-50">
-                                    <img src="/images/piano-in-the-box.png" alt="DreamPlay One Packaging" className="w-full aspect-square object-cover scale-110" />
+                                    <Image src="/images/piano-in-the-box.png" alt="DreamPlay One digital piano in protective packaging with custom foam inserts" width={600} height={600} className="w-full aspect-square object-cover scale-110" />
                                 </div>
                             </div>
                         </div>
@@ -431,7 +434,7 @@ export default function ShippingPage() {
                             {/* DS5.5 */}
                             <div className="reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-100 border border-white/10 bg-white/5 rounded-none p-8 hover:border-white/20 transition-all">
                                 <div className="aspect-[4/3] bg-[#0a0a0a] rounded-none mb-6 flex items-center justify-center p-4">
-                                    <img src="/images/Group-2.png" alt="DS5.5" className="max-h-full object-contain" />
+                                    <Image src="/images/Group-2.png" alt="DreamPlay DS5.5 narrow keys piano for small hands" width={400} height={300} className="max-h-full object-contain" />
                                 </div>
                                 <div className="flex justify-between items-start mb-2">
                                     <h3 className="font-serif text-2xl font-bold">DS5.5</h3>
@@ -446,7 +449,7 @@ export default function ShippingPage() {
                             {/* DS6.0 */}
                             <div className="reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-200 border border-white/10 bg-white/5 rounded-none p-8 hover:border-white/20 transition-all">
                                 <div className="aspect-[4/3] bg-[#0a0a0a] rounded-none mb-6 flex items-center justify-center p-4">
-                                    <img src="/images/Group-3.png" alt="DS6.0" className="max-h-full object-contain" />
+                                    <Image src="/images/Group-3.png" alt="DreamPlay DS6.0 ergonomic piano keyboard" width={400} height={300} className="max-h-full object-contain" />
                                 </div>
                                 <div className="flex justify-between items-start mb-2">
                                     <h3 className="font-serif text-2xl font-bold">DS6.0</h3>
@@ -461,7 +464,7 @@ export default function ShippingPage() {
                             {/* DS6.5 */}
                             <div className="reveal-el opacity-0 translate-y-8 transition-all duration-700 delay-300 border border-white/10 bg-white/5 rounded-none p-8 hover:border-white/20 transition-all">
                                 <div className="aspect-[4/3] bg-[#0a0a0a] rounded-none mb-6 flex items-center justify-center p-4">
-                                    <img src="/images/DS6.5-Black.png" alt="DS6.5" className="max-h-full object-contain" />
+                                    <Image src="/images/DS6.5-Black.png" alt="DreamPlay DS6.5 standard size digital piano" width={400} height={300} className="max-h-full object-contain" />
                                 </div>
                                 <div className="flex justify-between items-start mb-2">
                                     <h3 className="font-serif text-2xl font-bold">DS6.5</h3>
