@@ -397,7 +397,7 @@ export default function IntroOfferPage() {
                                 {index < professorQuotes.length - 1 && (
                                     <button
                                         onClick={() => setQuoteHorizontalSlide(index + 1)}
-                                        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                        className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
                                         aria-label="Next quote"
                                     >
                                         <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
@@ -455,7 +455,7 @@ export default function IntroOfferPage() {
                             {/* SWIPE indicator — right side */}
                             <button
                                 onClick={() => setProductHorizontalSlide(1)}
-                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
                             >
                                 <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
                                 <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
@@ -512,7 +512,7 @@ export default function IntroOfferPage() {
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(1)}
-                                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
                                 aria-label="Next"
                             >
                                 <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
