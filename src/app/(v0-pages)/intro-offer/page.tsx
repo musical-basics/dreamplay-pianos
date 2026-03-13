@@ -757,8 +757,8 @@ export default function IntroOfferPage() {
                     <div className="w-full max-w-2xl px-6 py-12">
                         <div className="text-center mb-8">
                             <h2 className="font-serif text-3xl md:text-4xl text-black mb-3">Still have questions?</h2>
-                            <p className="font-sans text-sm text-black/50">
-                                We&apos;d love to hear from you. Tell us your story.
+                            <p className="font-sans text-sm text-black/50 max-w-lg mx-auto leading-relaxed">
+                                Visit our FAQ, or contact us here. We will love to hear from you. If you truly believe that this keyboard will change your piano playing experience, please tell us your story. We want to deliver your dream keyboard.
                             </p>
                         </div>
 
