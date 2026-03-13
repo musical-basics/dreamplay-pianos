@@ -496,30 +496,6 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-black overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="h-full flex transition-transform duration-500" style={{ transform: `translateX(-${learnHorizontalSlide * 100}%)` }}>
                         <div className="h-full w-full flex-shrink-0 relative">
-                            <img
-                                src="/images/DreamPlay piano with Midi app copy.png"
-                                alt="DreamPlay Piano with MIDI App"
-                                className="absolute inset-0 w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/75" />
-                            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
-                                <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight max-w-3xl text-balance" style={{ textShadow: "0 4px 12px rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.5)" }}>
-                                    Dedicated learning app to improve even faster.
-                                </h2>
-                                <p className="mt-6 font-sans text-base text-white/70 max-w-xl">
-                                    LED lights above every key make learning songs fast and fun. Want a classic look? They toggle off completely.
-                                </p>
-                            </div>
-                            <button
-                                onClick={() => setLearnHorizontalSlide(1)}
-                                className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
-                                aria-label="Next"
-                            >
-                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
-                                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
-                            </button>
-                        </div>
-                        <div className="h-full w-full flex-shrink-0 relative">
                             <video
                                 className="absolute inset-0 w-full h-full object-cover"
                                 autoPlay
@@ -539,6 +515,30 @@ export default function IntroOfferPage() {
                                 >
                                     View All Learning Features <ArrowRight className="w-4 h-4" />
                                 </Link>
+                            </div>
+                            <button
+                                onClick={() => setLearnHorizontalSlide(1)}
+                                className="absolute right-4 md:right-8 top-[60%] md:top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 group cursor-pointer"
+                                aria-label="Next"
+                            >
+                                <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">Swipe</span>
+                                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+                            </button>
+                        </div>
+                        <div className="h-full w-full flex-shrink-0 relative">
+                            <img
+                                src="/images/DreamPlay piano with Midi app copy.png"
+                                alt="DreamPlay Piano with MIDI App"
+                                className="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/75" />
+                            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
+                                <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight max-w-3xl text-balance" style={{ textShadow: "0 4px 12px rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.5)" }}>
+                                    Dedicated learning app to improve even faster.
+                                </h2>
+                                <p className="mt-6 font-sans text-base text-white/70 max-w-xl">
+                                    LED lights above every key make learning songs fast and fun. Want a classic look? They toggle off completely.
+                                </p>
                             </div>
                             <button
                                 onClick={() => setLearnHorizontalSlide(0)}

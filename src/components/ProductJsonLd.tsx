@@ -13,7 +13,7 @@ export default function ProductJsonLd() {
             "@type": "Offer",
             "url": "https://dreamplaypianos.com",
             "priceCurrency": "USD",
-            "price": "799",
+            "price": "699",
             "priceValidUntil": "2026-04-30",
             "availability": "https://schema.org/PreOrder",
             "itemCondition": "https://schema.org/NewCondition"
