@@ -83,12 +83,14 @@ Use lowercase, hyphenated tags that identify the source:
 | `intro-offer/page.tsx` ($25 credit popup) | `$25-credit-popup` | 3-minute timer popup |
 | `checkout/ProductSelectionForm.tsx` | varies | Checkout flow |
 
-### ⚠️ Uses `/api/contact` (Correct — These Are Contact Forms, NOT Email Capture)
+### ✅ Contact Forms (Using `submitContactForm` — subscribes + sends notification)
 
 | Location | Purpose |
 |----------|---------|
 | `intro-offer/page.tsx` (Slide 16) | "Still have questions?" contact form |
 | `contact/page.tsx` | Dedicated contact page |
+
+> **Note:** `submitContactForm` calls `subscribeToNewsletter` internally (tag: `contact-form`) AND sends a Resend notification email to `support@dreamplaypianos.com`. The old `/api/contact` endpoint has been **deleted**.
 
 ### ⚠️ Chatbot Email Gate (Saves to Chat Session Only)
 

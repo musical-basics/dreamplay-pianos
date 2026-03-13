@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { submitContactForm } from "@/actions/email-actions";
 
 export default function ContactPage() {
     const [name, setName] = useState("");
@@ -44,17 +45,10 @@ export default function ContactPage() {
         setError("");
 
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, subject, message }),
-            });
-
-            if (!res.ok) {
-                const data = await res.json().catch(() => ({}));
-                throw new Error(data.error || "Failed to send message");
+            const result = await submitContactForm({ name, email, subject, message });
+            if (!result.success) {
+                throw new Error(result.error || "Failed to send message");
             }
-
             setIsSubmitted(true);
         } catch (err: any) {
             setError(err.message || "Something went wrong. Please try again.");

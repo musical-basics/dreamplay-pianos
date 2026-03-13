@@ -8,7 +8,7 @@ import { SpecialOfferHeader } from "@/components/special-offer/header"
 import { CalculatorSection } from "@/components/how-it-works/calculator-section"
 import { LazyVideo } from "@/components/extended-offer/LazyVideo"
 import DonutChart from "@/components/DonutChart"
-import { subscribeToNewsletter } from "@/actions/email-actions"
+import { subscribeToNewsletter, submitContactForm } from "@/actions/email-actions"
 
 const professorQuotes = [
     {
@@ -259,14 +259,9 @@ export default function IntroOfferPage() {
         setIsContactSubmitting(true)
         setContactError("")
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: contactName, email: contactEmail, subject: "Intro Offer Inquiry", message: contactMessage }),
-            })
-            if (!res.ok) {
-                const data = await res.json().catch(() => ({}))
-                throw new Error(data.error || "Failed to send message")
+            const result = await submitContactForm({ name: contactName, email: contactEmail, subject: "Intro Offer Inquiry", message: contactMessage })
+            if (!result.success) {
+                throw new Error(result.error || "Failed to send message")
             }
             setIsContactSubmitted(true)
         } catch (err: any) {
