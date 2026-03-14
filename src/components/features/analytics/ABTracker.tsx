@@ -89,7 +89,8 @@ function ABTrackerContent() {
             // Note: React cleanup runs on component unmount (navigation), so this captures "time on page" for SPA transitions too.
             handleUnload();
         };
-    }, [pathname, searchParams]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname, searchParams?.toString()]);
 
     return null;
 }

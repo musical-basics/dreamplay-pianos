@@ -103,7 +103,8 @@ function AnalyticsTrackerContent() {
         // 3. Log the page view using your existing Server Action
         logEvent('pageview', { path: url, metadata });
 
-    }, [pathname, searchParams])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname, searchParams?.toString()])
 
     // 4. Track physical exits (tab close, browser minimize, phone lock)
     useEffect(() => {
