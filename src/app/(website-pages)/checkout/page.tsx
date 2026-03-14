@@ -8,6 +8,8 @@ import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import { VARIANT_MAP } from "@/app/(website-pages)/customize/variant-map";
 import { trackEmailConversion } from "@/components/EmailTracker";
+import { getJourneyById } from "@/actions/admin-actions";
+import type { JourneyProduct } from "@/actions/admin-actions";
 
 const PRODUCT_IMAGES = {
     Black: [
@@ -54,12 +56,18 @@ function CheckoutContent() {
     const [activeImageIdx, setActiveImageIdx] = useState(0);
     const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-    // Journey-Aware Pricing
-    const [priceTier, setPriceTier] = useState<"standard" | "sale">("standard");
+    // Journey products for price overlay + discount codes
+    const [journeyProducts, setJourneyProducts] = useState<JourneyProduct[] | null>(null);
 
     useEffect(() => {
-        const match = document.cookie.match(/(^| )dp_journey_pricing=([^;]+)/);
-        if (match) setPriceTier(match[2] as "standard" | "sale");
+        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
+        if (match) {
+            getJourneyById(match[2]).then(journey => {
+                if (journey?.products?.length) {
+                    setJourneyProducts(journey.products);
+                }
+            });
+        }
     }, []);
 
     useEffect(() => {
@@ -73,24 +81,36 @@ function CheckoutContent() {
     }, [color]);
 
     const activeImages = PRODUCT_IMAGES[color];
-    const activePackage = PACKAGES.find(p => p.id === tier)!;
+
+    // Journey-aware package display
+    const displayPackages = PACKAGES.map(pkg => {
+        const jp = journeyProducts?.find(p => p.id === pkg.id);
+        if (!jp) return pkg;
+        const priceNum = parseInt(jp.price.replace(/[$,]/g, ''));
+        const origNum = jp.originalPrice ? parseInt(jp.originalPrice.replace(/[$,]/g, '')) : pkg.comparePrice;
+        return { ...pkg, price: priceNum || pkg.price, comparePrice: origNum || pkg.comparePrice };
+    });
+
+    const activePackage = displayPackages.find(p => p.id === tier)!;
 
     const handleCheckout = () => {
         setIsCheckingOut(true);
-        const exactVariantId = VARIANT_MAP[priceTier]?.[tier]?.[size]?.[color] || "";
+        const exactVariantId = VARIANT_MAP[tier]?.[size]?.[color] || "";
 
-        if (exactVariantId && exactVariantId.trim() !== '' && !exactVariantId.startsWith('SALE_')) {
+        // Get discount code: journey product > URL param > sessionStorage
+        const journeyProduct = journeyProducts?.find(p => p.id === tier);
+        const activeDiscount = journeyProduct?.discountCode || discountCode;
+
+        if (exactVariantId && exactVariantId.trim() !== '') {
             let permalink = `/cart/${exactVariantId}:1?note=checkout_source:pdp`;
-            if (discountCode) permalink += `&discount=${discountCode}`;
+            if (activeDiscount) permalink += `&discount=${activeDiscount}`;
 
-            // Shopify clear cart hack ensures no duplicate checkouts
             const checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
             trackEmailConversion('conversion_t2', window.location.pathname);
             window.location.href = checkoutUrl;
         } else {
-            // Fallback
             let fallbackUrl = `https://dreamplay-pianos.myshopify.com/cart/add?id=52209394549050&quantity=1&return_to=/checkout&properties[Size]=${size}&properties[Finish]=${color}&note=checkout_source:pdp`;
-            if (discountCode) fallbackUrl += `&discount=${discountCode}`;
+            if (activeDiscount) fallbackUrl += `&discount=${activeDiscount}`;
             window.location.href = fallbackUrl;
         }
     };

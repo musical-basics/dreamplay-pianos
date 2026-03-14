@@ -4,7 +4,8 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { SpecialOfferHeader } from "@/components/special-offer/header";
-import { getCountdownDate } from "@/actions/admin-actions";
+import { getCountdownDate, getJourneyById } from "@/actions/admin-actions";
+import type { JourneyProduct } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 import { useABAnalytics } from "@/hooks/use-ab-analytics";
@@ -70,29 +71,33 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const [widgetTimeLeft, setWidgetTimeLeft] = useState(12 * 60);
     const [showWidget, setShowWidget] = useState(true);
 
-    // Journey-Aware Pricing State
-    const [priceTier, setPriceTier] = useState<"standard" | "sale">("standard");
+    // Journey Products State (replaces priceTier, hiddenProducts, and hardcoded prices)
+    const [journeyProducts, setJourneyProducts] = useState<JourneyProduct[] | null>(null);
 
     useEffect(() => {
-        // Read the pricing tier set by our middleware Journey Engine
-        const match = document.cookie.match(/(^| )dp_journey_pricing=([^;]+)/);
-        if (match) setPriceTier(match[2] as "standard" | "sale");
+        // Fetch journey products based on the assigned journey cookie
+        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
+        if (match) {
+            getJourneyById(match[2]).then(journey => {
+                if (journey?.products?.length) {
+                    setJourneyProducts(journey.products);
+                }
+            });
+        }
     }, []);
 
     const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
-    // --- DATA ---
-    const isSale = priceTier === "sale";
-
-    const tiers = [
-        {
+    // --- PRODUCT CATALOG (static data, shared across all journeys) ---
+    const PRODUCT_CATALOG: Record<string, any> = {
+        reservation: {
             id: 'reservation',
-            badge: null,
+            badge: null as string | null,
             title: "Lock My Spot",
             subtitle: "Batch 1 — August 2026",
             price: "$99",
-            retailPrice: null,
-            originalPrice: null,
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
             description: "100% refundable reservation. Lock in Founder\u0027s pricing and secure your Batch 1 (August) delivery. Pay the remaining balance only when your piano is boxed and ready to ship.",
             includes: ["Batch 1 Delivery Slot", "Founder\u0027s Price Lock", "Full Refund Anytime"],
             delivery: "Aug 2026",
@@ -101,14 +106,14 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 50,
             highlight: false,
         },
-        {
+        reserve50: {
             id: 'reserve50',
-            badge: null,
+            badge: null as string | null,
             title: "Reserve (50%)",
             subtitle: "",
             price: "$274",
-            retailPrice: null,
-            originalPrice: null,
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
             description: "Pay 50% now, the rest (50% + shipping/taxes) when ready to ship.",
             includes: ["DreamPlay One Keyboard"],
             delivery: "Aug 2026",
@@ -117,14 +122,14 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 10,
             highlight: false,
         },
-        {
+        solo: {
             id: 'solo',
-            badge: null,
+            badge: null as string | null,
             title: "DreamPlay One",
             subtitle: "",
-            price: isSale ? "$599" : "$1,099",
-            retailPrice: null,
-            originalPrice: isSale ? "$1,099" : null,
+            price: "$1,099",
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
             description: "The DreamPlay One Keyboard. Available in DS5.5 or DS6.0. Choose Midnight Black or Pearl White.",
             includes: ["DreamPlay One Keyboard"],
             delivery: "Aug 2026",
@@ -133,14 +138,14 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 50,
             highlight: false,
         },
-        {
+        full: {
             id: 'full',
             badge: "Most Popular",
             title: "DreamPlay Bundle",
             subtitle: "",
-            price: isSale ? "$649" : "$1,199",
-            retailPrice: null,
-            originalPrice: isSale ? "$1,199" : null,
+            price: "$1,199",
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
             description: "The complete DreamPlay experience. Keyboard, adjustable stand, responsive sustain pedal, and comfortable padded bench.",
             includes: ["DreamPlay One Keyboard", "Keyboard Stand", "Sustain Pedal", "Padded Bench"],
             delivery: "Aug 2026",
@@ -149,14 +154,14 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 250,
             highlight: true,
         },
-        {
+        signature: {
             id: 'signature',
             badge: "Founder's Circle",
             title: "DreamPlay Signature",
             subtitle: "",
             price: "$999",
             retailPrice: "$1,599.00",
-            originalPrice: null,
+            originalPrice: null as string | null,
             description: "Join the extremely limited Founder's Circle. Receive a keyboard with your personalized name engraved, plus Lifetime Access to Lionel Yu's entire Piano Masterclass ($700 value).",
             includes: ["DreamPlay One Keyboard", "Keyboard Stand", "Sustain Pedal", "Padded Bench", "Personalized Name Engraving", "Lifetime Piano Masterclass Access"],
             delivery: "Aug 2026",
@@ -166,7 +171,31 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             highlight: false,
             savings: "$600",
         }
-    ];
+    };
+
+    // --- BUILD VISIBLE TIERS ---
+    // If a journey has products defined, use those (with catalog defaults merged in).
+    // Otherwise fall back to global product visibility (hiddenProducts prop).
+    const tiers = (() => {
+        if (journeyProducts && journeyProducts.length > 0) {
+            return journeyProducts.map((jp: JourneyProduct) => {
+                const catalog = PRODUCT_CATALOG[jp.id];
+                if (!catalog) return null;
+                return {
+                    ...catalog,
+                    price: jp.price,
+                    originalPrice: jp.originalPrice || null,
+                    badge: jp.badge !== undefined ? jp.badge : catalog.badge,
+                    title: jp.label || catalog.title,
+                };
+            }).filter(Boolean);
+        }
+        // Fallback: use all products minus hiddenProducts
+        const defaultOrder = ['reservation', 'reserve50', 'solo', 'full', 'signature'];
+        return defaultOrder
+            .filter(id => !hiddenProducts.includes(id))
+            .map(id => PRODUCT_CATALOG[id]);
+    })();
 
     const keyboards = {
         'DS5.5': {
@@ -363,36 +392,26 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             const size = appState.size || 'DS6.0';
             const color = appState.color || 'Black';
 
-            // Journey-aware variant lookup:
-            // reservation/reserve50 are price-tier-agnostic, pull from VARIANT_MAP.reservation
-            // solo/full/signature pull from VARIANT_MAP[priceTier] (standard or sale)
-            let exactVariantId = "";
-            if (tierId === 'reservation' || tierId === 'reserve50') {
-                exactVariantId = VARIANT_MAP.reservation?.[tierId]?.[size]?.[color] || "";
-            } else {
-                exactVariantId = VARIANT_MAP[priceTier]?.[tierId]?.[size]?.[color] || "";
-            }
+            // Flat variant lookup: VARIANT_MAP[tier][size][color]
+            const exactVariantId = VARIANT_MAP[tierId]?.[size]?.[color] || "";
+
+            // Get discount code: journey product > URL param > sessionStorage
+            const journeyProduct = journeyProducts?.find(jp => jp.id === tierId);
+            const activeDiscount = journeyProduct?.discountCode || discountCode;
 
             let checkoutUrl = "";
 
-            if (exactVariantId && exactVariantId.trim() !== '' && !exactVariantId.startsWith('SALE_')) {
-                // SUCCESS: We have the exact variant ID! 
-                // We use a Shopify "Cart Permalink" format: /cart/{variant_id}:{quantity}
+            if (exactVariantId && exactVariantId.trim() !== '') {
                 let permalink = `/cart/${exactVariantId}:1?note=checkout_source:customize`;
 
-                // Append the VIP Discount Code if one was generated from the Emailer
-                if (discountCode) {
-                    permalink += `&discount=${discountCode}`;
+                if (activeDiscount) {
+                    permalink += `&discount=${activeDiscount}`;
                 }
 
-                // THE CART CLEAR HACK: 
-                // By hitting /cart/clear and returning to the permalink, Shopify instantly wipes 
-                // out their old cart before creating a brand new checkout with the correct item.
                 checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
 
             } else {
-                // FALLBACK: If you haven't filled out the map yet, it falls back to your old method 
-                // using the Admin Panel variables and appending custom properties so the site doesn't break.
+                // FALLBACK: Admin Panel URL variables
                 const sizeParam = encodeURIComponent(size);
                 const colorParam = encodeURIComponent(color);
                 const propertiesParams = `&properties[Size]=${sizeParam}&properties[Finish]=${colorParam}`;
@@ -419,8 +438,8 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                     checkoutUrl += `&note=checkout_source:customize`;
 
-                    if (discountCode) {
-                        checkoutUrl += `&discount=${discountCode}`;
+                    if (activeDiscount) {
+                        checkoutUrl += `&discount=${activeDiscount}`;
                     }
                 }
             }
@@ -890,7 +909,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     </div>
 
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {tiers.filter(t => !hiddenProducts.includes(t.id)).map(tier => {
+                        {tiers.map(tier => {
                             const isSelected = appState.selectedTier === tier.id;
                             const isHighlight = tier.highlight;
 
@@ -951,7 +970,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                                 Includes
                                             </p>
                                             <div className="flex flex-col gap-2">
-                                                {tier.includes.map((item, i) => (
+                                                {tier.includes.map((item: string, i: number) => (
                                                     <div key={i} className="flex items-center gap-3">
                                                         <span className={`h-1 w-1 shrink-0 rounded-full ${isSelected ? 'bg-black/40' : 'bg-white/40'}`} />
                                                         <span className={`font-sans text-sm ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{item}</span>

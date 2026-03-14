@@ -639,6 +639,15 @@ export async function getPopupABResults() {
 
 // ─── Journey Engine Types ───
 
+export type JourneyProduct = {
+    id: string;              // "reservation", "solo", "full", "signature", "reserve50"
+    label?: string;          // Override display name, e.g. "DreamPlay One — Sale"
+    price: string;           // Displayed price: "$599", "$99", "$1,099"
+    originalPrice?: string;  // Strikethrough price: "$1,099"
+    badge?: string;          // Override badge: "Most Popular", "Limited Time"
+    discountCode?: string;   // Auto-applied at Shopify checkout
+};
+
 export type JourneyConfig = {
     id: string;          // e.g., "journey_a" — also used as the ?journey= URL param for ads
     name: string;        // e.g., "High Ticket Premium"
@@ -646,7 +655,7 @@ export type JourneyConfig = {
     homepage: string;    // e.g., "/premium-offer"
     checkout: string;    // e.g., "/customize"
     popup: string;       // e.g., "discount", "shipping", "discount_44", "pdf"
-    priceTier: "standard" | "sale"; // "standard" = $1099, "sale" = $599
+    products: JourneyProduct[]; // Which products to show + at what price
 };
 
 export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
@@ -670,6 +679,11 @@ export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
     }
 }
 
+export async function getJourneyById(journeyId: string): Promise<JourneyConfig | null> {
+    const configs = await getJourneyConfigs();
+    return configs.find(j => j.id === journeyId) || null;
+}
+
 export async function updateJourneyConfigs(journeys: JourneyConfig[]) {
     try {
         const { error } = await supabase.from('admin_variables').upsert({
@@ -688,3 +702,4 @@ export async function updateJourneyConfigs(journeys: JourneyConfig[]) {
         return { success: false, error: error.message };
     }
 }
+

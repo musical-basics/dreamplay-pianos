@@ -133,7 +133,6 @@ export async function middleware(request: NextRequest) {
         if (!isBot) {
             response.cookies.set("dp_journey_id", assignedJourney.id, { maxAge: 31536000 });
             response.cookies.set("dp_journey_popup", assignedJourney.popup, { maxAge: 31536000 });
-            response.cookies.set("dp_journey_pricing", assignedJourney.priceTier, { maxAge: 31536000 });
         }
     } else {
         // Ultimate Fallback if DB is empty — use current behavior

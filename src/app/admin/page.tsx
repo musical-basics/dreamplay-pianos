@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { getCountdownDate, updateCountdownDate, getDiscountPopupStatus, updateDiscountPopupStatus, loginAdmin, getHomepageVersion, updateHomepageVersion, getHiddenProducts, updateHiddenProducts, getChatModel, updateChatModel, getChatKnowledge, updateChatKnowledge, getChatSuggestions, updateChatSuggestions, getPopupABConfig, updatePopupABConfig, getPopupABResults, getChatbotEnabled, updateChatbotEnabled, getJourneyConfigs, updateJourneyConfigs } from '@/actions/admin-actions'
-import type { PopupABConfig, JourneyConfig } from '@/actions/admin-actions'
+import type { PopupABConfig, JourneyConfig, JourneyProduct } from '@/actions/admin-actions'
 
 type AdminTab = 'chatbot' | 'marketing' | 'other' | 'ab-config' | 'ab-results' | 'journeys'
 
@@ -954,7 +954,7 @@ export default function AdminPage() {
                                         onChange={(e) => setJourneyJson(e.target.value)}
                                         rows={15}
                                         className="w-full bg-black border border-neutral-700 rounded-lg p-3 text-white text-sm outline-none focus:border-blue-500 font-mono leading-relaxed resize-y"
-                                        placeholder='[{"id":"journey_a","name":"Standard","weight":50,"homepage":"/premium-offer","checkout":"/customize","popup":"shipping","priceTier":"standard"}]'
+                                        placeholder='[{"id":"journey_a","name":"Standard","weight":50,"homepage":"/premium-offer","checkout":"/customize","popup":"shipping","products":[{"id":"full","price":"$1,199","badge":"Most Popular"},{"id":"solo","price":"$1,099"}]}]'
                                     />
                                     <button
                                         onClick={async () => {
@@ -1025,19 +1025,66 @@ export default function AdminPage() {
                                                         <option value="accessory_25">25% Accessory</option>
                                                     </select>
                                                 </div>
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Price Tier</label>
-                                                    <select value={j.priceTier} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], priceTier: e.target.value as 'standard' | 'sale' }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500">
-                                                        <option value="standard">Standard ($1,099/$1,199)</option>
-                                                        <option value="sale">Sale ($599/$649)</option>
-                                                    </select>
+                                            </div>
+
+                                            {/* Products Editor */}
+                                            <div className="mt-3 pt-3 border-t border-neutral-800">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <span className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Products</span>
+                                                    <button
+                                                        onClick={() => {
+                                                            const u = [...journeys]
+                                                            const products = [...(u[idx].products || [])]
+                                                            products.push({ id: 'full', price: '$1,199' })
+                                                            u[idx] = { ...u[idx], products }
+                                                            setJourneys(u)
+                                                        }}
+                                                        className="text-xs text-blue-400 hover:text-blue-300"
+                                                    >
+                                                        + Add Product
+                                                    </button>
                                                 </div>
+                                                {(j.products || []).length === 0 && (
+                                                    <p className="text-xs text-neutral-600 italic">No products defined — will use global defaults</p>
+                                                )}
+                                                {(j.products || []).map((product: JourneyProduct, pIdx: number) => (
+                                                    <div key={pIdx} className="grid grid-cols-5 gap-2 mb-2 items-end">
+                                                        <div>
+                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Product</label>
+                                                            <select value={product.id} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], id: e.target.value }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500">
+                                                                <option value="reservation">Lock My Spot ($99)</option>
+                                                                <option value="reserve50">Reserve 50%</option>
+                                                                <option value="solo">Keyboard Only</option>
+                                                                <option value="full">Bundle</option>
+                                                                <option value="signature">Signature</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Price</label>
+                                                            <input value={product.price} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], price: e.target.value }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} placeholder="$1,199" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Strikethrough</label>
+                                                            <input value={product.originalPrice || ''} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], originalPrice: e.target.value || undefined }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} placeholder="$1,499" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Discount Code</label>
+                                                            <input value={product.discountCode || ''} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], discountCode: e.target.value || undefined }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} placeholder="FLASH44" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
+                                                        </div>
+                                                        <button
+                                                            onClick={() => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p.splice(pIdx, 1); u[idx] = { ...u[idx], products: p }; setJourneys(u) }}
+                                                            className="text-red-400 hover:text-red-300 text-xs pb-1"
+                                                        >
+                                                            ✕
+                                                        </button>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     ))}
 
                                     <button
-                                        onClick={() => setJourneys([...journeys, { id: `journey_${String.fromCharCode(97 + journeys.length)}`, name: 'New Journey', weight: 50, homepage: '/premium-offer', checkout: '/customize', popup: 'shipping', priceTier: 'standard' }])}
+                                        onClick={() => setJourneys([...journeys, { id: `journey_${String.fromCharCode(97 + journeys.length)}`, name: 'New Journey', weight: 50, homepage: '/premium-offer', checkout: '/customize', popup: 'shipping', products: [{ id: 'full', price: '$1,199', badge: 'Most Popular' }, { id: 'solo', price: '$1,099' }] }])}
                                         className="w-full border border-dashed border-neutral-700 hover:border-neutral-500 text-neutral-500 hover:text-neutral-300 text-sm font-medium py-2.5 rounded-lg transition-colors"
                                     >
                                         + Add Journey
