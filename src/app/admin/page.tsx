@@ -11,7 +11,7 @@ export default function AdminPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [password, setPassword] = useState('')
     const [authError, setAuthError] = useState('')
-    const [activeTab, setActiveTab] = useState<AdminTab>('chatbot')
+    const [activeTab, setActiveTab] = useState<AdminTab>('journeys')
 
     // Date State
     const [date, setDate] = useState('')
