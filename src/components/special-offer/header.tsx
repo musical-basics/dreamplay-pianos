@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import { RegisterModal } from "../RegisterModal"
 import { CountdownBanner } from "../extended-offer/countdown-banner"
-import { getJourneyById } from "@/actions/admin-actions"
+import { useJourneyCheckout } from "@/hooks/use-journey-checkout"
 
 interface SpecialOfferHeaderProps {
     forceOpaque?: boolean;
@@ -69,23 +69,13 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
     const lastScrollY = useRef(0)
     const [user, setUser] = useState<any>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
-    const [checkoutPath, setCheckoutPath] = useState("/reserve")
+    const checkoutPath = useJourneyCheckout("/reserve")
 
     useEffect(() => {
         const supabase = createClient()
         supabase.auth.getUser().then(({ data: { user } }) => setUser(user))
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null))
         return () => subscription.unsubscribe()
-    }, [])
-
-    // Read journey checkout path
-    useEffect(() => {
-        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)
-        if (match?.[2]) {
-            getJourneyById(match[2]).then(journey => {
-                if (journey?.checkout) setCheckoutPath(journey.checkout)
-            })
-        }
     }, [])
 
     // Sync homepage A/B cookie to localStorage
