@@ -1,33 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-// 💡 FUTURE A/B TESTS: Instead of querying the database on every request,
-// define your active tests here. This gets compiled directly into the Vercel Edge 
-// function, meaning it executes in 0ms with zero database calls.
-const ACTIVE_EXPERIMENTS: Record<string, { slug: string, variants: { id: string, path: string, weight: number }[] }> = {
-    // Example structure for when you turn A/B testing back on:
-    // "/how-it-works": {
-    //     slug: "how_it_works_hero_v1",
-    //     variants: [
-    //         { id: "control", path: "/how-it-works", weight: 50 },
-    //         { id: "variant_b", path: "/how-it-works-b", weight: 50 },
-    //     ]
-    // }
-};
-
-/**
- * Helper: Get the variant path from a hardcoded mapping.
- * Used for instant overrides via email links.
- */
-function getVariantPath(currentPath: string, variant: string): string | null {
-    if (variant === "control" || variant === "a") {
-        return null;
-    }
-    const basePath = currentPath.replace(/\/$/, "");
-    const suffix = variant.replace("variant_", "");
-    return `${basePath}-${suffix}`;
-}
-
 export async function middleware(request: NextRequest) {
     // ========================================================================
     // REFRESH SUPABASE AUTH SESSION (must run on every request)
@@ -37,8 +10,13 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl;
     const pathname = url.pathname;
 
-    // Skip A/B testing for auth-related paths
-    if (pathname.startsWith('/api/auth')) {
+    // Skip Journey Engine for API routes, admin, and auth paths
+    if (pathname.startsWith('/api') || pathname.startsWith('/admin') || pathname.startsWith('/api/auth')) {
+        return sessionResponse;
+    }
+
+    // Skip static files
+    if (pathname.match(/\.(.*)$/)) {
         return sessionResponse;
     }
 
@@ -76,66 +54,117 @@ export async function middleware(request: NextRequest) {
     }
 
     // ========================================================================
-    // PRIORITY #2: HOMEPAGE → /intro-offer (SEO rewrite, preserves domain authority)
+    // PRIORITY #2: JOURNEY ENGINE (Full-Funnel Routing)
     // ========================================================================
-    if (pathname === "/") {
-        const rewriteUrl = request.nextUrl.clone();
-        rewriteUrl.pathname = `/intro-offer`;
-        return NextResponse.rewrite(rewriteUrl);
+
+    // 1. Fetch Active Journeys via REST (Cached at the Edge for 0ms latency)
+    let activeJourneys: any[] = [];
+    try {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/admin_variables?key=eq.journey_configs&select=value`,
+            {
+                headers: {
+                    'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`
+                },
+                next: { revalidate: 60 }
+            }
+        );
+        const data = await res.json();
+        if (data && data[0]) activeJourneys = JSON.parse(data[0].value);
+    } catch (e) {
+        console.error("Failed to fetch journeys", e);
     }
 
-    // ========================================================================
-    // PRIORITY #3: EDGE-NATIVE A/B TESTING (Zero Latency)
-    // ========================================================================
-    const experiment = ACTIVE_EXPERIMENTS[pathname];
-    if (experiment) {
-        const cookieName = `ab_${experiment.slug}`;
-        let assignedVariantId = request.cookies.get(cookieName)?.value;
+    // 2. Identify or Assign Journey
+    let assignedJourneyId = request.cookies.get("dp_journey_id")?.value;
 
-        let variant = experiment.variants.find(v => v.id === assignedVariantId);
+    // Feature: Force a journey via URL for your Ads (e.g., ?journey=journey_a)
+    const forcedJourney = url.searchParams.get("journey");
+    if (forcedJourney) assignedJourneyId = forcedJourney;
 
-        // If no bucket cookie exists, assign one based on traffic weights
-        if (!variant) {
-            const random = Math.random() * 100;
-            let accumulated = 0;
-            for (const v of experiment.variants) {
-                accumulated += v.weight;
-                if (random <= accumulated) {
-                    variant = v;
-                    break;
-                }
+    let assignedJourney = activeJourneys.find((j: any) => j.id === assignedJourneyId);
+
+    // ==========================================
+    // 🛡️ SEO PROTECTION: THE BOT BYPASS
+    // ==========================================
+    const userAgent = request.headers.get("user-agent") || "";
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(userAgent);
+
+    if (isBot && activeJourneys.length > 0) {
+        // ALWAYS serve your standard $1099 Journey to Search Engines
+        // to prevent cheap prices from being indexed in Google Search Results.
+        assignedJourney = activeJourneys.find((j: any) => j.priceTier === "standard") || activeJourneys[0];
+    }
+    // ==========================================
+
+    // 3. Otherwise, assign humans randomly based on weights
+    else if (!assignedJourney && activeJourneys.length > 0) {
+        const totalWeight = activeJourneys.reduce((sum: number, j: any) => sum + j.weight, 0);
+        let random = Math.random() * totalWeight;
+        for (const j of activeJourneys) {
+            random -= j.weight;
+            if (random <= 0) {
+                assignedJourney = j;
+                break;
             }
         }
-
-        // Rewrite Request if assigned to a variant path
-        if (variant && variant.path !== pathname) {
-            const rewriteUrl = request.nextUrl.clone();
-            rewriteUrl.pathname = variant.path;
-
-            const response = NextResponse.rewrite(rewriteUrl);
-            response.cookies.set(cookieName, variant.id, { maxAge: 60 * 60 * 24 * 30 });
-            response.headers.set("x-ab-test-id", experiment.slug);
-            response.headers.set("x-ab-variant-id", variant.id);
-            return response;
-        }
-
-        // Control fallback
-        const response = NextResponse.next();
-        if (variant) {
-            response.cookies.set(cookieName, variant.id, { maxAge: 60 * 60 * 24 * 30 });
-            response.headers.set("x-ab-test-id", experiment.slug);
-            response.headers.set("x-ab-variant-id", variant.id);
-        }
-        return response;
     }
 
-    // Return the response with the refreshed auth cookie
-    return sessionResponse;
+    let response = NextResponse.next();
+
+    if (assignedJourney) {
+        // Rewrite root to their assigned Homepage
+        if (pathname === "/") {
+            const rewriteUrl = request.nextUrl.clone();
+            rewriteUrl.pathname = assignedJourney.homepage;
+            response = NextResponse.rewrite(rewriteUrl);
+        }
+
+        // Universal Checkout Router: Rewrite /buy to their assigned Checkout
+        if (pathname === "/buy") {
+            const rewriteUrl = request.nextUrl.clone();
+            rewriteUrl.pathname = assignedJourney.checkout;
+            response = NextResponse.rewrite(rewriteUrl);
+        }
+
+        // Set stateful cookies so frontend components know what to render
+        // Bots don't accept cookies, so this only applies to humans
+        if (!isBot) {
+            response.cookies.set("dp_journey_id", assignedJourney.id, { maxAge: 31536000 });
+            response.cookies.set("dp_journey_popup", assignedJourney.popup, { maxAge: 31536000 });
+            response.cookies.set("dp_journey_pricing", assignedJourney.priceTier, { maxAge: 31536000 });
+        }
+    } else {
+        // Ultimate Fallback if DB is empty — use current behavior
+        if (pathname === "/") {
+            const fallback = request.nextUrl.clone();
+            fallback.pathname = "/intro-offer";
+            response = NextResponse.rewrite(fallback);
+        }
+    }
+
+    // Attach auth cookies from updateSession
+    sessionResponse.cookies.getAll().forEach(c => response.cookies.set(c.name, c.value));
+    return response;
+}
+
+/**
+ * Helper: Get the variant path from a hardcoded mapping.
+ * Used for instant overrides via email links.
+ */
+function getVariantPath(currentPath: string, variant: string): string | null {
+    if (variant === "control" || variant === "a") {
+        return null;
+    }
+    const basePath = currentPath.replace(/\/$/, "");
+    const suffix = variant.replace("variant_", "");
+    return `${basePath}-${suffix}`;
 }
 
 export const config = {
     matcher: [
-        // Exclude API, Admin, Next Static files, AND media folders to save processing time
-        "/((?!_next/static|_next/image|images|videos|favicon.ico|api|admin).*)",
+        // Exclude Next Static files AND media folders to save processing time
+        "/((?!_next/static|_next/image|images|videos|favicon.ico).*)",
     ],
 };

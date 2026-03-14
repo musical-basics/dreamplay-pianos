@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { getCountdownDate, updateCountdownDate, getDiscountPopupStatus, updateDiscountPopupStatus, loginAdmin, getHomepageVersion, updateHomepageVersion, getHiddenProducts, updateHiddenProducts, getChatModel, updateChatModel, getChatKnowledge, updateChatKnowledge, getChatSuggestions, updateChatSuggestions, getPopupABConfig, updatePopupABConfig, getPopupABResults, getChatbotEnabled, updateChatbotEnabled } from '@/actions/admin-actions'
-import type { PopupABConfig } from '@/actions/admin-actions'
+import { getCountdownDate, updateCountdownDate, getDiscountPopupStatus, updateDiscountPopupStatus, loginAdmin, getHomepageVersion, updateHomepageVersion, getHiddenProducts, updateHiddenProducts, getChatModel, updateChatModel, getChatKnowledge, updateChatKnowledge, getChatSuggestions, updateChatSuggestions, getPopupABConfig, updatePopupABConfig, getPopupABResults, getChatbotEnabled, updateChatbotEnabled, getJourneyConfigs, updateJourneyConfigs } from '@/actions/admin-actions'
+import type { PopupABConfig, JourneyConfig } from '@/actions/admin-actions'
 
-type AdminTab = 'chatbot' | 'marketing' | 'other' | 'ab-config' | 'ab-results'
+type AdminTab = 'chatbot' | 'marketing' | 'other' | 'ab-config' | 'ab-results' | 'journeys'
 
 export default function AdminPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -52,6 +52,13 @@ export default function AdminPage() {
     const [saving, setSaving] = useState(false)
     const [message, setMessage] = useState('')
 
+    // Journey Engine State
+    const [journeys, setJourneys] = useState<JourneyConfig[]>([])
+    const [journeySaving, setJourneySaving] = useState(false)
+    const [journeyMessage, setJourneyMessage] = useState('')
+    const [journeyJsonMode, setJourneyJsonMode] = useState(false)
+    const [journeyJson, setJourneyJson] = useState('')
+
     useEffect(() => {
         const storedAuth = localStorage.getItem('admin_token')
         if (storedAuth === 'sorenkier_valid') {
@@ -78,7 +85,7 @@ export default function AdminPage() {
 
     async function loadData() {
         setLoading(true)
-        const [dateVal, discountVal, versionVal, hiddenVal, chatModelVal, chatKnowledgeVal, chatSuggestionsVal, abConfigVal, chatbotEnabledVal] = await Promise.all([
+        const [dateVal, discountVal, versionVal, hiddenVal, chatModelVal, chatKnowledgeVal, chatSuggestionsVal, abConfigVal, chatbotEnabledVal, journeyConfigsVal] = await Promise.all([
             getCountdownDate(),
             getDiscountPopupStatus(),
             getHomepageVersion(),
@@ -87,7 +94,8 @@ export default function AdminPage() {
             getChatKnowledge(),
             getChatSuggestions(),
             getPopupABConfig(),
-            getChatbotEnabled()
+            getChatbotEnabled(),
+            getJourneyConfigs()
         ])
 
         if (dateVal) setDate(dateVal)
@@ -101,6 +109,8 @@ export default function AdminPage() {
         setChatSuggestions(chatSuggestionsVal)
         setAbConfig(abConfigVal)
         setIsChatbotEnabled(chatbotEnabledVal)
+        setJourneys(journeyConfigsVal)
+        setJourneyJson(JSON.stringify(journeyConfigsVal, null, 2))
 
         // Fetch available models in background
         setModelsLoading(true)
@@ -309,6 +319,7 @@ export default function AdminPage() {
                         { key: 'ab-config' as AdminTab, label: '🧪 A/B Config' },
                         { key: 'ab-results' as AdminTab, label: '📊 A/B Results' },
                         { key: 'other' as AdminTab, label: '⚙️ Other' },
+                        { key: 'journeys' as AdminTab, label: '🚀 Journeys' },
                     ]).map(tab => (
                         <button
                             key={tab.key}
@@ -910,6 +921,165 @@ export default function AdminPage() {
                                 </div>
                             )
                         })}
+                    </div>
+                )}
+
+                {/* ─── TAB 6: JOURNEY ENGINE ─── */}
+                {activeTab === 'journeys' && (
+                    <div className="space-y-6">
+                        <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800 shadow-xl">
+                            <div className="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 className="font-medium text-white">Journey Engine</h3>
+                                    <p className="text-sm text-neutral-500">Configure full-funnel A/B journeys. Each journey controls homepage, checkout, popup, and pricing.</p>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => {
+                                            setJourneyJsonMode(!journeyJsonMode)
+                                            if (!journeyJsonMode) setJourneyJson(JSON.stringify(journeys, null, 2))
+                                        }}
+                                        className="text-xs text-blue-400 hover:text-blue-300 underline"
+                                    >
+                                        {journeyJsonMode ? 'Visual Editor' : 'JSON Editor'}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {journeyJsonMode ? (
+                                /* JSON Editor Mode */
+                                <div>
+                                    <textarea
+                                        value={journeyJson}
+                                        onChange={(e) => setJourneyJson(e.target.value)}
+                                        rows={15}
+                                        className="w-full bg-black border border-neutral-700 rounded-lg p-3 text-white text-sm outline-none focus:border-blue-500 font-mono leading-relaxed resize-y"
+                                        placeholder='[{"id":"journey_a","name":"Standard","weight":50,"homepage":"/premium-offer","checkout":"/customize","popup":"shipping","priceTier":"standard"}]'
+                                    />
+                                    <button
+                                        onClick={async () => {
+                                            try {
+                                                const parsed = JSON.parse(journeyJson)
+                                                setJourneys(parsed)
+                                                setJourneySaving(true)
+                                                const res = await updateJourneyConfigs(parsed)
+                                                setJourneyMessage(res.success ? 'Journeys saved from JSON!' : 'Failed to save')
+                                                setJourneySaving(false)
+                                                setTimeout(() => setJourneyMessage(''), 3000)
+                                            } catch {
+                                                setJourneyMessage('Invalid JSON')
+                                                setTimeout(() => setJourneyMessage(''), 3000)
+                                            }
+                                        }}
+                                        disabled={journeySaving}
+                                        className="mt-3 w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 text-white font-semibold py-3 rounded-lg transition-colors"
+                                    >
+                                        {journeySaving ? 'Saving...' : 'Save JSON'}
+                                    </button>
+                                </div>
+                            ) : (
+                                /* Visual Editor Mode */
+                                <div className="space-y-4">
+                                    {journeys.map((j, idx) => (
+                                        <div key={idx} className="bg-black/40 p-4 rounded-lg border border-neutral-800">
+                                            <div className="flex items-center justify-between mb-3">
+                                                <span className="text-xs font-mono text-blue-400">?journey={j.id}</span>
+                                                <button
+                                                    onClick={() => {
+                                                        const updated = journeys.filter((_, i) => i !== idx)
+                                                        setJourneys(updated)
+                                                    }}
+                                                    className="text-red-400 hover:text-red-300 text-xs"
+                                                >
+                                                    ✕ Remove
+                                                </button>
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Journey ID</label>
+                                                    <input value={j.id} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], id: e.target.value }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Name</label>
+                                                    <input value={j.name} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], name: e.target.value }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Weight (%)</label>
+                                                    <input type="number" value={j.weight} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], weight: parseInt(e.target.value) || 0 }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Homepage Path</label>
+                                                    <input value={j.homepage} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], homepage: e.target.value }; setJourneys(u) }} placeholder="/premium-offer" className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Checkout Path</label>
+                                                    <input value={j.checkout} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], checkout: e.target.value }; setJourneys(u) }} placeholder="/customize" className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Popup Type</label>
+                                                    <select value={j.popup} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], popup: e.target.value }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500">
+                                                        <option value="shipping">Free Shipping</option>
+                                                        <option value="pdf">PDF Guide</option>
+                                                        <option value="discount">$300 Off</option>
+                                                        <option value="discount_44">44% Off</option>
+                                                        <option value="accessory_25">25% Accessory</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-neutral-500 mb-1">Price Tier</label>
+                                                    <select value={j.priceTier} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], priceTier: e.target.value as 'standard' | 'sale' }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500">
+                                                        <option value="standard">Standard ($1,099/$1,199)</option>
+                                                        <option value="sale">Sale ($599/$649)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    <button
+                                        onClick={() => setJourneys([...journeys, { id: `journey_${String.fromCharCode(97 + journeys.length)}`, name: 'New Journey', weight: 50, homepage: '/premium-offer', checkout: '/customize', popup: 'shipping', priceTier: 'standard' }])}
+                                        className="w-full border border-dashed border-neutral-700 hover:border-neutral-500 text-neutral-500 hover:text-neutral-300 text-sm font-medium py-2.5 rounded-lg transition-colors"
+                                    >
+                                        + Add Journey
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Save */}
+                            <button
+                                onClick={async () => {
+                                    setJourneySaving(true)
+                                    setJourneyMessage('')
+                                    const res = await updateJourneyConfigs(journeys)
+                                    setJourneyMessage(res.success ? 'Journeys saved!' : 'Failed to save')
+                                    setJourneySaving(false)
+                                    setJourneyJson(JSON.stringify(journeys, null, 2))
+                                    setTimeout(() => setJourneyMessage(''), 3000)
+                                }}
+                                disabled={journeySaving}
+                                className={`w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 text-white font-semibold py-3 rounded-lg transition-colors ${journeyJsonMode ? 'hidden' : 'mt-4'}`}
+                            >
+                                {journeySaving ? 'Saving...' : 'Save Journeys'}
+                            </button>
+
+                            {journeyMessage && (
+                                <div className={`mt-3 p-3 rounded-lg text-sm text-center font-medium ${journeyMessage.includes('saved') || journeyMessage.includes('Saved') ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
+                                    {journeyMessage}
+                                </div>
+                            )}
+
+                            {/* How to Use */}
+                            <div className="mt-6 p-4 bg-neutral-950 rounded-lg border border-neutral-800">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-2">How It Works</h4>
+                                <ul className="text-xs text-neutral-500 space-y-1.5">
+                                    <li>• Each journey controls the full funnel: homepage → popup → pricing → checkout</li>
+                                    <li>• Traffic is split by weight (e.g., 50/50 for two journeys)</li>
+                                    <li>• Force a journey via ad URL: <code className="text-blue-400">dreamplaypianos.com?journey=journey_a</code></li>
+                                    <li>• Search engines always see the &quot;standard&quot; price tier (bot bypass)</li>
+                                    <li>• Journey ID is tracked in analytics for ROAS calculation</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 )}
 

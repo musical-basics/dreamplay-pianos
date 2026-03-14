@@ -70,9 +70,20 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const [widgetTimeLeft, setWidgetTimeLeft] = useState(12 * 60);
     const [showWidget, setShowWidget] = useState(true);
 
+    // Journey-Aware Pricing State
+    const [priceTier, setPriceTier] = useState<"standard" | "sale">("standard");
+
+    useEffect(() => {
+        // Read the pricing tier set by our middleware Journey Engine
+        const match = document.cookie.match(/(^| )dp_journey_pricing=([^;]+)/);
+        if (match) setPriceTier(match[2] as "standard" | "sale");
+    }, []);
+
     const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
     // --- DATA ---
+    const isSale = priceTier === "sale";
+
     const tiers = [
         {
             id: 'reservation',
@@ -111,9 +122,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             badge: null,
             title: "DreamPlay One",
             subtitle: "",
-            price: "$1,099",
+            price: isSale ? "$599" : "$1,099",
             retailPrice: null,
-            originalPrice: null,
+            originalPrice: isSale ? "$1,099" : null,
             description: "The DreamPlay One Keyboard. Available in DS5.5 or DS6.0. Choose Midnight Black or Pearl White.",
             includes: ["DreamPlay One Keyboard"],
             delivery: "Aug 2026",
@@ -127,9 +138,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             badge: "Most Popular",
             title: "DreamPlay Bundle",
             subtitle: "",
-            price: "$1,199",
+            price: isSale ? "$649" : "$1,199",
             retailPrice: null,
-            originalPrice: null,
+            originalPrice: isSale ? "$1,199" : null,
             description: "The complete DreamPlay experience. Keyboard, adjustable stand, responsive sustain pedal, and comfortable padded bench.",
             includes: ["DreamPlay One Keyboard", "Keyboard Stand", "Sustain Pedal", "Padded Bench"],
             delivery: "Aug 2026",
@@ -352,11 +363,19 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             const size = appState.size || 'DS6.0';
             const color = appState.color || 'Black';
 
+            // Journey-aware variant lookup:
+            // reservation/reserve50 are price-tier-agnostic, pull from VARIANT_MAP.reservation
+            // solo/full/signature pull from VARIANT_MAP[priceTier] (standard or sale)
+            let exactVariantId = "";
+            if (tierId === 'reservation' || tierId === 'reserve50') {
+                exactVariantId = VARIANT_MAP.reservation?.[tierId]?.[size]?.[color] || "";
+            } else {
+                exactVariantId = VARIANT_MAP[priceTier]?.[tierId]?.[size]?.[color] || "";
+            }
 
-            const exactVariantId = VARIANT_MAP[tierId]?.[size]?.[color];
             let checkoutUrl = "";
 
-            if (exactVariantId && exactVariantId.trim() !== '') {
+            if (exactVariantId && exactVariantId.trim() !== '' && !exactVariantId.startsWith('SALE_')) {
                 // SUCCESS: We have the exact variant ID! 
                 // We use a Shopify "Cart Permalink" format: /cart/{variant_id}:{quantity}
                 let permalink = `/cart/${exactVariantId}:1?note=checkout_source:customize`;

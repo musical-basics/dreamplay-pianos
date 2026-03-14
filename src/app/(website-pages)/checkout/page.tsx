@@ -54,6 +54,14 @@ function CheckoutContent() {
     const [activeImageIdx, setActiveImageIdx] = useState(0);
     const [isCheckingOut, setIsCheckingOut] = useState(false);
 
+    // Journey-Aware Pricing
+    const [priceTier, setPriceTier] = useState<"standard" | "sale">("standard");
+
+    useEffect(() => {
+        const match = document.cookie.match(/(^| )dp_journey_pricing=([^;]+)/);
+        if (match) setPriceTier(match[2] as "standard" | "sale");
+    }, []);
+
     useEffect(() => {
         const promo = searchParams?.get("discount") || sessionStorage.getItem("dp_vip_discount");
         if (promo) setDiscountCode(promo);
@@ -69,9 +77,9 @@ function CheckoutContent() {
 
     const handleCheckout = () => {
         setIsCheckingOut(true);
-        const exactVariantId = VARIANT_MAP[tier]?.[size]?.[color];
+        const exactVariantId = VARIANT_MAP[priceTier]?.[tier]?.[size]?.[color] || "";
 
-        if (exactVariantId && exactVariantId.trim() !== '') {
+        if (exactVariantId && exactVariantId.trim() !== '' && !exactVariantId.startsWith('SALE_')) {
             let permalink = `/cart/${exactVariantId}:1?note=checkout_source:pdp`;
             if (discountCode) permalink += `&discount=${discountCode}`;
 

@@ -8,7 +8,7 @@ import { getDiscountPopupStatus } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 
-type PopupType = "none" | "shipping" | "pdf" | "discount";
+type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25";
 
 /** Safe analytics wrapper — won't crash if tracker is blocked or hasn't loaded */
 const trackPopup = (action: 'yes' | 'no', popupName: string) => {
@@ -41,12 +41,10 @@ export default function NewsletterPopup() {
     const abSettingsRef = useRef<ABSettings | null>(null);
 
     useEffect(() => {
-        const popupTimers: NodeJS.Timeout[] = [];
-        let qualifyTimer: NodeJS.Timeout | undefined;
-        let cancelled = false;
+        let popupTimer: NodeJS.Timeout | undefined;
 
         const checkStatus = async () => {
-            // If user is already mapped, skip A/B entirely
+            // If user is already mapped, skip popups entirely
             if (localStorage.getItem("dp_user_email")) return;
             if (localStorage.getItem("dp_v2_subscribed") === "true") return;
 
@@ -57,59 +55,28 @@ export default function NewsletterPopup() {
                 // proceed if admin check fails
             }
 
-            // ── A/B Assignment ──
-            try {
-                const res = await fetch('/api/popup-ab', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'assign' }),
-                });
-                const data = await res.json();
-                if (cancelled) return;
-                abBucketRef.current = data.bucket;
-                abSettingsRef.current = data.settings;
-            } catch (e) {
-                console.error('A/B assign failed, using defaults:', e);
-                abBucketRef.current = 'control';
-                abSettingsRef.current = { entries: [{ type: 'discount', delaySec: 30 }, { type: 'pdf', delaySec: 100 }, { type: 'shipping', delaySec: 180 }] };
-            }
+            // ── Journey-Aware Popup Assignment ──
+            // Read the popup type assigned to this user's Journey from the middleware cookie
+            const match = document.cookie.match(/(^| )dp_journey_popup=([^;]+)/);
+            const assignedPopup = (match ? match[2] : "pdf") as PopupType;
 
-            const settings = abSettingsRef.current!;
-            const bucket = abBucketRef.current!;
+            // Store for A/B conversion tracking
+            abBucketRef.current = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)?.[2] || 'default';
 
-            // ── 10-Second Qualification ──
-            if (!sessionStorage.getItem('dp_ab_qualified')) {
-                qualifyTimer = setTimeout(() => {
-                    if (sessionStorage.getItem('dp_ab_qualified')) return;
-                    sessionStorage.setItem('dp_ab_qualified', 'true');
-                    fetch('/api/popup-ab', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ action: 'qualify', bucket }),
-                    }).catch(() => { });
-                }, 10000);
-            }
+            if (localStorage.getItem(`dp_v2_${assignedPopup}_seen`) === 'true') return;
 
-            // ── Timed Popup Triggers ──
-            for (const entry of settings.entries) {
-                const popupType = entry.type as PopupType;
-                if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') continue;
-
-                const timer = setTimeout(() => {
-                    if (localStorage.getItem('dp_v2_subscribed') === 'true') return;
-                    if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') return;
-                    setActivePopup(popupType);
-                }, entry.delaySec * 1000);
-                popupTimers.push(timer);
-            }
+            // Show the assigned popup after 12 seconds
+            popupTimer = setTimeout(() => {
+                if (localStorage.getItem('dp_v2_subscribed') === 'true') return;
+                if (localStorage.getItem(`dp_v2_${assignedPopup}_seen`) === 'true') return;
+                setActivePopup(assignedPopup);
+            }, 12000);
         };
 
         checkStatus();
 
         return () => {
-            cancelled = true;
-            popupTimers.forEach(t => clearTimeout(t));
-            if (qualifyTimer) clearTimeout(qualifyTimer);
+            if (popupTimer) clearTimeout(popupTimer);
             if (pdfTimerRef.current) clearTimeout(pdfTimerRef.current);
         };
     }, []);
@@ -140,7 +107,7 @@ export default function NewsletterPopup() {
 
     /** Try to show the next unseen popup after a delay */
     const chainNextPopup = (excludeType: PopupType) => {
-        const types: PopupType[] = ["shipping", "pdf", "discount"];
+        const types: PopupType[] = ["shipping", "pdf", "discount", "discount_44", "accessory_25"];
         for (const t of types) {
             if (t === excludeType) continue;
             if (localStorage.getItem(`dp_v2_${t}_seen`) === "true") continue;
@@ -156,24 +123,20 @@ export default function NewsletterPopup() {
 
     const handleClose = () => {
         setErrorMsg("");
-        if (activePopup === "shipping") {
-            trackPopup('no', 'free_shipping');
-            localStorage.setItem("dp_v2_shipping_seen", "true");
+        const popupTrackNames: Record<string, string> = {
+            shipping: 'free_shipping',
+            pdf: 'hand_size',
+            discount: 'discount_300',
+            discount_44: 'discount_44',
+            accessory_25: 'accessory_25',
+        };
+        const trackName = popupTrackNames[activePopup];
+        if (trackName) {
+            trackPopup('no', trackName);
+            localStorage.setItem(`dp_v2_${activePopup}_seen`, "true");
             setActivePopup("none");
             setIsSubmitted("none");
-            chainNextPopup("shipping");
-        } else if (activePopup === "pdf") {
-            trackPopup('no', 'hand_size');
-            localStorage.setItem("dp_v2_pdf_seen", "true");
-            setActivePopup("none");
-            setIsSubmitted("none");
-            chainNextPopup("pdf");
-        } else if (activePopup === "discount") {
-            trackPopup('no', 'discount_300');
-            localStorage.setItem("dp_v2_discount_seen", "true");
-            setActivePopup("none");
-            setIsSubmitted("none");
-            chainNextPopup("discount");
+            chainNextPopup(activePopup);
         } else {
             setActivePopup("none");
             setIsSubmitted("none");
@@ -188,7 +151,14 @@ export default function NewsletterPopup() {
         const currentOffer = activePopup;
 
         try {
-            const tag = currentOffer === "shipping" ? "Free Shipping Lead" : currentOffer === "discount" ? "$300 Off Lead" : "Hand Guide Download";
+            const tagMap: Record<string, string> = {
+                shipping: "Free Shipping Lead",
+                discount: "$300 Off Lead",
+                discount_44: "44% Off Lead",
+                accessory_25: "25% Accessory Lead",
+                pdf: "Hand Guide Download",
+            };
+            const tag = tagMap[currentOffer] || "Hand Guide Download";
             const tempSession = localStorage.getItem("dp_temp_session") || undefined;
 
             const res = await subscribeToNewsletter({
@@ -260,15 +230,21 @@ export default function NewsletterPopup() {
                             <div className="mx-auto bg-white/5 border border-white/10 w-14 h-14 rounded-none flex items-center justify-center mb-6">
                                 {activePopup === "shipping" ? (
                                     <Package className="text-white" size={24} strokeWidth={1.5} />
-                                ) : activePopup === "discount" ? (
+                                ) : activePopup === "discount" || activePopup === "discount_44" ? (
                                     <DollarSign className="text-white" size={24} strokeWidth={1.5} />
+                                ) : activePopup === "accessory_25" ? (
+                                    <Package className="text-white" size={24} strokeWidth={1.5} />
                                 ) : (
                                     <FileText className="text-white" size={24} strokeWidth={1.5} />
                                 )}
                             </div>
 
                             <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">
-                                {activePopup === "shipping" ? "Waitlist Exclusive" : activePopup === "discount" ? "Founder's Batch" : "Free Resource"}
+                                {activePopup === "shipping" ? "Waitlist Exclusive"
+                                    : activePopup === "discount" ? "Founder's Batch"
+                                        : activePopup === "discount_44" ? "Limited Time Offer"
+                                            : activePopup === "accessory_25" ? "Bundle & Save"
+                                                : "Free Resource"}
                             </p>
 
                             <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
@@ -276,7 +252,11 @@ export default function NewsletterPopup() {
                                     ? "Unlock Free Global Shipping."
                                     : activePopup === "discount"
                                         ? "Lock in Founder's Pricing."
-                                        : "Are standard keys holding you back?"}
+                                        : activePopup === "discount_44"
+                                            ? "Get 44% Off Today."
+                                            : activePopup === "accessory_25"
+                                                ? "25% Off All Accessories."
+                                                : "Are standard keys holding you back?"}
                             </h2>
 
                             <p className="text-white/60 font-sans text-sm leading-relaxed">
@@ -284,7 +264,11 @@ export default function NewsletterPopup() {
                                     ? "Join our VIP list and get a Free Shipping Pass applied to your next reservation. Limited availability."
                                     : activePopup === "discount"
                                         ? "Enter your email to secure early-adopter pricing for the DreamPlay One Founder's Batch, shipping August 2026."
-                                        : "Enter your email to instantly download our Hand-Measuring Guide to see exactly which piano size will help you the most."}
+                                        : activePopup === "discount_44"
+                                            ? "Enter your email now to unlock an exclusive 44% discount on the DreamPlay One. This offer won't last."
+                                            : activePopup === "accessory_25"
+                                                ? "Enter your email to get 25% off our stand, pedal, and bench bundle when you order with your DreamPlay One."
+                                                : "Enter your email to instantly download our Hand-Measuring Guide to see exactly which piano size will help you the most."}
                             </p>
                         </div>
 
@@ -315,7 +299,11 @@ export default function NewsletterPopup() {
                                         ? "Get Free Shipping Pass"
                                         : activePopup === "discount"
                                             ? "Secure My Spot"
-                                            : "Get Free PDF Guide"}
+                                            : activePopup === "discount_44"
+                                                ? "Claim 44% Off"
+                                                : activePopup === "accessory_25"
+                                                    ? "Get 25% Off Accessories"
+                                                    : "Get Free PDF Guide"}
                             </button>
 
                             <button
@@ -330,7 +318,7 @@ export default function NewsletterPopup() {
                             </p>
                         </form>
                     </>
-                ) : isSubmitted === "shipping" || isSubmitted === "discount" ? (
+                ) : isSubmitted === "shipping" || isSubmitted === "discount" || isSubmitted === "discount_44" || isSubmitted === "accessory_25" ? (
                     /* ── Shipping / Discount Success: Check your email ── */
                     <div className="text-center py-6">
                         <div className="mx-auto bg-white border border-white/20 w-16 h-16 rounded-none flex items-center justify-center mb-6">
@@ -340,7 +328,11 @@ export default function NewsletterPopup() {
                         <p className="text-white/60 font-sans text-sm mb-8 max-w-xs mx-auto leading-relaxed">
                             {isSubmitted === "discount"
                                 ? "We just sent you an email with your exclusive $300 discount code. Use it at checkout to save on any DreamPlay keyboard or bundle."
-                                : "We just sent you an email with instructions to unlock your VIP Free Shipping Pass. Create your account to claim it."
+                                : isSubmitted === "discount_44"
+                                    ? "We just sent you an email with your exclusive 44% discount code. Use it at checkout to save on any DreamPlay keyboard."
+                                    : isSubmitted === "accessory_25"
+                                        ? "We just sent you an email with your exclusive 25% accessory discount. Use it at checkout with your DreamPlay order."
+                                        : "We just sent you an email with instructions to unlock your VIP Free Shipping Pass. Create your account to claim it."
                             }
                         </p>
                         <button

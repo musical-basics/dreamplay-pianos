@@ -636,3 +636,55 @@ export async function getPopupABResults() {
         return { summary: [], sessions: [] }
     }
 }
+
+// ─── Journey Engine Types ───
+
+export type JourneyConfig = {
+    id: string;          // e.g., "journey_a" — also used as the ?journey= URL param for ads
+    name: string;        // e.g., "High Ticket Premium"
+    weight: number;      // Traffic percentage (e.g., 50)
+    homepage: string;    // e.g., "/premium-offer"
+    checkout: string;    // e.g., "/customize"
+    popup: string;       // e.g., "discount", "shipping", "discount_44", "pdf"
+    priceTier: "standard" | "sale"; // "standard" = $1099, "sale" = $599
+};
+
+export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
+    try {
+        const { data, error } = await supabase
+            .from('admin_variables')
+            .select('value')
+            .eq('key', 'journey_configs')
+            .single();
+
+        if (error) {
+            if (error.code === 'PGRST116') return [];
+            console.error('Error fetching journey configs:', error);
+            return [];
+        }
+
+        return JSON.parse(data?.value || '[]');
+    } catch (error) {
+        console.error('Failed to get journey configs:', error);
+        return [];
+    }
+}
+
+export async function updateJourneyConfigs(journeys: JourneyConfig[]) {
+    try {
+        const { error } = await supabase.from('admin_variables').upsert({
+            key: 'journey_configs',
+            value: JSON.stringify(journeys),
+            updated_at: new Date().toISOString()
+        });
+
+        if (error) {
+            console.error('Error updating journey configs:', error);
+            throw new Error(error.message);
+        }
+
+        return { success: true };
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+}
