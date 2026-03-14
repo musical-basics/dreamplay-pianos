@@ -983,7 +983,7 @@ export default function AdminPage() {
                                     {journeys.map((j, idx) => (
                                         <div key={idx} className="bg-black/40 p-4 rounded-lg border border-neutral-800">
                                             <div className="flex items-center justify-between mb-3">
-                                                <span className="text-xs font-mono text-blue-400">?journey={j.id}</span>
+                                                <a href={`https://dreamplaypianos.com/?journey=${j.id}`} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2">dreamplaypianos.com/?journey={j.id}</a>
                                                 <button
                                                     onClick={() => {
                                                         const updated = journeys.filter((_, i) => i !== idx)
