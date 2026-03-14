@@ -37,55 +37,84 @@ export default function NewsletterPopup() {
 
     useEffect(() => {
         const initPopups = async () => {
+            console.log('[PopupDebug] initPopups() called');
+
             // If user is already mapped, skip popups entirely
-            if (localStorage.getItem("dp_user_email")) return;
-            if (localStorage.getItem("dp_v2_subscribed") === "true") return;
+            if (localStorage.getItem("dp_user_email")) {
+                console.log('[PopupDebug] SKIPPED: dp_user_email found in localStorage');
+                return;
+            }
+            if (localStorage.getItem("dp_v2_subscribed") === "true") {
+                console.log('[PopupDebug] SKIPPED: dp_v2_subscribed=true in localStorage');
+                return;
+            }
 
             try {
                 const status = await getDiscountPopupStatus();
-                if (String(status) !== 'true') return;
+                console.log('[PopupDebug] getDiscountPopupStatus() returned:', status, '(type:', typeof status, ')');
+                if (String(status) !== 'true') {
+                    console.log('[PopupDebug] SKIPPED: discount popup status is not true');
+                    return;
+                }
             } catch (e) {
-                // proceed if admin check fails
+                console.log('[PopupDebug] getDiscountPopupStatus() threw error, proceeding anyway:', e);
             }
 
             // Store journey ID for A/B conversion tracking
             const journeyMatch = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
             abBucketRef.current = journeyMatch?.[2] || 'default';
+            console.log('[PopupDebug] dp_journey_id cookie:', journeyMatch?.[2] || 'NOT FOUND');
 
             // Fetch journey popups
             let popups: JourneyPopup[] = [];
             if (journeyMatch?.[2]) {
                 try {
                     const journey = await getJourneyById(journeyMatch[2]);
+                    console.log('[PopupDebug] getJourneyById() returned:', JSON.stringify(journey?.popups));
                     if (journey?.popups?.length) {
                         popups = journey.popups;
                     }
                 } catch (e) {
-                    // fallback to default
+                    console.log('[PopupDebug] getJourneyById() threw error:', e);
                 }
             }
 
             // Fallback: if no journey popups configured, use a single PDF popup at 12s
             if (popups.length === 0) {
                 popups = [{ type: "pdf", delaySeconds: 12 }];
+                console.log('[PopupDebug] Using fallback popup (pdf at 12s)');
             }
 
             journeyPopupsRef.current = popups;
+            console.log('[PopupDebug] Scheduling', popups.length, 'popups:', JSON.stringify(popups));
 
             // Schedule each popup with its delay
             popups.forEach((popup, index) => {
                 const popupType = popup.type as PopupType;
-                if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') return;
+                if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') {
+                    console.log(`[PopupDebug] SKIPPED popup ${index} (${popupType}): already seen`);
+                    return;
+                }
 
+                console.log(`[PopupDebug] Scheduling popup ${index}: ${popupType} at ${popup.delaySeconds}s`);
                 const timer = setTimeout(() => {
-                    if (localStorage.getItem('dp_v2_subscribed') === 'true') return;
-                    if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') return;
+                    console.log(`[PopupDebug] Timer fired for popup ${index}: ${popupType}`);
+                    if (localStorage.getItem('dp_v2_subscribed') === 'true') {
+                        console.log(`[PopupDebug] SKIPPED: user subscribed during wait`);
+                        return;
+                    }
+                    if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') {
+                        console.log(`[PopupDebug] SKIPPED: popup ${popupType} marked seen during wait`);
+                        return;
+                    }
                     // Only show if no popup is currently active
                     setActivePopup(prev => {
                         if (prev === "none") {
+                            console.log(`[PopupDebug] SHOWING popup: ${popupType}`);
                             popupIndexRef.current = index;
                             return popupType;
                         }
+                        console.log(`[PopupDebug] SKIPPED: another popup (${prev}) is already active`);
                         return prev;
                     });
                 }, popup.delaySeconds * 1000);
