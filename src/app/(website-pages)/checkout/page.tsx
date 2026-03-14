@@ -240,13 +240,13 @@ function CheckoutContent() {
                                 <div className="relative flex items-center py-2 mb-4">
                                     <div className="flex-grow border-t border-neutral-300"></div>
                                     <span className="flex-shrink-0 mx-4 text-xs font-bold tracking-[0.1em] text-neutral-800 uppercase">
-                                        Bundle & Save
+                                        Reserve
                                     </span>
                                     <div className="flex-grow border-t border-neutral-300"></div>
                                 </div>
 
                                 <div className="space-y-3 mb-6">
-                                    {PACKAGES.map((option) => {
+                                    {displayPackages.map((option) => {
                                         const isSelected = tier === option.id;
                                         return (
                                             <label
