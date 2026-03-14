@@ -310,7 +310,17 @@ export default function LandingPage1() {
         const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)
         if (match) {
             getJourneyById(match[2]).then(journey => {
-                if (journey?.checkout) setCheckoutPath(journey.checkout)
+                if (!journey) return
+                if (journey.checkout && journey.checkout.trim()) {
+                    setCheckoutPath(journey.checkout)
+                } else if (journey.products?.length && journey.products[0].variantId) {
+                    // No checkout path → go directly to Shopify with the first product's variant
+                    const variantId = journey.products[0].variantId
+                    const discountCode = journey.products[0].discountCode
+                    let url = `https://dreamplay-pianos.myshopify.com/cart/${variantId}:1`
+                    if (discountCode) url += `?discount=${discountCode}`
+                    setCheckoutPath(url)
+                }
             })
         }
     }, [])
