@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { X, FileText, Package, DollarSign, CheckCircle2 } from "lucide-react";
 
-import { getDiscountPopupStatus } from "@/actions/admin-actions";
+import { getDiscountPopupStatus, getJourneyById } from "@/actions/admin-actions";
+import type { JourneyPopup } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 
@@ -17,33 +18,25 @@ const trackPopup = (action: 'yes' | 'no', popupName: string) => {
     }
 };
 
-interface ABEntry {
-    type: string;
-    delaySec: number;
-}
-
-interface ABSettings {
-    entries: ABEntry[];
-}
-
 export default function NewsletterPopup() {
     const [activePopup, setActivePopup] = useState<PopupType>("none");
     const [email, setEmail] = useState("");
     const [isSubmitted, setIsSubmitted] = useState<PopupType>("none");
     const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const pdfTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const popupTimersRef = useRef<NodeJS.Timeout[]>([]);
     const hasExitFired = useRef(false);
     const pathname = usePathname();
 
+    // Journey popup queue
+    const journeyPopupsRef = useRef<JourneyPopup[]>([]);
+    const popupIndexRef = useRef(0);
+
     // A/B test refs
     const abBucketRef = useRef<string | null>(null);
-    const abSettingsRef = useRef<ABSettings | null>(null);
 
     useEffect(() => {
-        let popupTimer: NodeJS.Timeout | undefined;
-
-        const checkStatus = async () => {
+        const initPopups = async () => {
             // If user is already mapped, skip popups entirely
             if (localStorage.getItem("dp_user_email")) return;
             if (localStorage.getItem("dp_v2_subscribed") === "true") return;
@@ -55,36 +48,61 @@ export default function NewsletterPopup() {
                 // proceed if admin check fails
             }
 
-            // ── Journey-Aware Popup Assignment ──
-            // Read the popup type assigned to this user's Journey from the middleware cookie
-            const match = document.cookie.match(/(^| )dp_journey_popup=([^;]+)/);
-            const assignedPopup = (match ? match[2] : "pdf") as PopupType;
+            // Store journey ID for A/B conversion tracking
+            const journeyMatch = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
+            abBucketRef.current = journeyMatch?.[2] || 'default';
 
-            // Store for A/B conversion tracking
-            abBucketRef.current = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)?.[2] || 'default';
+            // Fetch journey popups
+            let popups: JourneyPopup[] = [];
+            if (journeyMatch?.[2]) {
+                try {
+                    const journey = await getJourneyById(journeyMatch[2]);
+                    if (journey?.popups?.length) {
+                        popups = journey.popups;
+                    }
+                } catch (e) {
+                    // fallback to default
+                }
+            }
 
-            if (localStorage.getItem(`dp_v2_${assignedPopup}_seen`) === 'true') return;
+            // Fallback: if no journey popups configured, use a single PDF popup at 12s
+            if (popups.length === 0) {
+                popups = [{ type: "pdf", delaySeconds: 12 }];
+            }
 
-            // Show the assigned popup after 12 seconds
-            popupTimer = setTimeout(() => {
-                if (localStorage.getItem('dp_v2_subscribed') === 'true') return;
-                if (localStorage.getItem(`dp_v2_${assignedPopup}_seen`) === 'true') return;
-                setActivePopup(assignedPopup);
-            }, 12000);
+            journeyPopupsRef.current = popups;
+
+            // Schedule each popup with its delay
+            popups.forEach((popup, index) => {
+                const popupType = popup.type as PopupType;
+                if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') return;
+
+                const timer = setTimeout(() => {
+                    if (localStorage.getItem('dp_v2_subscribed') === 'true') return;
+                    if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') return;
+                    // Only show if no popup is currently active
+                    setActivePopup(prev => {
+                        if (prev === "none") {
+                            popupIndexRef.current = index;
+                            return popupType;
+                        }
+                        return prev;
+                    });
+                }, popup.delaySeconds * 1000);
+
+                popupTimersRef.current.push(timer);
+            });
         };
 
-        checkStatus();
+        initPopups();
 
         return () => {
-            if (popupTimer) clearTimeout(popupTimer);
-            if (pdfTimerRef.current) clearTimeout(pdfTimerRef.current);
+            popupTimersRef.current.forEach(t => clearTimeout(t));
         };
     }, []);
 
     // --- EXIT-INTENT POPUP ---
     useEffect(() => {
-        // Show first unseen popup when user moves to leave the page
-
         const excludedPaths = ["/vip", "/login", "/register", "/activate", "/forgot-password", "/reset-password"];
         if (excludedPaths.includes(pathname)) return;
 
@@ -96,7 +114,11 @@ export default function NewsletterPopup() {
             if (isSubscribed) return;
 
             hasExitFired.current = true;
-            setActivePopup("shipping");
+            // Show first unseen popup from journey, or shipping as fallback
+            const unseen = journeyPopupsRef.current.find(p =>
+                localStorage.getItem(`dp_v2_${p.type}_seen`) !== 'true'
+            );
+            setActivePopup((unseen?.type || "shipping") as PopupType);
         };
 
         document.documentElement.addEventListener("mouseleave", handleMouseLeave);
@@ -105,18 +127,21 @@ export default function NewsletterPopup() {
         };
     }, [pathname]);
 
-    /** Try to show the next unseen popup after a delay */
-    const chainNextPopup = (excludeType: PopupType) => {
-        const types: PopupType[] = ["shipping", "pdf", "discount", "discount_44", "accessory_25"];
-        for (const t of types) {
-            if (t === excludeType) continue;
-            if (localStorage.getItem(`dp_v2_${t}_seen`) === "true") continue;
-            if (pdfTimerRef.current) clearTimeout(pdfTimerRef.current);
-            pdfTimerRef.current = setTimeout(() => {
+    /** Show the next unseen popup from the journey queue after closing current one */
+    const showNextPopup = (closedType: PopupType) => {
+        const popups = journeyPopupsRef.current;
+        const closedIndex = popups.findIndex(p => p.type === closedType);
+        // Find next unseen popup after the closed one
+        for (let i = closedIndex + 1; i < popups.length; i++) {
+            const nextType = popups[i].type as PopupType;
+            if (localStorage.getItem(`dp_v2_${nextType}_seen`) === 'true') continue;
+            // Show after a short delay (5s after close)
+            const timer = setTimeout(() => {
                 if (localStorage.getItem("dp_v2_subscribed") !== "true") {
-                    setActivePopup(t);
+                    setActivePopup(nextType);
                 }
-            }, 22000);
+            }, 5000);
+            popupTimersRef.current.push(timer);
             break;
         }
     };
@@ -136,7 +161,7 @@ export default function NewsletterPopup() {
             localStorage.setItem(`dp_v2_${activePopup}_seen`, "true");
             setActivePopup("none");
             setIsSubmitted("none");
-            chainNextPopup(activePopup);
+            showNextPopup(activePopup);
         } else {
             setActivePopup("none");
             setIsSubmitted("none");

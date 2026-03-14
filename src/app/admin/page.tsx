@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { getCountdownDate, updateCountdownDate, getDiscountPopupStatus, updateDiscountPopupStatus, loginAdmin, getHomepageVersion, updateHomepageVersion, getHiddenProducts, updateHiddenProducts, getChatModel, updateChatModel, getChatKnowledge, updateChatKnowledge, getChatSuggestions, updateChatSuggestions, getPopupABConfig, updatePopupABConfig, getPopupABResults, getChatbotEnabled, updateChatbotEnabled, getJourneyConfigs, updateJourneyConfigs } from '@/actions/admin-actions'
-import type { PopupABConfig, JourneyConfig, JourneyProduct } from '@/actions/admin-actions'
+import type { PopupABConfig, JourneyConfig, JourneyProduct, JourneyPopup } from '@/actions/admin-actions'
 
 type AdminTab = 'chatbot' | 'marketing' | 'other' | 'ab-config' | 'ab-results' | 'journeys'
 
@@ -954,7 +954,7 @@ export default function AdminPage() {
                                         onChange={(e) => setJourneyJson(e.target.value)}
                                         rows={15}
                                         className="w-full bg-black border border-neutral-700 rounded-lg p-3 text-white text-sm outline-none focus:border-blue-500 font-mono leading-relaxed resize-y"
-                                        placeholder='[{"id":"journey_a","name":"Standard","weight":50,"homepage":"/premium-offer","checkout":"/customize","popup":"shipping","products":[{"id":"full","price":"$1,199","badge":"Most Popular"},{"id":"solo","price":"$1,099"}]}]'
+                                        placeholder='[{"id":"journey_a","name":"Standard","weight":50,"homepage":"/premium-offer","checkout":"/customize","popups":[{"type":"pdf","delaySeconds":12}],"products":[{"id":"full","price":"$1,199"}]}]'
                                     />
                                     <button
                                         onClick={async () => {
@@ -1015,16 +1015,54 @@ export default function AdminPage() {
                                                     <label className="block text-xs text-neutral-500 mb-1">Checkout Path</label>
                                                     <input value={j.checkout} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], checkout: e.target.value }; setJourneys(u) }} placeholder="/customize" className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
                                                 </div>
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Popup Type</label>
-                                                    <select value={j.popup} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], popup: e.target.value }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500">
-                                                        <option value="shipping">Free Shipping</option>
-                                                        <option value="pdf">PDF Guide</option>
-                                                        <option value="discount">$300 Off</option>
-                                                        <option value="discount_44">44% Off</option>
-                                                        <option value="accessory_25">25% Accessory</option>
-                                                    </select>
+                                            </div>
+
+                                            {/* Popups Editor */}
+                                            <div className="mt-3 pt-3 border-t border-neutral-800">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <span className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Popups</span>
+                                                    {(j.popups || []).length < 10 && (
+                                                        <button
+                                                            onClick={() => {
+                                                                const u = [...journeys]
+                                                                const popups = [...(u[idx].popups || [])]
+                                                                popups.push({ type: 'pdf', delaySeconds: 12 })
+                                                                u[idx] = { ...u[idx], popups }
+                                                                setJourneys(u)
+                                                            }}
+                                                            className="text-xs text-blue-400 hover:text-blue-300"
+                                                        >
+                                                            + Add Popup ({(j.popups || []).length}/10)
+                                                        </button>
+                                                    )}
                                                 </div>
+                                                {(j.popups || []).length === 0 && (
+                                                    <p className="text-xs text-neutral-600 italic">No popups — will default to PDF at 12s</p>
+                                                )}
+                                                {(j.popups || []).map((popup: JourneyPopup, pIdx: number) => (
+                                                    <div key={pIdx} className="grid grid-cols-3 gap-2 mb-2 items-end">
+                                                        <div>
+                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Type</label>
+                                                            <select value={popup.type} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p[pIdx] = { ...p[pIdx], type: e.target.value }; u[idx] = { ...u[idx], popups: p }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500">
+                                                                <option value="shipping">Free Shipping</option>
+                                                                <option value="pdf">PDF Guide</option>
+                                                                <option value="discount">$300 Off</option>
+                                                                <option value="discount_44">44% Off</option>
+                                                                <option value="accessory_25">25% Accessory</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Delay (seconds)</label>
+                                                            <input type="number" value={popup.delaySeconds} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p[pIdx] = { ...p[pIdx], delaySeconds: parseInt(e.target.value) || 0 }; u[idx] = { ...u[idx], popups: p }; setJourneys(u) }} placeholder="12" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
+                                                        </div>
+                                                        <button
+                                                            onClick={() => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p.splice(pIdx, 1); u[idx] = { ...u[idx], popups: p }; setJourneys(u) }}
+                                                            className="text-red-400 hover:text-red-300 text-xs pb-1"
+                                                        >
+                                                            ✕
+                                                        </button>
+                                                    </div>
+                                                ))}
                                             </div>
 
                                             {/* Products Editor */}
@@ -1084,7 +1122,7 @@ export default function AdminPage() {
                                     ))}
 
                                     <button
-                                        onClick={() => setJourneys([...journeys, { id: `journey_${String.fromCharCode(97 + journeys.length)}`, name: 'New Journey', weight: 50, homepage: '/premium-offer', checkout: '/customize', popup: 'shipping', products: [{ id: 'full', price: '$1,199', badge: 'Most Popular' }, { id: 'solo', price: '$1,099' }] }])}
+                                        onClick={() => setJourneys([...journeys, { id: `journey_${String.fromCharCode(97 + journeys.length)}`, name: 'New Journey', weight: 50, homepage: '/premium-offer', checkout: '/customize', popups: [{ type: 'pdf', delaySeconds: 12 }], products: [{ id: 'full', price: '$1,199', badge: 'Most Popular' }, { id: 'solo', price: '$1,099' }] }])}
                                         className="w-full border border-dashed border-neutral-700 hover:border-neutral-500 text-neutral-500 hover:text-neutral-300 text-sm font-medium py-2.5 rounded-lg transition-colors"
                                     >
                                         + Add Journey

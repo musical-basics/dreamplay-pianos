@@ -649,13 +649,18 @@ export type JourneyProduct = {
     variantId?: string;       // Shopify variant ID override for checkout URL
 };
 
+export type JourneyPopup = {
+    type: string;           // "shipping", "pdf", "discount", "discount_44", "accessory_25"
+    delaySeconds: number;   // seconds after page load to show this popup
+};
+
 export type JourneyConfig = {
     id: string;          // e.g., "journey_a" — also used as the ?journey= URL param for ads
     name: string;        // e.g., "High Ticket Premium"
     weight: number;      // Traffic percentage (e.g., 50)
     homepage: string;    // e.g., "/premium-offer"
     checkout: string;    // e.g., "/customize"
-    popup: string;       // e.g., "discount", "shipping", "discount_44", "pdf"
+    popups: JourneyPopup[]; // Ordered list of popups with timing (up to 10)
     products: JourneyProduct[]; // Which products to show + at what price
 };
 
