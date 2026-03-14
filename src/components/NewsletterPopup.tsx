@@ -143,6 +143,7 @@ export default function NewsletterPopup() {
             if (isSubscribed) return;
 
             hasExitFired.current = true;
+            console.log('[PopupDebug] Exit-intent fired');
             // Show first unseen popup from journey, or shipping as fallback
             const unseen = journeyPopupsRef.current.find(p =>
                 localStorage.getItem(`dp_v2_${p.type}_seen`) !== 'true'
@@ -150,8 +151,13 @@ export default function NewsletterPopup() {
             setActivePopup((unseen?.type || "shipping") as PopupType);
         };
 
-        document.documentElement.addEventListener("mouseleave", handleMouseLeave);
+        // Delay attaching exit-intent by 5s to prevent false triggers on page load/refresh
+        const attachTimer = setTimeout(() => {
+            document.documentElement.addEventListener("mouseleave", handleMouseLeave);
+        }, 5000);
+
         return () => {
+            clearTimeout(attachTimer);
             document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
         };
     }, [pathname]);
