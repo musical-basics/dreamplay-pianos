@@ -9,7 +9,7 @@ import type { JourneyPopup } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 
-type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25";
+type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping";
 
 /** Safe analytics wrapper — won't crash if tracker is blocked or hasn't loaded */
 const trackPopup = (action: 'yes' | 'no', popupName: string) => {
@@ -171,6 +171,8 @@ export default function NewsletterPopup() {
             discount: 'discount_300',
             discount_44: 'discount_44',
             accessory_25: 'accessory_25',
+            store_credit_25: 'store_credit_25',
+            priority_shipping: 'priority_shipping',
         };
         const trackName = popupTrackNames[activePopup];
         if (trackName) {
@@ -269,12 +271,12 @@ export default function NewsletterPopup() {
                     <>
                         <div className="mb-8 text-center">
                             <div className="mx-auto bg-white/5 border border-white/10 w-14 h-14 rounded-none flex items-center justify-center mb-6">
-                                {activePopup === "shipping" ? (
+                                {activePopup === "shipping" || activePopup === "priority_shipping" ? (
                                     <Package className="text-white" size={24} strokeWidth={1.5} />
                                 ) : activePopup === "discount" || activePopup === "discount_44" ? (
                                     <DollarSign className="text-white" size={24} strokeWidth={1.5} />
-                                ) : activePopup === "accessory_25" ? (
-                                    <Package className="text-white" size={24} strokeWidth={1.5} />
+                                ) : activePopup === "accessory_25" || activePopup === "store_credit_25" ? (
+                                    <DollarSign className="text-white" size={24} strokeWidth={1.5} />
                                 ) : (
                                     <FileText className="text-white" size={24} strokeWidth={1.5} />
                                 )}
@@ -285,7 +287,9 @@ export default function NewsletterPopup() {
                                     : activePopup === "discount" ? "Founder's Batch"
                                         : activePopup === "discount_44" ? "Limited Time Offer"
                                             : activePopup === "accessory_25" ? "Bundle & Save"
-                                                : "Free Resource"}
+                                                : activePopup === "store_credit_25" ? "Exclusive Offer"
+                                                    : activePopup === "priority_shipping" ? "Priority Access"
+                                                        : "Free Resource"}
                             </p>
 
                             <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
@@ -297,7 +301,11 @@ export default function NewsletterPopup() {
                                             ? "Get 44% Off Today."
                                             : activePopup === "accessory_25"
                                                 ? "25% Off All Accessories."
-                                                : "Are standard keys holding you back?"}
+                                                : activePopup === "store_credit_25"
+                                                    ? "Get $25 Store Credit."
+                                                    : activePopup === "priority_shipping"
+                                                        ? "Get Priority Shipping."
+                                                        : "Are standard keys holding you back?"}
                             </h2>
 
                             <p className="text-white/60 font-sans text-sm leading-relaxed">
@@ -309,7 +317,11 @@ export default function NewsletterPopup() {
                                             ? "Enter your email now to unlock an exclusive 44% discount on the DreamPlay One. This offer won't last."
                                             : activePopup === "accessory_25"
                                                 ? "Enter your email to get 25% off our stand, pedal, and bench bundle when you order with your DreamPlay One."
-                                                : "Enter your email to instantly download our Hand-Measuring Guide to see exactly which piano size will help you the most."}
+                                                : activePopup === "store_credit_25"
+                                                    ? "Enter your email and we'll send you $25 off any piano accessory — bench, stand, or headphones."
+                                                    : activePopup === "priority_shipping"
+                                                        ? "Enter your email to get priority status for early shipping. Be among the first to receive your DreamPlay One."
+                                                        : "Enter your email to instantly download our Hand-Measuring Guide to see exactly which piano size will help you the most."}
                             </p>
                         </div>
 
@@ -344,7 +356,11 @@ export default function NewsletterPopup() {
                                                 ? "Claim 44% Off"
                                                 : activePopup === "accessory_25"
                                                     ? "Get 25% Off Accessories"
-                                                    : "Get Free PDF Guide"}
+                                                    : activePopup === "store_credit_25"
+                                                        ? "Claim My $25 Credit"
+                                                        : activePopup === "priority_shipping"
+                                                            ? "Get Priority Status"
+                                                            : "Get Free PDF Guide"}
                             </button>
 
                             <button
@@ -359,7 +375,7 @@ export default function NewsletterPopup() {
                             </p>
                         </form>
                     </>
-                ) : isSubmitted === "shipping" || isSubmitted === "discount" || isSubmitted === "discount_44" || isSubmitted === "accessory_25" ? (
+                ) : isSubmitted === "shipping" || isSubmitted === "discount" || isSubmitted === "discount_44" || isSubmitted === "accessory_25" || isSubmitted === "store_credit_25" || isSubmitted === "priority_shipping" ? (
                     /* ── Shipping / Discount Success: Check your email ── */
                     <div className="text-center py-6">
                         <div className="mx-auto bg-white border border-white/20 w-16 h-16 rounded-none flex items-center justify-center mb-6">
@@ -373,7 +389,11 @@ export default function NewsletterPopup() {
                                     ? "We just sent you an email with your exclusive 44% discount code. Use it at checkout to save on any DreamPlay keyboard."
                                     : isSubmitted === "accessory_25"
                                         ? "We just sent you an email with your exclusive 25% accessory discount. Use it at checkout with your DreamPlay order."
-                                        : "We just sent you an email with instructions to unlock your VIP Free Shipping Pass. Create your account to claim it."
+                                        : isSubmitted === "store_credit_25"
+                                            ? "Your $25 store credit has been reserved. We'll send the details to your email."
+                                            : isSubmitted === "priority_shipping"
+                                                ? "You're on the priority list for early shipping. We'll keep you updated."
+                                                : "We just sent you an email with instructions to unlock your VIP Free Shipping Pass. Create your account to claim it."
                             }
                         </p>
                         <button

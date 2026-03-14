@@ -983,7 +983,7 @@ export default function AdminPage() {
                                     {journeys.map((j, idx) => (
                                         <div key={idx} className="bg-black/40 p-4 rounded-lg border border-neutral-800">
                                             <div className="flex items-center justify-between mb-3">
-                                                <a href={`https://dreamplaypianos.com/?journey=${j.id}`} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2">dreamplaypianos.com/?journey={j.id}</a>
+                                                <a href={`https://dreamplaypianos.com/?journey=${j.id}`} className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2">dreamplaypianos.com/?journey={j.id}</a>
                                                 <button
                                                     onClick={() => {
                                                         const updated = journeys.filter((_, i) => i !== idx)
@@ -1049,6 +1049,8 @@ export default function AdminPage() {
                                                                 <option value="discount">$300 Off</option>
                                                                 <option value="discount_44">44% Off</option>
                                                                 <option value="accessory_25">25% Accessory</option>
+                                                                <option value="store_credit_25">$25 Store Credit</option>
+                                                                <option value="priority_shipping">Priority Shipping</option>
                                                             </select>
                                                         </div>
                                                         <div>
