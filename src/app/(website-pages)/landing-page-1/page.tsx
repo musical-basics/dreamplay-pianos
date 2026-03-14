@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
 import { syncHomepageAB } from "@/lib/homepage-ab"
 import { logEvent } from "@/lib/analytics"
+import { getJourneyById } from "@/actions/admin-actions"
 import {
     Check,
     Star,
@@ -289,6 +290,7 @@ export default function LandingPage1() {
     const [activeTestimonial, setActiveTestimonial] = useState(0)
     const [showSticky, setShowSticky] = useState(false)
     const [openAccordion, setOpenAccordion] = useState<number | null>(null)
+    const [checkoutPath, setCheckoutPath] = useState("/checkout")
     const buyBoxRef = useRef<HTMLElement>(null)
 
     /* Sticky bar on scroll */
@@ -301,6 +303,16 @@ export default function LandingPage1() {
     /* Sync homepage A/B cookie to localStorage */
     useEffect(() => {
         syncHomepageAB()
+    }, [])
+
+    /* Read journey checkout path from cookie */
+    useEffect(() => {
+        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)
+        if (match) {
+            getJourneyById(match[2]).then(journey => {
+                if (journey?.checkout) setCheckoutPath(journey.checkout)
+            })
+        }
     }, [])
 
     const trackCTA = (destination: string) => {
@@ -444,8 +456,8 @@ export default function LandingPage1() {
 
                         {/* CTA */}
                         <a
-                            href="/checkout"
-                            onClick={() => trackCTA("/checkout")}
+                            href={checkoutPath}
+                            onClick={() => trackCTA(checkoutPath)}
                             className="block w-full text-center bg-[#111111] text-white py-4 text-sm font-bold tracking-widest uppercase hover:bg-transparent hover:text-[#111111] transition-all duration-200"
                             style={{ border: "2px solid #111111" }}
                         >
