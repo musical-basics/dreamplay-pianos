@@ -433,10 +433,10 @@ export default function LandingPage1() {
                             <p className="text-sm text-stone-500">
                                 Locks in{" "}
                                 <span className="font-bold text-stone-800">
-                                    $1,099 Founder&apos;s Price
+                                    $699 Founder&apos;s Price
                                 </span>
                                 <span className="line-through text-stone-400 ml-2">
-                                    $1,499 MSRP
+                                    $1,099 MSRP
                                 </span>
                             </p>
                         </div>
@@ -1004,7 +1004,7 @@ export default function LandingPage1() {
                                 $99
                             </span>
                             <span className="text-stone-400 text-xs">
-                                locks in $1,099
+                                locks in $699
                             </span>
                         </div>
                     </div>
