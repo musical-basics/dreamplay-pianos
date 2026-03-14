@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import { SpecialOfferHeader } from "@/components/special-offer/header"
 import { syncHomepageAB } from "@/lib/homepage-ab"
 import { logEvent } from "@/lib/analytics"
-import { getJourneyById } from "@/actions/admin-actions"
+import { useJourneyCheckout } from "@/hooks/use-journey-checkout"
 import {
     Check,
     Star,
@@ -290,7 +290,7 @@ export default function LandingPage1() {
     const [activeTestimonial, setActiveTestimonial] = useState(0)
     const [showSticky, setShowSticky] = useState(false)
     const [openAccordion, setOpenAccordion] = useState<number | null>(null)
-    const [checkoutPath, setCheckoutPath] = useState("/checkout")
+    const checkoutPath = useJourneyCheckout()
     const buyBoxRef = useRef<HTMLElement>(null)
 
     /* Sticky bar on scroll */
@@ -303,26 +303,6 @@ export default function LandingPage1() {
     /* Sync homepage A/B cookie to localStorage */
     useEffect(() => {
         syncHomepageAB()
-    }, [])
-
-    /* Read journey checkout path from cookie */
-    useEffect(() => {
-        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)
-        if (match) {
-            getJourneyById(match[2]).then(journey => {
-                if (!journey) return
-                if (journey.checkout && journey.checkout.trim()) {
-                    setCheckoutPath(journey.checkout)
-                } else if (journey.products?.length && journey.products[0].variantId) {
-                    // No checkout path → go directly to Shopify with the first product's variant
-                    const variantId = journey.products[0].variantId
-                    const discountCode = journey.products[0].discountCode
-                    let url = `https://dreamplay-pianos.myshopify.com/cart/${variantId}:1`
-                    if (discountCode) url += `?discount=${discountCode}`
-                    setCheckoutPath(url)
-                }
-            })
-        }
     }, [])
 
     const trackCTA = (destination: string) => {
