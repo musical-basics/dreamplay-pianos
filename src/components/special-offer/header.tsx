@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import { RegisterModal } from "../RegisterModal"
 import { CountdownBanner } from "../extended-offer/countdown-banner"
+import { getJourneyById } from "@/actions/admin-actions"
 
 interface SpecialOfferHeaderProps {
     forceOpaque?: boolean;
@@ -68,12 +69,23 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
     const lastScrollY = useRef(0)
     const [user, setUser] = useState<any>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
+    const [checkoutPath, setCheckoutPath] = useState("/reserve")
 
     useEffect(() => {
         const supabase = createClient()
         supabase.auth.getUser().then(({ data: { user } }) => setUser(user))
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null))
         return () => subscription.unsubscribe()
+    }, [])
+
+    // Read journey checkout path
+    useEffect(() => {
+        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)
+        if (match?.[2]) {
+            getJourneyById(match[2]).then(journey => {
+                if (journey?.checkout) setCheckoutPath(journey.checkout)
+            })
+        }
     }, [])
 
     // Sync homepage A/B cookie to localStorage
@@ -188,7 +200,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                         <div className="flex items-center gap-4">
                             <Link
                                 onClick={() => trackClick("header", "start_customization")}
-                                href="/reserve"
+                                href={checkoutPath}
                                 className={`hidden md:flex items-center gap-2 rounded-none px-5 py-2.5 text-sm font-medium transition-all duration-300 ${useDarkText
                                     ? "bg-black border border-black text-white hover:bg-neutral-800"
                                     : "bg-white/5 backdrop-blur-sm border border-white/30 text-white hover:bg-white/15"
@@ -290,7 +302,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                     </Link>
                                 )}
                                 <Link
-                                    href="/reserve"
+                                    href={checkoutPath}
                                     className="mt-4 flex items-center justify-center gap-2 w-full bg-black text-white rounded-none py-3 font-medium"
                                     onClick={() => {
                                         trackClick("header", "start_customization_mobile")
