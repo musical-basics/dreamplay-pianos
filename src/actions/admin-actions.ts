@@ -646,6 +646,7 @@ export type JourneyProduct = {
     originalPrice?: string;  // Strikethrough price: "$1,099"
     badge?: string;          // Override badge: "Most Popular", "Limited Time"
     discountCode?: string;   // Auto-applied at Shopify checkout
+    variantId?: string;       // Shopify variant ID override for checkout URL
 };
 
 export type JourneyConfig = {

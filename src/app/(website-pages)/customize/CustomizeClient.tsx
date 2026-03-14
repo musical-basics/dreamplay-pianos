@@ -392,20 +392,18 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             const size = appState.size || 'DS6.0';
             const color = appState.color || 'Black';
 
-            // Flat variant lookup: VARIANT_MAP[tier][size][color]
-            const exactVariantId = VARIANT_MAP[tierId]?.[size]?.[color] || "";
-
-            // Get discount code: journey product > URL param > sessionStorage
+            // Variant lookup: journey product variantId > VARIANT_MAP[tier][size][color]
             const journeyProduct = journeyProducts?.find(jp => jp.id === tierId);
-            const activeDiscount = journeyProduct?.discountCode || discountCode;
+            const exactVariantId = journeyProduct?.variantId || VARIANT_MAP[tierId]?.[size]?.[color] || "";
 
             let checkoutUrl = "";
 
             if (exactVariantId && exactVariantId.trim() !== '') {
                 let permalink = `/cart/${exactVariantId}:1?note=checkout_source:customize`;
 
-                if (activeDiscount) {
-                    permalink += `&discount=${activeDiscount}`;
+                // Append discount code from URL params or sessionStorage (email links)
+                if (discountCode) {
+                    permalink += `&discount=${discountCode}`;
                 }
 
                 checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
@@ -438,8 +436,8 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                     checkoutUrl += `&note=checkout_source:customize`;
 
-                    if (activeDiscount) {
-                        checkoutUrl += `&discount=${activeDiscount}`;
+                    if (discountCode) {
+                        checkoutUrl += `&discount=${discountCode}`;
                     }
                 }
             }

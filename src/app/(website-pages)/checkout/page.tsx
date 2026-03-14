@@ -95,22 +95,21 @@ function CheckoutContent() {
 
     const handleCheckout = () => {
         setIsCheckingOut(true);
-        const exactVariantId = VARIANT_MAP[tier]?.[size]?.[color] || "";
 
-        // Get discount code: journey product > URL param > sessionStorage
+        // Variant lookup: journey product variantId > VARIANT_MAP[tier][size][color]
         const journeyProduct = journeyProducts?.find(p => p.id === tier);
-        const activeDiscount = journeyProduct?.discountCode || discountCode;
+        const exactVariantId = journeyProduct?.variantId || VARIANT_MAP[tier]?.[size]?.[color] || "";
 
         if (exactVariantId && exactVariantId.trim() !== '') {
             let permalink = `/cart/${exactVariantId}:1?note=checkout_source:pdp`;
-            if (activeDiscount) permalink += `&discount=${activeDiscount}`;
+            if (discountCode) permalink += `&discount=${discountCode}`;
 
             const checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
             trackEmailConversion('conversion_t2', window.location.pathname);
             window.location.href = checkoutUrl;
         } else {
             let fallbackUrl = `https://dreamplay-pianos.myshopify.com/cart/add?id=52209394549050&quantity=1&return_to=/checkout&properties[Size]=${size}&properties[Finish]=${color}&note=checkout_source:pdp`;
-            if (activeDiscount) fallbackUrl += `&discount=${activeDiscount}`;
+            if (discountCode) fallbackUrl += `&discount=${discountCode}`;
             window.location.href = fallbackUrl;
         }
     };
