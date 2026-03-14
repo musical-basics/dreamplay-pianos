@@ -162,24 +162,6 @@ export default function NewsletterPopup() {
         };
     }, [pathname]);
 
-    /** Show the next unseen popup from the journey queue after closing current one */
-    const showNextPopup = (closedType: PopupType) => {
-        const popups = journeyPopupsRef.current;
-        const closedIndex = popups.findIndex(p => p.type === closedType);
-        // Find next unseen popup after the closed one
-        for (let i = closedIndex + 1; i < popups.length; i++) {
-            const nextType = popups[i].type as PopupType;
-            if (localStorage.getItem(`dp_v2_${nextType}_seen`) === 'true') continue;
-            // Show after a short delay (5s after close)
-            const timer = setTimeout(() => {
-                if (localStorage.getItem("dp_v2_subscribed") !== "true") {
-                    setActivePopup(nextType);
-                }
-            }, 5000);
-            popupTimersRef.current.push(timer);
-            break;
-        }
-    };
 
     const handleClose = () => {
         setErrorMsg("");
@@ -196,7 +178,6 @@ export default function NewsletterPopup() {
             localStorage.setItem(`dp_v2_${activePopup}_seen`, "true");
             setActivePopup("none");
             setIsSubmitted("none");
-            showNextPopup(activePopup);
         } else {
             setActivePopup("none");
             setIsSubmitted("none");
