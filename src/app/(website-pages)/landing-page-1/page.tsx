@@ -220,7 +220,7 @@ const FEATURES_DEEP = [
     {
         headline: "Studio-Ready MIDI",
         copy: "Connect to any DAW, play any virtual instrument, layer sounds. DreamPlay One is a production-grade controller with Bluetooth and USB-C MIDI.",
-        img: "/images/keyboards/ds60-black-narrow-keys-piano.png",
+        img: "/images/learn/keyboard-back-ports.jpg",
         icon: Crosshair,
     },
     {
