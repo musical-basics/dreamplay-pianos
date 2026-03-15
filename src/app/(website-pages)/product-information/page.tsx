@@ -6,6 +6,7 @@ import Footer from "@/components/Footer"
 import Link from "next/link"
 import { UrgencySubtext } from "@/components/UrgencySubtext"
 import { SizeVisualSection } from "@/components/premium-offer/size-visual-section"
+import { SpecsSection } from "@/components/premium-offer/specs-section"
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -334,6 +335,9 @@ export default function ProductInformationPage() {
 
                 {/* Everything You Need, Built In */}
                 <FeaturesPianoSection />
+
+                {/* Technical Details — Dimensions Image + Specs from Premium Offer */}
+                <SpecsSection />
 
                 {/* ── THE SCIENCE OF FIT (Vertical Walls vs Funnel) ── */}
                 <section className="bg-[#050505] border-t border-neutral-800 py-24 md:py-32">
