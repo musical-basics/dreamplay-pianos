@@ -22,86 +22,90 @@ function AnalyticsTrackerContent() {
             url = url + `?${searchParams.toString()}`
         }
 
-        const metadata: Record<string, string> = {};
+        const runTracking = async () => {
+            const metadata: Record<string, string> = {};
 
-        // --- RESOLVE EMAIL FROM SID (server-side, replaces ?em= which was spoofable) ---
-        const sid = searchParams?.get('sid');
-        const cid = searchParams?.get('cid');
-        if (sid && typeof window !== 'undefined' && !sessionStorage.getItem('dp_sid_resolved')) {
-            // Only resolve once per session to avoid hammering the endpoint
-            sessionStorage.setItem('dp_sid_resolved', '1');
-            fetch(`https://email.dreamplaypianos.com/api/resolve-subscriber?sid=${sid}${cid ? `&cid=${cid}` : ''}`)
-                .then(r => r.json())
-                .then(data => {
+            // --- RESOLVE EMAIL FROM SID (await before sending pageview) ---
+            const sid = searchParams?.get('sid');
+            const cid = searchParams?.get('cid');
+            if (sid && typeof window !== 'undefined' && !sessionStorage.getItem('dp_sid_resolved')) {
+                sessionStorage.setItem('dp_sid_resolved', '1');
+                try {
+                    const res = await fetch(`https://email.dreamplaypianos.com/api/resolve-subscriber?sid=${sid}${cid ? `&cid=${cid}` : ''}`);
+                    const data = await res.json();
                     if (data.email) {
                         localStorage.setItem('dp_user_email', data.email);
                     }
-                })
-                .catch(() => { });
-        }
-
-        if (typeof window !== 'undefined') {
-            const savedEmail = localStorage.getItem('dp_user_email');
-            if (savedEmail) metadata.email = savedEmail;
-
-            // --- CAPTURE UTM PARAMETERS ---
-            const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-            utms.forEach(utm => {
-                const val = searchParams?.get(utm);
-                if (val) sessionStorage.setItem(`dp_${utm}`, val);
-
-                const storedVal = sessionStorage.getItem(`dp_${utm}`);
-                if (storedVal) metadata[utm] = storedVal;
-            });
-
-            // --- CAPTURE ORGANIC REFERRER ---
-            const currentReferrer = document.referrer;
-
-            // Only save if it exists and is NOT from our own domain (or localhost)
-            if (currentReferrer && !currentReferrer.includes(window.location.hostname) && !currentReferrer.includes('localhost')) {
-                // Only set it once per session so we remember the original entry point
-                if (!sessionStorage.getItem('dp_initial_referrer')) {
-                    sessionStorage.setItem('dp_initial_referrer', currentReferrer);
+                } catch (e) {
+                    console.warn('[Analytics] Failed to resolve subscriber:', e);
                 }
             }
 
-            // --- ATTACH TO METADATA ---
-            const initialReferrer = sessionStorage.getItem('dp_initial_referrer');
-            if (initialReferrer) metadata.referrer = initialReferrer;
+            if (typeof window !== 'undefined') {
+                const savedEmail = localStorage.getItem('dp_user_email');
+                if (savedEmail) metadata.email = savedEmail;
 
-            // --- CHECKOUT A/B TEST BUCKET ---
-            const abCookieMatch = document.cookie.match(/(^| )dp_checkout_ab=([^;]+)/);
-            if (abCookieMatch) metadata.checkout_ab = abCookieMatch[2];
+                // --- CAPTURE UTM PARAMETERS ---
+                const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+                utms.forEach(utm => {
+                    const val = searchParams?.get(utm);
+                    if (val) sessionStorage.setItem(`dp_${utm}`, val);
 
-            // --- JOURNEY ENGINE ---
-            const journeyCookieMatch = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
-            if (journeyCookieMatch) metadata.journey_id = journeyCookieMatch[2];
-        }
+                    const storedVal = sessionStorage.getItem(`dp_${utm}`);
+                    if (storedVal) metadata[utm] = storedVal;
+                });
 
-        // 1. If navigating internally inside the App, fire the leave event for the OLD page
-        if (currentPath.current && currentPath.current !== url && !hasSentLeave.current) {
-            const duration = Math.round((Date.now() - startTime.current) / 1000);
-            if (duration > 1) {
-                fetch(analyticsTrackUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        eventName: 'page_leave',
-                        path: currentPath.current,
-                        metadata: { ...metadata, duration_seconds: duration }
-                    }),
-                    keepalive: true // Guarantees delivery even during navigation
-                }).catch(() => { });
+                // --- CAPTURE ORGANIC REFERRER ---
+                const currentReferrer = document.referrer;
+
+                // Only save if it exists and is NOT from our own domain (or localhost)
+                if (currentReferrer && !currentReferrer.includes(window.location.hostname) && !currentReferrer.includes('localhost')) {
+                    // Only set it once per session so we remember the original entry point
+                    if (!sessionStorage.getItem('dp_initial_referrer')) {
+                        sessionStorage.setItem('dp_initial_referrer', currentReferrer);
+                    }
+                }
+
+                // --- ATTACH TO METADATA ---
+                const initialReferrer = sessionStorage.getItem('dp_initial_referrer');
+                if (initialReferrer) metadata.referrer = initialReferrer;
+
+                // --- CHECKOUT A/B TEST BUCKET ---
+                const abCookieMatch = document.cookie.match(/(^| )dp_checkout_ab=([^;]+)/);
+                if (abCookieMatch) metadata.checkout_ab = abCookieMatch[2];
+
+                // --- JOURNEY ENGINE ---
+                const journeyCookieMatch = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
+                if (journeyCookieMatch) metadata.journey_id = journeyCookieMatch[2];
             }
-        }
 
-        // 2. Setup for the NEW page
-        currentPath.current = url;
-        startTime.current = Date.now();
-        hasSentLeave.current = false;
+            // 1. If navigating internally inside the App, fire the leave event for the OLD page
+            if (currentPath.current && currentPath.current !== url && !hasSentLeave.current) {
+                const duration = Math.round((Date.now() - startTime.current) / 1000);
+                if (duration > 1) {
+                    fetch(analyticsTrackUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            eventName: 'page_leave',
+                            path: currentPath.current,
+                            metadata: { ...metadata, duration_seconds: duration }
+                        }),
+                        keepalive: true
+                    }).catch(() => { });
+                }
+            }
 
-        // 3. Log the page view using your existing Server Action
-        logEvent('pageview', { path: url, metadata });
+            // 2. Setup for the NEW page
+            currentPath.current = url;
+            startTime.current = Date.now();
+            hasSentLeave.current = false;
+
+            // 3. Log the page view (now guaranteed to have email if SID was present)
+            logEvent('pageview', { path: url, metadata });
+        };
+
+        runTracking();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname, searchParams?.toString()])
