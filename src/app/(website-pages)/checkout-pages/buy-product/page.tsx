@@ -107,7 +107,7 @@ export default function BuyProductPage() {
                     <div className="container mx-auto px-6">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-neutral-800">
-                                Pre-Order Now and Save $400 Off Our MSRP
+                                Become A VIP Member And Save $400 Off Our MSRP
                             </h2>
                             <p className="text-center text-neutral-500 mb-12 text-base">
                                 Join hundreds of pianists eliminating strain forever.
