@@ -33,6 +33,9 @@ export default function AdminPage() {
     const [suggestionsMessage, setSuggestionsMessage] = useState('')
     const [dragIndex, setDragIndex] = useState<number | null>(null)
     const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
+    // Popup drag state (per-journey)
+    const [popupDragIdx, setPopupDragIdx] = useState<number | null>(null)
+    const [popupDragOverIdx, setPopupDragOverIdx] = useState<number | null>(null)
     const [editingIndex, setEditingIndex] = useState<number | null>(null)
     const [editingText, setEditingText] = useState('')
 
@@ -1041,7 +1044,37 @@ export default function AdminPage() {
                                                     <p className="text-xs text-neutral-600 italic">No popups — will default to PDF at 12s</p>
                                                 )}
                                                 {(j.popups || []).map((popup: JourneyPopup, pIdx: number) => (
-                                                    <div key={pIdx} className="grid grid-cols-3 gap-2 mb-2 items-end">
+                                                    <div
+                                                        key={pIdx}
+                                                        draggable
+                                                        onDragStart={() => setPopupDragIdx(pIdx)}
+                                                        onDragOver={(e) => { e.preventDefault(); setPopupDragOverIdx(pIdx) }}
+                                                        onDragLeave={() => setPopupDragOverIdx(null)}
+                                                        onDrop={() => {
+                                                            if (popupDragIdx !== null && popupDragIdx !== pIdx) {
+                                                                const u = [...journeys]
+                                                                const p = [...(u[idx].popups || [])]
+                                                                const [moved] = p.splice(popupDragIdx, 1)
+                                                                p.splice(pIdx, 0, moved)
+                                                                u[idx] = { ...u[idx], popups: p }
+                                                                setJourneys(u)
+                                                            }
+                                                            setPopupDragIdx(null)
+                                                            setPopupDragOverIdx(null)
+                                                        }}
+                                                        onDragEnd={() => { setPopupDragIdx(null); setPopupDragOverIdx(null) }}
+                                                        className={`grid grid-cols-[auto_1fr_1fr_auto] gap-2 mb-2 items-end p-1.5 rounded-lg border transition-all ${
+                                                            popupDragOverIdx === pIdx && popupDragIdx !== pIdx
+                                                                ? 'border-blue-500 bg-blue-500/10'
+                                                                : popupDragIdx === pIdx
+                                                                    ? 'border-neutral-600 opacity-50'
+                                                                    : 'border-transparent'
+                                                        }`}
+                                                    >
+                                                        {/* Drag handle */}
+                                                        <span className="cursor-grab active:cursor-grabbing text-neutral-500 hover:text-neutral-300 px-1 select-none self-center" title="Drag to reorder">
+                                                            ⠿
+                                                        </span>
                                                         <div>
                                                             <label className="block text-[10px] text-neutral-600 mb-0.5">Type</label>
                                                             <select value={popup.type} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p[pIdx] = { ...p[pIdx], type: e.target.value }; u[idx] = { ...u[idx], popups: p }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500">
