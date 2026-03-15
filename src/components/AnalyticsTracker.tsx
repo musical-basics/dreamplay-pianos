@@ -25,9 +25,11 @@ function AnalyticsTrackerContent() {
         const runTracking = async () => {
             const metadata: Record<string, string> = {};
 
-            // --- RESOLVE EMAIL FROM SID (await before sending pageview) ---
-            const sid = searchParams?.get('sid');
-            const cid = searchParams?.get('cid');
+            // --- RESOLVE EMAIL FROM SID (read from cookie set by middleware) ---
+            const sidCookieMatch = document.cookie.match(/(^| )dp_sid=([^;]+)/);
+            const cidCookieMatch = document.cookie.match(/(^| )dp_cid=([^;]+)/);
+            const sid = sidCookieMatch ? sidCookieMatch[2] : null;
+            const cid = cidCookieMatch ? cidCookieMatch[2] : null;
             if (sid && typeof window !== 'undefined' && !sessionStorage.getItem('dp_sid_resolved')) {
                 sessionStorage.setItem('dp_sid_resolved', '1');
                 try {
@@ -39,6 +41,13 @@ function AnalyticsTrackerContent() {
                 } catch (e) {
                     console.warn('[Analytics] Failed to resolve subscriber:', e);
                 }
+            }
+
+            // --- FIRST TOUCH URL SAFETY NET ---
+            const firstTouchMatch = document.cookie.match(/(^| )dp_first_touch_url=([^;]+)/);
+            if (firstTouchMatch && !sessionStorage.getItem('dp_first_touch_logged')) {
+                sessionStorage.setItem('dp_first_touch_logged', '1');
+                metadata.first_touch_url = decodeURIComponent(firstTouchMatch[2]);
             }
 
             if (typeof window !== 'undefined') {

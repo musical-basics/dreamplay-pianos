@@ -54,6 +54,61 @@ export async function middleware(request: NextRequest) {
     }
 
     // ========================================================================
+    // PRIORITY #1.5: SID/CID COOKIE CAPTURE + CLEAN URL REDIRECT
+    // Reads subscriber/campaign IDs from email links, saves to root-domain
+    // cookies, then strips params from URL to prevent shared-link contamination.
+    // ========================================================================
+    const sid = searchParams.get("sid");
+    const cid = searchParams.get("cid");
+
+    if (sid) {
+        const isTrackingBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(
+            request.headers.get("user-agent") || ""
+        );
+
+        // Build clean URL (strip sid, cid, and em)
+        const cleanUrl = request.nextUrl.clone();
+        cleanUrl.searchParams.delete("sid");
+        cleanUrl.searchParams.delete("cid");
+        cleanUrl.searchParams.delete("em");
+
+        // Set root-domain cookies so all subdomains can read them
+        const cookieOpts = {
+            maxAge: 60 * 60 * 24 * 90, // 90 days
+            path: "/",
+            domain: ".dreamplaypianos.com",
+            sameSite: "lax" as const,
+        };
+
+        // For localhost dev, don't set domain (browsers reject dotted localhost)
+        const isLocal = request.headers.get("host")?.includes("localhost");
+        if (isLocal) delete (cookieOpts as any).domain;
+
+        const redirectResponse = isTrackingBot
+            ? NextResponse.next() // Don't redirect bots
+            : NextResponse.redirect(cleanUrl);
+
+        redirectResponse.cookies.set("dp_sid", sid, cookieOpts);
+        if (cid) redirectResponse.cookies.set("dp_cid", cid, cookieOpts);
+
+        // Safety net: store the full original URL (only on first touch)
+        if (!request.cookies.get("dp_first_touch_url")) {
+            redirectResponse.cookies.set(
+                "dp_first_touch_url",
+                url.pathname + url.search,
+                cookieOpts
+            );
+        }
+
+        // Attach auth cookies from session
+        sessionResponse.cookies.getAll().forEach(c =>
+            redirectResponse.cookies.set(c.name, c.value)
+        );
+
+        return redirectResponse;
+    }
+
+    // ========================================================================
     // PRIORITY #2: JOURNEY ENGINE (Full-Funnel Routing)
     // ========================================================================
 

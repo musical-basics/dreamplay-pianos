@@ -10,24 +10,27 @@ function EmailTrackerContent() {
     // Track when the user lands on a specific page
     const startTime = useRef(Date.now())
 
-    // 1. IDENTIFY: Check for Subscriber ID in URL + generate temp session
+    // 1. IDENTIFY: Check for Subscriber ID in cookies (set by middleware) + generate temp session
     useEffect(() => {
         // Generate a persistent temp session for anonymous identity stitching
         if (!localStorage.getItem("dp_temp_session")) {
             localStorage.setItem("dp_temp_session", crypto.randomUUID())
         }
 
-        const sid = searchParams.get("sid")
-        const cid = searchParams.get("cid")
-        const em = searchParams.get("em")
+        // Read sid/cid from root-domain cookies (set by middleware from URL params)
+        const sidMatch = document.cookie.match(/(^| )dp_sid=([^;]+)/)
+        const cidMatch = document.cookie.match(/(^| )dp_cid=([^;]+)/)
+        const sid = sidMatch ? sidMatch[2] : null
+        const cid = cidMatch ? cidMatch[2] : null
 
         if (sid) {
-            // Save to storage so we track them on future pages too
+            // Sync to localStorage for components that read from there
             localStorage.setItem("dp_subscriber_id", sid)
             if (cid) localStorage.setItem("dp_campaign_id", cid)
 
-            // Safe click tracking: if both sid and cid are in URL, this is a direct email click
-            if (cid) {
+            // Safe click tracking: fire once per session when both sid and cid exist
+            if (cid && !sessionStorage.getItem("dp_click_tracked")) {
+                sessionStorage.setItem("dp_click_tracked", "1")
                 fetch(emailTrackUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -42,6 +45,9 @@ function EmailTrackerContent() {
             }
         }
 
+        // Read email from em cookie or URL fallback
+        const emMatch = document.cookie.match(/(^| )dp_em=([^;]+)/)
+        const em = emMatch ? emMatch[2] : searchParams.get("em")
         if (em) {
             localStorage.setItem("dp_user_email", em)
         }
