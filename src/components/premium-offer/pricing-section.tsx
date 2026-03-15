@@ -106,15 +106,113 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
           </div>
         </div>
 
-        {/* Single CTA — pricing is managed on /customize */}
-        <a
-          href="/customize"
-          onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
-          className="group inline-flex items-center justify-center gap-2 border border-background bg-background text-foreground px-10 py-4 font-sans text-xs uppercase tracking-widest transition-colors hover:bg-background/90"
-        >
-          Choose Your Configuration
-          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
-        </a>
+        <div className="grid gap-6 lg:grid-cols-3">
+          {tiers.map((tier) => (
+            <div
+              key={tier.title}
+              className={`relative flex flex-col border p-8 transition-all md:p-10 ${tier.highlight
+                ? "border-background/30 bg-background/5"
+                : "border-background/10 bg-transparent"
+                }`}
+            >
+              {tier.badge && (
+                <span className="mb-4 self-start font-sans text-[10px] uppercase tracking-[0.3em] text-background/50">
+                  {tier.badge}
+                </span>
+              )}
+
+              <h3 className="font-serif text-xl text-background md:text-2xl">
+                {tier.title}
+              </h3>
+              <p className="mt-1 font-sans text-xs text-background/40">
+                {tier.subtitle}
+              </p>
+
+              <div className="mt-6 flex items-baseline gap-3">
+                <p className="font-serif text-4xl text-background md:text-5xl">
+                  {tier.price}
+                </p>
+                {tier.msrp && (
+                  <p className="font-sans text-lg text-background/30 line-through">
+                    {tier.msrp}
+                  </p>
+                )}
+              </div>
+
+              <p className="mt-6 font-sans text-sm leading-relaxed text-background/60">
+                {tier.description}
+              </p>
+
+              {/* Includes */}
+              <div className="mt-6 flex flex-col gap-2">
+                <p className="font-sans text-xs uppercase tracking-[0.2em] text-background/40">
+                  Includes
+                </p>
+                {tier.includes.map((item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <span className="h-1 w-1 rounded-full bg-background/40" />
+                    <span className="font-sans text-sm text-background/70">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Meta */}
+              <div className="mt-6 flex items-center gap-6">
+                <div>
+                  <p className="font-sans text-xs text-background/40">
+                    Delivery
+                  </p>
+                  <p className="font-sans text-sm text-background/70">
+                    {tier.delivery}
+                  </p>
+                </div>
+                <div className="h-6 w-px bg-background/10" aria-hidden="true" />
+                <div>
+                  <p className="font-sans text-xs text-background/40">
+                    Backers
+                  </p>
+                  <p className="font-sans text-sm text-background/70">
+                    {tier.backers}
+                  </p>
+                </div>
+                <div className="h-6 w-px bg-background/10" aria-hidden="true" />
+                <div>
+                  <p className="font-sans text-xs text-background/40">
+                    Left
+                  </p>
+                  <p className="font-sans text-sm text-background/70">
+                    {tier.remaining} of {tier.total}
+                  </p>
+                </div>
+              </div>
+
+              {/* Progress bar */}
+              <div className="mt-4 h-px w-full bg-background/10">
+                <div
+                  className="h-full bg-background/40 transition-all"
+                  style={{
+                    width: `${((tier.total - tier.remaining) / tier.total) * 100}%`,
+                  }}
+                />
+              </div>
+
+              {/* CTA */}
+              <a
+                href="/customize"
+                onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
+                className={`mt-8 group flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors ${tier.highlight
+                  ? "border-background bg-background text-foreground hover:bg-background/90"
+                  : "border-background/30 text-background hover:bg-background/10"
+                  }`}
+              >
+                Reserve for {tier.price}
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
