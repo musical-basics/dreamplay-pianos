@@ -368,28 +368,41 @@ export default function IntroOfferPage() {
                             </>
                         ) : (
                             <div
-                                className="fixed inset-0 z-50 bg-black flex items-center justify-center md:relative md:inset-auto md:z-auto md:bg-transparent md:w-full md:max-w-6xl md:block"
+                                className="fixed inset-0 z-50 bg-black flex flex-col md:relative md:inset-auto md:z-auto md:bg-transparent md:w-full md:max-w-6xl md:block"
                                 style={{ perspective: "1000px" }}
-                                onClick={() => setIsVideoPlaying(false)}
                             >
+                                {/* Close button bar — always visible above video */}
+                                <div className="flex-shrink-0 flex justify-end items-center px-4 py-3 md:hidden" style={{ paddingTop: "max(12px, env(safe-area-inset-top))" }}>
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); setIsVideoPlaying(false); }}
+                                        className="z-[60] w-10 h-10 flex items-center justify-center rounded-full bg-white/20 text-white transition-colors cursor-pointer"
+                                        aria-label="Close video"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                    </button>
+                                </div>
+                                {/* Desktop close button */}
                                 <button
                                     onClick={(e) => { e.stopPropagation(); setIsVideoPlaying(false); }}
-                                    className="absolute top-4 right-4 md:-top-10 md:right-0 z-30 w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-full bg-white/20 md:bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                                    className="hidden md:flex absolute -top-10 right-0 z-30 w-8 h-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                                     aria-label="Close video"
                                 >
-                                    <svg className="w-5 h-5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                                 </button>
-                                <video
-                                    ref={videoRef}
-                                    className="w-full h-full object-contain md:aspect-video md:h-auto md:rounded-2xl md:shadow-2xl"
-                                    style={{ transform: "rotateX(0deg)", transformOrigin: "center center" }}
-                                    controls
-                                    autoPlay
-                                    playsInline
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Final%204k%20Video%20DreamPlay%20Intro.mp4" type="video/mp4" />
-                                </video>
+                                {/* Video — flex-1 so it fills remaining space below the close bar */}
+                                <div className="flex-1 min-h-0 flex items-center justify-center" onClick={() => setIsVideoPlaying(false)}>
+                                    <video
+                                        ref={videoRef}
+                                        className="w-full max-h-full object-contain md:aspect-video md:h-auto md:rounded-2xl md:shadow-2xl"
+                                        style={{ transform: "rotateX(0deg)", transformOrigin: "center center" }}
+                                        controls
+                                        autoPlay
+                                        playsInline
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <source src="https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/Final%204k%20Video%20DreamPlay%20Intro.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
                             </div>
                         )}
                     </div>
