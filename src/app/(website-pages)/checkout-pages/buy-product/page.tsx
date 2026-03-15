@@ -14,7 +14,7 @@ export const metadata = {
 export default function BuyProductPage() {
     return (
         <div className="page-wrapper bg-white font-sans text-neutral-900">
-            <SpecialOfferHeader />
+            <SpecialOfferHeader forceOpaque />
 
             <main>
                 {/* --- Hero Section --- */}
