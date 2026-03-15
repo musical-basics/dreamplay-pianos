@@ -59,7 +59,7 @@ const GALLERY_IMAGES = [
         alt: "DreamPlay One, Front Angle",
     },
     {
-        src: "/images/keyboards/Piano + Bench Frontal + Bundle.png",
+        src: "/images/keyboards/Piano%20%2B%20Bench%20Frontal%20%2B%20Bundle.png",
         alt: "DreamPlay One Complete Bundle",
     },
     {
