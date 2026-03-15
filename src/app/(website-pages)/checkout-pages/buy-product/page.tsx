@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/old-navbar";
+import { SpecialOfferHeader } from "@/components/special-offer/header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import ProductSelectionForm from "@/components/checkout/ProductSelectionForm";
@@ -15,7 +15,7 @@ export const metadata = {
 export default function BuyProductPage() {
     return (
         <div className="page-wrapper bg-white font-sans text-neutral-900">
-            <Navbar />
+            <SpecialOfferHeader />
 
             <main>
                 {/* --- Hero Section --- */}
