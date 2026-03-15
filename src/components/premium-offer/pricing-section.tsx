@@ -128,16 +128,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                 {tier.subtitle}
               </p>
 
-              <div className="mt-6 flex items-baseline gap-3">
-                <p className="font-serif text-4xl text-background md:text-5xl">
-                  {tier.price}
-                </p>
-                {tier.msrp && (
-                  <p className="font-sans text-lg text-background/30 line-through">
-                    {tier.msrp}
-                  </p>
-                )}
-              </div>
+
 
               <p className="mt-6 font-sans text-sm leading-relaxed text-background/60">
                 {tier.description}
@@ -207,7 +198,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                   : "border-background/30 text-background hover:bg-background/10"
                   }`}
               >
-                Reserve for {tier.price}
+                Reserve Now
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
