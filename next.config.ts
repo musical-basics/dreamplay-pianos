@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/buy-product',
+        destination: '/checkout-pages/buy-product',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
