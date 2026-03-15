@@ -188,14 +188,8 @@ export default function ReservePage() {
                     href="https://dreamplay-pianos.myshopify.com/cart/clear?return_to=/cart/53150736253242:1"
                     className="inline-flex items-center justify-center gap-3 bg-white px-12 py-5 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors w-full"
                   >
-                    Yes, Purchase Now <ArrowRight className="w-5 h-5" />
+                    Yes, Reserve Now <ArrowRight className="w-5 h-5" />
                   </a>
-                  <button
-                    onClick={() => setShowEmailForm(true)}
-                    className="inline-flex items-center justify-center gap-3 border border-white/30 px-12 py-5 font-sans text-sm uppercase tracking-widest text-white hover:bg-white/10 transition-colors w-full cursor-pointer"
-                  >
-                    Let Me Think About It <Mail className="w-5 h-5" />
-                  </button>
                 </>
               ) : (
                 <form onSubmit={handleEmailSubmit} className="flex flex-col gap-4">
