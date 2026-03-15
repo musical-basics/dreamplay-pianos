@@ -749,6 +749,7 @@ export default function AdminPage() {
                                                     <option value="shipping">Free Shipping</option>
                                                     <option value="pdf">PDF Guide</option>
                                                     <option value="discount">$300 Off</option>
+                                                    <option value="survey_5off">5% Off Survey</option>
                                                 </select>
 
                                                 <label className="block text-sm text-neutral-400 mb-2">{ordinal}{suffix} Popup Delay</label>
@@ -1051,6 +1052,7 @@ export default function AdminPage() {
                                                                 <option value="accessory_25">25% Accessory</option>
                                                                 <option value="store_credit_25">$25 Store Credit</option>
                                                                 <option value="priority_shipping">Priority Shipping</option>
+                                                                <option value="survey_5off">5% Off Survey</option>
                                                             </select>
                                                         </div>
                                                         <div>
