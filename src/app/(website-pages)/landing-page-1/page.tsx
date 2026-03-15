@@ -51,6 +51,22 @@ const GALLERY_IMAGES = [
         alt: "DreamPlay One, Hands on Keys",
     },
     {
+        src: "/images/keyboards/DS6.0-Black-transparent v2.png",
+        alt: "DreamPlay One DS6.0, Front View",
+    },
+    {
+        src: "/images/keyboards/piano-front-2.jpg",
+        alt: "DreamPlay One, Front Angle",
+    },
+    {
+        src: "/images/keyboards/Piano + Bench Frontal + Bundle.png",
+        alt: "DreamPlay One Complete Bundle",
+    },
+    {
+        src: "/images/learn/keyboard-led-lights.jpg",
+        alt: "DreamPlay One, LED Learning Lights",
+    },
+    {
         src: "/images/keyboards/ds60-black-narrow-keys-piano.png",
         alt: "DreamPlay One DS6.0, Side Angle",
     },
