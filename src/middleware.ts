@@ -54,24 +54,14 @@ export async function middleware(request: NextRequest) {
     }
 
     // ========================================================================
-    // PRIORITY #1.5: SID/CID COOKIE CAPTURE + CLEAN URL REDIRECT
+    // PRIORITY #1.5: SID/CID COOKIE CAPTURE (params stay in URL)
     // Reads subscriber/campaign IDs from email links, saves to root-domain
-    // cookies, then strips params from URL to prevent shared-link contamination.
+    // cookies for cross-subdomain tracking. URL params are NOT stripped.
     // ========================================================================
     const sid = searchParams.get("sid");
     const cid = searchParams.get("cid");
 
     if (sid) {
-        const isTrackingBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(
-            request.headers.get("user-agent") || ""
-        );
-
-        // Build clean URL (strip sid, cid, and em)
-        const cleanUrl = request.nextUrl.clone();
-        cleanUrl.searchParams.delete("sid");
-        cleanUrl.searchParams.delete("cid");
-        cleanUrl.searchParams.delete("em");
-
         // Set root-domain cookies so all subdomains can read them
         const cookieOpts = {
             maxAge: 60 * 60 * 24 * 90, // 90 days
@@ -84,16 +74,15 @@ export async function middleware(request: NextRequest) {
         const isLocal = request.headers.get("host")?.includes("localhost");
         if (isLocal) delete (cookieOpts as any).domain;
 
-        const redirectResponse = isTrackingBot
-            ? NextResponse.next() // Don't redirect bots
-            : NextResponse.redirect(cleanUrl);
+        // Continue without redirect — keep sid/cid in URL
+        const passthrough = NextResponse.next();
 
-        redirectResponse.cookies.set("dp_sid", sid, cookieOpts);
-        if (cid) redirectResponse.cookies.set("dp_cid", cid, cookieOpts);
+        passthrough.cookies.set("dp_sid", sid, cookieOpts);
+        if (cid) passthrough.cookies.set("dp_cid", cid, cookieOpts);
 
         // Safety net: store the full original URL (only on first touch)
         if (!request.cookies.get("dp_first_touch_url")) {
-            redirectResponse.cookies.set(
+            passthrough.cookies.set(
                 "dp_first_touch_url",
                 url.pathname + url.search,
                 cookieOpts
@@ -102,10 +91,10 @@ export async function middleware(request: NextRequest) {
 
         // Attach auth cookies from session
         sessionResponse.cookies.getAll().forEach(c =>
-            redirectResponse.cookies.set(c.name, c.value)
+            passthrough.cookies.set(c.name, c.value)
         );
 
-        return redirectResponse;
+        return passthrough;
     }
 
     // ========================================================================
