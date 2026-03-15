@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { X, FileText, Package, DollarSign, CheckCircle2 } from "lucide-react";
+import SurveyPopup from "@/components/SurveyPopup";
 
 import { getDiscountPopupStatus, getJourneyById } from "@/actions/admin-actions";
 import type { JourneyPopup } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 
-type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping";
+type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping" | "survey_5off";
 
 /** Safe analytics wrapper — won't crash if tracker is blocked or hasn't loaded */
 const trackPopup = (action: 'yes' | 'no', popupName: string) => {
@@ -173,6 +174,7 @@ export default function NewsletterPopup() {
             accessory_25: 'accessory_25',
             store_credit_25: 'store_credit_25',
             priority_shipping: 'priority_shipping',
+            survey_5off: 'survey_5off',
         };
         const trackName = popupTrackNames[activePopup];
         if (trackName) {
@@ -255,6 +257,19 @@ export default function NewsletterPopup() {
     };
 
     if (activePopup === "none" && isSubmitted === "none") return null;
+
+    // ── Survey popup gets its own full-screen component ──
+    if (activePopup === "survey_5off") {
+        return (
+            <SurveyPopup
+                onClose={() => {
+                    setActivePopup("none");
+                    setIsSubmitted("none");
+                }}
+                abBucket={abBucketRef.current}
+            />
+        );
+    }
 
     return (
         <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300">
