@@ -903,13 +903,30 @@ export default function IntroOfferPage() {
                 </section>
 
                 {/* Slide 7: Manufacturing */}
-                <section className="h-screen relative bg-black flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
-                    <div className="w-full max-w-6xl px-6">
-                        <div className="text-center mb-8">
+                <section className="h-screen relative bg-black flex flex-col items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
+                    <div className="w-full max-w-6xl px-6 flex flex-col items-center">
+                        <div className="text-center mb-4 md:mb-8">
                             <p className="font-sans text-xs uppercase tracking-[0.3em] text-white/50 mb-2">Behind the Scenes</p>
                             <h2 className="font-serif text-3xl md:text-4xl text-white">Manufacturing Timeline</h2>
+                            <p className="mt-2 font-sans text-sm text-white/40 max-w-md mx-auto md:hidden">
+                                Inside our factory — from raw materials to finished keyboards.
+                            </p>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {/* Mobile: 2x2 grid showing 4 key images */}
+                        <div className="grid grid-cols-2 gap-2 md:hidden w-full">
+                            {[factoryImages[0], factoryImages[2], factoryImages[5], factoryImages[7]].map((img, i) => (
+                                <div key={i} className="aspect-square relative overflow-hidden bg-neutral-900 rounded-lg">
+                                    <Image
+                                        src={img}
+                                        alt={`Manufacturing ${i + 1}`}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                        {/* Desktop: full 4-col grid */}
+                        <div className="hidden md:grid grid-cols-4 gap-2 w-full">
                             {factoryImages.map((img, i) => (
                                 <div key={i} className="aspect-square relative overflow-hidden bg-neutral-900">
                                     <Image
@@ -921,10 +938,10 @@ export default function IntroOfferPage() {
                                 </div>
                             ))}
                         </div>
-                        <div className="text-center mt-8">
+                        <div className="text-center mt-6 md:mt-8">
                             <Link
                                 href="/production-timeline"
-                                className="inline-flex items-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-white/90 transition-colors"
+                                className="inline-flex items-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black hover:bg-white/90 transition-colors rounded-full md:rounded-none"
                             >
                                 View Production Timeline <ArrowRight className="w-4 h-4" />
                             </Link>
