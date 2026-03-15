@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
         source: '/buy-product',
         destination: '/checkout-pages/buy-product',
       },
+      {
+        source: '/buy-product2',
+        destination: '/checkout-pages/buy-product2',
+      },
     ];
   },
 };
