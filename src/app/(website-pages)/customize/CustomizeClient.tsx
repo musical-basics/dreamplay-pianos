@@ -534,25 +534,6 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
     return (
         <div className="min-h-screen bg-white font-sans text-neutral-900 selection:bg-neutral-200">
-            {/* Floating Discount Code Callout */}
-            {discountCode && !discountDismissed && (
-                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] animate-in slide-in-from-bottom-4 fade-in duration-500">
-                    <div className="flex items-center gap-3 bg-[#0a0a0f] border border-emerald-500/30 px-5 py-3.5 shadow-2xl shadow-black/40 backdrop-blur-md" style={{ minWidth: '320px' }}>
-                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/20">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                        </div>
-                        <div className="flex-1">
-                            <p className="font-sans text-xs font-semibold text-emerald-400 uppercase tracking-wider">Discount Applied</p>
-                            <p className="font-sans text-[11px] text-white/60 mt-0.5">
-                                Code <span className="font-mono text-white/90 font-medium">{discountCode}</span> will be applied at checkout.
-                            </p>
-                        </div>
-                        <button onClick={() => setDiscountDismissed(true)} className="shrink-0 p-1 text-white/30 hover:text-white/60 transition-colors cursor-pointer">
-                            <X className="h-3.5 w-3.5" />
-                        </button>
-                    </div>
-                </div>
-            )}
             {/* --- FIXED HEADERS WRAPPER --- */}
             <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
                 <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
@@ -605,6 +586,35 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </div>
                     </div>
                 )}
+
+                {/* FLOATING DISCOUNT CALLOUT — desktop: below build summary, mobile: top-right */}
+                {discountCode && !discountDismissed && (() => {
+                    const hasBuild = !!(appState.handSpan || appState.size || appState.color);
+                    const hasUrgency = !!(authUser && showWidget && widgetTimeLeft > 0);
+                    // Desktop top offset: stack below urgency widget + build summary
+                    const desktopTop = hasUrgency && hasBuild ? 'md:top-[440px]'
+                        : hasBuild ? 'md:top-[290px]'
+                        : hasUrgency ? 'md:top-[290px]'
+                        : 'md:top-[140px]';
+                    return (
+                        <div className={`absolute right-3 top-[140px] ${desktopTop} md:right-8 z-[60] transition-all`} style={{ animation: 'slideInRight 0.5s ease-out' }}>
+                            <div className="flex items-center gap-2.5 bg-[#050505] border border-emerald-500/30 px-4 py-3 shadow-2xl max-w-xs">
+                                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/20">
+                                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="font-sans text-[10px] font-semibold text-emerald-400 uppercase tracking-wider">Discount Applied</p>
+                                    <p className="font-sans text-[10px] text-white/60 mt-0.5 truncate">
+                                        Code <span className="font-mono text-white/90 font-medium">{discountCode}</span> active at checkout
+                                    </p>
+                                </div>
+                                <button onClick={() => setDiscountDismissed(true)} className="shrink-0 p-1 text-white/30 hover:text-white/60 transition-colors cursor-pointer">
+                                    <X className="h-3 w-3" />
+                                </button>
+                            </div>
+                        </div>
+                    );
+                })()}
 
                 {/* Steps Sub-Navbar */}
                 <header id="sticky-nav" className="w-full mt-[100px] bg-[#050505]/95 backdrop-blur-md border-b border-white/5 shadow-sm">
