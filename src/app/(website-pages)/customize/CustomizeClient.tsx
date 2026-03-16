@@ -1007,7 +1007,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                                         </div>
 
-                                        {/* ⚡ Fast Checkout Test Button — direct checkout URL (skips cart/clear redirect chain) */}
+                                        {/* ⚡ Fast Checkout Test Button — commented out, direct checkout URL didn't work properly
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
@@ -1028,6 +1028,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         >
                                             ⚡ Fast Checkout (Test)
                                         </button>
+                                        */}
 
 
                                         {/* Savings subtext */}
