@@ -46,6 +46,16 @@ export default function NewsletterPopup() {
                 return;
             }
 
+            // Disable all popups for email visitors (have discount code or SID)
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasEmailSignal = urlParams.has('discount') || urlParams.has('sid')
+                || sessionStorage.getItem('dp_vip_discount')
+                || localStorage.getItem('dp_subscriber_id');
+            if (hasEmailSignal) {
+                console.log('[PopupDebug] SKIPPED: visitor came from email (discount/sid detected)');
+                return;
+            }
+
             // If user is already mapped, skip popups entirely
             if (localStorage.getItem("dp_user_email")) {
                 console.log('[PopupDebug] SKIPPED: dp_user_email found in localStorage');
