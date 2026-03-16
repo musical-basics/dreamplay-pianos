@@ -40,6 +40,12 @@ export default function NewsletterPopup() {
         const initPopups = async () => {
             console.log('[PopupDebug] initPopups() called');
 
+            // Disable all popups on /customize — user is in checkout flow
+            if (window.location.pathname === '/customize') {
+                console.log('[PopupDebug] SKIPPED: on /customize page');
+                return;
+            }
+
             // If user is already mapped, skip popups entirely
             if (localStorage.getItem("dp_user_email")) {
                 console.log('[PopupDebug] SKIPPED: dp_user_email found in localStorage');
