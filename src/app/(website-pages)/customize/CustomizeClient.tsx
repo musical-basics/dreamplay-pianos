@@ -1007,6 +1007,28 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                                         </div>
 
+                                        {/* ⚡ Fast Checkout Test Button — direct checkout URL (skips cart/clear redirect chain) */}
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                const size = appState.size || 'DS6.0';
+                                                const color = appState.color || 'Black';
+                                                const journeyProduct = journeyProducts?.find((jp: JourneyProduct) => jp.id === tier.id);
+                                                const variantId = journeyProduct?.variantId || VARIANT_MAP[tier.id]?.[size]?.[color] || "";
+                                                if (!variantId) { alert("No variant ID found for this selection"); return; }
+                                                let url = `https://dreamplay-pianos.myshopify.com/checkout?line_items[][variant_id]=${variantId}&line_items[][quantity]=1`;
+                                                if (discountCode) url += `&discount=${discountCode}`;
+                                                trackEmailConversion('conversion_t2', window.location.pathname);
+                                                window.location.href = url;
+                                            }}
+                                            className={`mt-2 flex w-full items-center justify-center gap-2 border border-dashed px-4 py-2.5 text-center font-sans text-[10px] uppercase tracking-widest transition-colors ${isSelected
+                                                ? "border-black/20 text-black/50 hover:border-black/40 hover:text-black/70"
+                                                : "border-white/15 text-white/35 hover:border-white/30 hover:text-white/50"
+                                            }`}
+                                        >
+                                            ⚡ Fast Checkout (Test)
+                                        </button>
+
 
                                         {/* Savings subtext */}
                                         {tier.retailPrice && (
