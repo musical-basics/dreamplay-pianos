@@ -10,7 +10,7 @@ import type { JourneyPopup } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 
-type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping" | "survey_5off";
+type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping" | "survey_5off" | "tips";
 
 /** Safe analytics wrapper — won't crash if tracker is blocked or hasn't loaded */
 const trackPopup = (action: 'yes' | 'no', popupName: string) => {
@@ -191,6 +191,7 @@ export default function NewsletterPopup() {
             store_credit_25: 'store_credit_25',
             priority_shipping: 'priority_shipping',
             survey_5off: 'survey_5off',
+            tips: 'piano_tips',
         };
         const trackName = popupTrackNames[activePopup];
         if (trackName) {
@@ -218,6 +219,7 @@ export default function NewsletterPopup() {
                 discount_44: "44% Off Lead",
                 accessory_25: "25% Accessory Lead",
                 pdf: "Hand Guide Download",
+                tips: "Piano Tips Subscriber",
             };
             const tag = tagMap[currentOffer] || "Hand Guide Download";
             const tempSession = localStorage.getItem("dp_temp_session") || undefined;
@@ -284,6 +286,94 @@ export default function NewsletterPopup() {
                 }}
                 abBucket={abBucketRef.current}
             />
+        );
+    }
+
+    // ── Tips popup gets its own distinct visual style ──
+    if (activePopup === "tips" && isSubmitted === "none") {
+        return (
+            <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300">
+                <div className="relative w-full max-w-md bg-[#0a0f0a] border border-emerald-500/20 rounded-xl shadow-2xl shadow-emerald-900/10 p-8 md:p-10 animate-in fade-in zoom-in-95 duration-300">
+
+                    <button
+                        onClick={handleClose}
+                        className="absolute right-4 top-4 text-white/30 hover:text-white transition-colors cursor-pointer"
+                    >
+                        <X size={18} />
+                    </button>
+
+                    <div className="mb-8 text-center">
+                        <h2 className="text-2xl md:text-[28px] tracking-tight leading-tight mb-4">
+                            <span className="text-white/90" style={{ fontFamily: "'Courier New', Courier, monospace", fontWeight: 400 }}>
+                                improve your{" "}
+                            </span>
+                            <span className="text-emerald-400" style={{ fontFamily: "'Courier New', Courier, monospace", fontWeight: 700 }}>
+                                practice
+                            </span>
+                        </h2>
+
+                        <p className="text-white/50 font-sans text-sm leading-relaxed max-w-xs mx-auto" style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: "13px", lineHeight: "1.7" }}>
+                            foundational tips on technique, practice strategies,
+                            and principles that actually help you improve.
+                        </p>
+                        <p className="text-white/35 mt-3" style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: "12px" }}>
+                            no sales. no spam. just piano.
+                        </p>
+                    </div>
+
+                    {errorMsg && (
+                        <div className="mb-4 p-3 border border-red-500/30 bg-red-500/10 rounded-lg text-red-400 text-xs font-sans text-center">
+                            {errorMsg}
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="flex gap-3">
+                        <input
+                            type="email"
+                            required
+                            placeholder="your@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="flex-1 px-4 py-3.5 rounded-lg border border-white/15 bg-white/5 placeholder-white/30 text-white focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 outline-none transition-all text-sm"
+                            style={{ fontFamily: "'Courier New', Courier, monospace" }}
+                        />
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-lg transition-colors disabled:opacity-70 cursor-pointer shrink-0"
+                            style={{ fontFamily: "'Courier New', Courier, monospace" }}
+                        >
+                            {isLoading ? "..." : "subscribe"}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+
+    // Tips success state
+    if (activePopup === "tips" && isSubmitted === "tips") {
+        return (
+            <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300">
+                <div className="relative w-full max-w-md bg-[#0a0f0a] border border-emerald-500/20 rounded-xl shadow-2xl shadow-emerald-900/10 p-8 md:p-10 animate-in fade-in zoom-in-95 duration-300">
+                    <div className="text-center py-4">
+                        <div className="mx-auto bg-emerald-500/10 border border-emerald-500/20 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                            <CheckCircle2 className="text-emerald-400" size={28} strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-xl text-white mb-3" style={{ fontFamily: "'Courier New', Courier, monospace" }}>you&apos;re in.</h3>
+                        <p className="text-white/50 text-sm mb-6 max-w-xs mx-auto" style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: "13px", lineHeight: "1.7" }}>
+                            check your inbox for a welcome email with your first practice tip.
+                        </p>
+                        <button
+                            onClick={handleClose}
+                            className="text-white/30 hover:text-white/60 text-xs uppercase tracking-widest transition-colors cursor-pointer py-2"
+                            style={{ fontFamily: "'Courier New', Courier, monospace" }}
+                        >
+                            close
+                        </button>
+                    </div>
+                </div>
+            </div>
         );
     }
 
