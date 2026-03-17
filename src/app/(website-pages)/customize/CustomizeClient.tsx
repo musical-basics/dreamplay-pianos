@@ -934,33 +934,18 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     </div>
 
                     {/* SOLD OUT BANNER */}
-                    <div className="mb-16 border border-red-500/30 bg-red-500/[0.06] p-8 md:p-12 rounded-2xl relative overflow-hidden text-center">
+                    <button
+                        onClick={() => setIsSaveModalOpen(true)}
+                        className="mb-16 w-full border border-red-500/30 bg-red-500/[0.06] px-8 py-6 md:py-8 rounded-2xl relative overflow-hidden text-center cursor-pointer transition-all hover:bg-red-500/[0.10] hover:border-red-500/50 group"
+                    >
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-400 opacity-60"></div>
-                        <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-red-400/70 mb-4">Batch 1 &middot; August 2026</p>
-                        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
-                            The DreamPlay One is officially <span className="text-red-400">sold out.</span>
-                        </h3>
-                        <p className="font-sans text-sm md:text-base text-white/60 max-w-xl mx-auto mb-8 leading-relaxed">
-                            Please join our waitlist to be notified of the next availability.
+                        <p className="font-sans text-sm md:text-base lg:text-lg font-bold uppercase tracking-widest text-white leading-relaxed">
+                            The DreamPlay One is sold out.{' '}
+                            <span className="text-red-400 underline underline-offset-4 decoration-red-400/50 group-hover:decoration-red-400 transition-colors">
+                                Click here to be notified of our upcoming products.
+                            </span>
                         </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
-                            <input
-                                type="email"
-                                placeholder="Your email address"
-                                value={saveEmail}
-                                onChange={(e) => setSaveEmail(e.target.value)}
-                                className="w-full sm:flex-1 px-5 py-4 bg-white/[0.06] border border-white/15 text-white placeholder-white/30 font-sans text-sm focus:outline-none focus:border-white/40 transition-colors"
-                            />
-                            <button
-                                onClick={() => handleSaveBuild({ preventDefault: () => {} } as React.FormEvent)}
-                                disabled={saveLoading || !saveEmail}
-                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-sans text-xs uppercase tracking-widest font-bold hover:bg-white/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                            >
-                                {saveSuccess ? '\u2713 Joined!' : saveLoading ? 'Joining...' : 'Join Waitlist'}
-                            </button>
-                        </div>
-                        {saveError && <p className="mt-3 text-red-400 text-xs">{saveError}</p>}
-                    </div>
+                    </button>
 
                     <DynamicProductionTimeline />
 
