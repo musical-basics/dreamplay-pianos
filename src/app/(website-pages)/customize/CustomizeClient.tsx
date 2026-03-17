@@ -1302,13 +1302,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         <ShieldCheck className="text-white" size={24} strokeWidth={1.5} />
                                     </div>
                                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">
-                                        VIP Access
+                                        Waitlist
                                     </p>
                                     <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
-                                        Save Your Custom Build.
+                                        Join Our Waitlist.
                                     </h2>
                                     <p className="text-white/60 font-sans text-sm leading-relaxed">
-                                        Save your custom configuration to your VIP profile and reveal your Free Global Shipping pass.
+                                        The DreamPlay One is sold out. Enter your email to be the first to know when our upcoming products become available.
                                     </p>
                                 </div>
 
@@ -1333,7 +1333,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         disabled={saveLoading}
                                         className="w-full bg-white text-black font-sans text-xs uppercase tracking-widest font-bold py-4 rounded-none hover:bg-white/90 transition-colors disabled:opacity-70 cursor-pointer"
                                     >
-                                        {saveLoading ? "Saving..." : "Save My Configuration"}
+                                        {saveLoading ? "Joining..." : "Join Waitlist"}
                                     </button>
 
                                     <button
