@@ -13,7 +13,7 @@ export function QuestionFour({ selected, onSelect }: QuestionFourProps) {
         { value: "beginner" as const, icon: Music, label: "Starting Fresh", description: "Just beginning my piano journey or learning the basics" },
         { value: "intermediate" as const, icon: GraduationCap, label: "Building Skills", description: "Working on technique, taking lessons, or practicing regularly" },
         { value: "professional" as const, icon: Trophy, label: "Serious Performance", description: "Preparing for competitions, recitals, or professional work" },
-        { value: "casual" as const, icon: Headphones, label: "Playing for Joy", description: "Enjoying music as a hobby without pressure or deadlines" },
+        { value: "casual" as const, icon: Headphones, label: "Pure Expression", description: "I want to play freely, without the instrument getting in the way of the music I feel." },
     ]
 
     return (

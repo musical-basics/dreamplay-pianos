@@ -12,6 +12,7 @@ import { useABAnalytics } from "@/hooks/use-ab-analytics";
 import { ArrowRight, ArrowLeft, Check, ShieldCheck, X, CheckCircle2, Undo2, Truck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { VARIANT_MAP } from "./variant-map";
+import { DynamicProductionTimeline } from "@/components/customize/DynamicProductionTimeline";
 import { RegisterModal } from "@/components/RegisterModal";
 
 interface CustomizeClientProps {
@@ -931,6 +932,8 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                             <ShieldCheck className="h-4 w-4" /> Ships worldwide. Choose the size and color that suits you.
                         </div>
                     </div>
+
+                    <DynamicProductionTimeline />
 
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {tiers.map(tier => {

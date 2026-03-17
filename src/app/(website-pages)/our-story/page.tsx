@@ -362,6 +362,7 @@ export default function OurStoryPage() {
                                     <p>During the first few weeks of practicing, I didn&apos;t notice much difference. The main thought I had during this time was, wow, the black keys feel so narrow. Whereas on the conventional pianos, the black keys had enough surface area that you could kind of &quot;approximate&quot; the distance, and still hit the note, with the narrower keys, finger accuracy was paramount.</p>
                                     <p>But this feeling of unease gradually went away. As time went on, the feeling that profoundly affected me as I played on this keyboard, was the feeling of complete relaxation.</p>
                                     <p>For the first time in my life, I didn&apos;t have to strain to play the #1 most common interval, the octave. Pieces by Romantic composers, especially by Chopin, Liszt, and Rachmaninoff, began opening up to me, like old friends who moved back into town.</p>
+                                    <p>I realized I wasn&apos;t just fighting the piano—I was fighting to express my true self. The gap between the music I felt in my heart and what my hands could physically execute was devastating. When I finally played on a DS6.0, it wasn&apos;t just my hands that relaxed; my soul took a breath.</p>
                                 </div>
                                 <div className="flex items-center">
                                     <div className="relative">

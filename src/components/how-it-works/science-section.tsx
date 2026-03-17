@@ -69,6 +69,9 @@ export function ScienceSection() {
                             <p className="font-sans text-base text-neutral-600 leading-relaxed">
                                 Full mechanical leverage is restored — producing a <strong className="text-neutral-900 font-semibold">richer, more powerful tone</strong> with zero strain.
                             </p>
+                            <p className="font-sans text-base text-neutral-600 leading-relaxed mt-4">
+                                Ergonomics isn&apos;t just about preventing injury. It&apos;s about <strong className="text-neutral-900 font-semibold">expression</strong>. By restoring your natural hand arch, we remove the physical barrier between your soul and your sound.
+                            </p>
                         </div>
                     </div>
                 </div>

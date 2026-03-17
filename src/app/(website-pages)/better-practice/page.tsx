@@ -71,6 +71,23 @@ export default function BetterPracticePage() {
                     </div>
                 </section>
 
+                {/* ═══ ENTERING THE FLOW STATE — LIGHT ═══ */}
+                <section className="bg-white py-20 text-black md:py-28">
+                    <div className="container mx-auto max-w-4xl px-6 text-center">
+                        <AnimatedSection>
+                            <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-400">
+                                The Result
+                            </p>
+                            <h3 className="mb-8 font-serif text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+                                Entering the Flow State.
+                            </h3>
+                            <p className="mx-auto max-w-2xl font-serif text-xl leading-relaxed text-neutral-600 md:text-2xl">
+                                When you don&apos;t have to dedicate 50% of your brain&apos;s processing power to calculating awkward stretches, you enter the <span className="italic text-neutral-900">Flow State</span>. Your hands simply do what your heart feels. When you stop fighting the instrument, your true musical voice emerges.
+                            </p>
+                        </AnimatedSection>
+                    </div>
+                </section>
+
                 {/* ═══ CLAUDIA WANG QUOTE — WARM ═══ */}
                 <section className="border-y border-neutral-200 bg-[#f7f3ee] py-20 md:py-28">
                     <div className="container mx-auto max-w-3xl px-6 text-center">
