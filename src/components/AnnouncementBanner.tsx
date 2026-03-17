@@ -1,11 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 
 export function AnnouncementBanner() {
     return (
-        <div className="w-full bg-amber-400 text-black py-1.5 px-4 text-center z-[9999] relative">
+        <Link href="/customize#section-4" className="block w-full bg-amber-400 text-black py-1.5 px-4 text-center z-[9999] relative hover:bg-amber-300 transition-colors">
             <p className="font-sans text-[10px] sm:text-xs font-bold uppercase tracking-widest">
-                Prices go up in April 2026 to $1099 MSRP.
+                The DreamPlay One is sold out. Click here to join our waitlist.
             </p>
-        </div>
+        </Link>
     );
 }
