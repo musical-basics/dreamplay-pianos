@@ -933,6 +933,35 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </div>
                     </div>
 
+                    {/* SOLD OUT BANNER */}
+                    <div className="mb-16 border border-red-500/30 bg-red-500/[0.06] p-8 md:p-12 rounded-2xl relative overflow-hidden text-center">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-400 opacity-60"></div>
+                        <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-red-400/70 mb-4">Batch 1 &middot; August 2026</p>
+                        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
+                            The DreamPlay One is officially <span className="text-red-400">sold out.</span>
+                        </h3>
+                        <p className="font-sans text-sm md:text-base text-white/60 max-w-xl mx-auto mb-8 leading-relaxed">
+                            Please join our waitlist to be notified of the next availability.
+                        </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+                            <input
+                                type="email"
+                                placeholder="Your email address"
+                                value={saveEmail}
+                                onChange={(e) => setSaveEmail(e.target.value)}
+                                className="w-full sm:flex-1 px-5 py-4 bg-white/[0.06] border border-white/15 text-white placeholder-white/30 font-sans text-sm focus:outline-none focus:border-white/40 transition-colors"
+                            />
+                            <button
+                                onClick={() => handleSaveBuild({ preventDefault: () => {} } as React.FormEvent)}
+                                disabled={saveLoading || !saveEmail}
+                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-sans text-xs uppercase tracking-widest font-bold hover:bg-white/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                            >
+                                {saveSuccess ? '\u2713 Joined!' : saveLoading ? 'Joining...' : 'Join Waitlist'}
+                            </button>
+                        </div>
+                        {saveError && <p className="mt-3 text-red-400 text-xs">{saveError}</p>}
+                    </div>
+
                     <DynamicProductionTimeline />
 
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -941,19 +970,21 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                             const isHighlight = tier.highlight;
 
                             return (
-                                <button
+                                <div
                                     key={tier.id}
-                                    onClick={() => handleSelectTier(tier.id)}
-                                    className={`relative flex flex-col border p-8 text-left transition-all md:p-10 cursor-pointer overflow-visible ${isSelected
-                                        ? "z-10 scale-105 border-white bg-white text-black shadow-2xl"
-                                        : isHighlight
-                                            ? "border-white/30 bg-white/10 shadow-lg hover:border-white/50 hover:shadow-xl"
-                                            : "border-white/10 bg-white/5 shadow-lg hover:border-white/30 hover:bg-white/10 hover:shadow-xl"
+                                    className={`relative flex flex-col border p-8 text-left transition-all md:p-10 overflow-visible opacity-50 ${isHighlight
+                                            ? "border-white/30 bg-white/10 shadow-lg"
+                                            : "border-white/10 bg-white/5 shadow-lg"
                                         }`}
                                 >
-                                    {/* Badge — positioned as a top ribbon */}
+                                    {/* SOLD OUT Badge */}
+                                    <span className="absolute -top-3 right-6 px-4 py-1 font-sans text-[10px] uppercase tracking-[0.3em] font-bold bg-red-500 text-white z-20">
+                                        Sold Out
+                                    </span>
+
+                                    {/* Original Badge */}
                                     {tier.badge && (
-                                        <span className={`absolute -top-3 left-6 px-4 py-1 font-sans text-[10px] uppercase tracking-[0.3em] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>
+                                        <span className="absolute -top-3 left-6 px-4 py-1 font-sans text-[10px] uppercase tracking-[0.3em] font-bold bg-white text-black">
                                             {tier.badge}
                                         </span>
                                     )}
@@ -1028,50 +1059,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         <div className={`h-full transition-all ${isSelected ? 'bg-black/40' : 'bg-white/40'}`} style={{ width: `${((tier.total - tier.remaining) / tier.total) * 100}%` }} />
                                     </div>
 
-                                    {/* CTA Button */}
+                                    {/* CTA Button — disabled (sold out) */}
                                     <div className="mt-8 w-full pt-4">
-                                        <div className={`group flex w-full items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors ${isSelected
-                                            ? "border-black bg-black text-white hover:bg-black/90"
-                                            : isHighlight
-                                                ? "border-white bg-white text-black hover:bg-white/90"
-                                                : "border-white/30 text-white group-hover:border-white group-hover:bg-white/10"
-                                            }`}>
-                                            {`Reserve for ${tier.price}`}
-                                            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                                        <div className="flex w-full items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest border-white/20 text-white/40 cursor-not-allowed">
+                                            Sold Out
                                         </div>
-
-                                        {/* ⚡ Fast Checkout Test Button — commented out, direct checkout URL didn't work properly
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                const size = appState.size || 'DS6.0';
-                                                const color = appState.color || 'Black';
-                                                const journeyProduct = journeyProducts?.find((jp: JourneyProduct) => jp.id === tier.id);
-                                                const variantId = journeyProduct?.variantId || VARIANT_MAP[tier.id]?.[size]?.[color] || "";
-                                                if (!variantId) { alert("No variant ID found for this selection"); return; }
-                                                let url = `https://dreamplay-pianos.myshopify.com/checkout?line_items[][variant_id]=${variantId}&line_items[][quantity]=1`;
-                                                if (discountCode) url += `&discount=${discountCode}`;
-                                                trackEmailConversion('conversion_t2', window.location.pathname);
-                                                window.location.href = url;
-                                            }}
-                                            className={`mt-2 flex w-full items-center justify-center gap-2 border border-dashed px-4 py-2.5 text-center font-sans text-[10px] uppercase tracking-widest transition-colors ${isSelected
-                                                ? "border-black/20 text-black/50 hover:border-black/40 hover:text-black/70"
-                                                : "border-white/15 text-white/35 hover:border-white/30 hover:text-white/50"
-                                            }`}
-                                        >
-                                            ⚡ Fast Checkout (Test)
-                                        </button>
-                                        */}
-
-
-                                        {/* Savings subtext */}
-                                        {tier.retailPrice && (
-                                            <p className={`text-xs text-center mt-4 ${isSelected ? 'text-black/50' : 'text-white/60'}`}>
-                                                Securing your build today saves {tier.savings} before public retail pricing takes effect.
-                                            </p>
-                                        )}
                                     </div>
-                                </button>
+                                </div>
                             )
                         })}
                     </div>
