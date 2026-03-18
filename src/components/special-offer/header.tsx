@@ -149,8 +149,25 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
 
                         {/* Main navigation */}
                         <nav className="hidden md:flex items-center gap-6 h-full">
-                            <Link href="/how-it-works" className={linkClass(useDarkText)}>How It Works</Link>
-                            <Link href="/better-practice" className={linkClass(useDarkText)}>The Benefits</Link>
+                            <NavDropdown
+                                label="DreamPlay Keyboards"
+                                useDarkText={useDarkText}
+                                items={[
+                                    { label: "Our Product", href: "/premium-offer" },
+                                    { label: "Discover", href: "/intro-offer" },
+                                    { label: "Explore", href: "/extended-offer" },
+                                ]}
+                            />
+
+                            <NavDropdown
+                                label="Why Narrow?"
+                                useDarkText={useDarkText}
+                                items={[
+                                    { label: "How It Works", href: "/how-it-works" },
+                                    { label: "The Benefits", href: "/better-practice" },
+                                ]}
+                            />
+
                             <NavDropdown
                                 label="Features"
                                 useDarkText={useDarkText}
@@ -178,16 +195,6 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 items={[
                                     { label: "Production Timeline", href: "/production-timeline" },
                                     { label: "Shipping", href: "/information-and-policies/shipping" },
-                                ]}
-                            />
-
-                            <NavDropdown
-                                label="Special Offers"
-                                useDarkText={useDarkText}
-                                items={[
-                                    { label: "Premium Offer", href: "/premium-offer" },
-                                    { label: "Intro Offer", href: "/intro-offer" },
-                                    { label: "Extended Offer", href: "/extended-offer" },
                                 ]}
                             />
 
@@ -249,8 +256,16 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                     isMobileMenuOpen && (
                         <div className="md:hidden absolute top-[100px] left-0 right-0 bg-white border-b border-gray-100 shadow-xl animate-in slide-in-from-top-2 duration-200">
                             <nav className="flex flex-col p-4">
-                                <Link href="/how-it-works" className="py-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>How It Works</Link>
-                                <Link href="/better-practice" className="py-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>The Benefits</Link>
+                                <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">DreamPlay Keyboards</div>
+                                <Link href="/premium-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Our Product</Link>
+                                <Link href="/intro-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Discover</Link>
+                                <Link href="/extended-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Explore</Link>
+
+                                <div className="border-t border-gray-200 my-2" />
+                                <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Why Narrow?</div>
+                                <Link href="/how-it-works" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>How It Works</Link>
+                                <Link href="/better-practice" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>The Benefits</Link>
+
                                 <div className="border-t border-gray-200 my-2" />
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Features</div>
                                 <Link href="/product-information" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Product Info</Link>
@@ -268,12 +283,6 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Manufacturing & Shipping</div>
                                 <Link href="/production-timeline" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Production Timeline</Link>
                                 <Link href="/information-and-policies/shipping" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Shipping</Link>
-
-                                <div className="border-t border-gray-200 my-2" />
-                                <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Special Offers</div>
-                                <Link href="/premium-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Premium Offer</Link>
-                                <Link href="/intro-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Intro Offer</Link>
-                                <Link href="/extended-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Extended Offer</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
                                 <Link href="/information-and-policies/faq" className="py-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
