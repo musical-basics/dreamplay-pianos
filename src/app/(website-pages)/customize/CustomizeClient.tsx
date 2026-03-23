@@ -933,19 +933,18 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </div>
                     </div>
 
-                    {/* SOLD OUT BANNER */}
-                    <button
-                        onClick={() => setIsSaveModalOpen(true)}
-                        className="mb-16 w-full border border-red-500/30 bg-red-500/[0.06] px-8 py-6 md:py-8 rounded-2xl relative overflow-hidden text-center cursor-pointer transition-all hover:bg-red-500/[0.10] hover:border-red-500/50 group"
+                    {/* LAST WEEK ANNOUNCEMENT */}
+                    <div
+                        className="mb-16 w-full border border-amber-500/30 bg-amber-500/[0.06] px-8 py-6 md:py-8 rounded-2xl relative overflow-hidden text-center"
                     >
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-400 opacity-60"></div>
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-amber-400 opacity-60"></div>
                         <p className="font-sans text-sm md:text-base lg:text-lg font-bold uppercase tracking-widest text-white leading-relaxed">
-                            The DreamPlay One is sold out.{' '}
-                            <span className="text-red-400 underline underline-offset-4 decoration-red-400/50 group-hover:decoration-red-400 transition-colors">
-                                Click here to be notified of our upcoming products.
+                            Last week! The DreamPlay One gets replaced by the{' '}
+                            <span className="text-amber-400">
+                                DreamPlay Pro next week at $1,899.
                             </span>
                         </p>
-                    </button>
+                    </div>
 
                     <DynamicProductionTimeline />
 
@@ -957,15 +956,11 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                             return (
                                 <div
                                     key={tier.id}
-                                    className={`relative flex flex-col border p-8 text-left transition-all md:p-10 overflow-visible opacity-50 ${isHighlight
+                                    className={`relative flex flex-col border p-8 text-left transition-all md:p-10 overflow-visible ${isHighlight
                                             ? "border-white/30 bg-white/10 shadow-lg"
                                             : "border-white/10 bg-white/5 shadow-lg"
                                         }`}
                                 >
-                                    {/* SOLD OUT Badge */}
-                                    <span className="absolute -top-3 right-6 px-4 py-1 font-sans text-[10px] uppercase tracking-[0.3em] font-bold bg-red-500 text-white z-20">
-                                        Sold Out
-                                    </span>
 
                                     {/* Original Badge */}
                                     {tier.badge && (
@@ -1044,11 +1039,18 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         <div className={`h-full transition-all ${isSelected ? 'bg-black/40' : 'bg-white/40'}`} style={{ width: `${((tier.total - tier.remaining) / tier.total) * 100}%` }} />
                                     </div>
 
-                                    {/* CTA Button — disabled (sold out) */}
+                                    {/* CTA Button */}
                                     <div className="mt-8 w-full pt-4">
-                                        <div className="flex w-full items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest border-white/20 text-white/40 cursor-not-allowed">
-                                            Sold Out
-                                        </div>
+                                        <button
+                                            onClick={() => handleSelectTier(tier.id)}
+                                            className={`flex w-full items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors cursor-pointer ${isSelected
+                                                ? 'border-white bg-white text-black hover:bg-white/90'
+                                                : 'border-white/30 text-white hover:border-white hover:bg-white/10'
+                                            }`}
+                                        >
+                                            {isSelected ? 'Reserve Now' : 'Select'}
+                                            {!isSelected && <span className="ml-1">→</span>}
+                                        </button>
                                     </div>
                                 </div>
                             )
@@ -1302,13 +1304,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         <ShieldCheck className="text-white" size={24} strokeWidth={1.5} />
                                     </div>
                                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">
-                                        Waitlist
+                                        Stay Updated
                                     </p>
                                     <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
-                                        Join Our Waitlist.
+                                        Get Notified.
                                     </h2>
                                     <p className="text-white/60 font-sans text-sm leading-relaxed">
-                                        The DreamPlay One is sold out. Enter your email to be the first to know when our upcoming products become available.
+                                        The DreamPlay Pro launches next week at $1,899. Enter your email to be the first to know when it becomes available.
                                     </p>
                                 </div>
 

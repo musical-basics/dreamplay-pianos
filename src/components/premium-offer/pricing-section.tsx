@@ -111,15 +111,11 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
           {tiers.map((tier) => (
             <div
               key={tier.title}
-              className={`relative flex flex-col border p-8 transition-all md:p-10 opacity-50 ${tier.highlight
+              className={`relative flex flex-col border p-8 transition-all md:p-10 ${tier.highlight
                 ? "border-background/30 bg-background/5"
                 : "border-background/10 bg-transparent"
                 }`}
             >
-              {/* SOLD OUT Badge */}
-              <span className="absolute -top-3 right-6 px-4 py-1 font-sans text-[10px] uppercase tracking-[0.3em] font-bold bg-red-500 text-white z-20">
-                Sold Out
-              </span>
 
               {tier.badge && (
                 <span className="mb-4 self-start font-sans text-[10px] uppercase tracking-[0.3em] text-background/50">
@@ -195,10 +191,14 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
                 />
               </div>
 
-              {/* CTA — disabled (sold out) */}
-              <div className="mt-8 flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest border-background/20 text-background/40 cursor-not-allowed">
-                Sold Out
-              </div>
+              {/* CTA */}
+              <a
+                href="/customize"
+                className="mt-8 flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest border-background/30 text-background/80 hover:border-background hover:bg-background/10 transition-colors"
+              >
+                Reserve Now
+                <ArrowRight className="h-3 w-3" />
+              </a>
             </div>
           ))}
         </div>
