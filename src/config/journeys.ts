@@ -71,7 +71,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         id: 'journey_b',
         name: 'Intro Offer',
         weight: 50,
-        homepage: '/intro-offer2',
+        homepage: '/intro-offer',
         checkout: '/customize',
         announcementText: 'Last week! The DreamPlay One gets replaced by the DreamPlay Pro next week at $1,899.',
         popups: [

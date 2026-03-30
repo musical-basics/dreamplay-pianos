@@ -977,7 +977,7 @@ export default function IntroOfferPage() {
                     <div className="text-center px-6">
                         <p className="font-sans text-xs uppercase tracking-[0.3em] text-black/50 mb-4">Official Release Price</p>
                         <p className="font-sans text-sm text-black/60 mb-2">Here&apos;s how much DreamPlay One will cost once our product is officially released:</p>
-                        <p className="font-serif text-7xl md:text-9xl text-black">$1,099</p>
+                        <p className="font-serif text-7xl md:text-9xl text-black">$1,199</p>
                     </div>
                     <ScrollIndicator next={9} dark />
                 </section>
@@ -994,7 +994,7 @@ export default function IntroOfferPage() {
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-sm text-white/60 mb-4">TODAY, You can lock in our exclusive, <span className="underline">limited introductory</span> price of just</p>
-                        <p className="font-serif text-6xl md:text-8xl text-white mb-12">$699</p>
+                        <p className="font-serif text-6xl md:text-8xl text-white mb-12">$649</p>
                         <div className="w-16 border-t border-white/20 mx-auto mb-12" />
                         <p className="font-sans text-sm text-white/60 mb-2">Due Today:</p>
                         <p className="font-serif text-5xl md:text-7xl text-white">$99</p>
