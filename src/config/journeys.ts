@@ -69,7 +69,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         id: 'journey_b',
         name: 'Special Offer — Discounted',
         weight: 50,
-        homepage: '/special-offer',
+        homepage: '/intro-offer',
         checkout: '/customize',
         popups: [
             { type: 'discount', delaySeconds: 15 },
