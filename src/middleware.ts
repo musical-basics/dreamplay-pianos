@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
+import { JOURNEY_CONFIGS, STANDARD_JOURNEY } from "@/config/journeys";
 
 export async function middleware(request: NextRequest) {
     // ========================================================================
@@ -101,14 +102,8 @@ export async function middleware(request: NextRequest) {
     // PRIORITY #2: JOURNEY ENGINE (Full-Funnel Routing)
     // ========================================================================
 
-    // 1. Load journeys from hardcoded config (zero latency, no DB hit)
-    let activeJourneys: any[] = [];
-    try {
-        const { JOURNEY_CONFIGS } = await import('@/config/journeys');
-        activeJourneys = JOURNEY_CONFIGS;
-    } catch (e) {
-        console.error('Failed to load journey configs', e);
-    }
+    // 1. Load journeys from hardcoded config (zero latency, no DB hit, Edge-compatible)
+    const activeJourneys = JOURNEY_CONFIGS;
 
     // 2. Identify or Assign Journey
     let assignedJourneyId = request.cookies.get("dp_journey_id")?.value;
@@ -125,10 +120,10 @@ export async function middleware(request: NextRequest) {
     const userAgent = request.headers.get("user-agent") || "";
     const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(userAgent);
 
-    if (isBot && activeJourneys.length > 0) {
-        // ALWAYS serve your standard $1099 Journey to Search Engines
-        // to prevent cheap prices from being indexed in Google Search Results.
-        assignedJourney = activeJourneys.find((j: any) => j.priceTier === "standard") || activeJourneys[0];
+    if (isBot) {
+        // ALWAYS serve the explicit standard-priced journey to search engines
+        // to prevent discounted prices from being indexed in Google Search Results.
+        assignedJourney = STANDARD_JOURNEY;
     }
     // ==========================================
 
@@ -168,10 +163,10 @@ export async function middleware(request: NextRequest) {
             response.cookies.set("dp_journey_id", assignedJourney.id, { maxAge: 31536000 });
         }
     } else {
-        // Ultimate Fallback if DB is empty — use current behavior
+        // Ultimate Fallback if JOURNEY_CONFIGS is empty — serve STANDARD_JOURNEY homepage
         if (pathname === "/") {
             const fallback = request.nextUrl.clone();
-            fallback.pathname = "/intro-offer";
+            fallback.pathname = STANDARD_JOURNEY.homepage;
             response = NextResponse.rewrite(fallback);
         }
     }

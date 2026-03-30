@@ -660,6 +660,7 @@ export type JourneyConfig = {
     weight: number;      // Traffic percentage (e.g., 50)
     homepage: string;    // e.g., "/premium-offer"
     checkout: string;    // e.g., "/customize"
+    priceTier?: string;  // e.g., "standard" — used for bot bypass SEO protection
     popups: JourneyPopup[]; // Ordered list of popups with timing (up to 10)
     products: JourneyProduct[]; // Which products to show + at what price
 };
@@ -668,13 +669,15 @@ export type JourneyConfig = {
 // To change journeys, edit that file and deploy. No DB writes needed.
 
 export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
-    const { JOURNEY_CONFIGS } = await import('@/config/journeys');
-    return JOURNEY_CONFIGS;
+    const { JOURNEY_CONFIGS, STANDARD_JOURNEY } = await import('@/config/journeys');
+    // Include the STANDARD_JOURNEY last so the admin can see the bot bypass config too
+    return [...JOURNEY_CONFIGS, STANDARD_JOURNEY];
 }
 
 export async function getJourneyById(journeyId: string): Promise<JourneyConfig | null> {
-    const { JOURNEY_CONFIGS } = await import('@/config/journeys');
-    return JOURNEY_CONFIGS.find(j => j.id === journeyId) || null;
+    const { JOURNEY_CONFIGS, STANDARD_JOURNEY } = await import('@/config/journeys');
+    const all = [...JOURNEY_CONFIGS, STANDARD_JOURNEY];
+    return all.find(j => j.id === journeyId) || null;
 }
 
 /** No-op: journeys are now hardcoded in src/config/journeys.ts */

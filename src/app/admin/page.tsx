@@ -936,21 +936,30 @@ export default function AdminPage() {
 
                         {/* Journey cards */}
                         {journeys.map((j) => (
-                            <div key={j.id} className="bg-neutral-900 p-6 rounded-xl border border-neutral-800 shadow-xl">
+                            <div key={j.id} className={`p-6 rounded-xl border shadow-xl ${j.priceTier === 'standard' ? 'bg-amber-950/20 border-amber-800/50' : 'bg-neutral-900 border-neutral-800'}`}>
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
-                                        <h3 className="font-semibold text-white text-base">{j.name}</h3>
-                                        <a
-                                            href={`https://dreamplaypianos.com/?journey=${j.id}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2"
-                                        >
-                                            dreamplaypianos.com/?journey={j.id}
-                                        </a>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <h3 className="font-semibold text-white text-base">{j.name}</h3>
+                                            {j.priceTier === 'standard' && (
+                                                <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-full">🤖 Bot Bypass</span>
+                                            )}
+                                        </div>
+                                        {j.priceTier !== 'standard' ? (
+                                            <a
+                                                href={`https://dreamplaypianos.com/?journey=${j.id}`}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2"
+                                            >
+                                                dreamplaypianos.com/?journey={j.id}
+                                            </a>
+                                        ) : (
+                                            <p className="text-xs font-mono text-amber-600/70">Not assignable via URL — only served to crawlers</p>
+                                        )}
                                     </div>
-                                    <span className="text-xs font-mono bg-neutral-800 text-neutral-400 px-2 py-1 rounded">
-                                        weight: {j.weight}
+                                    <span className={`text-xs font-mono px-2 py-1 rounded ${j.priceTier === 'standard' ? 'bg-amber-900/40 text-amber-500' : 'bg-neutral-800 text-neutral-400'}`}>
+                                        {j.priceTier === 'standard' ? 'bots only' : `weight: ${j.weight}`}
                                     </span>
                                 </div>
 
