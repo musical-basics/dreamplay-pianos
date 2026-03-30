@@ -50,7 +50,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         weight: 50,
         homepage: '/premium-offer',
         checkout: '/customize',
-        announcementText: 'Final 48 Hours! The DreamPlay One Goes Up In Price To $799.',
+        announcementText: 'The DreamPlay One Goes Up In Price To $1,199 In April.',
         popups: [
             { type: 'pdf', delaySeconds: 12 },
             { type: 'discount', delaySeconds: 45 },
@@ -105,7 +105,7 @@ export const STANDARD_JOURNEY: JourneyConfig = {
     priceTier: 'standard',
     homepage: '/premium-offer',
     checkout: '/customize',
-    announcementText: 'Final 48 Hours! The DreamPlay One Goes Up In Price To $799.',
+    announcementText: 'The DreamPlay One Goes Up In Price To $1,199 In April.',
     popups: [],           // No popups for bots
     products: [
         {
