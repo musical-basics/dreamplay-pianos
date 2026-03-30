@@ -1,5 +1,43 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
+import { parseJourneyConfigArray, serializeJourneyConfigCookie } from "@/lib/journey-types";
+import type { JourneyConfig } from "@/lib/journey-types";
+
+// ============================================================================
+// MODULE-LEVEL CACHE (60-second TTL)
+// Avoids hitting Supabase REST on every request within the same edge instance.
+// ============================================================================
+let _cachedJourneys: JourneyConfig[] = [];
+let _cacheTimestamp = 0;
+const CACHE_TTL_MS = 60_000; // 60 seconds
+
+async function getActiveJourneys(): Promise<JourneyConfig[]> {
+    if (Date.now() - _cacheTimestamp < CACHE_TTL_MS) {
+        return _cachedJourneys;
+    }
+    try {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/admin_variables?key=eq.journey_configs&select=value`,
+            {
+                headers: {
+                    'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`
+                },
+            }
+        );
+        const data = await res.json();
+        if (data && data[0]) {
+            _cachedJourneys = parseJourneyConfigArray(data[0].value);
+        } else {
+            _cachedJourneys = [];
+        }
+    } catch (e) {
+        console.error("Failed to fetch journeys", e);
+        // Keep stale cache on error rather than clearing it
+    }
+    _cacheTimestamp = Date.now();
+    return _cachedJourneys;
+}
 
 export async function middleware(request: NextRequest) {
     // ========================================================================
@@ -57,68 +95,18 @@ export async function middleware(request: NextRequest) {
     // PRIORITY #1.5: SID/CID COOKIE CAPTURE (params stay in URL)
     // Reads subscriber/campaign IDs from email links, saves to root-domain
     // cookies for cross-subdomain tracking. URL params are NOT stripped.
+    // NOTE: We do NOT return early here — execution falls through to the
+    // Journey Engine so email link visitors also get journey assignment.
     // ========================================================================
     const sid = searchParams.get("sid");
     const cid = searchParams.get("cid");
-
-    if (sid) {
-        // Set root-domain cookies so all subdomains can read them
-        const cookieOpts = {
-            maxAge: 60 * 60 * 24 * 90, // 90 days
-            path: "/",
-            domain: ".dreamplaypianos.com",
-            sameSite: "lax" as const,
-        };
-
-        // For localhost dev, don't set domain (browsers reject dotted localhost)
-        const isLocal = request.headers.get("host")?.includes("localhost");
-        if (isLocal) delete (cookieOpts as any).domain;
-
-        // Continue without redirect — keep sid/cid in URL
-        const passthrough = NextResponse.next();
-
-        passthrough.cookies.set("dp_sid", sid, cookieOpts);
-        if (cid) passthrough.cookies.set("dp_cid", cid, cookieOpts);
-
-        // Safety net: store the full original URL (only on first touch)
-        if (!request.cookies.get("dp_first_touch_url")) {
-            passthrough.cookies.set(
-                "dp_first_touch_url",
-                url.pathname + url.search,
-                cookieOpts
-            );
-        }
-
-        // Attach auth cookies from session
-        sessionResponse.cookies.getAll().forEach(c =>
-            passthrough.cookies.set(c.name, c.value)
-        );
-
-        return passthrough;
-    }
 
     // ========================================================================
     // PRIORITY #2: JOURNEY ENGINE (Full-Funnel Routing)
     // ========================================================================
 
-    // 1. Fetch Active Journeys via REST (Cached at the Edge for 0ms latency)
-    let activeJourneys: any[] = [];
-    try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/admin_variables?key=eq.journey_configs&select=value`,
-            {
-                headers: {
-                    'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`
-                },
-                next: { revalidate: 60 }
-            }
-        );
-        const data = await res.json();
-        if (data && data[0]) activeJourneys = JSON.parse(data[0].value);
-    } catch (e) {
-        console.error("Failed to fetch journeys", e);
-    }
+    // 1. Fetch Active Journeys (cached at module level)
+    const activeJourneys = await getActiveJourneys();
 
     // 2. Identify or Assign Journey
     let assignedJourneyId = request.cookies.get("dp_journey_id")?.value;
@@ -127,7 +115,7 @@ export async function middleware(request: NextRequest) {
     const forcedJourney = url.searchParams.get("journey");
     if (forcedJourney) assignedJourneyId = forcedJourney;
 
-    let assignedJourney = activeJourneys.find((j: any) => j.id === assignedJourneyId);
+    let assignedJourney = activeJourneys.find((j: JourneyConfig) => j.id === assignedJourneyId);
 
     // ==========================================
     // 🛡️ SEO PROTECTION: THE BOT BYPASS
@@ -138,13 +126,13 @@ export async function middleware(request: NextRequest) {
     if (isBot && activeJourneys.length > 0) {
         // ALWAYS serve your standard $1099 Journey to Search Engines
         // to prevent cheap prices from being indexed in Google Search Results.
-        assignedJourney = activeJourneys.find((j: any) => j.priceTier === "standard") || activeJourneys[0];
+        assignedJourney = activeJourneys.find((j: JourneyConfig) => j.priceTier === "standard") || activeJourneys[0];
     }
     // ==========================================
 
     // 3. Otherwise, assign humans randomly based on weights
     else if (!assignedJourney && activeJourneys.length > 0) {
-        const totalWeight = activeJourneys.reduce((sum: number, j: any) => sum + j.weight, 0);
+        const totalWeight = activeJourneys.reduce((sum: number, j: JourneyConfig) => sum + j.weight, 0);
         let random = Math.random() * totalWeight;
         for (const j of activeJourneys) {
             random -= j.weight;
@@ -172,10 +160,19 @@ export async function middleware(request: NextRequest) {
             response = NextResponse.rewrite(rewriteUrl);
         }
 
-        // Set stateful cookies so frontend components know what to render
-        // Bots don't accept cookies, so this only applies to humans
+        // Set stateful cookies so frontend components know what to render.
+        // Bots don't accept cookies, so this only applies to humans.
         if (!isBot) {
-            response.cookies.set("dp_journey_id", assignedJourney.id, { maxAge: 31536000 });
+            const journeyCookieOpts = { maxAge: 31536000 } as const;
+
+            // Always update cookies when a ?journey= param forces an override
+            // so the client immediately picks up the new journey's products.
+            response.cookies.set("dp_journey_id", assignedJourney.id, journeyCookieOpts);
+            response.cookies.set(
+                "dp_journey_config",
+                serializeJourneyConfigCookie(assignedJourney),
+                journeyCookieOpts
+            );
         }
     } else {
         // Ultimate Fallback if DB is empty — use current behavior
@@ -183,6 +180,36 @@ export async function middleware(request: NextRequest) {
             const fallback = request.nextUrl.clone();
             fallback.pathname = "/intro-offer";
             response = NextResponse.rewrite(fallback);
+        }
+    }
+
+    // ========================================================================
+    // APPLY SID/CID COOKIES (if present)
+    // This runs after journey resolution so we don't return early and skip
+    // journey assignment for email link visitors.
+    // ========================================================================
+    if (sid) {
+        const cookieOpts = {
+            maxAge: 60 * 60 * 24 * 90, // 90 days
+            path: "/",
+            domain: ".dreamplaypianos.com",
+            sameSite: "lax" as const,
+        };
+
+        // For localhost dev, don't set domain (browsers reject dotted localhost)
+        const isLocal = request.headers.get("host")?.includes("localhost");
+        if (isLocal) delete (cookieOpts as { domain?: string }).domain;
+
+        response.cookies.set("dp_sid", sid, cookieOpts);
+        if (cid) response.cookies.set("dp_cid", cid, cookieOpts);
+
+        // Safety net: store the full original URL (only on first touch)
+        if (!request.cookies.get("dp_first_touch_url")) {
+            response.cookies.set(
+                "dp_first_touch_url",
+                url.pathname + url.search,
+                cookieOpts
+            );
         }
     }
 

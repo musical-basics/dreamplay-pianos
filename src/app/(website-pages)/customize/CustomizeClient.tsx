@@ -13,6 +13,7 @@ import { ArrowRight, ArrowLeft, Check, ShieldCheck, X, CheckCircle2, Undo2, Truc
 import { createClient } from "@/lib/supabase/client";
 import { VARIANT_MAP } from "./variant-map";
 import { DynamicProductionTimeline } from "@/components/customize/DynamicProductionTimeline";
+import { parseJourneyConfigCookie } from "@/lib/journey-types";
 import { RegisterModal } from "@/components/RegisterModal";
 
 interface CustomizeClientProps {
@@ -77,15 +78,52 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const [journeyProducts, setJourneyProducts] = useState<JourneyProduct[] | null>(null);
 
     useEffect(() => {
-        // Fetch journey products based on the assigned journey cookie
-        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
-        if (match) {
-            getJourneyById(match[2]).then(journey => {
+        // Track the last known journey ID to avoid unnecessary re-renders on focus
+        let lastJourneyId: string | null = null;
+
+        // Helper that reads journey products from cookie or falls back to server action
+        function loadJourneyProducts(force = false) {
+            const idMatch = document.cookie.match(/(^| )dp_journey_id=([^;]+)/);
+            const currentJourneyId = idMatch?.[2] ?? null;
+
+            // Skip if the journey hasn't changed (avoids re-fetching on every tab focus)
+            if (!force && currentJourneyId === lastJourneyId) return;
+            lastJourneyId = currentJourneyId;
+
+            // Try the compact dp_journey_config cookie first (set by middleware)
+            const configMatch = document.cookie.match(/(^| )dp_journey_config=([^;]+)/);
+            const journeyConfig = parseJourneyConfigCookie(configMatch?.[2]);
+            if (journeyConfig?.products?.length) {
+                setJourneyProducts(journeyConfig.products);
+                return;
+            }
+
+            // Fall back to server action for old cached sessions without the new cookie
+            if (!currentJourneyId) return;
+
+            getJourneyById(currentJourneyId).then(journey => {
                 if (journey?.products?.length) {
                     setJourneyProducts(journey.products);
                 }
             });
         }
+
+        // Initial load
+        loadJourneyProducts(true);
+
+        // Watch for dp_journey_id cookie changes (e.g., forced ?journey= override via link).
+        // When the user navigates to a URL with ?journey=journey_b, the middleware updates
+        // the cookies, and the next popstate/focus event will re-read the new journey.
+        function handleCookieChange() {
+            loadJourneyProducts();
+        }
+
+        window.addEventListener("focus", handleCookieChange);
+        window.addEventListener("popstate", handleCookieChange);
+        return () => {
+            window.removeEventListener("focus", handleCookieChange);
+            window.removeEventListener("popstate", handleCookieChange);
+        };
     }, []);
 
     const sectionRefs = useRef<(HTMLElement | null)[]>([]);
