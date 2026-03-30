@@ -56,16 +56,12 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         products: [
             {
                 id: 'full',
-                price: '$1,199',
+                price: '$649',
                 badge: 'Most Popular',
             },
             {
                 id: 'solo',
-                price: '$1,099',
-            },
-            {
-                id: 'reservation',
-                price: '$99',
+                price: '$599',
             },
         ],
     },
