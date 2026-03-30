@@ -661,6 +661,7 @@ export type JourneyConfig = {
     homepage: string;    // e.g., "/premium-offer"
     checkout: string;    // e.g., "/customize"
     priceTier?: string;  // e.g., "standard" — used for bot bypass SEO protection
+    announcementText?: string; // Text shown in the top announcement banner. Omit to hide banner.
     popups: JourneyPopup[]; // Ordered list of popups with timing (up to 10)
     products: JourneyProduct[]; // Which products to show + at what price
 };

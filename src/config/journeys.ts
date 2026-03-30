@@ -7,19 +7,20 @@
  * To change a journey, edit this file and deploy.
  *
  * Each journey controls:
- *   - homepage:   which page renders when a visitor hits /
- *   - checkout:   where /buy routes to
- *   - priceTier:  "standard" = always shown to bots (SEO protection)
- *   - popups:     which popups fire and when (in seconds)
- *   - products:   which products show on /customize + at what price
+ *   - homepage:          which page renders when a visitor hits /
+ *   - checkout:          where /buy routes to
+ *   - priceTier:         "standard" = always shown to bots (SEO protection)
+ *   - announcementText:  text shown in the gold top banner (omit to hide)
+ *   - popups:            which popups fire and when (in seconds)
+ *   - products:          which products show on /customize + at what price
  *
  * === AD TRAFFIC ===
  * Force a journey via URL: dreamplaypianos.com/?journey=journey_a
  *
  * === BOT / SEO BYPASS ===
- * Bots (Googlebot etc.) always get the journey where priceTier = "standard"
- * so Google never indexes discounted prices. Only ONE journey should have
- * priceTier: "standard". It is NOT included in random traffic assignment.
+ * Bots (Googlebot etc.) always get STANDARD_JOURNEY.
+ * Only ONE journey should have priceTier: "standard".
+ * It is NOT included in random traffic assignment.
  *
  * === SHOPIFY VARIANT IDs (for reference) ===
  * Bundle (full):
@@ -45,13 +46,14 @@ import type { JourneyConfig } from '@/actions/admin-actions'
 export const JOURNEY_CONFIGS: JourneyConfig[] = [
     {
         id: 'journey_a',
-        name: 'Premium Offer — Full Price',
+        name: 'Premium Offer',
         weight: 50,
         homepage: '/premium-offer',
         checkout: '/customize',
+        announcementText: 'Last week! The DreamPlay One gets replaced by the DreamPlay Pro next week at $1,899.',
         popups: [
             { type: 'pdf', delaySeconds: 12 },
-            { type: 'shipping', delaySeconds: 300 },
+            { type: 'discount', delaySeconds: 45 },
         ],
         products: [
             {
@@ -67,10 +69,11 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
     },
     {
         id: 'journey_b',
-        name: 'Special Offer — Discounted',
+        name: 'Intro Offer',
         weight: 50,
-        homepage: '/intro-offer',
+        homepage: '/intro-offer2',
         checkout: '/customize',
+        announcementText: 'Last week! The DreamPlay One gets replaced by the DreamPlay Pro next week at $1,899.',
         popups: [
             { type: 'discount', delaySeconds: 15 },
             { type: 'pdf', delaySeconds: 300 },
@@ -102,20 +105,17 @@ export const STANDARD_JOURNEY: JourneyConfig = {
     priceTier: 'standard',
     homepage: '/premium-offer',
     checkout: '/customize',
+    announcementText: 'Last week! The DreamPlay One gets replaced by the DreamPlay Pro next week at $1,899.',
     popups: [],           // No popups for bots
     products: [
         {
             id: 'full',
-            price: '$1,199',
+            price: '$649',
             badge: 'Most Popular',
         },
         {
             id: 'solo',
-            price: '$1,099',
-        },
-        {
-            id: 'reservation',
-            price: '$99',
+            price: '$599',
         },
     ],
 }
