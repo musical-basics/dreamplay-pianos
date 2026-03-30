@@ -2,6 +2,8 @@
 
 import { createClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
+import { parseJourneyConfigArray } from '@/lib/journey-types'
+import type { JourneyConfig } from '@/lib/journey-types'
 
 // Initialize Supabase Admin Client
 // Using service_role key to ensure we have permission to manage admin variables
@@ -638,31 +640,9 @@ export async function getPopupABResults() {
 }
 
 // ─── Journey Engine Types ───
-
-export type JourneyProduct = {
-    id: string;              // "reservation", "solo", "full", "signature", "reserve50"
-    label?: string;          // Override display name, e.g. "DreamPlay One — Sale"
-    price: string;           // Displayed price: "$599", "$99", "$1,099"
-    originalPrice?: string;  // Strikethrough price: "$1,099"
-    badge?: string;          // Override badge: "Most Popular", "Limited Time"
-    discountCode?: string;   // Auto-applied at Shopify checkout
-    variantId?: string;       // Shopify variant ID override for checkout URL
-};
-
-export type JourneyPopup = {
-    type: string;           // "shipping", "pdf", "discount", "discount_44", "accessory_25"
-    delaySeconds: number;   // seconds after page load to show this popup
-};
-
-export type JourneyConfig = {
-    id: string;          // e.g., "journey_a" — also used as the ?journey= URL param for ads
-    name: string;        // e.g., "High Ticket Premium"
-    weight: number;      // Traffic percentage (e.g., 50)
-    homepage: string;    // e.g., "/premium-offer"
-    checkout: string;    // e.g., "/customize"
-    popups: JourneyPopup[]; // Ordered list of popups with timing (up to 10)
-    products: JourneyProduct[]; // Which products to show + at what price
-};
+// Re-exported from the shared types module so admin page and other callers
+// only need to import from one place.
+export type { JourneyProduct, JourneyPopup, JourneyConfig } from '@/lib/journey-types';
 
 export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
     try {
@@ -678,7 +658,7 @@ export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
             return [];
         }
 
-        return JSON.parse(data?.value || '[]');
+        return parseJourneyConfigArray(data?.value || '[]');
     } catch (error) {
         console.error('Failed to get journey configs:', error);
         return [];
