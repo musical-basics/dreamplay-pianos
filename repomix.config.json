@@ -25,8 +25,8 @@
             "**/*.xml",
             "**/*.backup.*",
             "**/*backup*",
-            "**/old-homepage/**",
-            "_old/**",
+            "src/app/(website-pages)/old-customize/**",
+            "src/app/(website-pages)/old-homepage/**",
             "**/*.standalone.*",
             "src/app/(website-pages)/customize/CustomizeClient.backup.tsx",
             "_backup_logic/**",
@@ -38,7 +38,9 @@
             "schema.sql",
             "scripts/**",
             "supabase/**",
-            "tsconfig.tsbuildinfo"
+            "tsconfig.tsbuildinfo",
+            "**/*.MOV",
+            "**/*.mov"
         ]
     }
 }

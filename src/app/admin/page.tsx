@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { getCountdownDate, updateCountdownDate, getDiscountPopupStatus, updateDiscountPopupStatus, loginAdmin, getHomepageVersion, updateHomepageVersion, getHiddenProducts, updateHiddenProducts, getChatModel, updateChatModel, getChatKnowledge, updateChatKnowledge, getChatSuggestions, updateChatSuggestions, getPopupABConfig, updatePopupABConfig, getPopupABResults, getChatbotEnabled, updateChatbotEnabled, getJourneyConfigs, updateJourneyConfigs } from '@/actions/admin-actions'
-import type { PopupABConfig, JourneyConfig, JourneyProduct, JourneyPopup } from '@/actions/admin-actions'
+import { getCountdownDate, updateCountdownDate, getDiscountPopupStatus, updateDiscountPopupStatus, loginAdmin, getHomepageVersion, updateHomepageVersion, getHiddenProducts, updateHiddenProducts, getChatModel, updateChatModel, getChatKnowledge, updateChatKnowledge, getChatSuggestions, updateChatSuggestions, getPopupABConfig, updatePopupABConfig, getPopupABResults, getChatbotEnabled, updateChatbotEnabled, getJourneyConfigs } from '@/actions/admin-actions'
+import type { PopupABConfig, JourneyConfig } from '@/actions/admin-actions'
 
 type AdminTab = 'chatbot' | 'marketing' | 'other' | 'ab-config' | 'ab-results' | 'journeys'
 
@@ -33,9 +33,6 @@ export default function AdminPage() {
     const [suggestionsMessage, setSuggestionsMessage] = useState('')
     const [dragIndex, setDragIndex] = useState<number | null>(null)
     const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
-    // Popup drag state (per-journey)
-    const [popupDragIdx, setPopupDragIdx] = useState<number | null>(null)
-    const [popupDragOverIdx, setPopupDragOverIdx] = useState<number | null>(null)
     const [editingIndex, setEditingIndex] = useState<number | null>(null)
     const [editingText, setEditingText] = useState('')
 
@@ -55,12 +52,8 @@ export default function AdminPage() {
     const [saving, setSaving] = useState(false)
     const [message, setMessage] = useState('')
 
-    // Journey Engine State
+    // Journey Engine State (read-only)
     const [journeys, setJourneys] = useState<JourneyConfig[]>([])
-    const [journeySaving, setJourneySaving] = useState(false)
-    const [journeyMessage, setJourneyMessage] = useState('')
-    const [journeyJsonMode, setJourneyJsonMode] = useState(false)
-    const [journeyJson, setJourneyJson] = useState('')
 
     useEffect(() => {
         const storedAuth = localStorage.getItem('admin_token')
@@ -113,7 +106,6 @@ export default function AdminPage() {
         setAbConfig(abConfigVal)
         setIsChatbotEnabled(chatbotEnabledVal)
         setJourneys(journeyConfigsVal)
-        setJourneyJson(JSON.stringify(journeyConfigsVal, null, 2))
 
         // Fetch available models in background
         setModelsLoading(true)
@@ -928,279 +920,101 @@ export default function AdminPage() {
                     </div>
                 )}
 
-                {/* ─── TAB 6: JOURNEY ENGINE ─── */}
+                {/* ─── TAB 6: JOURNEY ENGINE (READ-ONLY) ─── */}
                 {activeTab === 'journeys' && (
                     <div className="space-y-6">
-                        <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800 shadow-xl">
-                            <div className="flex items-center justify-between mb-4">
-                                <div>
-                                    <h3 className="font-medium text-white">Journey Engine</h3>
-                                    <p className="text-sm text-neutral-500">Configure full-funnel A/B journeys. Each journey controls homepage, checkout, popup, and pricing.</p>
-                                </div>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => {
-                                            setJourneyJsonMode(!journeyJsonMode)
-                                            if (!journeyJsonMode) setJourneyJson(JSON.stringify(journeys, null, 2))
-                                        }}
-                                        className="text-xs text-blue-400 hover:text-blue-300 underline"
-                                    >
-                                        {journeyJsonMode ? 'Visual Editor' : 'JSON Editor'}
-                                    </button>
-                                </div>
+                        {/* Hardcoded notice */}
+                        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex gap-3">
+                            <span className="text-amber-400 text-lg">🔒</span>
+                            <div>
+                                <p className="text-sm font-semibold text-amber-400">Journeys are hardcoded</p>
+                                <p className="text-xs text-amber-400/70 mt-0.5">
+                                    To change a journey, edit <code className="font-mono bg-amber-500/10 px-1 rounded">src/config/journeys.ts</code> and deploy. Changes here are not saved.
+                                </p>
                             </div>
+                        </div>
 
-                            {journeyJsonMode ? (
-                                /* JSON Editor Mode */
-                                <div>
-                                    <textarea
-                                        value={journeyJson}
-                                        onChange={(e) => setJourneyJson(e.target.value)}
-                                        rows={15}
-                                        className="w-full bg-black border border-neutral-700 rounded-lg p-3 text-white text-sm outline-none focus:border-blue-500 font-mono leading-relaxed resize-y"
-                                        placeholder='[{"id":"journey_a","name":"Standard","weight":50,"homepage":"/premium-offer","checkout":"/customize","popups":[{"type":"pdf","delaySeconds":12}],"products":[{"id":"full","price":"$1,199"}]}]'
-                                    />
-                                    <button
-                                        onClick={async () => {
-                                            try {
-                                                const parsed = JSON.parse(journeyJson)
-                                                setJourneys(parsed)
-                                                setJourneySaving(true)
-                                                const res = await updateJourneyConfigs(parsed)
-                                                setJourneyMessage(res.success ? 'Journeys saved from JSON!' : 'Failed to save')
-                                                setJourneySaving(false)
-                                                setTimeout(() => setJourneyMessage(''), 3000)
-                                            } catch {
-                                                setJourneyMessage('Invalid JSON')
-                                                setTimeout(() => setJourneyMessage(''), 3000)
-                                            }
-                                        }}
-                                        disabled={journeySaving}
-                                        className="mt-3 w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 text-white font-semibold py-3 rounded-lg transition-colors"
-                                    >
-                                        {journeySaving ? 'Saving...' : 'Save JSON'}
-                                    </button>
+                        {/* Journey cards */}
+                        {journeys.map((j) => (
+                            <div key={j.id} className="bg-neutral-900 p-6 rounded-xl border border-neutral-800 shadow-xl">
+                                <div className="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 className="font-semibold text-white text-base">{j.name}</h3>
+                                        <a
+                                            href={`https://dreamplaypianos.com/?journey=${j.id}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2"
+                                        >
+                                            dreamplaypianos.com/?journey={j.id}
+                                        </a>
+                                    </div>
+                                    <span className="text-xs font-mono bg-neutral-800 text-neutral-400 px-2 py-1 rounded">
+                                        weight: {j.weight}
+                                    </span>
                                 </div>
-                            ) : (
-                                /* Visual Editor Mode */
-                                <div className="space-y-4">
-                                    {journeys.map((j, idx) => (
-                                        <div key={idx} className="bg-black/40 p-4 rounded-lg border border-neutral-800">
-                                            <div className="flex items-center justify-between mb-3">
-                                                <a href={`https://dreamplaypianos.com/?journey=${j.id}`} className="text-xs font-mono text-blue-400 hover:text-blue-300 underline underline-offset-2">dreamplaypianos.com/?journey={j.id}</a>
-                                                <button
-                                                    onClick={() => {
-                                                        const updated = journeys.filter((_, i) => i !== idx)
-                                                        setJourneys(updated)
-                                                    }}
-                                                    className="text-red-400 hover:text-red-300 text-xs"
-                                                >
-                                                    ✕ Remove
-                                                </button>
-                                            </div>
-                                            <div className="grid grid-cols-2 gap-3">
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Journey ID</label>
-                                                    <input value={j.id} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], id: e.target.value }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
-                                                </div>
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Name</label>
-                                                    <input value={j.name} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], name: e.target.value }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
-                                                </div>
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Weight (%)</label>
-                                                    <input type="number" value={j.weight} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], weight: parseInt(e.target.value) || 0 }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
-                                                </div>
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Homepage Path</label>
-                                                    <input value={j.homepage} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], homepage: e.target.value }; setJourneys(u) }} placeholder="/premium-offer" className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
-                                                </div>
-                                                <div>
-                                                    <label className="block text-xs text-neutral-500 mb-1">Checkout Path</label>
-                                                    <input value={j.checkout} onChange={(e) => { const u = [...journeys]; u[idx] = { ...u[idx], checkout: e.target.value }; setJourneys(u) }} placeholder="/customize" className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1.5 text-white text-sm outline-none focus:border-blue-500" />
-                                                </div>
-                                            </div>
 
-                                            {/* Popups Editor */}
-                                            <div className="mt-3 pt-3 border-t border-neutral-800">
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <span className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Popups</span>
-                                                    {(j.popups || []).length < 10 && (
-                                                        <button
-                                                            onClick={() => {
-                                                                const u = [...journeys]
-                                                                const popups = [...(u[idx].popups || [])]
-                                                                popups.push({ type: 'pdf', delaySeconds: 12 })
-                                                                u[idx] = { ...u[idx], popups }
-                                                                setJourneys(u)
-                                                            }}
-                                                            className="text-xs text-blue-400 hover:text-blue-300"
-                                                        >
-                                                            + Add Popup ({(j.popups || []).length}/10)
-                                                        </button>
-                                                    )}
-                                                </div>
-                                                {(j.popups || []).length === 0 && (
-                                                    <p className="text-xs text-neutral-600 italic">No popups — will default to PDF at 12s</p>
-                                                )}
-                                                {(j.popups || []).map((popup: JourneyPopup, pIdx: number) => (
-                                                    <div
-                                                        key={pIdx}
-                                                        draggable
-                                                        onDragStart={() => setPopupDragIdx(pIdx)}
-                                                        onDragOver={(e) => { e.preventDefault(); setPopupDragOverIdx(pIdx) }}
-                                                        onDragLeave={() => setPopupDragOverIdx(null)}
-                                                        onDrop={() => {
-                                                            if (popupDragIdx !== null && popupDragIdx !== pIdx) {
-                                                                const u = [...journeys]
-                                                                const p = [...(u[idx].popups || [])]
-                                                                const [moved] = p.splice(popupDragIdx, 1)
-                                                                p.splice(pIdx, 0, moved)
-                                                                u[idx] = { ...u[idx], popups: p }
-                                                                setJourneys(u)
-                                                            }
-                                                            setPopupDragIdx(null)
-                                                            setPopupDragOverIdx(null)
-                                                        }}
-                                                        onDragEnd={() => { setPopupDragIdx(null); setPopupDragOverIdx(null) }}
-                                                        className={`grid grid-cols-[auto_1fr_1fr_auto] gap-2 mb-2 items-end p-1.5 rounded-lg border transition-all ${
-                                                            popupDragOverIdx === pIdx && popupDragIdx !== pIdx
-                                                                ? 'border-blue-500 bg-blue-500/10'
-                                                                : popupDragIdx === pIdx
-                                                                    ? 'border-neutral-600 opacity-50'
-                                                                    : 'border-transparent'
-                                                        }`}
-                                                    >
-                                                        {/* Drag handle */}
-                                                        <span className="cursor-grab active:cursor-grabbing text-neutral-500 hover:text-neutral-300 px-1 select-none self-center" title="Drag to reorder">
-                                                            ⠿
-                                                        </span>
-                                                        <div>
-                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Type</label>
-                                                            <select value={popup.type} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p[pIdx] = { ...p[pIdx], type: e.target.value }; u[idx] = { ...u[idx], popups: p }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500">
-                                                                <option value="shipping">Free Shipping</option>
-                                                                <option value="pdf">PDF Guide</option>
-                                                                <option value="discount">$300 Off</option>
-                                                                <option value="discount_44">44% Off</option>
-                                                                <option value="accessory_25">25% Accessory</option>
-                                                                <option value="store_credit_25">$25 Store Credit</option>
-                                                                <option value="priority_shipping">Priority Shipping</option>
-                                                                <option value="survey_5off">5% Off Survey</option>
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Delay (seconds)</label>
-                                                            <input type="number" value={popup.delaySeconds} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p[pIdx] = { ...p[pIdx], delaySeconds: parseInt(e.target.value) || 0 }; u[idx] = { ...u[idx], popups: p }; setJourneys(u) }} placeholder="12" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
-                                                        </div>
-                                                        <button
-                                                            onClick={() => { const u = [...journeys]; const p = [...(u[idx].popups || [])]; p.splice(pIdx, 1); u[idx] = { ...u[idx], popups: p }; setJourneys(u) }}
-                                                            className="text-red-400 hover:text-red-300 text-xs pb-1"
-                                                        >
-                                                            ✕
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                {/* Core routing */}
+                                <div className="grid grid-cols-2 gap-3 mb-4">
+                                    <div className="bg-black/40 rounded-lg p-3">
+                                        <p className="text-[10px] uppercase tracking-wider text-neutral-500 mb-1">Homepage</p>
+                                        <p className="text-sm font-mono text-white">{j.homepage}</p>
+                                    </div>
+                                    <div className="bg-black/40 rounded-lg p-3">
+                                        <p className="text-[10px] uppercase tracking-wider text-neutral-500 mb-1">Checkout</p>
+                                        <p className="text-sm font-mono text-white">{j.checkout}</p>
+                                    </div>
+                                </div>
 
-                                            {/* Products Editor */}
-                                            <div className="mt-3 pt-3 border-t border-neutral-800">
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <span className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Products</span>
-                                                    <button
-                                                        onClick={() => {
-                                                            const u = [...journeys]
-                                                            const products = [...(u[idx].products || [])]
-                                                            products.push({ id: 'full', price: '$1,199' })
-                                                            u[idx] = { ...u[idx], products }
-                                                            setJourneys(u)
-                                                        }}
-                                                        className="text-xs text-blue-400 hover:text-blue-300"
-                                                    >
-                                                        + Add Product
-                                                    </button>
-                                                </div>
-                                                {(j.products || []).length === 0 && (
-                                                    <p className="text-xs text-neutral-600 italic">No products defined — will use global defaults</p>
-                                                )}
-                                                {(j.products || []).map((product: JourneyProduct, pIdx: number) => (
-                                                    <div key={pIdx} className="grid grid-cols-5 gap-2 mb-2 items-end">
-                                                        <div>
-                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Product</label>
-                                                            <select value={product.id} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], id: e.target.value }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500">
-                                                                <option value="reservation">Lock My Spot ($99)</option>
-                                                                <option value="reserve50">Reserve 50%</option>
-                                                                <option value="solo">Keyboard Only</option>
-                                                                <option value="full">Bundle</option>
-                                                                <option value="signature">Signature</option>
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Price</label>
-                                                            <input value={product.price} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], price: e.target.value }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} placeholder="$1,199" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
-                                                        </div>
-                                                        <div>
-                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Strikethrough</label>
-                                                            <input value={product.originalPrice || ''} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], originalPrice: e.target.value || undefined }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} placeholder="$1,499" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
-                                                        </div>
-                                                        <div>
-                                                            <label className="block text-[10px] text-neutral-600 mb-0.5">Variant ID</label>
-                                                            <input value={product.variantId || ''} onChange={(e) => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p[pIdx] = { ...p[pIdx], variantId: e.target.value || undefined }; u[idx] = { ...u[idx], products: p }; setJourneys(u) }} placeholder="53081205506362" className="w-full bg-neutral-800 border border-neutral-700 rounded px-1.5 py-1 text-white text-xs outline-none focus:border-blue-500" />
-                                                        </div>
-                                                        <button
-                                                            onClick={() => { const u = [...journeys]; const p = [...(u[idx].products || [])]; p.splice(pIdx, 1); u[idx] = { ...u[idx], products: p }; setJourneys(u) }}
-                                                            className="text-red-400 hover:text-red-300 text-xs pb-1"
-                                                        >
-                                                            ✕
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                {/* Popups */}
+                                <div className="mb-4">
+                                    <p className="text-[10px] uppercase tracking-wider text-neutral-500 mb-2">Popups</p>
+                                    {(j.popups || []).length === 0 ? (
+                                        <p className="text-xs text-neutral-600 italic">None — defaults to PDF at 12s</p>
+                                    ) : (
+                                        <div className="flex flex-wrap gap-2">
+                                            {j.popups.map((p, i) => (
+                                                <span key={i} className="text-xs bg-neutral-800 text-neutral-300 px-2 py-1 rounded font-mono">
+                                                    {p.type} @ {p.delaySeconds}s
+                                                </span>
+                                            ))}
                                         </div>
-                                    ))}
-
-                                    <button
-                                        onClick={() => setJourneys([...journeys, { id: `journey_${String.fromCharCode(97 + journeys.length)}`, name: 'New Journey', weight: 50, homepage: '/premium-offer', checkout: '/customize', popups: [{ type: 'pdf', delaySeconds: 12 }], products: [{ id: 'full', price: '$1,199', badge: 'Most Popular' }, { id: 'solo', price: '$1,099' }] }])}
-                                        className="w-full border border-dashed border-neutral-700 hover:border-neutral-500 text-neutral-500 hover:text-neutral-300 text-sm font-medium py-2.5 rounded-lg transition-colors"
-                                    >
-                                        + Add Journey
-                                    </button>
+                                    )}
                                 </div>
-                            )}
 
-                            {/* Save */}
-                            <button
-                                onClick={async () => {
-                                    setJourneySaving(true)
-                                    setJourneyMessage('')
-                                    const res = await updateJourneyConfigs(journeys)
-                                    setJourneyMessage(res.success ? 'Journeys saved!' : 'Failed to save')
-                                    setJourneySaving(false)
-                                    setJourneyJson(JSON.stringify(journeys, null, 2))
-                                    setTimeout(() => setJourneyMessage(''), 3000)
-                                }}
-                                disabled={journeySaving}
-                                className={`w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 text-white font-semibold py-3 rounded-lg transition-colors ${journeyJsonMode ? 'hidden' : 'mt-4'}`}
-                            >
-                                {journeySaving ? 'Saving...' : 'Save Journeys'}
-                            </button>
-
-                            {journeyMessage && (
-                                <div className={`mt-3 p-3 rounded-lg text-sm text-center font-medium ${journeyMessage.includes('saved') || journeyMessage.includes('Saved') ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                                    {journeyMessage}
+                                {/* Products */}
+                                <div>
+                                    <p className="text-[10px] uppercase tracking-wider text-neutral-500 mb-2">Products</p>
+                                    {(j.products || []).length === 0 ? (
+                                        <p className="text-xs text-neutral-600 italic">None — uses global defaults</p>
+                                    ) : (
+                                        <div className="flex flex-wrap gap-2">
+                                            {j.products.map((p, i) => (
+                                                <span key={i} className="text-xs bg-neutral-800 text-neutral-300 px-2 py-1 rounded font-mono">
+                                                    {p.id} — {p.price}{p.originalPrice ? ` (was ${p.originalPrice})` : ''}{p.badge ? ` [${p.badge}]` : ''}{p.variantId ? ` #${p.variantId}` : ''}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-
-                            {/* How to Use */}
-                            <div className="mt-6 p-4 bg-neutral-950 rounded-lg border border-neutral-800">
-                                <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-2">How It Works</h4>
-                                <ul className="text-xs text-neutral-500 space-y-1.5">
-                                    <li>• Each journey controls the full funnel: homepage → popup → pricing → checkout</li>
-                                    <li>• Traffic is split by weight (e.g., 50/50 for two journeys)</li>
-                                    <li>• Force a journey via ad URL: <code className="text-blue-400">dreamplaypianos.com?journey=journey_a</code></li>
-                                    <li>• Search engines always see the &quot;standard&quot; price tier (bot bypass)</li>
-                                    <li>• Journey ID is tracked in analytics for ROAS calculation</li>
-                                </ul>
                             </div>
+                        ))}
+
+                        {journeys.length === 0 && (
+                            <p className="text-neutral-500 text-sm text-center py-8">No journeys configured. Check <code className="font-mono">src/config/journeys.ts</code>.</p>
+                        )}
+
+                        {/* How to Use */}
+                        <div className="bg-neutral-900 p-5 rounded-xl border border-neutral-800">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-2">How It Works</h4>
+                            <ul className="text-xs text-neutral-500 space-y-1.5">
+                                <li>• Each journey controls the full funnel: homepage → popup → pricing → checkout</li>
+                                <li>• Traffic is split by weight (e.g., 50/50 for two journeys)</li>
+                                <li>• Force a journey via ad URL: <code className="text-blue-400">dreamplaypianos.com?journey=journey_a</code></li>
+                                <li>• Search engines always see the &quot;standard&quot; price tier (bot bypass)</li>
+                                <li>• Journey ID is tracked in analytics for ROAS calculation</li>
+                                <li>• <strong className="text-amber-400">To edit journeys:</strong> update <code className="text-blue-400">src/config/journeys.ts</code> and deploy</li>
+                            </ul>
                         </div>
                     </div>
                 )}

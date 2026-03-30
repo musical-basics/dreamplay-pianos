@@ -101,23 +101,13 @@ export async function middleware(request: NextRequest) {
     // PRIORITY #2: JOURNEY ENGINE (Full-Funnel Routing)
     // ========================================================================
 
-    // 1. Fetch Active Journeys via REST (Cached at the Edge for 0ms latency)
+    // 1. Load journeys from hardcoded config (zero latency, no DB hit)
     let activeJourneys: any[] = [];
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/admin_variables?key=eq.journey_configs&select=value`,
-            {
-                headers: {
-                    'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`
-                },
-                next: { revalidate: 60 }
-            }
-        );
-        const data = await res.json();
-        if (data && data[0]) activeJourneys = JSON.parse(data[0].value);
+        const { JOURNEY_CONFIGS } = await import('@/config/journeys');
+        activeJourneys = JOURNEY_CONFIGS;
     } catch (e) {
-        console.error("Failed to fetch journeys", e);
+        console.error('Failed to load journey configs', e);
     }
 
     // 2. Identify or Assign Journey

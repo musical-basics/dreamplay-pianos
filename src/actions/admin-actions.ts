@@ -664,48 +664,21 @@ export type JourneyConfig = {
     products: JourneyProduct[]; // Which products to show + at what price
 };
 
+// ─── Journey Engine — reads from hardcoded config (src/config/journeys.ts) ───
+// To change journeys, edit that file and deploy. No DB writes needed.
+
 export async function getJourneyConfigs(): Promise<JourneyConfig[]> {
-    try {
-        const { data, error } = await supabase
-            .from('admin_variables')
-            .select('value')
-            .eq('key', 'journey_configs')
-            .single();
-
-        if (error) {
-            if (error.code === 'PGRST116') return [];
-            console.error('Error fetching journey configs:', error);
-            return [];
-        }
-
-        return JSON.parse(data?.value || '[]');
-    } catch (error) {
-        console.error('Failed to get journey configs:', error);
-        return [];
-    }
+    const { JOURNEY_CONFIGS } = await import('@/config/journeys');
+    return JOURNEY_CONFIGS;
 }
 
 export async function getJourneyById(journeyId: string): Promise<JourneyConfig | null> {
-    const configs = await getJourneyConfigs();
-    return configs.find(j => j.id === journeyId) || null;
+    const { JOURNEY_CONFIGS } = await import('@/config/journeys');
+    return JOURNEY_CONFIGS.find(j => j.id === journeyId) || null;
 }
 
-export async function updateJourneyConfigs(journeys: JourneyConfig[]) {
-    try {
-        const { error } = await supabase.from('admin_variables').upsert({
-            key: 'journey_configs',
-            value: JSON.stringify(journeys),
-            updated_at: new Date().toISOString()
-        });
-
-        if (error) {
-            console.error('Error updating journey configs:', error);
-            throw new Error(error.message);
-        }
-
-        return { success: true };
-    } catch (error: any) {
-        return { success: false, error: error.message };
-    }
+/** No-op: journeys are now hardcoded in src/config/journeys.ts */
+export async function updateJourneyConfigs(_journeys: JourneyConfig[]) {
+    return { success: false, error: 'Journeys are hardcoded. Edit src/config/journeys.ts and deploy.' };
 }
 
