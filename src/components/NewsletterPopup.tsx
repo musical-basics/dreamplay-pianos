@@ -185,7 +185,7 @@ export default function NewsletterPopup() {
         const popupTrackNames: Record<string, string> = {
             shipping: 'free_shipping',
             pdf: 'hand_size',
-            discount: 'discount_300',
+            discount: 'discount_50',
             discount_44: 'discount_44',
             accessory_25: 'accessory_25',
             store_credit_25: 'store_credit_25',
@@ -215,7 +215,7 @@ export default function NewsletterPopup() {
         try {
             const tagMap: Record<string, string> = {
                 shipping: "Free Shipping Lead",
-                discount: "$300 Off Lead",
+                discount: "$50 Off Lead",
                 discount_44: "44% Off Lead",
                 accessory_25: "25% Accessory Lead",
                 pdf: "Hand Guide Download",
@@ -257,7 +257,7 @@ export default function NewsletterPopup() {
 
             setIsSubmitted(currentOffer);
             trackEmailConversion('conversion_t1', window.location.pathname);
-            trackPopup('yes', currentOffer === 'shipping' ? 'free_shipping' : currentOffer === 'discount' ? 'discount_300' : 'hand_size');
+            trackPopup('yes', currentOffer === 'shipping' ? 'free_shipping' : currentOffer === 'discount' ? 'discount_50' : 'hand_size');
 
             // Auto-open PDF for pdf offer
             if (currentOffer === "pdf") {
@@ -505,7 +505,7 @@ export default function NewsletterPopup() {
                         <h3 className="text-2xl font-serif text-white mb-3">Check your inbox.</h3>
                         <p className="text-white/60 font-sans text-sm mb-8 max-w-xs mx-auto leading-relaxed">
                             {isSubmitted === "discount"
-                                ? "We just sent you an email with your exclusive $300 discount code. Use it at checkout to save on any DreamPlay keyboard or bundle."
+                                ? "We just sent you an email with your exclusive $50 discount code. Use it at checkout to save on any DreamPlay keyboard or bundle."
                                 : isSubmitted === "discount_44"
                                     ? "We just sent you an email with your exclusive 44% discount code. Use it at checkout to save on any DreamPlay keyboard."
                                     : isSubmitted === "accessory_25"
