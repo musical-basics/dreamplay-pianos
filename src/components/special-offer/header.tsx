@@ -10,7 +10,7 @@ import { useABAnalytics } from "@/hooks/use-ab-analytics"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import { RegisterModal } from "../RegisterModal"
-import { CountdownBanner } from "../extended-offer/countdown-banner"
+import { JOURNEY_CONFIGS, STANDARD_JOURNEY } from "@/config/journeys"
 import { useJourneyCheckout } from "@/hooks/use-journey-checkout"
 
 interface SpecialOfferHeaderProps {
@@ -59,6 +59,33 @@ function NavDropdown({ label, items, useDarkText }: { label: string; items: { la
             </div>
         </div>
     );
+}
+
+// Reads the dp_journey_id cookie client-side and shows the matching announcementText
+function JourneyAnnouncementBanner() {
+    const [text, setText] = useState<string | null>(null)
+
+    useEffect(() => {
+        const match = document.cookie.match(/(^| )dp_journey_id=([^;]+)/)
+        const journeyId = match?.[2]
+        const allJourneys = [...JOURNEY_CONFIGS, STANDARD_JOURNEY]
+        const journey = allJourneys.find(j => j.id === journeyId)
+        const resolved = journey?.announcementText ?? STANDARD_JOURNEY.announcementText ?? null
+        setText(resolved)
+    }, [])
+
+    if (!text) return null
+
+    return (
+        <Link
+            href="/customize"
+            className="block w-full bg-amber-400 text-black py-1.5 px-4 text-center z-[9999] relative hover:bg-amber-300 transition-colors"
+        >
+            <p className="font-sans text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+                {text}
+            </p>
+        </Link>
+    )
 }
 
 export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, className = "" }: SpecialOfferHeaderProps) {
@@ -122,8 +149,8 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                     className
                 )}
             >
-                {/* Countdown Banner */}
-                <CountdownBanner />
+                {/* Journey-Aware Announcement Banner */}
+                <JourneyAnnouncementBanner />
                 <div className={cn(
                     "w-full transition-all duration-300",
                     darkMode
