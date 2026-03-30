@@ -515,8 +515,8 @@ export default function IntroOffer2Page() {
                         <AnimatedSection>
                             <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">Take the Next Step</p>
                             <h2 className="font-serif text-4xl md:text-6xl font-semibold tracking-tight mb-12 text-white">Ready to take the next step?</h2>
-                            <Link href="/reserve2" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-10 py-6 font-sans text-sm md:text-base font-black uppercase tracking-widest text-black transition-all hover:bg-neutral-200 shadow-[0_0_40px_rgba(255,255,255,0.15)] w-full max-w-2xl">
-                                Click here to start your DreamPlay One reservation
+                            <Link href="/customize" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-10 py-6 font-sans text-sm md:text-base font-black uppercase tracking-widest text-black transition-all hover:bg-neutral-200 shadow-[0_0_40px_rgba(255,255,255,0.15)] w-full max-w-2xl">
+                                Order Your DreamPlay One
                                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </Link>
                             <p className="mt-6 text-white/50 uppercase tracking-widest text-xs font-bold">Receive it by August 2026.</p>

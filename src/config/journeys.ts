@@ -73,7 +73,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         weight: 50,
         homepage: '/intro-offer',
         checkout: '/customize',
-        announcementText: 'Last week! The DreamPlay One gets replaced by the DreamPlay Pro next week at $1,899.',
+        announcementText: 'Limited intro pricing — DreamPlay One keyboard from $649. Ships August 2026.',
         popups: [
             { type: 'discount', delaySeconds: 15 },
             { type: 'pdf', delaySeconds: 300 },

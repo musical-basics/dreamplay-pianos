@@ -69,7 +69,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
     const lastScrollY = useRef(0)
     const [user, setUser] = useState<any>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
-    const checkoutPath = useJourneyCheckout("/reserve")
+    const checkoutPath = useJourneyCheckout("/customize")
 
     useEffect(() => {
         const supabase = createClient()
@@ -213,7 +213,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                     : "bg-white/5 backdrop-blur-sm border border-white/30 text-white hover:bg-white/15"
                                     }`}
                             >
-                                Reserve Now
+                                Order Now
                                 <span className="w-6 h-6 rounded-none flex items-center justify-center bg-white">
                                     <ArrowRight className="w-3 h-3 text-black" />
                                 </span>
@@ -324,7 +324,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                                         setIsMobileMenuOpen(false)
                                     }}
                                 >
-                                    Reserve Now
+                                    Order Now
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </nav>

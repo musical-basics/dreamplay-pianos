@@ -893,7 +893,7 @@ export default function IntroOfferPage() {
                             We&apos;re working hard to bring DreamPlay One to your doorstep.
                         </p>
                         <Link
-                            href="/shipping"
+                            href="/information-and-policies/shipping"
                             className="mt-6 inline-flex items-center gap-2 border border-white/30 px-8 py-4 font-sans text-xs uppercase tracking-widest text-white hover:bg-white/10 transition-colors"
                         >
                             View Shipping Details <ArrowRight className="w-4 h-4" />
@@ -1032,7 +1032,7 @@ export default function IntroOfferPage() {
                             </p>
                         </div>
                         <Link
-                            href="/shipping"
+                            href="/information-and-policies/shipping"
                             className="mt-8 inline-block font-sans text-sm text-black/60 underline hover:no-underline"
                         >
                             View our full shipping &amp; taxes policy
@@ -1107,10 +1107,10 @@ export default function IntroOfferPage() {
                     <div className="relative z-10 text-center px-6">
                         <h2 className="font-serif text-3xl md:text-5xl text-white mb-8">Ready to take the next step?</h2>
                         <Link
-                            href="/reserve"
+                            href="/customize"
                             className="inline-flex items-center gap-3 bg-white px-12 py-6 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors"
                         >
-                            Start Your DreamPlay One Reservation <ArrowRight className="w-5 h-5" />
+                            Order Your DreamPlay One <ArrowRight className="w-5 h-5" />
                         </Link>
                         <p className="mt-6 font-sans text-sm text-white/50">Receive it by August 2026</p>
                     </div>
