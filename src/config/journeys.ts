@@ -92,6 +92,12 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
                 id: 'solo',
                 price: '$599',
             },
+            {
+                id: 'pro',
+                label: 'DreamPlay Pro',
+                price: '$1,899',
+                badge: 'Upgrade',
+            },
         ],
     },
 ]
