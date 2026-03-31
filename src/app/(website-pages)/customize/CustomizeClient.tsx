@@ -1062,7 +1062,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                             onClick={() => handleSelectTier(tier.id)}
                                             className={`flex w-full items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors cursor-pointer ${isSelected
                                                 ? 'border-white bg-white text-black hover:bg-white/90'
-                                                : 'border-white/30 text-white hover:border-white hover:bg-white/10'
+                                                : 'border-white text-white hover:bg-white/10'
                                             }`}
                                         >
                                             {isSelected ? 'Reserve Now' : 'Select'}
