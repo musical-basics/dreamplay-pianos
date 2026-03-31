@@ -24,6 +24,11 @@ export const VARIANT_MAP: Record<string, Record<string, Record<string, string>>>
         'DS6.0': { 'Black': '53081298567482', 'White': '53081298600250' },
         'DS6.5': { 'Black': '53081298633018', 'White': '53081298665786' },
     },
+    pro: { // DreamPlay Pro
+        'DS5.5': { 'Black': '53111722082618', 'White': '53111722115386' },
+        'DS6.0': { 'Black': '53111722148154', 'White': '53111722180922' },
+        'DS6.5': { 'Black': '53111722213690', 'White': '53111722246458' },
+    },
     reservation: { // Lock My Spot ($99)
         'DS5.5': { 'Black': '', 'White': '' },
         'DS6.0': { 'Black': '', 'White': '' },
