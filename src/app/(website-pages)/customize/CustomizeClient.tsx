@@ -940,11 +940,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     >
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-amber-300 opacity-60"></div>
                         <p className="font-sans text-sm md:text-base lg:text-lg font-bold uppercase tracking-widest text-white leading-relaxed">
-                            ONLY 48 HOURS LEFT TO RESERVE THE DREAMPLAY ONE BEFORE THE{' '}
-                            <span className="text-amber-400">DREAMPLAY PRO</span>{' '}
-                            LAUNCHES AT{' '}
+                            Only 48 Hours Left on the DreamPlay One Until Price Doubles To{' '}
                             <span className="text-amber-400 underline underline-offset-4 decoration-amber-400/50 group-hover:decoration-amber-400 transition-colors">
-                                $1,899.
+                                $1,199 In April 2026.
                             </span>
                         </p>
                     </button>
