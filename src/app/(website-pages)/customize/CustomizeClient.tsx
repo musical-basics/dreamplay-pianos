@@ -172,6 +172,22 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 10,
             highlight: false,
             savings: "$600",
+        },
+        pro: {
+            id: 'pro',
+            badge: "Upgrade",
+            title: "DreamPlay Pro",
+            subtitle: "",
+            price: "$1,899",
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
+            description: "The next generation DreamPlay experience. The DreamPlay Pro Keyboard — upgraded components, enhanced touch, and refined precision. Available in DS5.5, DS6.0, and DS6.5.",
+            includes: ["DreamPlay Pro Keyboard"],
+            delivery: "Aug 2026",
+            backers: 0,
+            remaining: 984,
+            total: 984,
+            highlight: false,
         }
     };
 
