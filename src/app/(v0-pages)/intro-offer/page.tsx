@@ -697,7 +697,7 @@ export default function IntroOfferPage() {
                             {/* Glassmorphism hero card */}
                             <div className="mt-6 md:mt-10 relative w-full max-w-5xl rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
                                 <Image
-                                    src="https://dreamplaypianos.com/images/Piano%20Front%202.jpg"
+                                    src="/images/keyboards/piano-front-2.jpg"
                                     alt="DreamPlay One digital piano front view with narrow keys for small hands"
                                     width={1200}
                                     height={700}
