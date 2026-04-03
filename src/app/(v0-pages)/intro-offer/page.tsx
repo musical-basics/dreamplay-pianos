@@ -990,15 +990,12 @@ export default function IntroOfferPage() {
                     <ScrollIndicator next={10} />
                 </section>
 
-                {/* Slide 11: Pricing ($699 + $99 deposit) */}
+                {/* Slide 11: Pricing */}
                 <section className="h-screen relative bg-neutral-950 flex items-center justify-center overflow-hidden" style={{ scrollSnapAlign: "start" }}>
                     <div className="text-center px-6">
                         <p className="font-sans text-sm text-white/60 mb-4">TODAY, You can lock in our exclusive, <span className="underline">limited introductory</span> price of just</p>
                         <p className="font-serif text-6xl md:text-8xl text-white mb-12">$649</p>
-                        <div className="w-16 border-t border-white/20 mx-auto mb-12" />
-                        <p className="font-sans text-sm text-white/60 mb-2">Due Today:</p>
-                        <p className="font-serif text-5xl md:text-7xl text-white">$99</p>
-                        <p className="mt-4 font-sans text-sm text-white/50">Pay the rest when your keyboard is ready to ship</p>
+                        <p className="font-sans text-sm text-white/50">Limited-time launch pricing</p>
                     </div>
                     <ScrollIndicator next={11} />
                 </section>
