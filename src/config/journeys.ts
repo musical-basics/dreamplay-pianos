@@ -79,7 +79,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         checkout: '/customize',
         announcementText: 'Last chance at the current $599 price. The DreamPlay One doubles in price to $1,199 in April 2026.',
         popups: [
-            { type: 'discount', delaySeconds: 15 },
+            { type: 'survey_5off', delaySeconds: 15 },
             { type: 'pdf', delaySeconds: 300 },
         ],
         products: [
